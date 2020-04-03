@@ -19,4 +19,8 @@ struct MenuBrains {
         self.player.play()
     }
     
+    mutating func stopIntroMusic() {
+        self.player.stop()
+    }
+    
 }

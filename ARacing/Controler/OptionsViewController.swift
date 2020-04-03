@@ -9,17 +9,27 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
-
-    @IBOutlet weak var label: UILabel!
     
-    var newLabelText: String?
+    @IBOutlet weak var singlePlayerButton: UIButton!
+    @IBOutlet weak var multiPlayerButton: UIButton!
     
-    var menuBrains:MenuBrains?
+    
+    var menuBrains:MenuBrains!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        label.text = newLabelText
     }
+    
+    @IBAction func singlePlayerPressed(_ sender: UIButton) {
+        menuBrains.stopIntroMusic()
+        self.performSegue(withIdentifier: "goToSingleAR", sender: self)
+    }
+    
+    
+    @IBAction func multiPlayerPressed(_ sender: UIButton) {
+    }
+    
 
 }

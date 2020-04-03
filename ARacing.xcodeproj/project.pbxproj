@@ -16,6 +16,8 @@
 		5461C20D2436F5B500F02694 /* Intro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5461C20C2436F5B500F02694 /* Intro.m4a */; };
 		5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C20E2436FB5600F02694 /* MenuBrains.swift */; };
 		5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2102436FC8900F02694 /* OptionsViewController.swift */; };
+		5461C2132437055600F02694 /* SingleARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2122437055600F02694 /* SingleARViewController.swift */; };
+		5461C2182437162D00F02694 /* ARacing.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2172437162D00F02694 /* ARacing.rcproject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		5461C20C2436F5B500F02694 /* Intro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.m4a; sourceTree = "<group>"; };
 		5461C20E2436FB5600F02694 /* MenuBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBrains.swift; sourceTree = "<group>"; };
 		5461C2102436FC8900F02694 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		5461C2122437055600F02694 /* SingleARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARViewController.swift; sourceTree = "<group>"; };
+		5461C2172437162D00F02694 /* ARacing.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = ARacing.rcproject; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 		5461C1F12436CCEE00F02694 /* ARacing */ = {
 			isa = PBXGroup;
 			children = (
+				5461C2142437075A00F02694 /* AR */,
 				5461C2092436F55B00F02694 /* Sounds */,
 				5461C1F22436CCEE00F02694 /* AppDelegate.swift */,
 				5461C1F42436CCEE00F02694 /* SceneDelegate.swift */,
@@ -80,6 +85,7 @@
 			children = (
 				5461C1F62436CCEE00F02694 /* IntroViewController.swift */,
 				5461C2102436FC8900F02694 /* OptionsViewController.swift */,
+				5461C2122437055600F02694 /* SingleARViewController.swift */,
 			);
 			path = Controler;
 			sourceTree = "<group>";
@@ -106,6 +112,14 @@
 				5461C20C2436F5B500F02694 /* Intro.m4a */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		5461C2142437075A00F02694 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				5461C2172437162D00F02694 /* ARacing.rcproject */,
+			);
+			path = AR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,7 +197,9 @@
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
+				5461C2132437055600F02694 /* SingleARViewController.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
+				5461C2182437162D00F02694 /* ARacing.rcproject in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -58,7 +58,6 @@ class IntroViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOptions" {
             let destinationVC = segue.destination as! OptionsViewController
-            destinationVC.newLabelText = "Teste"
             destinationVC.menuBrains = menuBrains
         }
     }

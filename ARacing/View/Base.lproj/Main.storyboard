@@ -92,27 +92,118 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9b0-rg-jgy">
-                                <rect key="frame" x="427" y="196.5" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="V2" translatesAutoresizingMaskIntoConstraints="NO" id="Jzk-Ne-IQ0">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HnR-gH-jry" userLabel="Buttons Background StackView">
+                                <rect key="frame" x="44" y="124.5" width="808" height="165"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="Dvc-1l-ykO">
+                                        <rect key="frame" x="0.0" y="0.0" width="401" height="165"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-sg-wSf">
+                                        <rect key="frame" x="407" y="0.0" width="401" height="165"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="165" id="Fq7-Mx-cJe"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SPf-76-BOP" userLabel="Buttons StackView">
+                                <rect key="frame" x="44" y="124.5" width="808" height="165"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-2y-GqB">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="165"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="41"/>
+                                        <size key="titleShadowOffset" width="2" height="2"/>
+                                        <state key="normal" title="Single Player">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="singlePlayerPressed:" destination="1eg-OT-pJ5" eventType="touchUpInside" id="FHY-je-i1j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5p-Wz-fSW">
+                                        <rect key="frame" x="404" y="0.0" width="404" height="165"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="41"/>
+                                        <size key="titleShadowOffset" width="2" height="2"/>
+                                        <state key="normal" title="Multi Player">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="multiPlayerPressed:" destination="1eg-OT-pJ5" eventType="touchUpInside" id="wTt-hn-PP2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="165" id="Uwb-IG-bSS"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="9b0-rg-jgy" firstAttribute="centerY" secondItem="9uq-ns-SM9" secondAttribute="centerY" id="RWg-ff-w8j"/>
-                            <constraint firstItem="9b0-rg-jgy" firstAttribute="centerX" secondItem="9uq-ns-SM9" secondAttribute="centerX" id="mCl-HO-XMp"/>
+                            <constraint firstItem="HnR-gH-jry" firstAttribute="leading" secondItem="Bjg-MI-ojb" secondAttribute="leading" id="5aT-q0-br4"/>
+                            <constraint firstItem="Jzk-Ne-IQ0" firstAttribute="top" secondItem="9uq-ns-SM9" secondAttribute="top" id="Ear-OZ-X9z"/>
+                            <constraint firstItem="SPf-76-BOP" firstAttribute="leading" secondItem="Bjg-MI-ojb" secondAttribute="leading" id="EjA-nn-DeF"/>
+                            <constraint firstAttribute="trailing" secondItem="Jzk-Ne-IQ0" secondAttribute="trailing" id="Lnf-ag-Xf4"/>
+                            <constraint firstItem="SPf-76-BOP" firstAttribute="centerY" secondItem="9uq-ns-SM9" secondAttribute="centerY" id="ZBl-JJ-biP"/>
+                            <constraint firstAttribute="bottom" secondItem="Jzk-Ne-IQ0" secondAttribute="bottom" id="c48-J6-dOP"/>
+                            <constraint firstItem="Jzk-Ne-IQ0" firstAttribute="leading" secondItem="9uq-ns-SM9" secondAttribute="leading" id="krC-jG-Nou"/>
+                            <constraint firstItem="Bjg-MI-ojb" firstAttribute="trailing" secondItem="SPf-76-BOP" secondAttribute="trailing" id="kvv-RF-A4h"/>
+                            <constraint firstItem="HnR-gH-jry" firstAttribute="centerY" secondItem="9uq-ns-SM9" secondAttribute="centerY" id="sMo-3W-kI1"/>
+                            <constraint firstItem="Bjg-MI-ojb" firstAttribute="trailing" secondItem="HnR-gH-jry" secondAttribute="trailing" id="xq4-Rf-W2q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bjg-MI-ojb"/>
                     </view>
                     <connections>
-                        <outlet property="label" destination="9b0-rg-jgy" id="HMp-MR-Ozn"/>
+                        <outlet property="multiPlayerButton" destination="Y5p-Wz-fSW" id="Zok-dP-fWH"/>
+                        <outlet property="singlePlayerButton" destination="ks8-2y-GqB" id="TMp-Ky-97z"/>
+                        <segue destination="1mO-Fu-hmP" kind="presentation" identifier="goToSingleAR" id="6Uc-gN-Rkj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25n-HR-LkR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="932"/>
+            <point key="canvasLocation" x="138.61607142857142" y="931.88405797101461"/>
+        </scene>
+        <!--SingleAR View Controller-->
+        <scene sceneID="fWc-rI-KLE">
+            <objects>
+                <viewController id="1mO-Fu-hmP" customClass="SingleARViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zfY-Yo-o4f">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxY-HS-Xyz">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </arView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-jx-Oyf">
+                                <rect key="frame" x="425" y="295.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="test:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="TzT-09-BL0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vxY-HS-Xyz" firstAttribute="top" secondItem="zfY-Yo-o4f" secondAttribute="top" id="1Zb-KV-fOd"/>
+                            <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerY" secondItem="zfY-Yo-o4f" secondAttribute="centerY" multiplier="1.5" id="6fP-YY-Zfo"/>
+                            <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="EwJ-oW-l0M"/>
+                            <constraint firstAttribute="trailing" secondItem="vxY-HS-Xyz" secondAttribute="trailing" id="Ov8-ov-3RK"/>
+                            <constraint firstItem="vxY-HS-Xyz" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="dZc-qh-bXI"/>
+                            <constraint firstAttribute="bottom" secondItem="vxY-HS-Xyz" secondAttribute="bottom" id="eIc-Im-HSv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UQX-Uf-R1x"/>
+                    </view>
+                    <connections>
+                        <outlet property="arView" destination="vxY-HS-Xyz" id="yCV-tF-4iA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WQW-qs-e0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.61607142857142" y="1769.5652173913045"/>
         </scene>
     </scenes>
     <resources>
