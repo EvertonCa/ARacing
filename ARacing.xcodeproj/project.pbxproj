@@ -18,6 +18,7 @@
 		5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2102436FC8900F02694 /* OptionsViewController.swift */; };
 		5461C2132437055600F02694 /* SingleARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2122437055600F02694 /* SingleARViewController.swift */; };
 		5461C2182437162D00F02694 /* ARacing.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2172437162D00F02694 /* ARacing.rcproject */; };
+		5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2192437E5C800F02694 /* SingleARBrains.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		5461C2102436FC8900F02694 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		5461C2122437055600F02694 /* SingleARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARViewController.swift; sourceTree = "<group>"; };
 		5461C2172437162D00F02694 /* ARacing.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = ARacing.rcproject; sourceTree = "<group>"; };
+		5461C2192437E5C800F02694 /* SingleARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARBrains.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
+				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
+				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5461C2132437055600F02694 /* SingleARViewController.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2182437162D00F02694 /* ARacing.rcproject in Sources */,

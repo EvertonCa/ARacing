@@ -13,39 +13,18 @@ class SingleARViewController: UIViewController {
 
     @IBOutlet weak var arView: ARView!
     
+    var singleARBrain: SingleARBrains!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        singleARBrain = SingleARBrains(arView: arView)
 
-        loadFase1()
-    }
-    
-    var fase1: ARacing.Fase1!
-    
-    
-    func loadFase1() {
-        ARacing.loadFase1Async { [weak self] result in
-            switch result {
-            case .success(let anchor):
-                guard let self = self else { return }
-                print("LOADED")
-                
-                anchor.generateCollisionShapes(recursive: true)
-                
-                self.fase1 = anchor
-            
-            case .failure(let error):
-            print("Unable to load the game with error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func showExperience() {
-        self.arView.scene.anchors.append(fase1)
+        singleARBrain.loadFase1()
     }
     
     @IBAction func test(_ sender: UIButton) {
-        showExperience()
-        var animations = self.fase1.car1?.availableAnimations
+        singleARBrain.showExperience()
         
     }
 

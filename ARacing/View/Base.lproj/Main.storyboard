@@ -40,7 +40,7 @@
                                     <constraint firstAttribute="height" constant="165" id="Opw-cU-ZuY"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="wxL-3D-qZS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="41"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.61607142857142" y="137.68115942028987"/>
+            <point key="canvasLocation" x="139" y="55"/>
         </scene>
         <!--Options View Controller-->
         <scene sceneID="hqE-Lo-JLL">
@@ -203,13 +203,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQW-qs-e0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.61607142857142" y="1769.5652173913045"/>
+            <point key="canvasLocation" x="-207" y="1814"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Background_Button" width="672" height="288.5"/>
+        <image name="Background_Button" width="672" height="232"/>
         <image name="Background_Splash" width="666" height="375"/>
-        <image name="Logo_ARacing" width="564" height="122"/>
+        <image name="Logo_ARacing" width="601" height="195"/>
         <image name="V2" width="500" height="400"/>
     </resources>
 </document>
