@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F22436CCEE00F02694 /* AppDelegate.swift */; };
 		5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F42436CCEE00F02694 /* SceneDelegate.swift */; };
-		5461C1F72436CCEE00F02694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F62436CCEE00F02694 /* ViewController.swift */; };
+		5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F62436CCEE00F02694 /* IntroViewController.swift */; };
 		5461C1FA2436CCEE00F02694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5461C1F82436CCEE00F02694 /* Main.storyboard */; };
 		5461C1FC2436CCFD00F02694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5461C1FB2436CCFD00F02694 /* Assets.xcassets */; };
 		5461C1FF2436CCFD00F02694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5461C1FD2436CCFD00F02694 /* LaunchScreen.storyboard */; };
+		5461C20D2436F5B500F02694 /* Intro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5461C20C2436F5B500F02694 /* Intro.m4a */; };
+		5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C20E2436FB5600F02694 /* MenuBrains.swift */; };
+		5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2102436FC8900F02694 /* OptionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5461C1EF2436CCEE00F02694 /* ARacing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461C1F22436CCEE00F02694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5461C1F42436CCEE00F02694 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5461C1F62436CCEE00F02694 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5461C1F62436CCEE00F02694 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		5461C1F92436CCEE00F02694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5461C1FB2436CCFD00F02694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5461C1FE2436CCFD00F02694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5461C2002436CCFD00F02694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5461C20C2436F5B500F02694 /* Intro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.m4a; sourceTree = "<group>"; };
+		5461C20E2436FB5600F02694 /* MenuBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBrains.swift; sourceTree = "<group>"; };
+		5461C2102436FC8900F02694 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		5461C1F12436CCEE00F02694 /* ARacing */ = {
 			isa = PBXGroup;
 			children = (
+				5461C2092436F55B00F02694 /* Sounds */,
 				5461C1F22436CCEE00F02694 /* AppDelegate.swift */,
 				5461C1F42436CCEE00F02694 /* SceneDelegate.swift */,
-				5461C1F62436CCEE00F02694 /* ViewController.swift */,
-				5461C1F82436CCEE00F02694 /* Main.storyboard */,
+				5461C2082436CD5800F02694 /* Model */,
+				5461C2072436CD4400F02694 /* View */,
+				5461C2062436CD3600F02694 /* Controler */,
 				5461C1FB2436CCFD00F02694 /* Assets.xcassets */,
 				5461C1FD2436CCFD00F02694 /* LaunchScreen.storyboard */,
 				5461C2002436CCFD00F02694 /* Info.plist */,
 			);
 			path = ARacing;
+			sourceTree = "<group>";
+		};
+		5461C2062436CD3600F02694 /* Controler */ = {
+			isa = PBXGroup;
+			children = (
+				5461C1F62436CCEE00F02694 /* IntroViewController.swift */,
+				5461C2102436FC8900F02694 /* OptionsViewController.swift */,
+			);
+			path = Controler;
+			sourceTree = "<group>";
+		};
+		5461C2072436CD4400F02694 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5461C1F82436CCEE00F02694 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5461C2082436CD5800F02694 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5461C2092436F55B00F02694 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5461C20C2436F5B500F02694 /* Intro.m4a */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5461C1FF2436CCFD00F02694 /* LaunchScreen.storyboard in Resources */,
+				5461C20D2436F5B500F02694 /* Intro.m4a in Resources */,
 				5461C1FC2436CCFD00F02694 /* Assets.xcassets in Resources */,
 				5461C1FA2436CCEE00F02694 /* Main.storyboard in Resources */,
 			);
@@ -138,9 +180,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5461C1F72436CCEE00F02694 /* ViewController.swift in Sources */,
+				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
+				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
+				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
