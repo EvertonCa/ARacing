@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="V2" translatesAutoresizingMaskIntoConstraints="NO" id="le1-En-INd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="le1-En-INd">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="dDC-53-SyT">
@@ -92,7 +92,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="V2" translatesAutoresizingMaskIntoConstraints="NO" id="Jzk-Ne-IQ0">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="Jzk-Ne-IQ0">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HnR-gH-jry" userLabel="Buttons Background StackView">
@@ -178,14 +178,20 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" autoenablesDefaultLighting="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAq-GO-DI1">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-jx-Oyf">
-                                <rect key="frame" x="373" y="285.5" width="150" height="50"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="IGb-ci-7Vu">
+                                <rect key="frame" x="358" y="270.5" width="180" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="mtY-OJ-5gS"/>
-                                    <constraint firstAttribute="height" constant="50" id="tau-qw-t2s"/>
+                                    <constraint firstAttribute="width" constant="180" id="EsT-yO-IXW"/>
+                                    <constraint firstAttribute="height" constant="80" id="eYN-OA-raH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-jx-Oyf">
+                                <rect key="frame" x="358" y="270.5" width="180" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="mtY-OJ-5gS"/>
+                                    <constraint firstAttribute="height" constant="80" id="tau-qw-t2s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="47"/>
                                 <size key="titleShadowOffset" width="1" height="2"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -202,6 +208,9 @@
                                     <constraint firstAttribute="height" constant="128" id="pp3-vj-0BL"/>
                                 </constraints>
                                 <state key="normal" title="Acc"/>
+                                <connections>
+                                    <action selector="accPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="fsX-XC-ybP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6t-Nl-uFP">
                                 <rect key="frame" x="632" y="293" width="100" height="70"/>
@@ -210,6 +219,9 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="j9z-u6-IEr"/>
                                 </constraints>
                                 <state key="normal" title="Brake"/>
+                                <connections>
+                                    <action selector="brakePressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="Ldx-rG-MbR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTa-P8-v1l">
                                 <rect key="frame" x="184" y="273" width="100" height="100"/>
@@ -218,6 +230,9 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="sVh-do-gjW"/>
                                 </constraints>
                                 <state key="normal" title="Right"/>
+                                <connections>
+                                    <action selector="turnRightPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="FOo-7x-YVT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA9-Z9-iId">
                                 <rect key="frame" x="74" y="273" width="100" height="100"/>
@@ -226,6 +241,9 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ydN-Qi-gCx"/>
                                 </constraints>
                                 <state key="normal" title="Left"/>
+                                <connections>
+                                    <action selector="turnLeftPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="2Is-TD-pte"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Accelerator Pedal" translatesAutoresizingMaskIntoConstraints="NO" id="atr-1Y-nSk">
                                 <rect key="frame" x="752" y="245" width="70" height="128"/>
@@ -274,9 +292,11 @@
                             <constraint firstItem="UAq-GO-DI1" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="P65-po-ifz"/>
                             <constraint firstItem="5dp-Xf-3iN" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="30" id="Q7G-5U-Wl6"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="f6t-Nl-uFP" secondAttribute="bottom" constant="30" id="QPR-kY-8q2"/>
+                            <constraint firstItem="IGb-ci-7Vu" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="VvU-45-fMh"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="5dp-Xf-3iN" secondAttribute="bottom" constant="20" id="XXj-dW-bzV"/>
                             <constraint firstAttribute="trailing" secondItem="UAq-GO-DI1" secondAttribute="trailing" id="Zf5-6q-6nN"/>
                             <constraint firstItem="UAq-GO-DI1" firstAttribute="top" secondItem="zfY-Yo-o4f" secondAttribute="top" id="a7H-ti-1qQ"/>
+                            <constraint firstItem="IGb-ci-7Vu" firstAttribute="centerY" secondItem="zfY-Yo-o4f" secondAttribute="centerY" multiplier="1.5" id="beT-qH-zUZ"/>
                             <constraint firstAttribute="bottom" secondItem="UAq-GO-DI1" secondAttribute="bottom" id="cYL-iG-VYc"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="atr-1Y-nSk" secondAttribute="trailing" constant="30" id="iIQ-Dz-yti"/>
                             <constraint firstItem="xX5-0T-5kM" firstAttribute="leading" secondItem="5dp-Xf-3iN" secondAttribute="trailing" constant="10" id="sap-FC-EF0"/>
@@ -287,8 +307,17 @@
                         <viewLayoutGuide key="safeArea" id="UQX-Uf-R1x"/>
                     </view>
                     <connections>
+                        <outlet property="accButton" destination="349-gm-93V" id="uHt-yZ-sMq"/>
+                        <outlet property="accButtonBackground" destination="atr-1Y-nSk" id="Ltj-hy-Pf4"/>
+                        <outlet property="brakeButton" destination="f6t-Nl-uFP" id="Otz-u2-78b"/>
+                        <outlet property="brakeButtonBackground" destination="QJS-b1-0Bv" id="bZU-tA-CG3"/>
                         <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
                         <outlet property="startButton" destination="4GU-jx-Oyf" id="WP6-ae-rni"/>
+                        <outlet property="startButtonBackground" destination="IGb-ci-7Vu" id="eir-Md-YlG"/>
+                        <outlet property="turnLeftButton" destination="gA9-Z9-iId" id="l19-Zv-ocl"/>
+                        <outlet property="turnLeftButtonBackground" destination="5dp-Xf-3iN" id="Emc-Xm-s09"/>
+                        <outlet property="turnRightButton" destination="nTa-P8-v1l" id="BeY-Qs-GUi"/>
+                        <outlet property="turnRightButtonBackground" destination="xX5-0T-5kM" id="qhQ-MH-NOd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQW-qs-e0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -304,6 +333,5 @@
         <image name="Logo_ARacing" width="601" height="195"/>
         <image name="Turn Left Button" width="100" height="98"/>
         <image name="Turn Right Button" width="100.5" height="98"/>
-        <image name="V2" width="500" height="400"/>
     </resources>
 </document>
