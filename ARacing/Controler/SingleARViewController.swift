@@ -7,24 +7,28 @@
 //
 
 import UIKit
-import RealityKit
+import ARKit
 
 class SingleARViewController: UIViewController {
-
-    @IBOutlet weak var arView: ARView!
     
+    @IBOutlet weak var sceneView: ARSCNView!
+    
+    // Single AR Brain
     var singleARBrain: SingleARBrains!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        singleARBrain = SingleARBrains(arView: arView)
-
-        singleARBrain.loadFase1()
+        // start Single AR Brain
+        singleARBrain = SingleARBrains(sceneView)
+        
+        // setup delegate
+        self.sceneView.delegate = self
+        
     }
     
     @IBAction func test(_ sender: UIButton) {
-        singleARBrain.showExperience()
+        
         
     }
 

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--Intro View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="IntroViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="IntroViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,7 +77,7 @@
                         <outlet property="backgroundSplash" destination="dDC-53-SyT" id="gKA-qh-hHq"/>
                         <outlet property="buttonStart" destination="2Dv-4W-7zF" id="lhC-Z8-0py"/>
                         <outlet property="logoARacing" destination="WEu-VI-QqO" id="LwI-tE-Caz"/>
-                        <segue destination="1eg-OT-pJ5" kind="presentation" identifier="goToOptions" modalTransitionStyle="crossDissolve" id="rAK-vf-KFf"/>
+                        <segue destination="1eg-OT-pJ5" kind="presentation" identifier="goToOptions" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="rAK-vf-KFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -87,7 +87,7 @@
         <!--Options View Controller-->
         <scene sceneID="hqE-Lo-JLL">
             <objects>
-                <viewController id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9uq-ns-SM9">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -170,14 +170,11 @@
         <!--SingleAR View Controller-->
         <scene sceneID="fWc-rI-KLE">
             <objects>
-                <viewController id="1mO-Fu-hmP" customClass="SingleARViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="1mO-Fu-hmP" customClass="SingleARViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zfY-Yo-o4f">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxY-HS-Xyz">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                            </arView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-jx-Oyf">
                                 <rect key="frame" x="425" y="295.5" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
@@ -185,25 +182,28 @@
                                     <action selector="test:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="TzT-09-BL0"/>
                                 </connections>
                             </button>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" autoenablesDefaultLighting="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAq-GO-DI1">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </arscnView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="vxY-HS-Xyz" firstAttribute="top" secondItem="zfY-Yo-o4f" secondAttribute="top" id="1Zb-KV-fOd"/>
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerY" secondItem="zfY-Yo-o4f" secondAttribute="centerY" multiplier="1.5" id="6fP-YY-Zfo"/>
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="EwJ-oW-l0M"/>
-                            <constraint firstAttribute="trailing" secondItem="vxY-HS-Xyz" secondAttribute="trailing" id="Ov8-ov-3RK"/>
-                            <constraint firstItem="vxY-HS-Xyz" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="dZc-qh-bXI"/>
-                            <constraint firstAttribute="bottom" secondItem="vxY-HS-Xyz" secondAttribute="bottom" id="eIc-Im-HSv"/>
+                            <constraint firstItem="UAq-GO-DI1" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="P65-po-ifz"/>
+                            <constraint firstAttribute="trailing" secondItem="UAq-GO-DI1" secondAttribute="trailing" id="Zf5-6q-6nN"/>
+                            <constraint firstItem="UAq-GO-DI1" firstAttribute="top" secondItem="zfY-Yo-o4f" secondAttribute="top" id="a7H-ti-1qQ"/>
+                            <constraint firstAttribute="bottom" secondItem="UAq-GO-DI1" secondAttribute="bottom" id="cYL-iG-VYc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UQX-Uf-R1x"/>
                     </view>
                     <connections>
-                        <outlet property="arView" destination="vxY-HS-Xyz" id="yCV-tF-4iA"/>
+                        <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQW-qs-e0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207" y="1814"/>
+            <point key="canvasLocation" x="-207.58928571428569" y="1813.0434782608697"/>
         </scene>
     </scenes>
     <resources>

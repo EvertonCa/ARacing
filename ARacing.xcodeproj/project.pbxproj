@@ -17,8 +17,9 @@
 		5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C20E2436FB5600F02694 /* MenuBrains.swift */; };
 		5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2102436FC8900F02694 /* OptionsViewController.swift */; };
 		5461C2132437055600F02694 /* SingleARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2122437055600F02694 /* SingleARViewController.swift */; };
-		5461C2182437162D00F02694 /* ARacing.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2172437162D00F02694 /* ARacing.rcproject */; };
 		5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2192437E5C800F02694 /* SingleARBrains.swift */; };
+		5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */; };
+		5489C0872447F5A200B44030 /* 3D Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5489C0862447F5A200B44030 /* 3D Models.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +35,9 @@
 		5461C20E2436FB5600F02694 /* MenuBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBrains.swift; sourceTree = "<group>"; };
 		5461C2102436FC8900F02694 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		5461C2122437055600F02694 /* SingleARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARViewController.swift; sourceTree = "<group>"; };
-		5461C2172437162D00F02694 /* ARacing.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = ARacing.rcproject; sourceTree = "<group>"; };
 		5461C2192437E5C800F02694 /* SingleARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARBrains.swift; sourceTree = "<group>"; };
+		5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIngleARViewControllerDelegates.swift; sourceTree = "<group>"; };
+		5489C0862447F5A200B44030 /* 3D Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "3D Models.scnassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +70,14 @@
 		5461C1F12436CCEE00F02694 /* ARacing */ = {
 			isa = PBXGroup;
 			children = (
-				5461C2142437075A00F02694 /* AR */,
 				5461C2092436F55B00F02694 /* Sounds */,
-				5461C1F22436CCEE00F02694 /* AppDelegate.swift */,
+				5489C0862447F5A200B44030 /* 3D Models.scnassets */,
+				5461C1FB2436CCFD00F02694 /* Assets.xcassets */,
 				5461C1F42436CCEE00F02694 /* SceneDelegate.swift */,
+				5461C1F22436CCEE00F02694 /* AppDelegate.swift */,
 				5461C2082436CD5800F02694 /* Model */,
 				5461C2072436CD4400F02694 /* View */,
 				5461C2062436CD3600F02694 /* Controler */,
-				5461C1FB2436CCFD00F02694 /* Assets.xcassets */,
 				5461C1FD2436CCFD00F02694 /* LaunchScreen.storyboard */,
 				5461C2002436CCFD00F02694 /* Info.plist */,
 			);
@@ -105,6 +107,7 @@
 			children = (
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
 				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
+				5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,14 +118,6 @@
 				5461C20C2436F5B500F02694 /* Intro.m4a */,
 			);
 			path = Sounds;
-			sourceTree = "<group>";
-		};
-		5461C2142437075A00F02694 /* AR */ = {
-			isa = PBXGroup;
-			children = (
-				5461C2172437162D00F02694 /* ARacing.rcproject */,
-			);
-			path = AR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5461C1FF2436CCFD00F02694 /* LaunchScreen.storyboard in Resources */,
+				5489C0872447F5A200B44030 /* 3D Models.scnassets in Resources */,
 				5461C20D2436F5B500F02694 /* Intro.m4a in Resources */,
 				5461C1FC2436CCFD00F02694 /* Assets.xcassets in Resources */,
 				5461C1FA2436CCEE00F02694 /* Main.storyboard in Resources */,
@@ -199,11 +195,11 @@
 			files = (
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
+				5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5461C2132437055600F02694 /* SingleARViewController.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
-				5461C2182437162D00F02694 /* ARacing.rcproject in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
