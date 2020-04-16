@@ -111,7 +111,7 @@ class SingleARViewController: UIViewController {
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
         // show vehicle in the view
-        //self.singleARBrain.createVehicle()
+        self.singleARBrain.createVehicle()
     }
     
     @IBAction func accPressed(_ sender: UIButton) {
