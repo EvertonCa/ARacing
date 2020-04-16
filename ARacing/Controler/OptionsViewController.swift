@@ -10,18 +10,24 @@ import UIKit
 
 class OptionsViewController: UIViewController {
     
+    //MARK: - Global IBOutlets and Variables
+    
     @IBOutlet weak var singlePlayerButton: UIButton!
     @IBOutlet weak var multiPlayerButton: UIButton!
     
-    
+    // Menu Brains
     var menuBrains:MenuBrains!
     
+    //MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     
+    //MARK: - IBActions
+    
+    // Stops the music and segue to SingleARViewController
     @IBAction func singlePlayerPressed(_ sender: UIButton) {
         menuBrains.stopIntroMusic()
         self.performSegue(withIdentifier: "goToSingleAR", sender: self)

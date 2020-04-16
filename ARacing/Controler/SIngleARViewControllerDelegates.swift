@@ -18,8 +18,7 @@ extension SingleARViewController: ARSCNViewDelegate {
         guard anchor is ARPlaneAnchor else { return }
         DispatchQueue.main.async {
             // changes startButton alpha to 1 and enables the button
-            self.startButton.alpha = 1
-            self.startButton.isEnabled = true
+            self.showStartButton()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 //self.planeDetectedLabel.isHidden = true

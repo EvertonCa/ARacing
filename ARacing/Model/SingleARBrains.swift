@@ -11,6 +11,8 @@ import ARKit
 
 class SingleARBrains {
     
+    //MARK: - Global Variables
+    
     // ARKit scene View
     var sceneView:ARSCNView!
     
@@ -19,6 +21,8 @@ class SingleARBrains {
     
     // Vehicle
     var vehicle = SCNPhysicsVehicle()
+    
+    //MARK: - Functions
     
     init(_ sceneView: ARSCNView) {
         self.sceneView = sceneView

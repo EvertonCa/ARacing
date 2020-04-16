@@ -11,14 +11,19 @@ import AVFoundation
 
 struct MenuBrains {
     
+    //MARK: - Global Variables
     var player: AVAudioPlayer!
     
+    //MARK: - Functions
+    
+    // Starts playing the background music
     mutating func playIntroMusic() {
         let url = Bundle.main.url(forResource: "Intro", withExtension: "m4a")
         self.player = try! AVAudioPlayer(contentsOf: url!)
         self.player.play()
     }
     
+    // Stops the background music
     mutating func stopIntroMusic() {
         self.player.stop()
     }

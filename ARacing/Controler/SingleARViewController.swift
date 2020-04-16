@@ -11,6 +11,8 @@ import ARKit
 
 class SingleARViewController: UIViewController {
     
+    //MARK: - Global IBOutlets and Variables
+    
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var startButtonBackground: UIImageView!
@@ -26,6 +28,8 @@ class SingleARViewController: UIViewController {
     // Single AR Brain
     var singleARBrain: SingleARBrains!
     
+    //MARK: - Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +44,9 @@ class SingleARViewController: UIViewController {
         
     }
     
+    // hide all buttons with alpha = 0
     func hideButtons() {
+        // alphas to 0
         self.startButton.alpha = 0
         self.startButtonBackground.alpha = 0
         self.accButton.alpha = 0
@@ -51,7 +57,23 @@ class SingleARViewController: UIViewController {
         self.brakeButtonBackground.alpha = 0
         self.turnLeftButtonBackground.alpha = 0
         self.turnRightButtonBackground.alpha = 0
+        
+        // disables all buttons
+        self.startButton.isEnabled = false
+        self.accButton.isEnabled = false
+        self.turnRightButton.isEnabled = false
+        self.turnLeftButton.isEnabled = false
+        self.brakeButton.isEnabled = false
     }
+    
+    // enables and changes alpha to 1 for the startButton
+    func showStartButton() {
+        self.startButton.alpha = 1
+        self.startButtonBackground.alpha = 1
+        self.startButton.isEnabled = true
+    }
+    
+    //MARK: - IBActions
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
     }
