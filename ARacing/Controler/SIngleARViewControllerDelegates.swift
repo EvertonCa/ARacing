@@ -19,6 +19,7 @@ extension SingleARViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             // changes startButton alpha to 1 and enables the button
             self.showStartButton()
+            self.showDrivingUI()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 //self.planeDetectedLabel.isHidden = true
@@ -53,31 +54,56 @@ extension SingleARViewController: ARSCNViewDelegate {
     
     // used for vehicle and physics updates
     func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
-//        self.vehicle.setSteeringAngle(orientation, forWheelAt: 2)
-//        self.vehicle.setSteeringAngle(orientation, forWheelAt: 3)
-//
-//        var engineForce: CGFloat = 0
-//        var breakingForce: CGFloat = 0
-//
-//        if self.touched == 1 {
-//            // accelerate
-//            engineForce = 50
-//        } else if self.touched == 2 {
-//            // reverse
-//            engineForce = -50
-//        } else if self.touched == 3 {
-//            // break
-//            breakingForce = 100
-//        } else {
-//            engineForce = 0
-//            breakingForce = 0
-//        }
-//
-//        self.vehicle.applyEngineForce(engineForce, forWheelAt: 0)
-//        self.vehicle.applyEngineForce(engineForce, forWheelAt: 1)
-//
-//        self.vehicle.applyBrakingForce(breakingForce, forWheelAt: 0)
-//        self.vehicle.applyBrakingForce(breakingForce, forWheelAt: 1)
+        
+        let steerAngle:CGFloat = 0.7
+        // steer the vehicle to right
+        if self.turningRight {
+            self.singleARBrain.vehicle.setSteeringAngle(-steerAngle, forWheelAt: 2)
+            self.singleARBrain.vehicle.setSteeringAngle(-steerAngle, forWheelAt: 3)
+        } else {
+            self.singleARBrain.vehicle.setSteeringAngle(0, forWheelAt: 2)
+            self.singleARBrain.vehicle.setSteeringAngle(0, forWheelAt: 3)
+        }
+        
+        // steer the vehicle to left
+        if self.turningLeft {
+            self.singleARBrain.vehicle.setSteeringAngle(steerAngle, forWheelAt: 2)
+            self.singleARBrain.vehicle.setSteeringAngle(steerAngle, forWheelAt: 3)
+        } else {
+            self.singleARBrain.vehicle.setSteeringAngle(0, forWheelAt: 2)
+            self.singleARBrain.vehicle.setSteeringAngle(0, forWheelAt: 3)
+        }
+        
+        // Accelerate the vehicle
+        let engineForce: CGFloat = 50
+
+        if self.accelerating {
+            self.singleARBrain.vehicle.applyEngineForce(engineForce, forWheelAt: 0)
+            self.singleARBrain.vehicle.applyEngineForce(engineForce, forWheelAt: 1)
+        } else {
+            self.singleARBrain.vehicle.applyEngineForce(0, forWheelAt: 0)
+            self.singleARBrain.vehicle.applyEngineForce(0, forWheelAt: 1)
+        }
+        
+        // Break the vehicle
+        let frontBreakingForce: CGFloat = 100
+        let rearBreakingForce: CGFloat = 70
+        
+        if self.breaking {
+            // rear wheels
+            self.singleARBrain.vehicle.applyBrakingForce(rearBreakingForce, forWheelAt: 0)
+            self.singleARBrain.vehicle.applyBrakingForce(rearBreakingForce, forWheelAt: 1)
+            // front wheels
+            self.singleARBrain.vehicle.applyBrakingForce(frontBreakingForce, forWheelAt: 2)
+            self.singleARBrain.vehicle.applyBrakingForce(frontBreakingForce, forWheelAt: 3)
+        } else {
+            // rear wheels
+            self.singleARBrain.vehicle.applyBrakingForce(0, forWheelAt: 0)
+            self.singleARBrain.vehicle.applyBrakingForce(0, forWheelAt: 1)
+            // front wheels
+            self.singleARBrain.vehicle.applyBrakingForce(0, forWheelAt: 2)
+            self.singleARBrain.vehicle.applyBrakingForce(0, forWheelAt: 3)
+        }
     }
 }
 

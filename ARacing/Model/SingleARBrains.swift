@@ -77,16 +77,16 @@ class SingleARBrains {
         let currentPositionOfCamera = orientation + location
         
         // vehicle scene
-        let scene = SCNScene(named: "Models.scnassets/Car-Scene.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/E100.scn")
         
         //vehicle chassis
         let chassis = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
         
         // vehicle wheels nodes
-        let frontLeftWheel = (chassis.childNode(withName: "frontLeftParent", recursively: false))!
-        let frontRightWheel = (chassis.childNode(withName: "frontRightParent", recursively: false))!
-        let rearLeftWheel = (chassis.childNode(withName: "rearLeftParent", recursively: false))!
-        let rearRightWheel = (chassis.childNode(withName: "rearRightParent", recursively: false))!
+        let frontLeftWheel = (chassis.childNode(withName: "leftFrontWheelParent", recursively: false))!
+        let frontRightWheel = (chassis.childNode(withName: "rightFrontWheelParent", recursively: false))!
+        let rearLeftWheel = (chassis.childNode(withName: "leftRearWheelParent", recursively: false))!
+        let rearRightWheel = (chassis.childNode(withName: "rightRearWheelParent", recursively: false))!
         
         // vehicles wheels
         let v_frontLeftWheel = SCNPhysicsVehicleWheel(node: frontLeftWheel)
@@ -116,6 +116,52 @@ class SingleARBrains {
         self.sceneView.scene.rootNode.addChildNode(chassis)
     }
     
+    // Manager for Gestures
+    func registerGesturesrecognizers() {
+        // recognizer for Tap Gesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+        
+        // recognizer for Pinch Gesture
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinch))
+        self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
+    }
+    
+    // handler for Tap Gesture for adding scene to plane
+    @objc func tapped(sender:UITapGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let tapLocation = sender.location(in: sceneView)
+        
+        let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+        
+        if !hitTest.isEmpty {
+            print("Touched horizontal surface")
+        } else {
+            print("No match")
+        }
+    }
+    
+    // handler for Pinch Gesture to resize scene
+    @objc func pinch(sender: UIPinchGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let pinchLocation = sender.location(in: sceneView)
+        
+        let hitTest = sceneView.hitTest(pinchLocation)
+        
+        if !hitTest.isEmpty {
+            if let results = hitTest.first {
+                let node = results.node
+                
+                // scale the node with the gesture
+                let pinchAction = SCNAction.scale(by: sender.scale, duration: 0)
+                
+                node.runAction(pinchAction)
+                
+                // avoids exponential growth
+                sender.scale = 1.0
+            }
+        }
+    }
 }
 
 //MARK: - Extension to Int

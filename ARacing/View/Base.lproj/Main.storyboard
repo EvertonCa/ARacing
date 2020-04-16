@@ -209,7 +209,8 @@
                                 </constraints>
                                 <state key="normal" title="Acc"/>
                                 <connections>
-                                    <action selector="accPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="fsX-XC-ybP"/>
+                                    <action selector="accPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="pt7-he-isM"/>
+                                    <action selector="accReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="0AI-kF-dvE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6t-Nl-uFP">
@@ -220,7 +221,8 @@
                                 </constraints>
                                 <state key="normal" title="Brake"/>
                                 <connections>
-                                    <action selector="brakePressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="Ldx-rG-MbR"/>
+                                    <action selector="brakePressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="DQ5-z7-Z1C"/>
+                                    <action selector="breakReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="lxm-Ee-OaW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTa-P8-v1l">
@@ -231,7 +233,8 @@
                                 </constraints>
                                 <state key="normal" title="Right"/>
                                 <connections>
-                                    <action selector="turnRightPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="FOo-7x-YVT"/>
+                                    <action selector="turnRightPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="6Y4-As-B7W"/>
+                                    <action selector="turnRightReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="qij-x3-LvI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA9-Z9-iId">
@@ -242,7 +245,8 @@
                                 </constraints>
                                 <state key="normal" title="Left"/>
                                 <connections>
-                                    <action selector="turnLeftPressed:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="2Is-TD-pte"/>
+                                    <action selector="turnLeftPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="uEV-v7-tgt"/>
+                                    <action selector="turnLeftReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="t9J-O8-gRz"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Accelerator Pedal" translatesAutoresizingMaskIntoConstraints="NO" id="atr-1Y-nSk">

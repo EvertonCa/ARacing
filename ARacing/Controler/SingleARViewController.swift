@@ -28,6 +28,13 @@ class SingleARViewController: UIViewController {
     // Single AR Brain
     var singleARBrain: SingleARBrains!
     
+    // Driving variables
+    var turningRight = false
+    var turningLeft = false
+    var accelerating = false
+    var breaking = false
+    var goingBackwards = false
+    
     //MARK: - Functions
     
     override func viewDidLoad() {
@@ -42,6 +49,9 @@ class SingleARViewController: UIViewController {
         // hide all the UI
         self.hideButtons()
         
+        // setup the AR Experience
+        self.singleARBrain.setupView()
+        
     }
     
     // hide all buttons with alpha = 0
@@ -52,7 +62,7 @@ class SingleARViewController: UIViewController {
         self.accButton.alpha = 0
         self.turnRightButton.alpha = 0
         self.turnLeftButton.alpha = 0
-        self.turnLeftButton.alpha = 0
+        self.brakeButton.alpha = 0
         self.accButtonBackground.alpha = 0
         self.brakeButtonBackground.alpha = 0
         self.turnLeftButtonBackground.alpha = 0
@@ -68,22 +78,65 @@ class SingleARViewController: UIViewController {
     
     // enables and changes alpha to 1 for the startButton
     func showStartButton() {
-        self.startButton.alpha = 1
-        self.startButtonBackground.alpha = 1
-        self.startButton.isEnabled = true
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+            self.startButton.alpha = 1
+            self.startButtonBackground.alpha = 1
+            self.startButton.isEnabled = true
+        })
+    }
+    
+    // enables driving buttons
+    func showDrivingUI() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+            // alphas to 1
+            self.accButton.alpha = 1
+            self.turnRightButton.alpha = 1
+            self.turnLeftButton.alpha = 1
+            self.brakeButton.alpha = 1
+            self.accButtonBackground.alpha = 1
+            self.brakeButtonBackground.alpha = 1
+            self.turnLeftButtonBackground.alpha = 1
+            self.turnRightButtonBackground.alpha = 1
+            
+            // enables all buttons
+            self.accButton.isEnabled = true
+            self.turnRightButton.isEnabled = true
+            self.turnLeftButton.isEnabled = true
+            self.brakeButton.isEnabled = true
+        })
+        
     }
     
     //MARK: - IBActions
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
+        // show vehicle in the view
+        //self.singleARBrain.createVehicle()
     }
+    
     @IBAction func accPressed(_ sender: UIButton) {
+        self.accelerating = true
+    }
+    @IBAction func accReleased(_ sender: UIButton) {
+        self.accelerating = false
     }
     @IBAction func brakePressed(_ sender: UIButton) {
+        self.breaking = true
+    }
+    @IBAction func breakReleased(_ sender: UIButton) {
+        self.breaking = false
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
+        self.turningRight = true
+    }
+    @IBAction func turnRightReleased(_ sender: UIButton) {
+        self.turningRight = false
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
+        self.turningLeft = true
+    }
+    @IBAction func turnLeftReleased(_ sender: UIButton) {
+        self.turningLeft = false
     }
     
 }
