@@ -63,24 +63,28 @@ class SingleARBrains {
     
     // creates the vehicle
     func createVehicle() {
+        
+        // variables for the position of the device
         guard let pointOfView = sceneView.pointOfView else { return }
+        
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
         let currentPositionOfCamera = orientation + location
         
+        // vehicle scene
         let scene = SCNScene(named: "Models.scnassets/Car-Scene.scn")
         
+        //vehicle chassis
         let chassis = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
         
+        // vehicle wheels nodes
         let frontLeftWheel = (chassis.childNode(withName: "frontLeftParent", recursively: false))!
-        
         let frontRightWheel = (chassis.childNode(withName: "frontRightParent", recursively: false))!
-        
         let rearLeftWheel = (chassis.childNode(withName: "rearLeftParent", recursively: false))!
-        
         let rearRightWheel = (chassis.childNode(withName: "rearRightParent", recursively: false))!
         
+        // vehicles wheels
         let v_frontLeftWheel = SCNPhysicsVehicleWheel(node: frontLeftWheel)
         let v_frontRightWheel = SCNPhysicsVehicleWheel(node: frontRightWheel)
         let v_rearLeftWheel = SCNPhysicsVehicleWheel(node: rearLeftWheel)
@@ -89,16 +93,22 @@ class SingleARBrains {
         //if the option is true, it considers all of the geometries. If false, just combines into one geometry
         let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: chassis, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
         
-        // mass of 5 neutons
-        body.mass = 5
+        // mass of 50 N
+        body.mass = 50
         
+        // sets the position of the chassis
         chassis.position = currentPositionOfCamera
+        
+        // sets the physics body to the chassis
         chassis.physicsBody = body
         
         // Vehicle physics
         self.vehicle = SCNPhysicsVehicle(chassisBody: chassis.physicsBody!, wheels: [v_rearRightWheel, v_rearLeftWheel, v_frontRightWheel, v_frontLeftWheel])
         
+        // adds the vehicle to the physics world
         self.sceneView.scene.physicsWorld.addBehavior(self.vehicle)
+        
+        // adds the vehicle to the scene
         self.sceneView.scene.rootNode.addChildNode(chassis)
     }
     

@@ -90,6 +90,7 @@
 				5461C1F62436CCEE00F02694 /* IntroViewController.swift */,
 				5461C2102436FC8900F02694 /* OptionsViewController.swift */,
 				5461C2122437055600F02694 /* SingleARViewController.swift */,
+				5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */,
 			);
 			path = Controler;
 			sourceTree = "<group>";
@@ -107,7 +108,6 @@
 			children = (
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
 				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
-				5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

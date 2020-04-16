@@ -12,6 +12,7 @@ import ARKit
 class SingleARViewController: UIViewController {
     
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var startButton: UIButton!
     
     // Single AR Brain
     var singleARBrain: SingleARBrains!
@@ -25,11 +26,13 @@ class SingleARViewController: UIViewController {
         // setup delegate
         self.sceneView.delegate = self
         
+        // changes startButton alpha to 0
+        self.startButton.alpha = 0
+        
     }
     
-    @IBAction func test(_ sender: UIButton) {
-        
+    @IBAction func startButtonPressed(_ sender: UIButton) {
         
     }
-
+    
 }
