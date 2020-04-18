@@ -20,6 +20,7 @@ extension SingleARViewController: ARSCNViewDelegate {
             // changes startButton alpha to 1 and enables the button
             self.showStartButton()
             self.showDrivingUI()
+            self.showFeedback(text: "Click on the grid where you would like to place your map!")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 //self.planeDetectedLabel.isHidden = true
@@ -37,11 +38,18 @@ extension SingleARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
+        self.singleARBrain.gridNode = node
+        
         node.enumerateChildNodes { ( childNode, _ ) in
             childNode.removeFromParentNode()
         }
-        let gridNode = singleARBrain.createGrid(planeAnchor: planeAnchor)
-        node.addChildNode(gridNode)
+        
+        // if the scenary is placed, stop showing grid
+        if !self.singleARBrain.scenaryPlaced {
+            let gridNode = self.singleARBrain.createGrid(planeAnchor: planeAnchor)
+            node.addChildNode(gridNode)
+        }
+        
     }
     
     //when the anchor is removed

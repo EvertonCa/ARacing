@@ -13,6 +13,7 @@ class SingleARViewController: UIViewController {
     
     //MARK: - Global IBOutlets and Variables
     
+    @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var startButtonBackground: UIImageView!
@@ -41,7 +42,7 @@ class SingleARViewController: UIViewController {
         super.viewDidLoad()
         
         // start Single AR Brain
-        singleARBrain = SingleARBrains(sceneView)
+        singleARBrain = SingleARBrains(sceneView, self)
         
         // setup delegate
         self.sceneView.delegate = self
@@ -51,6 +52,9 @@ class SingleARViewController: UIViewController {
         
         // setup the AR Experience
         self.singleARBrain.setupView()
+        
+        // show feedback to move the camera
+        self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
         
     }
     
@@ -104,7 +108,22 @@ class SingleARViewController: UIViewController {
             self.turnLeftButton.isEnabled = true
             self.brakeButton.isEnabled = true
         })
-        
+    }
+    
+    // enables feedback label
+    func showFeedback(text:String) {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+            self.feedbackLabel.alpha = 1.0
+            self.feedbackLabel.text = text
+        })
+    }
+    
+    // hide feedback
+    func hideFeedback() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+            self.feedbackLabel.alpha = 0
+            self.feedbackLabel.text = ""
+        })
     }
     
     //MARK: - IBActions
@@ -112,31 +131,51 @@ class SingleARViewController: UIViewController {
     @IBAction func startButtonPressed(_ sender: UIButton) {
         // show vehicle in the view
         self.singleARBrain.createVehicle()
+        // disable gestures
+        self.singleARBrain.gesturesBrain.removeRotationGesture()
+        // removes feedback label
+        self.hideFeedback()
     }
     
     @IBAction func accPressed(_ sender: UIButton) {
         self.accelerating = true
+        self.accButton.alpha = 0.8
+        self.accButtonBackground.alpha = 0.8
     }
     @IBAction func accReleased(_ sender: UIButton) {
         self.accelerating = false
+        self.accButton.alpha = 1.0
+        self.accButtonBackground.alpha = 1.0
     }
     @IBAction func brakePressed(_ sender: UIButton) {
         self.breaking = true
+        self.brakeButton.alpha = 0.8
+        self.brakeButtonBackground.alpha = 0.8
     }
     @IBAction func breakReleased(_ sender: UIButton) {
         self.breaking = false
+        self.brakeButton.alpha = 1.0
+        self.brakeButtonBackground.alpha = 1.0
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
         self.turningRight = true
+        self.turnRightButton.alpha = 0.8
+        self.turnRightButtonBackground.alpha = 0.8
     }
     @IBAction func turnRightReleased(_ sender: UIButton) {
         self.turningRight = false
+        self.turnRightButton.alpha = 1.0
+        self.turnRightButtonBackground.alpha = 1.0
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
         self.turningLeft = true
+        self.turnLeftButton.alpha = 0.8
+        self.turnLeftButtonBackground.alpha = 0.8
     }
     @IBAction func turnLeftReleased(_ sender: UIButton) {
         self.turningLeft = false
+        self.turnLeftButton.alpha = 1.0
+        self.turnLeftButtonBackground.alpha = 1.0
     }
     
 }

@@ -2,14 +2,14 @@
 //  SingleARBrains.swift
 //  ARacing
 //
-//  Created by Everton Cardoso on 03/04/20.
+//  Created by Everton Cardoso on 18/04/20.
 //  Copyright © 2020 Everton Cardoso. All rights reserved.
 //
 
 import Foundation
 import ARKit
 
-class SingleARBrains {
+class RA_ARBrains {
     
     //MARK: - Global Variables
     
@@ -22,29 +22,10 @@ class SingleARBrains {
     // Vehicle
     var vehicle = SCNPhysicsVehicle()
     
-    // Scenary placed
-    var scenaryPlaced = false
-    
-    // Scenary locked
-    var scenaryLocked = false
-    
-    // Grid node
-    var gridNode:SCNNode?
-    
-    // Feedback Label
-    var feedbackLabel: UILabel?
-    
-    // Gestures
-    var gesturesBrain:Gestures!
-    
-    // ViewController
-    var singleARViewController: SingleARViewController!
-    
     //MARK: - Functions
     
-    init(_ sceneView: ARSCNView, _ view: SingleARViewController) {
+    init(_ sceneView: ARSCNView) {
         self.sceneView = sceneView
-        self.singleARViewController = view
     }
     
     // setup the view when it loads
@@ -66,8 +47,7 @@ class SingleARBrains {
         self.sceneView.session.run(arConfiguration)
         
         // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, arBrains: self)
-        self.gesturesBrain.registerGesturesrecognizers()
+        self.registerGesturesrecognizers()
         
     }
     
@@ -100,7 +80,7 @@ class SingleARBrains {
         let currentPositionOfCamera = orientation + location
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/SinglePlayerPlaceholder.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Placeholder.scn")
         
         // Main vehicle node
         let chassis = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
@@ -191,38 +171,87 @@ class SingleARBrains {
     
     // creates and places the scenary in the AR view
     func addScenary(hitTestResult: ARHitTestResult) {
-        let scene = SCNScene(named: "3D Models.scnassets/ScenarySinglePlayer1.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Scenary.scn")
         let node = (scene?.rootNode.childNode(withName: "plane", recursively: false))!
         let transform = hitTestResult.worldTransform
         let thirdColumn = transform.columns.3
         node.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
         
         self.sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    // Manager for Gestures
+    func registerGesturesrecognizers() {
+        // recognizer for Tap Gesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         
-        // sets the scenary placed to true and remove the tap gesture
-        self.scenaryPlaced = true
-        self.gesturesBrain.removeTapGesture()
+        // recognizer for spin Gesture
+        let spinGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotation))
+        self.sceneView.addGestureRecognizer(spinGestureRecognizer)
         
-        // changes feedback label
-        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
+        // recognizer for Pinch Gesture
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinch))
+        self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
+    }
+    
+    // handler for Tap Gesture for adding scene to plane
+    @objc func tapped(sender:UITapGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let tapLocation = sender.location(in: sceneView)
         
-        // removes the grid from view
-        self.gridNode!.enumerateChildNodes { ( childNode, _ ) in
-            childNode.removeFromParentNode()
+        let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+        
+        if !hitTest.isEmpty {
+            print("Touched horizontal surface")
+            self.addScenary(hitTestResult: hitTest.first!)
+        } else {
+            print("No match")
+        }
+    }
+    
+    // handler for Rotation Gesture for fixing location of the Scenary
+    @objc func rotation(sender:UIRotationGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let rotationLocation = sender.location(in: sceneView)
+        let angle = sender.rotation
+        
+        let hitTest = sceneView.hitTest(rotationLocation)
+        
+        if !hitTest.isEmpty {
+            if let results = hitTest.first {
+                let node = results.node
+                
+                let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: 0)
+                
+                node.runAction(rotateAction)
+                
+                sender.rotation = 0
+                print(angle)
+            }
+        }
+    }
+    
+    // handler for Pinch Gesture to resize scene
+    @objc func pinch(sender: UIPinchGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let pinchLocation = sender.location(in: sceneView)
+        
+        let hitTest = sceneView.hitTest(pinchLocation)
+        
+        if !hitTest.isEmpty {
+            if let results = hitTest.first {
+                let node = results.node
+                
+                // scale the node with the gesture
+                let pinchAction = SCNAction.scale(by: sender.scale, duration: 0)
+                
+                node.runAction(pinchAction)
+                
+                // avoids exponential growth
+                sender.scale = 1.0
+            }
         }
     }
 }
 
-//MARK: - Extension to Int
-
-extension Int {
-    
-    var degreesToRadians: Double { return Double(self) * .pi/180 }
-}
-
-
-//MARK: - Overload +
-
-func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
-}

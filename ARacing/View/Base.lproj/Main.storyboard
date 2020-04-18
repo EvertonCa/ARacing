@@ -277,6 +277,13 @@
                                     <constraint firstAttribute="width" constant="100" id="rvF-yO-gcG"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-ti-6td">
+                                <rect key="frame" x="395" y="10" width="106.5" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -287,6 +294,7 @@
                             <constraint firstItem="nTa-P8-v1l" firstAttribute="leading" secondItem="gA9-Z9-iId" secondAttribute="trailing" constant="10" id="E2y-xz-lS5"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="nTa-P8-v1l" secondAttribute="bottom" constant="20" id="EkG-Cj-kGm"/>
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="EwJ-oW-l0M"/>
+                            <constraint firstItem="gjr-ti-6td" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="10" id="J6o-KG-urW"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="QJS-b1-0Bv" secondAttribute="trailing" constant="20" id="J9W-Lm-e4A"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="f6t-Nl-uFP" secondAttribute="trailing" constant="20" id="JHY-zI-uww"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="349-gm-93V" secondAttribute="trailing" constant="30" id="JLN-wQ-HiR"/>
@@ -300,6 +308,7 @@
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="5dp-Xf-3iN" secondAttribute="bottom" constant="20" id="XXj-dW-bzV"/>
                             <constraint firstAttribute="trailing" secondItem="UAq-GO-DI1" secondAttribute="trailing" id="Zf5-6q-6nN"/>
                             <constraint firstItem="UAq-GO-DI1" firstAttribute="top" secondItem="zfY-Yo-o4f" secondAttribute="top" id="a7H-ti-1qQ"/>
+                            <constraint firstItem="gjr-ti-6td" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="ajA-JX-lBI"/>
                             <constraint firstItem="IGb-ci-7Vu" firstAttribute="centerY" secondItem="zfY-Yo-o4f" secondAttribute="centerY" multiplier="1.5" id="beT-qH-zUZ"/>
                             <constraint firstAttribute="bottom" secondItem="UAq-GO-DI1" secondAttribute="bottom" id="cYL-iG-VYc"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="atr-1Y-nSk" secondAttribute="trailing" constant="30" id="iIQ-Dz-yti"/>
@@ -315,6 +324,7 @@
                         <outlet property="accButtonBackground" destination="atr-1Y-nSk" id="Ltj-hy-Pf4"/>
                         <outlet property="brakeButton" destination="f6t-Nl-uFP" id="Otz-u2-78b"/>
                         <outlet property="brakeButtonBackground" destination="QJS-b1-0Bv" id="bZU-tA-CG3"/>
+                        <outlet property="feedbackLabel" destination="gjr-ti-6td" id="Grm-Rw-94x"/>
                         <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
                         <outlet property="startButton" destination="4GU-jx-Oyf" id="WP6-ae-rni"/>
                         <outlet property="startButtonBackground" destination="IGb-ci-7Vu" id="eir-Md-YlG"/>
