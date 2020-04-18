@@ -55,7 +55,7 @@ extension SingleARViewController: ARSCNViewDelegate {
     // used for vehicle and physics updates
     func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
         
-        let steerAngle:CGFloat = 0.7
+        let steerAngle:CGFloat = 0.8
         // steer the vehicle to right
         if self.turningRight {
             self.singleARBrain.vehicle.setSteeringAngle(steerAngle, forWheelAt: 2)
@@ -71,7 +71,7 @@ extension SingleARViewController: ARSCNViewDelegate {
         }
         
         // Accelerate the vehicle
-        let engineForce: CGFloat = 50
+        let engineForce: CGFloat = 100
         
         // Break the vehicle
         let frontBreakingForce: CGFloat = 100

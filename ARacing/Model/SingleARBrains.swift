@@ -32,7 +32,7 @@ class SingleARBrains {
     func setupView() {
         
         // debug options - feature points and world origin
-        self.sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
+        //self.sceneView.debugOptions = [.showFeaturePoints, .showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
         self.sceneView.showsStatistics = true
@@ -77,16 +77,19 @@ class SingleARBrains {
         let currentPositionOfCamera = orientation + location
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/Car-Scene.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Placeholder.scn")
         
-        //vehicle chassis
+        // Main vehicle node
         let chassis = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
         
+        // Actual Chassis node
+        //let chassis2 = (scene?.rootNode.childNode(withName: "chassis2", recursively: true))!
+        
         // vehicle wheels nodes
-        let frontLeftWheel = (chassis.childNode(withName: "FLP", recursively: false))!
-        let frontRightWheel = (chassis.childNode(withName: "FRP", recursively: false))!
-        let rearLeftWheel = (chassis.childNode(withName: "RLP", recursively: false))!
-        let rearRightWheel = (chassis.childNode(withName: "RRP", recursively: false))!
+        let frontLeftWheel = (chassis.childNode(withName: "FLP", recursively: true))!
+        let frontRightWheel = (chassis.childNode(withName: "FRP", recursively: true))!
+        let rearLeftWheel = (chassis.childNode(withName: "RLP", recursively: true))!
+        let rearRightWheel = (chassis.childNode(withName: "RRP", recursively: true))!
         
         // vehicles wheels
         let v_frontLeftWheel = SCNPhysicsVehicleWheel(node: frontLeftWheel)
@@ -94,32 +97,40 @@ class SingleARBrains {
         let v_rearLeftWheel = SCNPhysicsVehicleWheel(node: rearLeftWheel)
         let v_rearRightWheel = SCNPhysicsVehicleWheel(node: rearRightWheel)
         
-        // wheels bounding boxes
-//        let boundingBoxFrontTires = frontLeftWheel.boundingBox
-//        let boundingBoxRearTires = rearLeftWheel.boundingBox
+        // reverse wheels spin
+        v_frontLeftWheel.axle = SCNVector3(-1, 0, 0)
+        v_frontRightWheel.axle = SCNVector3(-1, 0, 0)
+        v_rearLeftWheel.axle = SCNVector3(-1, 0, 0)
+        v_rearRightWheel.axle = SCNVector3(-1, 0, 0)
         
-//        let frontWheelHalfWidth:Float = 0.5 * Float(boundingBoxFrontTires.max.x - boundingBoxFrontTires.min.x)
-//        let rearWheelHalfWidth:Float = 0.5 * Float(boundingBoxRearTires.max.x - boundingBoxRearTires.min.x)
+        // wheels bounding boxes
+        let boundingBoxFL = frontLeftWheel.boundingBox
+        let boundingBoxFR = frontRightWheel.boundingBox
+        let boundingBoxRL = rearLeftWheel.boundingBox
+        let boundingBoxRR = rearRightWheel.boundingBox
+        
+        // center wheel location
+        let centerFL:Float = 0.5 * Float(boundingBoxFL.max.x - boundingBoxFL.min.x)
+        let centerFR:Float = 0.5 * Float(boundingBoxFR.max.x - boundingBoxFR.min.x)
+        let centerRL:Float = 0.5 * Float(boundingBoxRL.max.x - boundingBoxRL.min.x)
+        let centerRR:Float = 0.5 * Float(boundingBoxRR.max.x - boundingBoxRR.min.x)
         
         // connection points for the wheels
-//        let frontLeftWheelToChassis = frontLeftWheel.convertPosition(SCNVector3(0, 0, 0), to: chassis)
-//        let frontLeftPositionToConnect = SCNVector3Make(frontLeftWheelToChassis.x, frontLeftWheelToChassis.y, frontLeftWheelToChassis.z)
-//        v_frontLeftWheel.connectionPosition = frontLeftPositionToConnect
-//
-//        let frontRightWheelToChassis = frontRightWheel.convertPosition(SCNVector3(0, 0, 0), to: chassis)
-//        let frontRightPositionToConnect = SCNVector3Make(frontRightWheelToChassis.x, frontRightWheelToChassis.y, frontRightWheelToChassis.z)
-//        v_frontRightWheel.connectionPosition = frontRightPositionToConnect
-//
-//        let rearLeftWheelToChassis = rearLeftWheel.convertPosition(SCNVector3(0, 0, 0), to: chassis)
-//        let rearLeftPositionToConnect = SCNVector3Make(rearLeftWheelToChassis.x, rearLeftWheelToChassis.y, rearLeftWheelToChassis.z)
-//        v_rearLeftWheel.connectionPosition = rearLeftPositionToConnect
-//
-//        let rearRightWheelToChassis = rearRightWheel.convertPosition(SCNVector3(0, 0, 0), to: chassis)
-//        let rearRightPositionToConnect = SCNVector3Make(rearRightWheelToChassis.x, rearRightWheelToChassis.y, rearRightWheelToChassis.z)
-//        v_rearRightWheel.connectionPosition = rearRightPositionToConnect
-        
-        //print(rearRightPositionToConnect, rearLeftPositionToConnect)
-        
+        let frontLeftWheelToChassis = frontLeftWheel.convertPosition(SCNVector3Zero, to: chassis)
+        let frontLeftPositionToConnect = SCNVector3Make(frontLeftWheelToChassis.x - centerFL, frontLeftWheelToChassis.y, frontLeftWheelToChassis.z)
+        v_frontLeftWheel.connectionPosition = frontLeftPositionToConnect
+
+        let frontRightWheelToChassis = frontRightWheel.convertPosition(SCNVector3Zero, to: chassis)
+        let frontRightPositionToConnect = SCNVector3Make(frontRightWheelToChassis.x + centerFR, frontRightWheelToChassis.y, frontRightWheelToChassis.z)
+        v_frontRightWheel.connectionPosition = frontRightPositionToConnect
+
+        let rearLeftWheelToChassis = rearLeftWheel.convertPosition(SCNVector3Zero, to: chassis)
+        let rearLeftPositionToConnect = SCNVector3Make(rearLeftWheelToChassis.x - centerRL, rearLeftWheelToChassis.y, rearLeftWheelToChassis.z)
+        v_rearLeftWheel.connectionPosition = rearLeftPositionToConnect
+
+        let rearRightWheelToChassis = rearRightWheel.convertPosition(SCNVector3Zero, to: chassis)
+        let rearRightPositionToConnect = SCNVector3Make(rearRightWheelToChassis.x + centerRR, rearRightWheelToChassis.y, rearRightWheelToChassis.z)
+        v_rearRightWheel.connectionPosition = rearRightPositionToConnect
         
         //if the option is true, it considers all of the geometries. If false, just combines into one geometry
         let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: chassis, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
@@ -128,7 +139,7 @@ class SingleARBrains {
         body.mass = 15
         body.allowsResting = false
         body.restitution = 0.1
-        body.friction = 0.5
+        body.friction = 0.1
         body.rollingFriction = 0
         
         // sets the position of the chassis
@@ -138,7 +149,7 @@ class SingleARBrains {
         chassis.physicsBody = body
         
         // Vehicle physics
-        self.vehicle = SCNPhysicsVehicle(chassisBody: chassis.physicsBody!, wheels: [v_rearRightWheel, v_rearLeftWheel, v_frontRightWheel, v_frontLeftWheel])
+        self.vehicle = SCNPhysicsVehicle(chassisBody: chassis.physicsBody!, wheels: [v_rearLeftWheel, v_rearRightWheel, v_frontRightWheel, v_frontLeftWheel])
         
         // adds the vehicle to the physics world
         self.sceneView.scene.physicsWorld.addBehavior(self.vehicle)
