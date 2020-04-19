@@ -14,6 +14,7 @@ class OptionsViewController: UIViewController {
     
     @IBOutlet weak var singlePlayerButton: UIButton!
     @IBOutlet weak var multiPlayerButton: UIButton!
+    @IBOutlet weak var rcModeButton: UIButton!
     
     // Menu Brains
     var menuBrains:MenuBrains!
@@ -35,7 +36,13 @@ class OptionsViewController: UIViewController {
     
     
     @IBAction func multiPlayerPressed(_ sender: UIButton) {
+        menuBrains.stopIntroMusic()
+        self.performSegue(withIdentifier: "goToMultiAR", sender: self)
     }
     
-
+    @IBAction func rcModePressed(_ sender: UIButton) {
+        menuBrains.stopIntroMusic()
+        self.performSegue(withIdentifier: "goToRC", sender: self)
+    }
+    
 }

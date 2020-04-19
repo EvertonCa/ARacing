@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 
-class Gestures {
+class GesturesSingleAR {
     
     //MARK: - Variables
     

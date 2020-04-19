@@ -105,10 +105,10 @@ class SingleARViewController: UIViewController {
     func showDrivingUI() {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
             // alphas to 1
-            self.accButton.alpha = 1
-            self.turnRightButton.alpha = 1
-            self.turnLeftButton.alpha = 1
-            self.brakeButton.alpha = 1
+            self.accButton.alpha = 0.5
+            self.turnRightButton.alpha = 0.5
+            self.turnLeftButton.alpha = 0.5
+            self.brakeButton.alpha = 0.5
             self.accButtonBackground.alpha = 1
             self.brakeButtonBackground.alpha = 1
             self.turnLeftButtonBackground.alpha = 1
@@ -167,42 +167,37 @@ class SingleARViewController: UIViewController {
     
     @IBAction func accPressed(_ sender: UIButton) {
         self.singleARBrain.accelerating = true
-        self.accButton.alpha = 0.8
         self.accButtonBackground.alpha = 0.8
     }
     @IBAction func accReleased(_ sender: UIButton) {
         self.singleARBrain.accelerating = false
-        self.accButton.alpha = 1.0
         self.accButtonBackground.alpha = 1.0
     }
     @IBAction func brakePressed(_ sender: UIButton) {
         self.singleARBrain.breaking = true
-        self.brakeButton.alpha = 0.8
         self.brakeButtonBackground.alpha = 0.8
     }
     @IBAction func breakReleased(_ sender: UIButton) {
         self.singleARBrain.breaking = false
-        self.brakeButton.alpha = 1.0
         self.brakeButtonBackground.alpha = 1.0
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
         self.singleARBrain.turningRight = true
-        self.turnRightButton.alpha = 0.8
         self.turnRightButtonBackground.alpha = 0.8
     }
     @IBAction func turnRightReleased(_ sender: UIButton) {
         self.singleARBrain.turningRight = false
-        self.turnRightButton.alpha = 1.0
         self.turnRightButtonBackground.alpha = 1.0
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
         self.singleARBrain.turningLeft = true
-        self.turnLeftButton.alpha = 0.8
         self.turnLeftButtonBackground.alpha = 0.8
     }
     @IBAction func turnLeftReleased(_ sender: UIButton) {
         self.singleARBrain.turningLeft = false
-        self.turnLeftButton.alpha = 1.0
         self.turnLeftButtonBackground.alpha = 1.0
+    }
+    @IBAction func backPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

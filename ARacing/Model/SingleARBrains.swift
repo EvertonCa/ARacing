@@ -48,7 +48,7 @@ class SingleARBrains {
     var feedbackLabel: UILabel?
     
     // Gestures
-    var gesturesBrain:Gestures!
+    var gesturesBrain:GesturesSingleAR!
     
     // ViewController
     var singleARViewController: SingleARViewController!
@@ -79,7 +79,7 @@ class SingleARBrains {
         self.sceneView.session.run(arConfiguration)
         
         // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, arBrains: self)
+        self.gesturesBrain = GesturesSingleAR(sceneView: self.sceneView, arBrains: self)
         self.gesturesBrain.registerGesturesrecognizers()
         
     }
