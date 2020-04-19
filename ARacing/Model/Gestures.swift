@@ -63,7 +63,8 @@ class Gestures {
         
         if !hitTest.isEmpty {
             print("Touched horizontal surface")
-            self.arBrains.addScenary(hitTestResult: hitTest.first!)
+            self.arBrains.addScenery(hitTestResult: hitTest.first!)
+            self.arBrains.singleARViewController.showStartButton()
         } else {
             print("No match")
         }

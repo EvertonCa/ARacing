@@ -22,6 +22,8 @@
 		5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2192437E5C800F02694 /* SingleARBrains.swift */; };
 		5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */; };
 		5489C0872447F5A200B44030 /* 3D Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5489C0862447F5A200B44030 /* 3D Models.scnassets */; };
+		54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */; };
+		54FAB6C1244C1F310057AF49 /* MultiARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		5461C2192437E5C800F02694 /* SingleARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARBrains.swift; sourceTree = "<group>"; };
 		5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIngleARViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5489C0862447F5A200B44030 /* 3D Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "3D Models.scnassets"; sourceTree = "<group>"; };
+		54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCViewController.swift; sourceTree = "<group>"; };
+		54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 				5461C2102436FC8900F02694 /* OptionsViewController.swift */,
 				5461C2122437055600F02694 /* SingleARViewController.swift */,
 				5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */,
+				54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */,
+				54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */,
 			);
 			path = Controler;
 			sourceTree = "<group>";
@@ -200,7 +206,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
+				54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
+				54FAB6C1244C1F310057AF49 /* MultiARViewController.swift in Sources */,
 				5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
 				5457FB8E244B36A400BD701E /* RC_ARBrains.swift in Sources */,

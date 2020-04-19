@@ -17,9 +17,7 @@ extension SingleARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard anchor is ARPlaneAnchor else { return }
         DispatchQueue.main.async {
-            // changes startButton alpha to 1 and enables the button
-            self.showStartButton()
-            self.showDrivingUI()
+            // show feedback
             self.showFeedback(text: "Click on the grid where you would like to place your map!")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -45,7 +43,7 @@ extension SingleARViewController: ARSCNViewDelegate {
         }
         
         // if the scenary is placed, stop showing grid
-        if !self.singleARBrain.scenaryPlaced {
+        if !self.singleARBrain.sceneryPlaced {
             let gridNode = self.singleARBrain.createGrid(planeAnchor: planeAnchor)
             node.addChildNode(gridNode)
         }
@@ -65,12 +63,12 @@ extension SingleARViewController: ARSCNViewDelegate {
         
         let steerAngle:CGFloat = 0.8
         // steer the vehicle to right
-        if self.turningRight {
+        if self.singleARBrain.turningRight {
             self.singleARBrain.vehicle.setSteeringAngle(steerAngle, forWheelAt: 2)
             self.singleARBrain.vehicle.setSteeringAngle(steerAngle, forWheelAt: 3)
         }
         // steer the vehicle to left
-        else if self.turningLeft {
+        else if self.singleARBrain.turningLeft {
             self.singleARBrain.vehicle.setSteeringAngle(-steerAngle, forWheelAt: 2)
             self.singleARBrain.vehicle.setSteeringAngle(-steerAngle, forWheelAt: 3)
         } else {
@@ -79,16 +77,16 @@ extension SingleARViewController: ARSCNViewDelegate {
         }
         
         // Accelerate the vehicle
-        let engineForce: CGFloat = 100
+        let engineForce: CGFloat = 10
         
         // Break the vehicle
-        let frontBreakingForce: CGFloat = 100
-        let rearBreakingForce: CGFloat = 70
+        let frontBreakingForce: CGFloat = 20
+        let rearBreakingForce: CGFloat = 10
 
-        if self.accelerating {
+        if self.singleARBrain.accelerating {
             self.singleARBrain.vehicle.applyEngineForce(engineForce, forWheelAt: 0)
             self.singleARBrain.vehicle.applyEngineForce(engineForce, forWheelAt: 1)
-        } else if self.breaking {
+        } else if self.singleARBrain.breaking {
             // if vehicle is stopped, reverse, else, brakes
             if self.singleARBrain.vehicle.speedInKilometersPerHour < 0.5{
                 self.singleARBrain.vehicle.applyEngineForce(-engineForce, forWheelAt: 0)
