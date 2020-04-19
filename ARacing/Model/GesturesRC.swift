@@ -54,7 +54,7 @@ class GesturesRC {
             self.arBrains.createVehicle(hitTest: hitTest.first!)
             
             // removes the tap gesture
-            self.removeTapGesture()
+            //self.removeTapGesture()
             
             // hides the feedback label
             self.arBrains.rcViewController.hideFeedback()
