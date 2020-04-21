@@ -10,7 +10,7 @@
         <!--Intro View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="IntroViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="IntroViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,7 +87,7 @@
         <!--Options View Controller-->
         <scene sceneID="hqE-Lo-JLL">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9uq-ns-SM9">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,7 +195,7 @@
         <!--SingleAR View Controller-->
         <scene sceneID="fWc-rI-KLE">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="1mO-Fu-hmP" customClass="SingleARViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="1mO-Fu-hmP" customClass="SingleARViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zfY-Yo-o4f">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -393,7 +393,7 @@
         <!--RC View Controller-->
         <scene sceneID="lpS-Yg-SpT">
             <objects>
-                <viewController title="RC View Controller" modalPresentationStyle="fullScreen" id="2JQ-hZ-BNH" customClass="RCViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="RC View Controller" modalPresentationStyle="fullScreen" id="2JQ-hZ-BNH" customClass="RCViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bw-BP-gQ9">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -565,7 +565,7 @@
         <!--MultiAR View Controller-->
         <scene sceneID="OdR-cB-teL">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="KJ5-Id-Mey" customClass="MultiARViewController" customModule="ARacing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="KJ5-Id-Mey" customClass="MultiARViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mmv-F0-39U">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -30,7 +30,7 @@
 
 /* Begin PBXFileReference section */
 		5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesSingleAR.swift; sourceTree = "<group>"; };
-		5461C1EF2436CCEE00F02694 /* ARacing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5461C1EF2436CCEE00F02694 /* ARacingPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacingPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461C1F22436CCEE00F02694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5461C1F42436CCEE00F02694 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5461C1F62436CCEE00F02694 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		5461C1F02436CCEE00F02694 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5461C1EF2436CCEE00F02694 /* ARacing.app */,
+				5461C1EF2436CCEE00F02694 /* ARacingPRO.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5461C1EE2436CCEE00F02694 /* ARacing */ = {
+		5461C1EE2436CCEE00F02694 /* ARacingPRO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5461C2032436CCFD00F02694 /* Build configuration list for PBXNativeTarget "ARacing" */;
+			buildConfigurationList = 5461C2032436CCFD00F02694 /* Build configuration list for PBXNativeTarget "ARacingPRO" */;
 			buildPhases = (
 				5461C1EB2436CCEE00F02694 /* Sources */,
 				5461C1EC2436CCEE00F02694 /* Frameworks */,
@@ -153,9 +153,9 @@
 			);
 			dependencies = (
 			);
-			name = ARacing;
+			name = ARacingPRO;
 			productName = ARacing;
-			productReference = 5461C1EF2436CCEE00F02694 /* ARacing.app */;
+			productReference = 5461C1EF2436CCEE00F02694 /* ARacingPRO.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5461C1EA2436CCEE00F02694 /* Build configuration list for PBXProject "ARacing" */;
+			buildConfigurationList = 5461C1EA2436CCEE00F02694 /* Build configuration list for PBXProject "ARacingPRO" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -186,7 +186,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5461C1EE2436CCEE00F02694 /* ARacing */,
+				5461C1EE2436CCEE00F02694 /* ARacingPRO */,
 			);
 		};
 /* End PBXProject section */
@@ -403,7 +403,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5461C1EA2436CCEE00F02694 /* Build configuration list for PBXProject "ARacing" */ = {
+		5461C1EA2436CCEE00F02694 /* Build configuration list for PBXProject "ARacingPRO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5461C2012436CCFD00F02694 /* Debug */,
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5461C2032436CCFD00F02694 /* Build configuration list for PBXNativeTarget "ARacing" */ = {
+		5461C2032436CCFD00F02694 /* Build configuration list for PBXNativeTarget "ARacingPRO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5461C2042436CCFD00F02694 /* Debug */,

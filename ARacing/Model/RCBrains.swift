@@ -52,12 +52,6 @@ class RCBrains {
     
     //MARK: - Vehicle Body Parameters Constants
     
-    // This vector is expressed in the coordinate space of the node containing the vehicle’s chassis. The default axle direction is {-1.0, 0.0, 0.0}.
-    let axle = SCNVector3(-1, 0, 0)
-    
-    // This vector is expressed in the coordinate space of the node containing the vehicle’s chassis. The default steering axis is {0.0, -1.0, 0.0}.
-    let steeringAxis = SCNVector3(0, 1, 0)
-    
     // The mass of a body affects its momentum and how it responds to forces. The default mass for dynamic bodies is 1.0. The default mass for static and kinematic bodies is 0.0, but these bodies are unaffected by mass.
     let mass:CGFloat = 1
     
@@ -88,6 +82,12 @@ class RCBrains {
     
     //MARK: - Vehicle Wheels Parameters Constants
     
+    // This vector is expressed in the coordinate space of the node containing the vehicle’s chassis. The default axle direction is {-1.0, 0.0, 0.0}.
+    let axle = SCNVector3(0, 0, 1)
+    
+    // This vector is expressed in the coordinate space of the node containing the vehicle’s chassis. The default steering axis is {0.0, -1.0, 0.0}.
+    let steeringAxis = SCNVector3(0, 1, 0)
+    
     // The default value of this property is 1.0. Lower values result in better traction, and higher values make the wheel more likely to slip (causing it to spin freely instead of moving the vehicle).
     let frictionSlip:CGFloat = 1.0
     
@@ -95,22 +95,22 @@ class RCBrains {
     let radius:CGFloat = (0.127/2)
     
     // The spring coefficient determines both how quickly the wheel returns to its natural position after a shock (for example, when the vehicle runs over a bump) and how much force from the shock it transmits to the vehicle. The default spring coefficient is 2.0.
-    let suspensionStiffness:CGFloat = 1.0
+    let suspensionStiffness:CGFloat = 2.0
     
     // The default suspension coefficient is 4.4. Lower values cause the wheel to return to its natural position more quickly.
-    let suspensionCompression:CGFloat = 4
+    let suspensionCompression:CGFloat = 4.0
     
     // Damping ratio measures the tendency of the suspension to oscillate after a shock—in other words, for the vehicle to bounce up and down after running over a bump. The default damping ratio of 2.3 causes the wheel to return to its neutral position quickly after a shock. Values lower than 1.0 result in more oscillation.
-    let suspensionDamping:CGFloat = 5
+    let suspensionDamping:CGFloat = 3.0
     
     // Travel is the total distance a wheel is allowed to move (in both directions), in the coordinate system of the node containing the vehicle’s chassis. The default suspension travel is 500.0. (Unit is centimeters)
-    let maximumSuspensionTravel:CGFloat = 100
+    let maximumSuspensionTravel:CGFloat = 10.0
     
     // The physics simulation applies a force of no greater than this magnitude when contact with the ground causes the wheel to move relative to the vehicle. The default maximum suspension force is 6000.0. (Unit is Neutons)
-    let maximumSuspensionForce:CGFloat = 10
+    let maximumSuspensionForce:CGFloat = 1000
     
     // This property measures the length of the simulated spring between the vehicle and its wheel when the spring is not stressed by the weight of either body. When the wheel receives a shock (for example, when the vehicle runs over a bump), SceneKit adds the difference between the wheel’s current position and its connection position to this rest length and then applies a force between the wheel and vehicle proportional to the total. (Unit is Meters)
-    let suspensionRestLength:CGFloat = 0.01
+    let suspensionRestLength:CGFloat = -0.005
     
     //MARK: - Engine, Breaking and Steering Constants
     
@@ -121,8 +121,8 @@ class RCBrains {
     let engineForce: CGFloat = 500
     
     // Breaking force
-    let frontBreakingForce: CGFloat = 1000
-    let rearBreakingForce: CGFloat = 500
+    let frontBreakingForce: CGFloat = 100
+    let rearBreakingForce: CGFloat = 50
     
     
     //MARK: - Functions
@@ -200,7 +200,7 @@ class RCBrains {
         // hit test to position the vehicle
         let transform = hitTest.worldTransform
         let thirdColumn = transform.columns.3
-        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y + 0.4, thirdColumn.z)
         
         // adds the vehicle to the scene
         self.sceneView.scene.rootNode.addChildNode(self.vehicleNode)
@@ -217,6 +217,7 @@ class RCBrains {
         let wheel = SCNPhysicsVehicleWheel(node: wheelNode)
         wheel.connectionPosition = position
         wheel.axle = self.axle
+        wheel.steeringAxis = self.steeringAxis
         wheel.maximumSuspensionTravel = self.maximumSuspensionTravel
         wheel.maximumSuspensionForce = self.maximumSuspensionForce
         wheel.suspensionRestLength = self.suspensionRestLength
@@ -240,11 +241,20 @@ class RCBrains {
         let wheelRL = createVehicleWheel(wheelNode: self.rearLeftWheel, position: self.rearLeftWheel.position)
         let wheelRR = createVehicleWheel(wheelNode: self.rearRightWheel, position: self.rearRightWheel.position)
         
-        let bodyShape = (self.vehicleNode.childNode(withName: "Body", recursively: true))!
-        
         //if the option is true, it considers all of the geometries. If false, just combines into one geometry
-        let bodyPhysics = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: bodyShape, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
+        let bodyPhysics = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: self.vehicleNode, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
 
+        // body physics parameters
+        bodyPhysics.mass = self.mass
+        bodyPhysics.charge = self.charge
+        bodyPhysics.friction = self.friction
+        bodyPhysics.rollingFriction = self.rollingFriction
+        bodyPhysics.restitution = self.restitution
+        bodyPhysics.damping = self.damping
+        bodyPhysics.angularDamping = self.angularDamping
+        bodyPhysics.centerOfMassOffset = self.centerOfMassOffset
+        bodyPhysics.allowsResting = self.allowsResting
+        
         self.vehicleNode.physicsBody = bodyPhysics
         
         // Vehicle physics
