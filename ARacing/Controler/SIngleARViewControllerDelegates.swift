@@ -34,16 +34,17 @@ extension SingleARViewController: ARSCNViewDelegate {
     
     //when the anchor is updated
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
-        self.singleARBrain.gridNode = node
-        
-        node.enumerateChildNodes { ( childNode, _ ) in
-            childNode.removeFromParentNode()
-        }
-        
-        // if the scenary is placed, stop showing grid
+        // if the scenary is not placed, updates the grid to the new size
         if !self.singleARBrain.sceneryPlaced {
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            
+            self.singleARBrain.gridNode = node
+            
+            node.enumerateChildNodes { ( childNode, _ ) in
+                childNode.removeFromParentNode()
+            }
+            
             let gridNode = self.singleARBrain.createGrid(planeAnchor: planeAnchor)
             node.addChildNode(gridNode)
         }
@@ -52,7 +53,6 @@ extension SingleARViewController: ARSCNViewDelegate {
     
     //when the anchor is removed
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        
         node.enumerateChildNodes { ( childNode, _ ) in
             childNode.removeFromParentNode()
         }
@@ -62,6 +62,29 @@ extension SingleARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         DispatchQueue.main.async {
             self.singleARBrain.updatesVehicle()
+        }
+    }
+}
+
+//MARK: - SCNPhysicsContactDelegate
+
+extension SingleARViewController: SCNPhysicsContactDelegate {
+    
+    // checks collision in the scene
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        let nodeA = contact.nodeA
+        let nodeB = contact.nodeB
+        
+        if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
+            && nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
+            
+            nodeA.removeFromParentNode()
+            
+        } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
+        && nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
+            
+            nodeB.removeFromParentNode()
+            
         }
     }
 }

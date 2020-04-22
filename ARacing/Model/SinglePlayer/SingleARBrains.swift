@@ -63,6 +63,9 @@ class SingleARBrains {
     // ViewController
     var singleARViewController: SingleARViewController!
     
+    // Checkpoints
+    var checkpoints: SingleCheckpoint!
+    
     //MARK: - Functions
     
     init(_ sceneView: ARSCNView, _ view: SingleARViewController) {
@@ -103,6 +106,8 @@ class SingleARBrains {
         gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
         gridNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
         
+        gridNode.name = "Grid"
+        
         // static is not affected by forces, but it is interactible
         let staticBody = SCNPhysicsBody.static()
         
@@ -121,13 +126,13 @@ class SingleARBrains {
         let scene = SCNScene(named: "3D Models.scnassets/SinglePlayerPlaceholder.scn")
         
         // Main vehicle node
-        vehicleNode = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
+        self.vehicleNode = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
         
         // vehicle wheels nodes
-        let frontLeftWheel = (vehicleNode.childNode(withName: "FLP", recursively: true))!
-        let frontRightWheel = (vehicleNode.childNode(withName: "FRP", recursively: true))!
-        let rearLeftWheel = (vehicleNode.childNode(withName: "RLP", recursively: true))!
-        let rearRightWheel = (vehicleNode.childNode(withName: "RRP", recursively: true))!
+        let frontLeftWheel = (self.vehicleNode.childNode(withName: "FLP", recursively: true))!
+        let frontRightWheel = (self.vehicleNode.childNode(withName: "FRP", recursively: true))!
+        let rearLeftWheel = (self.vehicleNode.childNode(withName: "RLP", recursively: true))!
+        let rearRightWheel = (self.vehicleNode.childNode(withName: "RRP", recursively: true))!
         
         // vehicles wheels
         let v_frontLeftWheel = SCNPhysicsVehicleWheel(node: frontLeftWheel)
@@ -181,64 +186,28 @@ class SingleARBrains {
         body.friction = 0.2
         body.rollingFriction = 0
         
-        // - - - - - - - - - wheels physical properties - - - - - - - - -
-        
-        // The default value of this property is 1.0. Lower values result in better traction, and higher values make the wheel more likely to slip (causing it to spin freely instead of moving the vehicle).
-//        v_frontLeftWheel.frictionSlip = 1.2
-//        v_frontRightWheel.frictionSlip = 1.2
-//        v_rearLeftWheel.frictionSlip = 1.2
-//        v_rearRightWheel.frictionSlip = 1.2
-        
-        // When you create a wheel from a node, its default radius is half of the largest dimension of the node’s bounding box. (A wheel is always circular, even if the content of the node representing it is not.)
-//        v_frontLeftWheel.radius = CGFloat(0.018)
-//        v_frontRightWheel.radius = CGFloat(0.018)
-//        v_rearLeftWheel.radius = CGFloat(0.018)
-//        v_rearRightWheel.radius = CGFloat(0.018)
-        
-        // The spring coefficient determines both how quickly the wheel returns to its natural position after a shock (for example, when the vehicle runs over a bump) and how much force from the shock it transmits to the vehicle. The default spring coefficient is 2.0.
-//        v_frontLeftWheel.suspensionStiffness = CGFloat(1.0)
-//        v_frontRightWheel.suspensionStiffness = CGFloat(1.0)
-//        v_rearLeftWheel.suspensionStiffness = CGFloat(1.0)
-//        v_rearRightWheel.suspensionStiffness = CGFloat(1.0)
-        
-        // The default suspension coefficient is 4.4. Lower values cause the wheel to return to its natural position more quickly.
-//        v_frontLeftWheel.suspensionCompression = CGFloat(5)
-//        v_frontRightWheel.suspensionCompression = CGFloat(5)
-//        v_rearLeftWheel.suspensionCompression = CGFloat(5)
-//        v_rearRightWheel.suspensionCompression = CGFloat(5)
-        
-        // Damping ratio measures the tendency of the suspension to oscillate after a shock—in other words, for the vehicle to bounce up and down after running over a bump. The default damping ratio of 2.3 causes the wheel to return to its neutral position quickly after a shock. Values lower than 1.0 result in more oscillation.
-//        v_frontLeftWheel.suspensionDamping = CGFloat(5)
-//        v_frontRightWheel.suspensionDamping = CGFloat(5)
-//        v_rearLeftWheel.suspensionDamping = CGFloat(5)
-//        v_rearRightWheel.suspensionDamping = CGFloat(5)
-        
-        // Travel is the total distance a wheel is allowed to move (in both directions), in the coordinate system of the node containing the vehicle’s chassis. The default suspension travel is 500.0.
         v_frontLeftWheel.maximumSuspensionTravel = CGFloat(10)
         v_frontRightWheel.maximumSuspensionTravel = CGFloat(10)
         v_rearLeftWheel.maximumSuspensionTravel = CGFloat(10)
         v_rearRightWheel.maximumSuspensionTravel = CGFloat(10)
         
-        // The physics simulation applies a force of no greater than this magnitude when contact with the ground causes the wheel to move relative to the vehicle. The default maximum suspension force is 6000.0.
-//        v_frontLeftWheel.maximumSuspensionForce = CGFloat(10)
-//        v_frontRightWheel.maximumSuspensionForce = CGFloat(10)
-//        v_rearLeftWheel.maximumSuspensionForce = CGFloat(10)
-//        v_rearRightWheel.maximumSuspensionForce = CGFloat(10)
-        
-        // This property measures the length of the simulated spring between the vehicle and its wheel when the spring is not stressed by the weight of either body. When the wheel receives a shock (for example, when the vehicle runs over a bump), SceneKit adds the difference between the wheel’s current position and its connection position to this rest length and then applies a force between the wheel and vehicle proportional to the total.
         v_frontLeftWheel.suspensionRestLength = CGFloat(0.045)
         v_frontRightWheel.suspensionRestLength = CGFloat(0.045)
         v_rearLeftWheel.suspensionRestLength = CGFloat(0.045)
         v_rearRightWheel.suspensionRestLength = CGFloat(0.045)
         
         // sets the position of the chassis
-        vehicleNode.position = currentPositionOfCamera
+        self.vehicleNode.position = currentPositionOfCamera
         
         // rotation of the vehicle
-        vehicleNode.eulerAngles = SCNVector3(x: -Float(90.degreesToRadians), y: 0, z: 0)
+        self.vehicleNode.eulerAngles = SCNVector3(x: -Float(90.degreesToRadians), y: 0, z: 0)
         
         // sets the physics body to the chassis
-        vehicleNode.physicsBody = body
+        self.vehicleNode.physicsBody = body
+        
+        // sets collision
+        self.vehicleNode.physicsBody?.categoryBitMask = BitMaskCategory.Vehicle.rawValue
+        self.vehicleNode.physicsBody?.contactTestBitMask = BitMaskCategory.Checkpoint.rawValue
         
         // Vehicle physics
         self.vehicle = SCNPhysicsVehicle(chassisBody: vehicleNode.physicsBody!, wheels: [v_rearLeftWheel, v_rearRightWheel, v_frontRightWheel, v_frontLeftWheel])
@@ -259,12 +228,12 @@ class SingleARBrains {
     // creates and places the scenary in the AR view
     func addScenery(hitTestResult: ARHitTestResult) {
         let scene = SCNScene(named: "3D Models.scnassets/ScenerySinglePlayer1.scn")
-        scenery = (scene?.rootNode.childNode(withName: "plane", recursively: false))!
+        self.scenery = (scene?.rootNode.childNode(withName: "plane", recursively: false))!
         let transform = hitTestResult.worldTransform
         let thirdColumn = transform.columns.3
-        scenery.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+        self.scenery.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
         
-        self.sceneView.scene.rootNode.addChildNode(scenery)
+        self.sceneView.scene.rootNode.addChildNode(self.scenery)
         
         // sets the scenary placed to true and remove the tap gesture
         self.sceneryPlaced = true
@@ -273,9 +242,15 @@ class SingleARBrains {
         // changes feedback label
         self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
         
-        // removes the grid from view
-        self.gridNode!.enumerateChildNodes { ( childNode, _ ) in
-            childNode.removeFromParentNode()
+        // setup the checkpoints and particles
+        self.checkpoints = SingleCheckpoint(sceneryNode: self.scenery)
+        self.checkpoints.setupCheckpoints()
+        
+        // removes all the grids in the scene
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "Grid" {
+                node.removeFromParentNode()
+            }
         }
     }
     // handles Acceleration, Breaking, Reversing and Steering for the vehicle
@@ -326,6 +301,9 @@ class SingleARBrains {
             self.vehicle.applyEngineForce(0, forWheelAt: 1)
         }
     }
+    
+    
+    
 }
 
 //MARK: - Extension to Int

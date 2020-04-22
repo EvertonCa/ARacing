@@ -40,6 +40,9 @@ class SingleARViewController: UIViewController {
         // setup delegate
         self.sceneView.delegate = self
         
+        // setup contact delegate
+        self.sceneView.scene.physicsWorld.contactDelegate = self
+        
         // hide all the UI
         self.hideButtons()
         

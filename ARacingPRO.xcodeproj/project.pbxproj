@@ -21,6 +21,10 @@
 		5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C2192437E5C800F02694 /* SingleARBrains.swift */; };
 		5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */; };
 		5489C0872447F5A200B44030 /* 3D Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5489C0862447F5A200B44030 /* 3D Models.scnassets */; };
+		54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */; };
+		54BDD8B124500B9100691408 /* SingleVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B024500B9100691408 /* SingleVehicle.swift */; };
+		54BDD8B324500BD600691408 /* SingleScenery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B224500BD600691408 /* SingleScenery.swift */; };
+		54BDD8B724500EB000691408 /* SingleBitMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B624500EB000691408 /* SingleBitMark.swift */; };
 		54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */; };
 		54FAB6C1244C1F310057AF49 /* MultiARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */; };
 		54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */; };
@@ -45,6 +49,10 @@
 		5461C2192437E5C800F02694 /* SingleARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleARBrains.swift; sourceTree = "<group>"; };
 		5489C0842447F37100B44030 /* SIngleARViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIngleARViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5489C0862447F5A200B44030 /* 3D Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "3D Models.scnassets"; sourceTree = "<group>"; };
+		54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCheckpoint.swift; sourceTree = "<group>"; };
+		54BDD8B024500B9100691408 /* SingleVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleVehicle.swift; sourceTree = "<group>"; };
+		54BDD8B224500BD600691408 /* SingleScenery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleScenery.swift; sourceTree = "<group>"; };
+		54BDD8B624500EB000691408 /* SingleBitMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBitMark.swift; sourceTree = "<group>"; };
 		54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCViewController.swift; sourceTree = "<group>"; };
 		54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARViewController.swift; sourceTree = "<group>"; };
 		54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCBrains.swift; sourceTree = "<group>"; };
@@ -122,10 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
-				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
-				54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */,
-				5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */,
-				54FAB6C6244C30980057AF49 /* GesturesRC.swift */,
+				54BDD8B424500E1000691408 /* SinglePlayer */,
+				54BDD8B524500E5F00691408 /* RC */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +142,28 @@
 				5461C20C2436F5B500F02694 /* Intro.m4a */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		54BDD8B424500E1000691408 /* SinglePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
+				5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */,
+				54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */,
+				54BDD8B024500B9100691408 /* SingleVehicle.swift */,
+				54BDD8B224500BD600691408 /* SingleScenery.swift */,
+				54BDD8B624500EB000691408 /* SingleBitMark.swift */,
+			);
+			path = SinglePlayer;
+			sourceTree = "<group>";
+		};
+		54BDD8B524500E5F00691408 /* RC */ = {
+			isa = PBXGroup;
+			children = (
+				54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */,
+				54FAB6C6244C30980057AF49 /* GesturesRC.swift */,
+			);
+			path = RC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,9 +239,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54BDD8B124500B9100691408 /* SingleVehicle.swift in Sources */,
 				54FAB6C7244C30980057AF49 /* GesturesRC.swift in Sources */,
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */,
+				54BDD8B724500EB000691408 /* SingleBitMark.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
 				54FAB6C1244C1F310057AF49 /* MultiARViewController.swift in Sources */,
 				5489C0852447F37100B44030 /* SIngleARViewControllerDelegates.swift in Sources */,
@@ -223,6 +253,8 @@
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5461C2132437055600F02694 /* SingleARViewController.swift in Sources */,
 				5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */,
+				54BDD8B324500BD600691408 /* SingleScenery.swift in Sources */,
+				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 			);
