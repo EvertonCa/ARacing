@@ -155,7 +155,7 @@ class SingleARViewController: UIViewController {
             self.hideFeedback()
             
             // sets the scenery to locked
-            self.singleARBrain.sceneryLocked = true
+            self.singleARBrain.scenery.sceneryLocked = true
             
             //shows driving UI
             self.showDrivingUI()
