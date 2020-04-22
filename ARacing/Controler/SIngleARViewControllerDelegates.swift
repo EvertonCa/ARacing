@@ -10,7 +10,6 @@ import Foundation
 import ARKit
 
 //MARK: - ARSCNViewDelegate
-
 extension SingleARViewController: ARSCNViewDelegate {
     
     // when a anchor is detected
@@ -36,7 +35,7 @@ extension SingleARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         
         // if the scenary is not placed, updates the grid to the new size
-        if !self.singleARBrain.sceneryPlaced {
+        if !self.singleARBrain.scenery.sceneryPlaced {
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
             
             self.singleARBrain.gridNode = node
@@ -67,7 +66,6 @@ extension SingleARViewController: ARSCNViewDelegate {
 }
 
 //MARK: - SCNPhysicsContactDelegate
-
 extension SingleARViewController: SCNPhysicsContactDelegate {
     
     // checks collision in the scene
@@ -88,4 +86,3 @@ extension SingleARViewController: SCNPhysicsContactDelegate {
         }
     }
 }
-

@@ -26,13 +26,7 @@ class SingleARBrains {
     var vehicleNode = SCNNode()
     
     // Scenery
-    var scenery = SCNNode()
-    
-    // Scenery placed
-    var sceneryPlaced = false
-    
-    // Scenery locked
-    var sceneryLocked = false
+    var sceneryNode = SCNNode()
     
     // Driving variables
     var turningRight = false
@@ -57,6 +51,8 @@ class SingleARBrains {
     // Feedback Label
     var feedbackLabel: UILabel?
     
+    //MARK: - Models
+    
     // Gestures
     var gesturesBrain:GesturesSingleAR!
     
@@ -65,6 +61,9 @@ class SingleARBrains {
     
     // Checkpoints
     var checkpoints: SingleCheckpoint!
+    
+    // Scenery
+    var scenery: SingleScenery!
     
     //MARK: - Functions
     
@@ -94,6 +93,9 @@ class SingleARBrains {
         // setup the gestures recognizer
         self.gesturesBrain = GesturesSingleAR(sceneView: self.sceneView, arBrains: self)
         self.gesturesBrain.registerGesturesrecognizers()
+        
+        // setup scenery
+        self.scenery = SingleScenery(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
         
     }
     
@@ -216,7 +218,7 @@ class SingleARBrains {
         self.sceneView.scene.physicsWorld.addBehavior(self.vehicle)
         
         // adds the vehicle to the scenery
-        self.scenery.addChildNode(vehicleNode)
+        self.sceneryNode.addChildNode(vehicleNode)
         
     }
     
@@ -225,34 +227,6 @@ class SingleARBrains {
         self.vehicleNode.removeFromParentNode()
     }
     
-    // creates and places the scenary in the AR view
-    func addScenery(hitTestResult: ARHitTestResult) {
-        let scene = SCNScene(named: "3D Models.scnassets/ScenerySinglePlayer1.scn")
-        self.scenery = (scene?.rootNode.childNode(withName: "plane", recursively: false))!
-        let transform = hitTestResult.worldTransform
-        let thirdColumn = transform.columns.3
-        self.scenery.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
-        
-        self.sceneView.scene.rootNode.addChildNode(self.scenery)
-        
-        // sets the scenary placed to true and remove the tap gesture
-        self.sceneryPlaced = true
-        self.gesturesBrain.removeTapGesture()
-        
-        // changes feedback label
-        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
-        
-        // setup the checkpoints and particles
-        self.checkpoints = SingleCheckpoint(sceneryNode: self.scenery)
-        self.checkpoints.setupCheckpoints()
-        
-        // removes all the grids in the scene
-        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.name == "Grid" {
-                node.removeFromParentNode()
-            }
-        }
-    }
     // handles Acceleration, Breaking, Reversing and Steering for the vehicle
     func updatesVehicle() {
         // steer the vehicle to right
@@ -302,12 +276,35 @@ class SingleARBrains {
         }
     }
     
+    // adds the scenery and disable gestures and the grid nodes
+    func setupScenery(hitTestResult: ARHitTestResult) {
+        self.sceneryNode = self.scenery.addScenery(hitTestResult: hitTestResult)
+        
+        self.gesturesBrain.removeTapGesture()
+        
+        // changes feedback label
+        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
+        
+        // setup the checkpoints and particles
+        self.updateCheckpoint()
+        
+        // removes all the grids in the scene
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "Grid" {
+                node.removeFromParentNode()
+            }
+        }
+    }
     
+    // adds the checkpoints with particles in the right place
+    func updateCheckpoint() {
+        self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
+        self.checkpoints.setupCheckpoints()
+    }
     
 }
 
 //MARK: - Extension to Int
-
 extension Int {
     
     var degreesToRadians: Double { return Double(self) * .pi/180 }
@@ -315,7 +312,6 @@ extension Int {
 
 
 //MARK: - Overload +
-
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
 }
