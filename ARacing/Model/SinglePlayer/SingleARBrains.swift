@@ -304,34 +304,111 @@ class SingleARBrains {
                 node.removeFromParentNode()
             }
         }
+        
+        // setup checkpoints
+        self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
     }
     
     // adds the checkpoints with particles in the right place
     func updateCheckpoint() {
-        self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
-        self.checkpoints.setupCheckpoints()
+        if !self.checkpoints.setupCheckpoints() {
+            self.endRace()
+        }
     }
     
     // shows the checkpoints, AR Text and starts the timer.
     func startRace() {
         
-        // setup the checkpoints and particles
-        self.updateCheckpoint()
-        
-        // shows the AR Text
-        let textNode = self.arText.showReadyText()
-        textNode.position = SCNVector3(0, 0, 0.5)
+        // shows the Ready AR Text
+        var textNode = self.arText.showReadyText()
+        textNode.position = SCNVector3(0, 0, 0.3)
+        textNode.opacity = 0
         self.sceneryNode.addChildNode(textNode)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            textNode.removeFromParentNode()
-            // starts the timer
-            self.lapTimer.startTimer()
-            self.singleARViewController.timerLabel.isHidden = false
+        //animate fade in Ready Text
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        textNode.opacity = 1
+        SCNTransaction.commit()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            //animate fade out Ready Text
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.5
+            textNode.opacity = 0
+            SCNTransaction.completionBlock = {
+                // removes the Ready text
+                textNode.removeFromParentNode()
+                
+                // shows the Set AR Text
+                textNode = self.arText.showSetText()
+                textNode.position = SCNVector3(0, 0, 0.3)
+                textNode.opacity = 0
+                self.sceneryNode.addChildNode(textNode)
+            }
+            SCNTransaction.commit()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                //animate fade in Set Text
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.5
+                textNode.opacity = 1
+                SCNTransaction.commit()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                    //animate fade out Set text
+                    SCNTransaction.begin()
+                    SCNTransaction.animationDuration = 0.5
+                    textNode.opacity = 0
+                    SCNTransaction.completionBlock = {
+                        // removes the Set text
+                        textNode.removeFromParentNode()
+                    
+                        // shows the GO AR Text
+                        textNode = self.arText.showGoText()
+                        textNode.position = SCNVector3(0, 0, 0.3)
+                        textNode.opacity = 0
+                        self.sceneryNode.addChildNode(textNode)
+                    
+                        // starts the timer
+                        self.lapTimer.startTimer()
+                        self.singleARViewController.timerLabel.isHidden = false
+                    
+                        // setup the checkpoints and particles
+                        self.updateCheckpoint()
+                        
+                    }
+                    SCNTransaction.commit()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        //animate fade in Go Text
+                        SCNTransaction.begin()
+                        SCNTransaction.animationDuration = 0.5
+                        textNode.opacity = 1
+                        SCNTransaction.commit()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            //animate fade out Go Text
+                            SCNTransaction.begin()
+                            SCNTransaction.animationDuration = 0.5
+                            textNode.opacity = 0
+                            SCNTransaction.completionBlock = {
+                                // removes the Ready text
+                                textNode.removeFromParentNode()
+                            }
+                            SCNTransaction.commit()
+                        }
+                    }
+                }
+                
+            }
         }
         
     }
     
+    // ends the race
+    func endRace() {
+        self.lapTimer.stopTimer()
+    }
 }
 
 //MARK: - Extension to Int

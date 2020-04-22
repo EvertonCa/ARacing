@@ -55,7 +55,7 @@ extension RCViewController: ARSCNViewDelegate {
         }
     }
     
-    // used for vehicle and physics updates
+    // used for vehicle updates
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         DispatchQueue.main.async {
             self.rcBrains.updatesVehicle()

@@ -76,12 +76,28 @@ extension SingleARViewController: SCNPhysicsContactDelegate {
         if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
             && nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
             
+            nodeA.physicsBody?.categoryBitMask = 0
+
+            // removes the node
             nodeA.removeFromParentNode()
+            // calls another checkpoint
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.singleARBrain.updateCheckpoint()
+            }
+            
+            
             
         } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
         && nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
             
+            nodeB.physicsBody?.categoryBitMask = 0
+
+            // removes the node
             nodeB.removeFromParentNode()
+            // calls another checkpoint
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.singleARBrain.updateCheckpoint()
+            }
             
         }
     }
