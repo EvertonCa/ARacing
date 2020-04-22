@@ -25,6 +25,8 @@
 		54BDD8B124500B9100691408 /* SingleVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B024500B9100691408 /* SingleVehicle.swift */; };
 		54BDD8B324500BD600691408 /* SingleScenery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B224500BD600691408 /* SingleScenery.swift */; };
 		54BDD8B724500EB000691408 /* SingleBitMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B624500EB000691408 /* SingleBitMark.swift */; };
+		54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC52450295A009E5E67 /* SingleTexts.swift */; };
+		54CE5FC824502AF9009E5E67 /* LapTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC724502AF9009E5E67 /* LapTimer.swift */; };
 		54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */; };
 		54FAB6C1244C1F310057AF49 /* MultiARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */; };
 		54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */; };
@@ -53,6 +55,8 @@
 		54BDD8B024500B9100691408 /* SingleVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleVehicle.swift; sourceTree = "<group>"; };
 		54BDD8B224500BD600691408 /* SingleScenery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleScenery.swift; sourceTree = "<group>"; };
 		54BDD8B624500EB000691408 /* SingleBitMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBitMark.swift; sourceTree = "<group>"; };
+		54CE5FC52450295A009E5E67 /* SingleTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTexts.swift; sourceTree = "<group>"; };
+		54CE5FC724502AF9009E5E67 /* LapTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTimer.swift; sourceTree = "<group>"; };
 		54FAB6BE244C1E1F0057AF49 /* RCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCViewController.swift; sourceTree = "<group>"; };
 		54FAB6C0244C1F310057AF49 /* MultiARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARViewController.swift; sourceTree = "<group>"; };
 		54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCBrains.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
+				54CE5FC724502AF9009E5E67 /* LapTimer.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
 			);
@@ -153,6 +158,7 @@
 				54BDD8B024500B9100691408 /* SingleVehicle.swift */,
 				54BDD8B224500BD600691408 /* SingleScenery.swift */,
 				54BDD8B624500EB000691408 /* SingleBitMark.swift */,
+				54CE5FC52450295A009E5E67 /* SingleTexts.swift */,
 			);
 			path = SinglePlayer;
 			sourceTree = "<group>";
@@ -242,6 +248,7 @@
 				54BDD8B124500B9100691408 /* SingleVehicle.swift in Sources */,
 				54FAB6C7244C30980057AF49 /* GesturesRC.swift in Sources */,
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
+				54CE5FC824502AF9009E5E67 /* LapTimer.swift in Sources */,
 				54FAB6BF244C1E1F0057AF49 /* RCViewController.swift in Sources */,
 				54BDD8B724500EB000691408 /* SingleBitMark.swift in Sources */,
 				5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */,
@@ -253,6 +260,7 @@
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5461C2132437055600F02694 /* SingleARViewController.swift in Sources */,
 				5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */,
+				54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */,
 				54BDD8B324500BD600691408 /* SingleScenery.swift in Sources */,
 				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,

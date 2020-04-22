@@ -65,6 +65,12 @@ class SingleARBrains {
     // Scenery
     var scenery: SingleScenery!
     
+    // Lap Timer
+    var lapTimer: LapTimer!
+    
+    // AR Text
+    var arText: SingleTexts!
+    
     //MARK: - Functions
     
     init(_ sceneView: ARSCNView, _ view: SingleARViewController) {
@@ -96,6 +102,12 @@ class SingleARBrains {
         
         // setup scenery
         self.scenery = SingleScenery(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
+        
+        // setup LapTimer
+        self.lapTimer = LapTimer(timerLabel: singleARViewController.timerLabel)
+        
+        // setup AR Text
+        self.arText = SingleTexts()
         
     }
     
@@ -220,6 +232,7 @@ class SingleARBrains {
         // adds the vehicle to the scenery
         self.sceneryNode.addChildNode(vehicleNode)
         
+        self.startRace()
     }
     
     // removes the vehicle in the scenery
@@ -285,9 +298,6 @@ class SingleARBrains {
         // changes feedback label
         self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
         
-        // setup the checkpoints and particles
-        self.updateCheckpoint()
-        
         // removes all the grids in the scene
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             if node.name == "Grid" {
@@ -300,6 +310,26 @@ class SingleARBrains {
     func updateCheckpoint() {
         self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
         self.checkpoints.setupCheckpoints()
+    }
+    
+    // shows the checkpoints, AR Text and starts the timer.
+    func startRace() {
+        
+        // setup the checkpoints and particles
+        self.updateCheckpoint()
+        
+        // shows the AR Text
+        let textNode = self.arText.showReadyText()
+        textNode.position = SCNVector3(0, 0, 0.5)
+        self.sceneryNode.addChildNode(textNode)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            textNode.removeFromParentNode()
+            // starts the timer
+            self.lapTimer.startTimer()
+            self.singleARViewController.timerLabel.isHidden = false
+        }
+        
     }
     
 }

@@ -26,6 +26,7 @@ class SingleARViewController: UIViewController {
     @IBOutlet weak var turnLeftButtonBackground: UIImageView!
     @IBOutlet weak var turnRightButtonBackground: UIImageView!
     
+    @IBOutlet weak var timerLabel: UILabel!
     // Single AR Brain
     var singleARBrain: SingleARBrains!
     
