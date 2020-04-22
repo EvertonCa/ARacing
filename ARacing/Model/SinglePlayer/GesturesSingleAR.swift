@@ -62,8 +62,11 @@ class GesturesSingleAR {
         let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
         if !hitTest.isEmpty {
-            self.arBrains.setupScenery(hitTestResult: hitTest.first!)
+            print("Touched horizontal surface")
+            self.arBrains.addScenery(hitTestResult: hitTest.first!)
             self.arBrains.singleARViewController.showStartButton()
+        } else {
+            print("No match")
         }
     }
     

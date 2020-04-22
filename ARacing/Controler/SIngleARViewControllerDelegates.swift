@@ -36,7 +36,7 @@ extension SingleARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         
         // if the scenary is not placed, updates the grid to the new size
-        if !self.singleARBrain.scenery.sceneryPlaced {
+        if !self.singleARBrain.sceneryPlaced {
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
             
             self.singleARBrain.gridNode = node
