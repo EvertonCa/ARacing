@@ -41,6 +41,16 @@ class SingleARBrains {
     var breaking = false
     var goingBackwards = false
     
+    // Steer angle
+    let steerAngle:CGFloat = 0.8
+    
+    // Engine force
+    let engineForce: CGFloat = 10
+    
+    // Breaking force
+    let frontBreakingForce: CGFloat = 20
+    let rearBreakingForce: CGFloat = 10
+    
     // Grid node
     var gridNode:SCNNode?
     
@@ -266,6 +276,54 @@ class SingleARBrains {
         // removes the grid from view
         self.gridNode!.enumerateChildNodes { ( childNode, _ ) in
             childNode.removeFromParentNode()
+        }
+    }
+    // handles Acceleration, Breaking, Reversing and Steering for the vehicle
+    func updatesVehicle() {
+        // steer the vehicle to right
+        if self.turningRight {
+            self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 2)
+            self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 3)
+        }
+        // steer the vehicle to left
+        else if self.turningLeft {
+            self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 2)
+            self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 3)
+        }
+        // straightens the vehicle
+        else {
+            self.vehicle.setSteeringAngle(0, forWheelAt: 2)
+            self.vehicle.setSteeringAngle(0, forWheelAt: 3)
+        }
+
+        // Acceleration, Breaking and Reversing
+        if self.accelerating {
+            self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 0)
+            self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 1)
+        } else if self.breaking {
+            // if vehicle is stopped, reverse, else, brakes
+            if self.vehicle.speedInKilometersPerHour < 0.5{
+                self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 0)
+                self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 1)
+            } else {
+                // rear wheels
+                self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 0)
+                self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 1)
+                // front wheels
+                self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 2)
+                self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 3)
+            }
+            
+        } else {
+            // rear wheels
+            self.vehicle.applyBrakingForce(0, forWheelAt: 0)
+            self.vehicle.applyBrakingForce(0, forWheelAt: 1)
+            // front wheels
+            self.vehicle.applyBrakingForce(0, forWheelAt: 2)
+            self.vehicle.applyBrakingForce(0, forWheelAt: 3)
+            // resets reverse wheels
+            self.vehicle.applyEngineForce(0, forWheelAt: 0)
+            self.vehicle.applyEngineForce(0, forWheelAt: 1)
         }
     }
 }
