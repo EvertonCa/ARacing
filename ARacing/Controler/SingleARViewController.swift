@@ -147,7 +147,7 @@ class SingleARViewController: UIViewController {
     @IBAction func startButtonPressed(_ sender: UIButton) {
         if self.startButton.currentTitle == "Start" {
             // show vehicle in the view
-            self.singleARBrain.createVehicle()
+            self.singleARBrain.vehicles.createVehicle()
             
             // disable gestures
             self.singleARBrain.gesturesBrain.removeRotationGesture()
@@ -162,7 +162,7 @@ class SingleARViewController: UIViewController {
             self.showDrivingUI()
         } else {
             // show vehicle in the view
-            self.singleARBrain.createVehicle()
+            self.singleARBrain.vehicles.createVehicle()
         }
         // hides the button
         //self.hideStartButton()
@@ -170,35 +170,35 @@ class SingleARViewController: UIViewController {
     }
     
     @IBAction func accPressed(_ sender: UIButton) {
-        self.singleARBrain.accelerating = true
+        self.singleARBrain.vehicles.accelerating = true
         self.accButtonBackground.alpha = 0.8
     }
     @IBAction func accReleased(_ sender: UIButton) {
-        self.singleARBrain.accelerating = false
+        self.singleARBrain.vehicles.accelerating = false
         self.accButtonBackground.alpha = 1.0
     }
     @IBAction func brakePressed(_ sender: UIButton) {
-        self.singleARBrain.breaking = true
+        self.singleARBrain.vehicles.breaking = true
         self.brakeButtonBackground.alpha = 0.8
     }
     @IBAction func breakReleased(_ sender: UIButton) {
-        self.singleARBrain.breaking = false
+        self.singleARBrain.vehicles.breaking = false
         self.brakeButtonBackground.alpha = 1.0
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
-        self.singleARBrain.turningRight = true
+        self.singleARBrain.vehicles.turningRight = true
         self.turnRightButtonBackground.alpha = 0.8
     }
     @IBAction func turnRightReleased(_ sender: UIButton) {
-        self.singleARBrain.turningRight = false
+        self.singleARBrain.vehicles.turningRight = false
         self.turnRightButtonBackground.alpha = 1.0
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
-        self.singleARBrain.turningLeft = true
+        self.singleARBrain.vehicles.turningLeft = true
         self.turnLeftButtonBackground.alpha = 0.8
     }
     @IBAction func turnLeftReleased(_ sender: UIButton) {
-        self.singleARBrain.turningLeft = false
+        self.singleARBrain.vehicles.turningLeft = false
         self.turnLeftButtonBackground.alpha = 1.0
     }
     @IBAction func backPressed(_ sender: UIButton) {

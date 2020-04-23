@@ -60,7 +60,7 @@ extension SingleARViewController: ARSCNViewDelegate {
     // used for vehicle and physics updates
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         DispatchQueue.main.async {
-            self.singleARBrain.updatesVehicle()
+            self.singleARBrain.vehicles.updatesVehicle()
         }
     }
 }
