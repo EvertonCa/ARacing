@@ -210,7 +210,7 @@ class SingleARBrains {
                         textNode.opacity = 1
                         SCNTransaction.commit()
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                             //animate fade out Go Text
                             SCNTransaction.begin()
                             SCNTransaction.animationDuration = 0.5
