@@ -74,7 +74,7 @@ class SingleARBrains {
         self.sceneView.autoenablesDefaultLighting = true
         
         // run session
-        self.sceneView.session.run(arConfiguration)
+        self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
         self.gesturesBrain = GesturesSingleAR(sceneView: self.sceneView, arBrains: self)

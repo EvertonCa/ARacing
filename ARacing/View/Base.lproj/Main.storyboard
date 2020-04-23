@@ -232,7 +232,6 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="2SF-OA-y8K"/>
                                     <constraint firstAttribute="height" constant="128" id="pp3-vj-0BL"/>
                                 </constraints>
-                                <state key="normal" title="Acc"/>
                                 <connections>
                                     <action selector="accPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="pt7-he-isM"/>
                                     <action selector="accReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="0AI-kF-dvE"/>
@@ -244,7 +243,6 @@
                                     <constraint firstAttribute="height" constant="70" id="I0T-cn-yQZ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="j9z-u6-IEr"/>
                                 </constraints>
-                                <state key="normal" title="Brake"/>
                                 <connections>
                                     <action selector="brakePressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="DQ5-z7-Z1C"/>
                                     <action selector="breakReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="lxm-Ee-OaW"/>
@@ -256,7 +254,6 @@
                                     <constraint firstAttribute="height" constant="100" id="rc2-72-A46"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="sVh-do-gjW"/>
                                 </constraints>
-                                <state key="normal" title="Right"/>
                                 <connections>
                                     <action selector="turnRightPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="6Y4-As-B7W"/>
                                     <action selector="turnRightReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="qij-x3-LvI"/>
@@ -268,7 +265,6 @@
                                     <constraint firstAttribute="height" constant="100" id="cDX-xm-oJz"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ydN-Qi-gCx"/>
                                 </constraints>
-                                <state key="normal" title="Left"/>
                                 <connections>
                                     <action selector="turnLeftPressed:" destination="1mO-Fu-hmP" eventType="touchDown" id="uEV-v7-tgt"/>
                                     <action selector="turnLeftReleased:" destination="1mO-Fu-hmP" eventType="touchUpInside" id="t9J-O8-gRz"/>
@@ -318,13 +314,13 @@
                                     <constraint firstAttribute="width" constant="35" id="wB5-6S-vzL"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUr-vk-cei">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUr-vk-cei">
                                 <rect key="frame" x="797" y="20" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="NEd-aL-xM8"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="f5P-LK-oWL"/>
                                 </constraints>
-                                <state key="normal" title="Back">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

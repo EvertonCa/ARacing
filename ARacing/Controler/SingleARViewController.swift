@@ -142,6 +142,17 @@ class SingleARViewController: UIViewController {
         })
     }
     
+    // kill ARKit session
+    func killSession() {
+        self.sceneView.scene.removeAllParticleSystems()
+        self.sceneView.scene.rootNode.enumerateChildNodes{ (node, _) in
+            node.removeFromParentNode()
+        }
+        self.sceneView.session.pause()
+        self.sceneView.removeFromSuperview()
+        self.sceneView = nil
+    }
+    
     //MARK: - IBActions
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
@@ -207,6 +218,7 @@ class SingleARViewController: UIViewController {
         self.turnLeftButtonBackground.alpha = 1.0
     }
     @IBAction func backPressed(_ sender: UIButton) {
+        self.killSession()
         self.dismiss(animated: true, completion: nil)
     }
 }
