@@ -30,6 +30,9 @@ class SingleVehicle {
     var vehicleSpawned = false
     
     // Vehicle spawn position
+    var initialSpawnPosition = SCNVector3(-0.8, 0.4, 0.8)
+    
+    // Vehicle Spawn position
     var spawnPosition = SCNVector3(-0.8, 0.4, 0.8)
     
     // Steer angle
@@ -55,7 +58,7 @@ class SingleVehicle {
     func createVehicle() {
         
         // position on the scenery to spawn
-        let currentPositionOfCamera = self.spawnPosition
+        let currentPositionOfCamera = self.initialSpawnPosition
         
         // vehicle scene
         let scene = SCNScene(named: "3D Models.scnassets/SinglePlayerPlaceholder.scn")
@@ -134,9 +137,6 @@ class SingleVehicle {
         // sets the position of the chassis
         self.vehicleNode.position = currentPositionOfCamera
         
-        // rotation of the vehicle
-        //self.vehicleNode.eulerAngles = SCNVector3(x: -Float(90.degreesToRadians), y: 0, z: 0)
-        
         // sets the physics body to the chassis
         self.vehicleNode.physicsBody = body
         
@@ -161,7 +161,7 @@ class SingleVehicle {
     func restartVehicle() {
         let particle = self.explodeVehicle()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.vehicleNode.position = self.spawnPosition
+            self.vehicleNode.position = SCNVector3(self.spawnPosition.x, self.initialSpawnPosition.y, self.spawnPosition.z)
             self.vehicleNode.physicsBody?.clearAllForces()
             particle.removeFromParentNode()
             
@@ -251,8 +251,7 @@ class SingleVehicle {
             
             if self.vehicleNode.presentation.position.x < -1.05 || self.vehicleNode.presentation.position.y < -1.05 ||
                 self.vehicleNode.presentation.position.x > 1.05 || self.vehicleNode.presentation.position.y > 1.05 {
-                
-                print("Entrei!!")
+    
                 self.restartVehicle()
             }
         }

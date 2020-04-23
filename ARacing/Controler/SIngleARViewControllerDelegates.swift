@@ -82,6 +82,9 @@ extension SingleARViewController: SCNPhysicsContactDelegate {
             
             nodeA.physicsBody?.categoryBitMask = 0
 
+            // sets the new spawn coordinate for the vehicle to be the collided checkpoint
+            self.singleARBrain.vehicles.spawnPosition = nodeA.position
+            
             // removes the node
             nodeA.removeFromParentNode()
             // calls another checkpoint
@@ -95,6 +98,9 @@ extension SingleARViewController: SCNPhysicsContactDelegate {
         && nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
             
             nodeB.physicsBody?.categoryBitMask = 0
+            
+            // sets the new spawn coordinate for the vehicle to be the collided checkpoint
+            self.singleARBrain.vehicles.spawnPosition = nodeB.position
 
             // removes the node
             nodeB.removeFromParentNode()
