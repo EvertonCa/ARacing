@@ -30,7 +30,7 @@ class SingleVehicle {
     var vehicleSpawned = false
     
     // Vehicle spawn position
-    var spawnPosition = SCNVector3(-0.8, 0.3, 0.8)
+    var spawnPosition = SCNVector3(-0.8, 0.4, 0.8)
     
     // Steer angle
     let steerAngle:CGFloat = 0.8
@@ -162,6 +162,7 @@ class SingleVehicle {
         let particle = self.explodeVehicle()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.vehicleNode.position = self.spawnPosition
+            self.vehicleNode.physicsBody?.clearAllForces()
             particle.removeFromParentNode()
             
         }
