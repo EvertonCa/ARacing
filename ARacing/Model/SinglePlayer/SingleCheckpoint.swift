@@ -17,9 +17,9 @@ class SingleCheckpoint {
     var scenery:SCNNode
     
     // checkpoints positions
-    var checkpointsPositions:[[SCNVector3]] = [[SCNVector3(0.8, 0.8, 0.1), SCNVector3(0, 0, Float(135.degreesToRadians))],
-                                               [SCNVector3(-0.8, -0.8, 0.1), SCNVector3(0, 0, Float(135.degreesToRadians))],
-                                               [SCNVector3(0.0, 0.0, 0.1), SCNVector3(0, 0, Float(90.degreesToRadians))]]
+    var checkpointsPositions:[[SCNVector3]] = [[SCNVector3(0.8, 0.35, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))],
+                                               [SCNVector3(-0.8, 0.35, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))],
+                                               [SCNVector3(0.8, 0.35, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]]
     
     // checkpoint being shown in the moment
     var checkpointNow:Int = 0

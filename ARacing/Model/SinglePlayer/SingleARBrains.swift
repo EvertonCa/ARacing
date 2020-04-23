@@ -145,7 +145,7 @@ class SingleARBrains {
         
         // shows the Ready AR Text
         var textNode = self.arText.showReadyText()
-        textNode.position = SCNVector3(0, 0, 0.3)
+        textNode.position = SCNVector3(0, 0.6, 0)
         textNode.opacity = 0
         self.sceneryNode.addChildNode(textNode)
         
@@ -166,7 +166,7 @@ class SingleARBrains {
                 
                 // shows the Set AR Text
                 textNode = self.arText.showSetText()
-                textNode.position = SCNVector3(0, 0, 0.3)
+                textNode.position = SCNVector3(0, 0.6, 0)
                 textNode.opacity = 0
                 self.sceneryNode.addChildNode(textNode)
             }
@@ -190,7 +190,7 @@ class SingleARBrains {
                     
                         // shows the GO AR Text
                         textNode = self.arText.showGoText()
-                        textNode.position = SCNVector3(0, 0, 0.3)
+                        textNode.position = SCNVector3(0, 0.6, 0)
                         textNode.opacity = 0
                         self.sceneryNode.addChildNode(textNode)
                     
@@ -210,7 +210,7 @@ class SingleARBrains {
                         textNode.opacity = 1
                         SCNTransaction.commit()
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                             //animate fade out Go Text
                             SCNTransaction.begin()
                             SCNTransaction.animationDuration = 0.5

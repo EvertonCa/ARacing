@@ -158,14 +158,19 @@ class SingleARViewController: UIViewController {
             // sets the scenery to locked
             self.singleARBrain.scenery.sceneryLocked = true
             
-            //shows driving UI
-            self.showDrivingUI()
+            // start the race
+            self.singleARBrain.startRace()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                //shows driving UI
+                self.showDrivingUI()
+            }
         } else {
             // show vehicle in the view
             self.singleARBrain.vehicles.createVehicle()
         }
         // hides the button
-        //self.hideStartButton()
+        self.hideStartButton()
         
     }
     

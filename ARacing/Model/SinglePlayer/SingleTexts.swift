@@ -16,7 +16,8 @@ class SingleTexts {
     func showReadyText() -> SCNNode {
         let scene = SCNScene(named: "3D Models.scnassets/ReadyText.scn")
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
-        textNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
+        textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
+        textNode.name = "Text"
         
         return textNode
     }
@@ -24,7 +25,8 @@ class SingleTexts {
     func showSetText() -> SCNNode {
         let scene = SCNScene(named: "3D Models.scnassets/SetText.scn")
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
-        textNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
+        textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
+        textNode.name = "Text"
         
         return textNode
     }
@@ -32,7 +34,8 @@ class SingleTexts {
     func showGoText() -> SCNNode {
         let scene = SCNScene(named: "3D Models.scnassets/GoText.scn")
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
-        textNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
+        textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
+        textNode.name = "Text"
         
         // Particles in the checkpoint
         let particle = SCNParticleSystem(named: "3D Models.scnassets/Confetti.scnp", inDirectory: nil)
@@ -41,11 +44,20 @@ class SingleTexts {
         particle?.emitterShape = textNode.geometry
         let particleNode = SCNNode()
         particleNode.addParticleSystem(particle!)
-        particleNode.position = SCNVector3(0, 0, 0)
+        particleNode.position = SCNVector3(0, 1, 0)
         particleNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
         
         textNode.addChildNode(particleNode)
         
         return textNode
+    }
+    
+    func lookAtCamera(sceneView: ARSCNView, sceneryNode: SCNNode) {
+        sceneView.scene.rootNode.enumerateChildNodes{ (node, _) in
+            if node.name == "Text" {
+                let relativePositionToScenery = sceneView.pointOfView?.convertPosition(SCNVector3Zero, to: sceneryNode)
+                node.look(at: relativePositionToScenery!)
+            }
+        }
     }
 }

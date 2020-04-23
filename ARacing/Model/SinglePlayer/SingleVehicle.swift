@@ -26,6 +26,12 @@ class SingleVehicle {
     var breaking = false
     var goingBackwards = false
     
+    // Vehicle Spawned
+    var vehicleSpawned = false
+    
+    // Vehicle spawn position
+    var spawnPosition = SCNVector3(-0.8, 0.3, 0.8)
+    
     // Steer angle
     let steerAngle:CGFloat = 0.8
     
@@ -49,7 +55,7 @@ class SingleVehicle {
     func createVehicle() {
         
         // position on the scenery to spawn
-        let currentPositionOfCamera = SCNVector3(-0.8, -0.8, 0.06)
+        let currentPositionOfCamera = self.spawnPosition
         
         // vehicle scene
         let scene = SCNScene(named: "3D Models.scnassets/SinglePlayerPlaceholder.scn")
@@ -129,7 +135,7 @@ class SingleVehicle {
         self.vehicleNode.position = currentPositionOfCamera
         
         // rotation of the vehicle
-        self.vehicleNode.eulerAngles = SCNVector3(x: -Float(90.degreesToRadians), y: 0, z: 0)
+        //self.vehicleNode.eulerAngles = SCNVector3(x: -Float(90.degreesToRadians), y: 0, z: 0)
         
         // sets the physics body to the chassis
         self.vehicleNode.physicsBody = body
@@ -147,60 +153,107 @@ class SingleVehicle {
         // adds the vehicle to the scenery
         self.arBrain.sceneryNode.addChildNode(vehicleNode)
         
-        self.arBrain.startRace()
+        // sets the flag to true
+        self.vehicleSpawned = true
     }
     
-    // removes the vehicle in the scenery
-    func removeVehicle() {
-        self.vehicleNode.removeFromParentNode()
+    // removes the vehicle in the scenery and spawns another one
+    func restartVehicle() {
+        let particle = self.explodeVehicle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.vehicleNode.position = self.spawnPosition
+            particle.removeFromParentNode()
+            
+        }
     }
     
-    // handles Acceleration, Breaking, Reversing and Steering for the vehicle
+    // explodes vehicle
+    func explodeVehicle() -> SCNNode {
+        // explosion
+        let explosion = SCNParticleSystem(named: "3D Models.scnassets/Explosion.scnp", inDirectory: nil)
+        explosion?.loops = false
+        explosion?.emissionDuration = 1
+        explosion?.emitterShape = self.vehicleNode.geometry
+        
+        let explosion2 = SCNParticleSystem(named: "3D Models.scnassets/Explosion2.scnp", inDirectory: nil)
+        explosion2?.loops = false
+        explosion2?.emissionDuration = 1
+        explosion2?.emitterShape = self.vehicleNode.geometry
+        
+        let explosionNode = SCNNode()
+        
+        let particleNode = SCNNode()
+        particleNode.addParticleSystem(explosion!)
+        particleNode.position = SCNVector3(0, 0, 0)
+        particleNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
+        explosionNode.addChildNode(particleNode)
+        
+        let particleNode2 = SCNNode()
+        particleNode2.addParticleSystem(explosion2!)
+        particleNode2.position = SCNVector3(0, 0, 0)
+        particleNode2.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
+        explosionNode.addChildNode(particleNode2)
+        
+        self.vehicleNode.addChildNode(explosionNode)
+        
+        return explosionNode
+    }
+    
+    // handles Acceleration, Breaking, Reversing and Steering for the vehicle. Also when vehicle is out of bounds
     func updatesVehicle() {
-        // steer the vehicle to right
-        if self.turningRight {
-            self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 2)
-            self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 3)
-        }
-        // steer the vehicle to left
-        else if self.turningLeft {
-            self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 2)
-            self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 3)
-        }
-        // straightens the vehicle
-        else {
-            self.vehicle.setSteeringAngle(0, forWheelAt: 2)
-            self.vehicle.setSteeringAngle(0, forWheelAt: 3)
-        }
+        if vehicleSpawned {
+            // steer the vehicle to right
+            if self.turningRight {
+                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 2)
+                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 3)
+            }
+            // steer the vehicle to left
+            else if self.turningLeft {
+                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 2)
+                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 3)
+            }
+            // straightens the vehicle
+            else {
+                self.vehicle.setSteeringAngle(0, forWheelAt: 2)
+                self.vehicle.setSteeringAngle(0, forWheelAt: 3)
+            }
 
-        // Acceleration, Breaking and Reversing
-        if self.accelerating {
-            self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 0)
-            self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 1)
-        } else if self.breaking {
-            // if vehicle is stopped, reverse, else, brakes
-            if self.vehicle.speedInKilometersPerHour < 0.5{
-                self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 0)
-                self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 1)
+            // Acceleration, Breaking and Reversing
+            if self.accelerating {
+                self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 0)
+                self.vehicle.applyEngineForce(self.engineForce, forWheelAt: 1)
+            } else if self.breaking {
+                // if vehicle is stopped, reverse, else, brakes
+                if self.vehicle.speedInKilometersPerHour < 0.5{
+                    self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 0)
+                    self.vehicle.applyEngineForce(-self.engineForce, forWheelAt: 1)
+                } else {
+                    // rear wheels
+                    self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 0)
+                    self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 1)
+                    // front wheels
+                    self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 2)
+                    self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 3)
+                }
+                
             } else {
                 // rear wheels
-                self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 0)
-                self.vehicle.applyBrakingForce(self.rearBreakingForce, forWheelAt: 1)
+                self.vehicle.applyBrakingForce(0, forWheelAt: 0)
+                self.vehicle.applyBrakingForce(0, forWheelAt: 1)
                 // front wheels
-                self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 2)
-                self.vehicle.applyBrakingForce(self.frontBreakingForce, forWheelAt: 3)
+                self.vehicle.applyBrakingForce(0, forWheelAt: 2)
+                self.vehicle.applyBrakingForce(0, forWheelAt: 3)
+                // resets reverse wheels
+                self.vehicle.applyEngineForce(0, forWheelAt: 0)
+                self.vehicle.applyEngineForce(0, forWheelAt: 1)
             }
             
-        } else {
-            // rear wheels
-            self.vehicle.applyBrakingForce(0, forWheelAt: 0)
-            self.vehicle.applyBrakingForce(0, forWheelAt: 1)
-            // front wheels
-            self.vehicle.applyBrakingForce(0, forWheelAt: 2)
-            self.vehicle.applyBrakingForce(0, forWheelAt: 3)
-            // resets reverse wheels
-            self.vehicle.applyEngineForce(0, forWheelAt: 0)
-            self.vehicle.applyEngineForce(0, forWheelAt: 1)
+            if self.vehicleNode.presentation.position.x < -1.05 || self.vehicleNode.presentation.position.y < -1.05 ||
+                self.vehicleNode.presentation.position.x > 1.05 || self.vehicleNode.presentation.position.y > 1.05 {
+                
+                print("Entrei!!")
+                self.restartVehicle()
+            }
         }
     }
 }
