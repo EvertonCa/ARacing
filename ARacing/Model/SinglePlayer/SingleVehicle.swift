@@ -143,6 +143,7 @@ class SingleVehicle {
         // sets collision
         self.vehicleNode.physicsBody?.categoryBitMask = BitMaskCategory.Vehicle.rawValue
         self.vehicleNode.physicsBody?.contactTestBitMask = BitMaskCategory.Checkpoint.rawValue
+        //self.vehicleNode.physicsBody?.collisionBitMask = BitMaskCategory.Checkpoint.rawValue
         
         // Vehicle physics
         self.vehicle = SCNPhysicsVehicle(chassisBody: vehicleNode.physicsBody!, wheels: [v_rearLeftWheel, v_rearRightWheel, v_frontRightWheel, v_frontLeftWheel])

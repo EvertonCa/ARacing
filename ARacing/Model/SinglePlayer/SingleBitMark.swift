@@ -9,6 +9,6 @@
 import Foundation
 
 enum BitMaskCategory: Int {
-    case Vehicle = 10
-    case Checkpoint = 20
+    case Vehicle = 4
+    case Checkpoint = 8
 }
