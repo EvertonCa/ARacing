@@ -79,13 +79,14 @@ class GesturesSingleAR {
             if let results = hitTest.first {
                 let node = results.node
                 
-                let rotateAction = SCNAction.rotateBy(x: 0, y: -angle, z: 0, duration: 0)
-                
-                node.runAction(rotateAction)
-                
-                sender.rotation = 0
+                if node.name == "Track" {
+                    let rotateAction = SCNAction.rotateBy(x: 0, y: -angle, z: 0, duration: 0)
+                    
+                    node.runAction(rotateAction)
+                    
+                    sender.rotation = 0
+                }
             }
         }
     }
-    
 }

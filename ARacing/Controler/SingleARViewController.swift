@@ -183,6 +183,9 @@ class SingleARViewController: UIViewController {
         // hides the button
         self.hideStartButton()
         
+        // hides feedback label
+        self.hideFeedback()
+        
     }
     
     @IBAction func accPressed(_ sender: UIButton) {

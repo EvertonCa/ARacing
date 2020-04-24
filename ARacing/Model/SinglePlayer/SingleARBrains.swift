@@ -120,7 +120,7 @@ class SingleARBrains {
         self.gesturesBrain.removeTapGesture()
         
         // changes feedback label
-        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to place your car!")
+        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
         
         // removes all the grids in the scene
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
