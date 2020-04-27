@@ -104,7 +104,7 @@ class RCBrains {
     let suspensionDamping:CGFloat = 3.0
     
     // Travel is the total distance a wheel is allowed to move (in both directions), in the coordinate system of the node containing the vehicle’s chassis. The default suspension travel is 500.0. (Unit is centimeters)
-    let maximumSuspensionTravel:CGFloat = 10.0
+    let maximumSuspensionTravel:CGFloat = 1.0
     
     // The physics simulation applies a force of no greater than this magnitude when contact with the ground causes the wheel to move relative to the vehicle. The default maximum suspension force is 6000.0. (Unit is Neutons)
     let maximumSuspensionForce:CGFloat = 1000
@@ -118,11 +118,11 @@ class RCBrains {
     let steerAngle:CGFloat = 0.8
     
     // Engine force
-    let engineForce: CGFloat = 500
+    let engineForce: CGFloat = 5
     
     // Breaking force
-    let frontBreakingForce: CGFloat = 100
-    let rearBreakingForce: CGFloat = 50
+    let frontBreakingForce: CGFloat = 10
+    let rearBreakingForce: CGFloat = 5
     
     
     //MARK: - Functions
@@ -177,7 +177,7 @@ class RCBrains {
     func createVehicle(hitTest: ARHitTestResult) {
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/RC-Z4_v2.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/RCPlaceholder.scn")
         
         // Main vehicle node
         self.vehicleNode = (scene?.rootNode.childNode(withName: "Chassis", recursively: false))!
@@ -216,15 +216,15 @@ class RCBrains {
     func createVehicleWheel(wheelNode: SCNNode, position: SCNVector3) -> SCNPhysicsVehicleWheel {
         let wheel = SCNPhysicsVehicleWheel(node: wheelNode)
         wheel.connectionPosition = position
-        wheel.axle = self.axle
-        wheel.steeringAxis = self.steeringAxis
+        //wheel.axle = self.axle
+        //wheel.steeringAxis = self.steeringAxis
         wheel.maximumSuspensionTravel = self.maximumSuspensionTravel
         wheel.maximumSuspensionForce = self.maximumSuspensionForce
         wheel.suspensionRestLength = self.suspensionRestLength
         wheel.suspensionDamping = self.suspensionDamping
         wheel.suspensionStiffness = self.suspensionStiffness
         wheel.suspensionCompression = self.suspensionCompression
-        wheel.radius = self.radius
+        //wheel.radius = self.radius
         wheel.frictionSlip = self.frictionSlip
         
         return wheel
@@ -236,10 +236,15 @@ class RCBrains {
             self.sceneView.scene.physicsWorld.removeBehavior(self.vehiclePhysics!)
         }
         
-        let wheelFL = createVehicleWheel(wheelNode: self.frontLeftWheel, position: self.frontLeftWheel.position)
-        let wheelFR = createVehicleWheel(wheelNode: self.frontRightWheel, position: self.frontRightWheel.position)
-        let wheelRL = createVehicleWheel(wheelNode: self.rearLeftWheel, position: self.rearLeftWheel.position)
-        let wheelRR = createVehicleWheel(wheelNode: self.rearRightWheel, position: self.rearRightWheel.position)
+        let connectionFL = SCNVector3(self.frontLeftWheel.position.x + 0.02, self.frontLeftWheel.position.y, self.frontLeftWheel.position.z)
+        let connectionFR = SCNVector3(self.frontRightWheel.position.x - 0.02, self.frontRightWheel.position.y, self.frontRightWheel.position.z)
+        let connectionRL = SCNVector3(self.rearLeftWheel.position.x + 0.02, self.rearLeftWheel.position.y, self.rearLeftWheel.position.z)
+        let connectionRR = SCNVector3(self.rearRightWheel.position.x - 0.02, self.rearRightWheel.position.y, self.rearRightWheel.position.z)
+        
+        let wheelFL = createVehicleWheel(wheelNode: self.frontLeftWheel, position: connectionFL)
+        let wheelFR = createVehicleWheel(wheelNode: self.frontRightWheel, position: connectionFR)
+        let wheelRL = createVehicleWheel(wheelNode: self.rearLeftWheel, position: connectionRL)
+        let wheelRR = createVehicleWheel(wheelNode: self.rearRightWheel, position: connectionRR)
         
         //if the option is true, it considers all of the geometries. If false, just combines into one geometry
         let bodyPhysics = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: self.vehicleNode, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
