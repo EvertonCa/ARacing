@@ -33,7 +33,7 @@ class SingleScenery {
     
     // creates and places the scenary in the AR view
     func addScenery(hitTestResult: ARHitTestResult) -> SCNNode {
-        let scene = SCNScene(named: "3D Models.scnassets/Track1.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Tracks/Track1.scn")
         self.scenery = (scene?.rootNode.childNode(withName: "Track", recursively: false))!
         let transform = hitTestResult.worldTransform
         let thirdColumn = transform.columns.3

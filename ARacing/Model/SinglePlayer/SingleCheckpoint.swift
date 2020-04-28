@@ -17,9 +17,9 @@ class SingleCheckpoint {
     var scenery:SCNNode
     
     // checkpoints positions
-    var checkpointsPositions:[[SCNVector3]] = [[SCNVector3(0.8, 0.35, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))],
-                                               [SCNVector3(-0.8, 0.35, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))],
-                                               [SCNVector3(0.8, 0.35, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]]
+    var checkpointsPositions:[[SCNVector3]] = [[SCNVector3(0.8, 0.25, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))],
+                                               [SCNVector3(-0.8, 0.25, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))],
+                                               [SCNVector3(0.8, 0.25, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]]
     
     // checkpoint being shown in the moment
     var checkpointNow:Int = 0
@@ -36,7 +36,7 @@ class SingleCheckpoint {
     // sets up and show the checkpoint
     func setupCheckpoints() -> Bool {
         if self.checkpointNow < self.checkpointsPositions.count {
-            let scene = SCNScene(named: "3D Models.scnassets/CheckPoint.scn")
+            let scene = SCNScene(named: "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn")
             let checkpoint = (scene?.rootNode.childNode(withName: "checkpoint", recursively: true))!
             
             checkpoint.position = self.checkpointsPositions[self.checkpointNow][0]
@@ -48,8 +48,8 @@ class SingleCheckpoint {
             checkpoint.name = String(self.checkpointNow)
             
             // Particles in the checkpoint
-            let particle = SCNParticleSystem(named: "3D Models.scnassets/Fire.scnp", inDirectory: nil)
-            let particle2 = SCNParticleSystem(named: "3D Models.scnassets/Fire2.scnp", inDirectory: nil)
+            let particle = SCNParticleSystem(named: "3D Models.scnassets/Checkpoint Assets/Fire.scnp", inDirectory: nil)
+            let particle2 = SCNParticleSystem(named: "3D Models.scnassets/Checkpoint Assets/Fire2.scnp", inDirectory: nil)
             particle?.loops = true
             particle2?.loops = true
             particle?.emitterShape = checkpoint.geometry

@@ -177,7 +177,7 @@ class RCBrains {
     func createVehicle(hitTest: ARHitTestResult) {
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/RCPlaceholder.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Vehicles Assets/RCPlaceholder.scn")
         
         // Main vehicle node
         self.vehicleNode = (scene?.rootNode.childNode(withName: "Chassis", recursively: false))!

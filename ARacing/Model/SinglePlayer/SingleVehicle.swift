@@ -61,7 +61,7 @@ class SingleVehicle {
         let currentPositionOfCamera = self.initialSpawnPosition
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/SinglePlayerPlaceholder.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Vehicles Assets/SinglePlayerPlaceholder.scn")
         
         // Main vehicle node
         self.vehicleNode = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
@@ -171,12 +171,12 @@ class SingleVehicle {
     // explodes vehicle
     func explodeVehicle() -> SCNNode {
         // explosion
-        let explosion = SCNParticleSystem(named: "3D Models.scnassets/Explosion.scnp", inDirectory: nil)
+        let explosion = SCNParticleSystem(named: "3D Models.scnassets/Vehicles Assets/Explosion.scnp", inDirectory: nil)
         explosion?.loops = false
         explosion?.emissionDuration = 1
         explosion?.emitterShape = self.vehicleNode.geometry
         
-        let explosion2 = SCNParticleSystem(named: "3D Models.scnassets/Explosion2.scnp", inDirectory: nil)
+        let explosion2 = SCNParticleSystem(named: "3D Models.scnassets/Vehicles Assets/Explosion2.scnp", inDirectory: nil)
         explosion2?.loops = false
         explosion2?.emissionDuration = 1
         explosion2?.emitterShape = self.vehicleNode.geometry
