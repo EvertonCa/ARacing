@@ -9,23 +9,52 @@
 import Foundation
 import ARKit
 
+struct Checkpoint {
+    let coordinates: SCNVector3
+    let rotation: SCNVector3
+    
+    init(_ coord: SCNVector3, _ rotat: SCNVector3) {
+        coordinates = coord
+        rotation = rotat
+    }
+}
+
+struct AllCheckpoints {
+    
+    // Map 1 Coordinates
+    let map1Checkpoints: [Checkpoint] = [Checkpoint(SCNVector3(0.8, 0.25, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(-0.8, 0.25, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(0.8, 0.25, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)))]
+    
+    // Map 2 Coordinates
+    let map2Checkpoints: [Checkpoint] = [Checkpoint(SCNVector3(0.8, 0.25, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(-0.8, 0.25, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(0.8, 0.25, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)))]
+    
+    // Map 3 Coordinates
+    let map3Checkpoints: [Checkpoint] = [Checkpoint(SCNVector3(0.8, 0.25, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(-0.8, 0.25, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))),
+                                         Checkpoint(SCNVector3(0.8, 0.25, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)))]
+    
+}
+
 class SingleCheckpoint {
+    //MARK: - Checkpoint Coordinates
+    let allCheckpoints = AllCheckpoints()
     
     //MARK: - Variables and Constants
     
     // Scenery
     var scenery:SCNNode
     
-    // checkpoints positions
-    var checkpointsPositions:[[SCNVector3]] = [[SCNVector3(0.8, 0.25, -0.8), SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians))],
-                                               [SCNVector3(-0.8, 0.25, 0.0), SCNVector3(0, 0, Float(90.degreesToRadians))],
-                                               [SCNVector3(0.8, 0.25, 0.8), SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]]
-    
     // checkpoint being shown in the moment
     var checkpointNow:Int = 0
     
     // checkpoint on screen
     var checkpointOnScreen = false
+    
+    // Map Selected
+    var mapSelected: Int = MapSelected.Map1.rawValue
     
     //MARK: - Functions
     
@@ -35,12 +64,28 @@ class SingleCheckpoint {
     
     // sets up and show the checkpoint
     func setupCheckpoints() -> Bool {
-        if self.checkpointNow < self.checkpointsPositions.count {
-            let scene = SCNScene(named: "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn")
+        
+        var checkpointCoordinates:[Checkpoint] = self.allCheckpoints.map1Checkpoints
+        
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            checkpointCoordinates = self.allCheckpoints.map1Checkpoints
+            
+        case MapSelected.Map2.rawValue:
+            checkpointCoordinates = self.allCheckpoints.map2Checkpoints
+            
+        case MapSelected.Map1.rawValue:
+            checkpointCoordinates = self.allCheckpoints.map3Checkpoints
+            
+        default: break
+        }
+        
+        if self.checkpointNow < checkpointCoordinates.count {
+            let scene = SCNScene(named: CheckpointsResources.Checkpoint.rawValue)
             let checkpoint = (scene?.rootNode.childNode(withName: "checkpoint", recursively: true))!
             
-            checkpoint.position = self.checkpointsPositions[self.checkpointNow][0]
-            checkpoint.eulerAngles = self.checkpointsPositions[self.checkpointNow][1]
+            checkpoint.position = checkpointCoordinates[self.checkpointNow].coordinates
+            checkpoint.eulerAngles = checkpointCoordinates[self.checkpointNow].rotation
             checkpoint.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: checkpoint, options: nil))
             checkpoint.physicsBody?.categoryBitMask = BitMaskCategory.Checkpoint.rawValue
             checkpoint.physicsBody?.contactTestBitMask = BitMaskCategory.Vehicle.rawValue
@@ -48,8 +93,8 @@ class SingleCheckpoint {
             checkpoint.name = String(self.checkpointNow)
             
             // Particles in the checkpoint
-            let particle = SCNParticleSystem(named: "3D Models.scnassets/Checkpoint Assets/Fire.scnp", inDirectory: nil)
-            let particle2 = SCNParticleSystem(named: "3D Models.scnassets/Checkpoint Assets/Fire2.scnp", inDirectory: nil)
+            let particle = SCNParticleSystem(named: CheckpointsResources.CheckpointFire1.rawValue, inDirectory: nil)
+            let particle2 = SCNParticleSystem(named: CheckpointsResources.CheckpointFire2.rawValue, inDirectory: nil)
             particle?.loops = true
             particle2?.loops = true
             particle?.emitterShape = checkpoint.geometry

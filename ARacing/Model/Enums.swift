@@ -27,3 +27,18 @@ enum BitMaskCategory: Int {
     case Vehicle = 4
     case Checkpoint = 8
 }
+
+// Maps enum
+enum MapsResources: String {
+    case Map1 = "3D Models.scnassets/Tracks/Track1.scn"
+    case Map2 = "3D Models.scnassets/Tracks/Test_Ice.scn"
+    case Map3 = "3D Models.scnassets/Tracks/Track3.scn"
+}
+
+// Checkpoints Resources
+enum CheckpointsResources: String {
+    case Checkpoint = "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn"
+    case CheckpointFire1 = "3D Models.scnassets/Checkpoint Assets/Fire.scnp"
+    case CheckpointFire2 = "3D Models.scnassets/Checkpoint Assets/Fire2.scnp"
+}
+

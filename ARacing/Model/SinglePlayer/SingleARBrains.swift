@@ -43,7 +43,7 @@ class SingleARBrains {
     var checkpoints: SingleCheckpoint!
     
     // Scenery
-    var scenery: SingleScenery!
+    var scenery: Sceneries!
     
     // Lap Timer
     var lapTimer: LapTimer!
@@ -84,7 +84,8 @@ class SingleARBrains {
         self.gesturesBrain.registerGesturesrecognizers()
         
         // setup scenery
-        self.scenery = SingleScenery(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
+        self.scenery = Sceneries(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
+        self.scenery.mapSelected = self.mapSelected
         
         // setup LapTimer
         self.lapTimer = LapTimer(timerLabel: arViewController.timerLabel)
@@ -134,6 +135,7 @@ class SingleARBrains {
         
         // setup checkpoints
         self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
+        self.checkpoints.mapSelected = self.mapSelected
     }
     
     // adds the checkpoints with particles in the right place

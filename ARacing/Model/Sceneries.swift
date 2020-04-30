@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 
-class SingleScenery {
+class Sceneries {
     
     //MARK: - Variables and Constants
     
@@ -25,15 +25,35 @@ class SingleScenery {
     // Scenery locked
     var sceneryLocked = false
     
+    // Map selected
+    var mapSelected: Int = MapSelected.Map1.rawValue
+    
     //MARK: - Functions
     init(sceneryNode: SCNNode, sceneView: ARSCNView) {
         self.scenery = sceneryNode
         self.sceneView = sceneView
     }
     
+    // Returns the address for the Selected Map
+    func mapAddress() -> String {
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            return MapsResources.Map1.rawValue
+            
+        case MapSelected.Map2.rawValue:
+            return MapsResources.Map2.rawValue
+            
+        case MapSelected.Map1.rawValue:
+            return MapsResources.Map3.rawValue
+            
+        default: return ""
+        }
+    }
+    
     // creates and places the scenary in the AR view
     func addScenery(hitTestResult: ARHitTestResult) -> SCNNode {
-        let scene = SCNScene(named: "3D Models.scnassets/Tracks/Track1.scn")
+        
+        let scene = SCNScene(named: self.mapAddress())
         self.scenery = (scene?.rootNode.childNode(withName: "Track", recursively: false))!
         let transform = hitTestResult.worldTransform
         let thirdColumn = transform.columns.3
