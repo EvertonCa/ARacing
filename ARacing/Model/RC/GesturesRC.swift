@@ -57,10 +57,10 @@ class GesturesRC {
             //self.removeTapGesture()
             
             // hides the feedback label
-            self.arBrains.rcViewController.hideFeedback()
+            self.arBrains.arViewController.hideFeedback()
             
             // show the driving controls
-            self.arBrains.rcViewController.showDrivingUI()
+            self.arBrains.arViewController.showDrivingUI()
         } else {
             print("No match")
         }

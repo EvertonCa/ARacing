@@ -17,10 +17,13 @@ extension ARViewController: OptionViewDelegate{
         switch selectedOption{
         case TypeSelected.SinglePlayer.rawValue:
             self.singlePlayerSelected()
+            self.menuBrains.stopIntroMusic()
         case TypeSelected.MultiPlayer.rawValue:
             self.multiPlayerSelected()
+            self.menuBrains.stopIntroMusic()
         case TypeSelected.RCMode.rawValue:
             self.rcModeSelected()
+            self.menuBrains.stopIntroMusic()
         default: break
         }
     }

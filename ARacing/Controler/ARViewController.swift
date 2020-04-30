@@ -99,8 +99,6 @@ class ARViewController: UIViewController {
         
         // defines the AR Delegates
         self.defineARDelegates()
-        
-        
     }
     
     // Starts AR Session as RC Mode
@@ -112,18 +110,27 @@ class ARViewController: UIViewController {
         self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
         
         // start RC Brain
+        self.rcBrains = RCBrains(sceneView, self)
         
         // defines the AR Delegates
         self.defineARDelegates()
         
+        // setup the AR Experience
+        self.rcBrains!.setupView()
+        
+        // show feedback to move the camera
+        self.showFeedback(text: "Move your device to detect the plane to place your RC car!")
     }
     
     func defineARDelegates() {
         // setup delegate
         self.sceneView.delegate = self
         
-        // setup contact delegate
-        self.sceneView.scene.physicsWorld.contactDelegate = self
+        if self.typeSelected == TypeSelected.SinglePlayer.rawValue ||
+            self.typeSelected == TypeSelected.MultiPlayer.rawValue{
+            // setup contact delegate
+            self.sceneView.scene.physicsWorld.contactDelegate = self
+        }
     }
     
     // hide all buttons with alpha = 0

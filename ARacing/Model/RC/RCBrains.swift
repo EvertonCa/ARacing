@@ -48,7 +48,7 @@ class RCBrains {
     var gesturesBrain:GesturesRC!
     
     // ViewController
-    var rcViewController: RCViewController!
+    var arViewController: ARViewController!
     
     //MARK: - Vehicle Body Parameters Constants
     
@@ -127,9 +127,9 @@ class RCBrains {
     
     //MARK: - Functions
     
-    init(_ sceneView: ARSCNView, _ view: RCViewController) {
+    init(_ sceneView: ARSCNView, _ view: ARViewController) {
         self.sceneView = sceneView
-        self.rcViewController = view
+        self.arViewController = view
     }
     
     // setup the view when it loads
