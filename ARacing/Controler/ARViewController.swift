@@ -61,6 +61,11 @@ class ARViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.goToOptionsViewController()
+    }
+    
+    // perform segue to OptionsViewController
+    func goToOptionsViewController() {
         // perform segue to options controller
         performSegue(withIdentifier: "GoToType", sender: self)
     }
@@ -122,6 +127,7 @@ class ARViewController: UIViewController {
         self.showFeedback(text: "Move your device to detect the plane to place your RC car!")
     }
     
+    // starts the delegates
     func defineARDelegates() {
         // setup delegate
         self.sceneView.delegate = self
@@ -130,6 +136,17 @@ class ARViewController: UIViewController {
             self.typeSelected == TypeSelected.MultiPlayer.rawValue{
             // setup contact delegate
             self.sceneView.scene.physicsWorld.contactDelegate = self
+        }
+    }
+    
+    // resets the delegates
+    func resetDelegates() {
+        self.sceneView.delegate = nil
+        
+        if self.typeSelected == TypeSelected.SinglePlayer.rawValue ||
+            self.typeSelected == TypeSelected.MultiPlayer.rawValue{
+            
+            self.sceneView.scene.physicsWorld.contactDelegate = nil
         }
     }
     
@@ -213,11 +230,22 @@ class ARViewController: UIViewController {
     
     // kill ARKit session
     func resetARSession() {
+        self.sceneView.session.pause()
+        self.resetDelegates()
+        
         self.sceneView.scene.removeAllParticleSystems()
         self.sceneView.scene.rootNode.enumerateChildNodes{ (node, _) in
             node.removeFromParentNode()
         }
-        self.sceneView.session.pause()
+        
+        // hide all the UI
+        self.hideUI()
+        
+        // Starts the AR view with temporary configuration
+        let tempConfig = ARWorldTrackingConfiguration()
+        self.sceneView.session.run(tempConfig)
+        
+        self.goToOptionsViewController()
     }
     
     //MARK: - Segues

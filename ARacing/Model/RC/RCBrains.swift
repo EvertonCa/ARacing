@@ -148,7 +148,7 @@ class RCBrains {
         self.sceneView.autoenablesDefaultLighting = true
         
         // run session
-        self.sceneView.session.run(arConfiguration)
+        self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
         self.gesturesBrain = GesturesRC(sceneView: self.sceneView, arBrains: self)
@@ -160,8 +160,7 @@ class RCBrains {
     func createGrid(planeAnchor: ARPlaneAnchor) -> SCNNode {
         
         let gridNode = SCNNode(geometry: SCNBox(width: CGFloat(planeAnchor.extent.x), height: CGFloat(0.08), length: CGFloat(planeAnchor.extent.z), chamferRadius: 1))
-        //gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
-        gridNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+        gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
         gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
         
         // static is not affected by forces, but it is interactible
@@ -199,7 +198,7 @@ class RCBrains {
         // hit test to position the vehicle
         let transform = hitTest.worldTransform
         let thirdColumn = transform.columns.3
-        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y + 0.4, thirdColumn.z)
+        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y + 0.1, thirdColumn.z)
         
         // adds the vehicle to the scene
         self.sceneView.scene.rootNode.addChildNode(self.vehicleNode)
