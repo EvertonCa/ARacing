@@ -34,7 +34,7 @@ class SingleARBrains {
     var gesturesBrain:GesturesSingleAR!
     
     // ViewController
-    var singleARViewController: SingleARViewController!
+    var arViewController: ARViewController!
     
     // Checkpoints
     var checkpoints: SingleCheckpoint!
@@ -53,16 +53,16 @@ class SingleARBrains {
     
     //MARK: - Functions
     
-    init(_ sceneView: ARSCNView, _ view: SingleARViewController) {
+    init(_ sceneView: ARSCNView, _ view: ARViewController) {
         self.sceneView = sceneView
-        self.singleARViewController = view
+        self.arViewController = view
     }
     
     // setup the view when it loads
     func setupView() {
         
         // debug options - feature points and world origin
-        self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
+        //self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
         //self.sceneView.showsStatistics = true
@@ -84,7 +84,7 @@ class SingleARBrains {
         self.scenery = SingleScenery(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
         
         // setup LapTimer
-        self.lapTimer = LapTimer(timerLabel: singleARViewController.timerLabel)
+        self.lapTimer = LapTimer(timerLabel: arViewController.timerLabel)
         
         // setup AR Text
         self.arText = SingleTexts()
@@ -120,7 +120,7 @@ class SingleARBrains {
         self.gesturesBrain.removeTapGesture()
         
         // changes feedback label
-        self.singleARViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
+        self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
         
         // removes all the grids in the scene
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
@@ -196,7 +196,7 @@ class SingleARBrains {
                     
                         // starts the timer
                         self.lapTimer.startTimer()
-                        self.singleARViewController.timerLabel.isHidden = false
+                        self.arViewController.timerLabel.isHidden = false
                     
                         // setup the checkpoints and particles
                         self.updateCheckpoint()

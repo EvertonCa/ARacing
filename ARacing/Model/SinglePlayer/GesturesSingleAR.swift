@@ -63,7 +63,7 @@ class GesturesSingleAR {
         
         if !hitTest.isEmpty {
             self.arBrains.setupScenery(hitTestResult: hitTest.first!)
-            self.arBrains.singleARViewController.showStartButton()
+            self.arBrains.arViewController.showStartButton()
         }
     }
     

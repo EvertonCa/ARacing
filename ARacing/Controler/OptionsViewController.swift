@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OptionViewDelegate: NSObjectProtocol {
+    func passSelectedOption(selectedOption: Int)
+}
+
 class OptionsViewController: UIViewController {
     
     //MARK: - Global IBOutlets and Variables
@@ -16,8 +20,8 @@ class OptionsViewController: UIViewController {
     @IBOutlet weak var multiPlayerButton: UIButton!
     @IBOutlet weak var rcModeButton: UIButton!
     
-    // Menu Brains
-    var menuBrains:MenuBrains!
+    // delegate
+    weak var delegate: OptionViewDelegate?
     
     //MARK: - Functions
     
@@ -28,21 +32,27 @@ class OptionsViewController: UIViewController {
     
     //MARK: - IBActions
     
-    // Stops the music and segue to SingleARViewController
+    // Send to the delegate the selected option and dismisses the view
     @IBAction func singlePlayerPressed(_ sender: UIButton) {
-        menuBrains.stopIntroMusic()
-        self.performSegue(withIdentifier: "goToSingleAR", sender: self)
+        
+        delegate?.passSelectedOption(selectedOption: TypeSelected.SinglePlayer.rawValue)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func multiPlayerPressed(_ sender: UIButton) {
-        menuBrains.stopIntroMusic()
-        self.performSegue(withIdentifier: "goToMultiAR", sender: self)
+        
+        delegate?.passSelectedOption(selectedOption: TypeSelected.MultiPlayer.rawValue)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func rcModePressed(_ sender: UIButton) {
-        menuBrains.stopIntroMusic()
-        self.performSegue(withIdentifier: "goToRC", sender: self)
+        
+        delegate?.passSelectedOption(selectedOption: TypeSelected.RCMode.rawValue)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

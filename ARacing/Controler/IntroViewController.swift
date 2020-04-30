@@ -67,8 +67,8 @@ class IntroViewController: UIViewController {
     
     // Prepare segue to OptionsViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOptions" {
-            let destinationVC = segue.destination as! OptionsViewController
+        if segue.identifier == "goToAR" {
+            let destinationVC = segue.destination as! ARViewController
             destinationVC.menuBrains = menuBrains
         }
     }
@@ -77,7 +77,7 @@ class IntroViewController: UIViewController {
 
     // Start segue to OptionViewController
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToOptions", sender: self)
+        self.performSegue(withIdentifier: "goToAR", sender: self)
     }
 }
 

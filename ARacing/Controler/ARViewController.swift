@@ -9,7 +9,7 @@
 import UIKit
 import ARKit
 
-class SingleARViewController: UIViewController {
+class ARViewController: UIViewController {
     
     //MARK: - Global IBOutlets and Variables
     
@@ -27,36 +27,107 @@ class SingleARViewController: UIViewController {
     @IBOutlet weak var turnRightButtonBackground: UIImageView!
     
     @IBOutlet weak var timerLabel: UILabel!
+    
+    //MARK: - Brains
+    
     // Single AR Brain
-    var singleARBrain: SingleARBrains!
+    var singleARBrain: SingleARBrains?
+    
+    // RC Brain
+    var rcBrains: RCBrains?
+    
+    // Menu Brains
+    var menuBrains: MenuBrains!
+    
+    // Type Brain
+    var typeBrain: TypeBrain!
+    
+    //MARK: - Constants and Variables
+    
+    // Type Selected
+    var typeSelected: Int?
     
     //MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // hide all the UI
+        self.hideUI()
+        
+        // Starts the AR view with temporary configuration
+        let tempConfig = ARWorldTrackingConfiguration()
+        self.sceneView.session.run(tempConfig)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // perform segue to options controller
+        performSegue(withIdentifier: "GoToType", sender: self)
+    }
+    
+    // Starts AR Session as Single Player Mode
+    func singlePlayerSelected() {
+        // sets the selected type
+        self.typeSelected = TypeSelected.SinglePlayer.rawValue
+        
+        // Type Brains started
+        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        
         // start Single AR Brain
         singleARBrain = SingleARBrains(sceneView, self)
         
-        // setup delegate
-        self.sceneView.delegate = self
-        
-        // setup contact delegate
-        self.sceneView.scene.physicsWorld.contactDelegate = self
-        
-        // hide all the UI
-        self.hideButtons()
+        // defines the AR Delegates
+        self.defineARDelegates()
         
         // setup the AR Experience
-        self.singleARBrain.setupView()
+        self.singleARBrain?.setupView()
         
         // show feedback to move the camera
         self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
         
     }
     
+    // Starts AR Session as Multi Player Mode
+    func multiPlayerSelected() {
+        // sets the selected type
+        self.typeSelected = TypeSelected.MultiPlayer.rawValue
+        
+        // Type Brains started
+        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        
+        // start Multi AR Brain
+        
+        // defines the AR Delegates
+        self.defineARDelegates()
+        
+        
+    }
+    
+    // Starts AR Session as RC Mode
+    func rcModeSelected() {
+        // sets the selected type
+        self.typeSelected = TypeSelected.RCMode.rawValue
+        
+        // Type Brains started
+        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        
+        // start RC Brain
+        
+        // defines the AR Delegates
+        self.defineARDelegates()
+        
+    }
+    
+    func defineARDelegates() {
+        // setup delegate
+        self.sceneView.delegate = self
+        
+        // setup contact delegate
+        self.sceneView.scene.physicsWorld.contactDelegate = self
+    }
+    
     // hide all buttons with alpha = 0
-    func hideButtons() {
+    func hideUI() {
         // alphas to 0
         self.startButton.alpha = 0
         self.startButtonBackground.alpha = 0
@@ -68,6 +139,7 @@ class SingleARViewController: UIViewController {
         self.brakeButtonBackground.alpha = 0
         self.turnLeftButtonBackground.alpha = 0
         self.turnRightButtonBackground.alpha = 0
+        self.feedbackLabel.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false
@@ -86,16 +158,6 @@ class SingleARViewController: UIViewController {
         })
     }
     
-    // re-enables and changes alpha to 1 for the startButton and changes the text to respawn
-    func reanableStartButton() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.startButton.alpha = 1
-            self.startButtonBackground.alpha = 1
-            self.startButton.isEnabled = true
-            self.startButton.setTitle("Respawn!", for: .normal)
-        })
-    }
-    
     // hides the start button
     func hideStartButton() {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
@@ -109,10 +171,10 @@ class SingleARViewController: UIViewController {
     func showDrivingUI() {
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
             // alphas to 1
-            self.accButton.alpha = 0.5
-            self.turnRightButton.alpha = 0.5
-            self.turnLeftButton.alpha = 0.5
-            self.brakeButton.alpha = 0.5
+            self.accButton.alpha = 1
+            self.turnRightButton.alpha = 1
+            self.turnLeftButton.alpha = 1
+            self.brakeButton.alpha = 1
             self.accButtonBackground.alpha = 1
             self.brakeButtonBackground.alpha = 1
             self.turnLeftButtonBackground.alpha = 1
@@ -143,85 +205,72 @@ class SingleARViewController: UIViewController {
     }
     
     // kill ARKit session
-    func killSession() {
+    func resetARSession() {
         self.sceneView.scene.removeAllParticleSystems()
         self.sceneView.scene.rootNode.enumerateChildNodes{ (node, _) in
             node.removeFromParentNode()
         }
         self.sceneView.session.pause()
-        self.sceneView.removeFromSuperview()
-        self.sceneView = nil
+    }
+    
+    //MARK: - Segues
+    
+    // Prepare segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToType" {
+            let destinationVC = segue.destination as! OptionsViewController
+            destinationVC.delegate = self
+        }
     }
     
     //MARK: - IBActions
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        if self.startButton.currentTitle == "Start" {
-            // show vehicle in the view
-            self.singleARBrain.vehicles.createVehicle()
-            
-            // disable gestures
-            self.singleARBrain.gesturesBrain.removeRotationGesture()
-            
-            // removes feedback label
-            self.hideFeedback()
-            
-            // sets the scenery to locked
-            self.singleARBrain.scenery.sceneryLocked = true
-            
-            // start the race
-            self.singleARBrain.startRace()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                //shows driving UI
-                self.showDrivingUI()
-            }
-        } else {
-            // show vehicle in the view
-            self.singleARBrain.vehicles.createVehicle()
-        }
+        // calls the handler for the start button
+        self.typeBrain.startButtonPressed()
+        
+        // removes feedback label
+        self.hideFeedback()
+        
         // hides the button
         self.hideStartButton()
-        
-        // hides feedback label
-        self.hideFeedback()
         
     }
     
     @IBAction func accPressed(_ sender: UIButton) {
-        self.singleARBrain.vehicles.accelerating = true
+        self.typeBrain.accPressed()
         self.accButtonBackground.alpha = 0.8
     }
     @IBAction func accReleased(_ sender: UIButton) {
-        self.singleARBrain.vehicles.accelerating = false
+        self.typeBrain.accReleased()
         self.accButtonBackground.alpha = 1.0
     }
     @IBAction func brakePressed(_ sender: UIButton) {
-        self.singleARBrain.vehicles.breaking = true
+        self.typeBrain.brakePressed()
         self.brakeButtonBackground.alpha = 0.8
     }
     @IBAction func breakReleased(_ sender: UIButton) {
-        self.singleARBrain.vehicles.breaking = false
+        self.typeBrain.brakeReleased()
         self.brakeButtonBackground.alpha = 1.0
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
-        self.singleARBrain.vehicles.turningRight = true
+        self.typeBrain.turnRightPressed()
         self.turnRightButtonBackground.alpha = 0.8
     }
     @IBAction func turnRightReleased(_ sender: UIButton) {
-        self.singleARBrain.vehicles.turningRight = false
+        self.typeBrain.turnRightReleased()
         self.turnRightButtonBackground.alpha = 1.0
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
-        self.singleARBrain.vehicles.turningLeft = true
+        self.typeBrain.turnLeftPressed()
         self.turnLeftButtonBackground.alpha = 0.8
     }
     @IBAction func turnLeftReleased(_ sender: UIButton) {
-        self.singleARBrain.vehicles.turningLeft = false
+        self.typeBrain.turnLeftReleased()
         self.turnLeftButtonBackground.alpha = 1.0
     }
+    
     @IBAction func backPressed(_ sender: UIButton) {
-        self.killSession()
-        self.dismiss(animated: true, completion: nil)
+        self.resetARSession()
     }
 }
