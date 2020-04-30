@@ -39,11 +39,11 @@ class SingleVehicle {
     let steerAngle:CGFloat = 0.8
     
     // Engine force
-    let engineForce: CGFloat = 10
+    let engineForce: CGFloat = 5
     
     // Breaking force
-    let frontBreakingForce: CGFloat = 20
-    let rearBreakingForce: CGFloat = 10
+    let frontBreakingForce: CGFloat = 5
+    let rearBreakingForce: CGFloat = 2
     
     // AR Brains
     var arBrain:SingleARBrains
@@ -61,10 +61,10 @@ class SingleVehicle {
         let currentPositionOfCamera = self.initialSpawnPosition
         
         // vehicle scene
-        let scene = SCNScene(named: "3D Models.scnassets/Vehicles Assets/SinglePlayerPlaceholder.scn")
+        let scene = SCNScene(named: "3D Models.scnassets/Vehicles Assets/SinglePlaceholder_v2.scn")
         
         // Main vehicle node
-        self.vehicleNode = (scene?.rootNode.childNode(withName: "chassis", recursively: false))!
+        self.vehicleNode = (scene?.rootNode.childNode(withName: "Chassis", recursively: false))!
         
         // vehicle wheels nodes
         let frontLeftWheel = (self.vehicleNode.childNode(withName: "FLP", recursively: true))!
@@ -77,45 +77,27 @@ class SingleVehicle {
         let v_frontRightWheel = SCNPhysicsVehicleWheel(node: frontRightWheel)
         let v_rearLeftWheel = SCNPhysicsVehicleWheel(node: rearLeftWheel)
         let v_rearRightWheel = SCNPhysicsVehicleWheel(node: rearRightWheel)
-        
-        // reverse wheels spin
-        v_frontLeftWheel.axle = SCNVector3(-1, 0, 0)
-        v_frontRightWheel.axle = SCNVector3(-1, 0, 0)
-        v_rearLeftWheel.axle = SCNVector3(-1, 0, 0)
-        v_rearRightWheel.axle = SCNVector3(-1, 0, 0)
-        
-        // wheels bounding boxes
-        let boundingBoxFL = frontLeftWheel.boundingBox
-        let boundingBoxFR = frontRightWheel.boundingBox
-        let boundingBoxRL = rearLeftWheel.boundingBox
-        let boundingBoxRR = rearRightWheel.boundingBox
-        
-        // center wheel location
-        let centerFL:Float = 0.5 * Float(boundingBoxFL.max.x - boundingBoxFL.min.x)
-        let centerFR:Float = 0.5 * Float(boundingBoxFR.max.x - boundingBoxFR.min.x)
-        let centerRL:Float = 0.5 * Float(boundingBoxRL.max.x - boundingBoxRL.min.x)
-        let centerRR:Float = 0.5 * Float(boundingBoxRR.max.x - boundingBoxRR.min.x)
-        
+
         // connection points for the wheels
         let frontLeftWheelToChassis = frontLeftWheel.convertPosition(SCNVector3Zero, to: vehicleNode)
-        let frontLeftPositionToConnect = SCNVector3Make(frontLeftWheelToChassis.x - centerFL, frontLeftWheelToChassis.y, frontLeftWheelToChassis.z)
+        let frontLeftPositionToConnect = SCNVector3Make(frontLeftWheelToChassis.x, frontLeftWheelToChassis.y, frontLeftWheelToChassis.z)
         v_frontLeftWheel.connectionPosition = frontLeftPositionToConnect
 
         let frontRightWheelToChassis = frontRightWheel.convertPosition(SCNVector3Zero, to: vehicleNode)
-        let frontRightPositionToConnect = SCNVector3Make(frontRightWheelToChassis.x + centerFR, frontRightWheelToChassis.y, frontRightWheelToChassis.z)
+        let frontRightPositionToConnect = SCNVector3Make(frontRightWheelToChassis.x, frontRightWheelToChassis.y, frontRightWheelToChassis.z)
         v_frontRightWheel.connectionPosition = frontRightPositionToConnect
 
         let rearLeftWheelToChassis = rearLeftWheel.convertPosition(SCNVector3Zero, to: vehicleNode)
-        let rearLeftPositionToConnect = SCNVector3Make(rearLeftWheelToChassis.x - centerRL, rearLeftWheelToChassis.y, rearLeftWheelToChassis.z)
+        let rearLeftPositionToConnect = SCNVector3Make(rearLeftWheelToChassis.x, rearLeftWheelToChassis.y, rearLeftWheelToChassis.z)
         v_rearLeftWheel.connectionPosition = rearLeftPositionToConnect
 
         let rearRightWheelToChassis = rearRightWheel.convertPosition(SCNVector3Zero, to: vehicleNode)
-        let rearRightPositionToConnect = SCNVector3Make(rearRightWheelToChassis.x + centerRR, rearRightWheelToChassis.y, rearRightWheelToChassis.z)
+        let rearRightPositionToConnect = SCNVector3Make(rearRightWheelToChassis.x, rearRightWheelToChassis.y, rearRightWheelToChassis.z)
         v_rearRightWheel.connectionPosition = rearRightPositionToConnect
-        
+
         //if the option is true, it considers all of the geometries. If false, just combines into one geometry
-        let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: vehicleNode, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
-        
+        let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: vehicleNode, options: [SCNPhysicsShape.Option.keepAsCompound: true, SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
+
         // body physical properties
         body.mass = 1
         body.allowsResting = false
@@ -123,17 +105,17 @@ class SingleVehicle {
         body.rollingFriction = 0.2
         body.friction = 0.2
         body.rollingFriction = 0
-        
-        v_frontLeftWheel.maximumSuspensionTravel = CGFloat(10)
-        v_frontRightWheel.maximumSuspensionTravel = CGFloat(10)
-        v_rearLeftWheel.maximumSuspensionTravel = CGFloat(10)
-        v_rearRightWheel.maximumSuspensionTravel = CGFloat(10)
-        
-        v_frontLeftWheel.suspensionRestLength = CGFloat(0.045)
-        v_frontRightWheel.suspensionRestLength = CGFloat(0.045)
-        v_rearLeftWheel.suspensionRestLength = CGFloat(0.045)
-        v_rearRightWheel.suspensionRestLength = CGFloat(0.045)
-        
+
+        v_frontLeftWheel.maximumSuspensionTravel = CGFloat(100)
+        v_frontRightWheel.maximumSuspensionTravel = CGFloat(100)
+        v_rearLeftWheel.maximumSuspensionTravel = CGFloat(100)
+        v_rearRightWheel.maximumSuspensionTravel = CGFloat(100)
+
+        v_frontLeftWheel.suspensionRestLength = CGFloat(0.08)
+        v_frontRightWheel.suspensionRestLength = CGFloat(0.08)
+        v_rearLeftWheel.suspensionRestLength = CGFloat(0.08)
+        v_rearRightWheel.suspensionRestLength = CGFloat(0.08)
+
         // sets the position of the chassis
         self.vehicleNode.position = currentPositionOfCamera
         
@@ -205,13 +187,13 @@ class SingleVehicle {
         if vehicleSpawned {
             // steer the vehicle to right
             if self.turningRight {
-                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 2)
-                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 3)
+                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 2)
+                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 3)
             }
             // steer the vehicle to left
             else if self.turningLeft {
-                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 2)
-                self.vehicle.setSteeringAngle(-self.steerAngle, forWheelAt: 3)
+                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 2)
+                self.vehicle.setSteeringAngle(self.steerAngle, forWheelAt: 3)
             }
             // straightens the vehicle
             else {

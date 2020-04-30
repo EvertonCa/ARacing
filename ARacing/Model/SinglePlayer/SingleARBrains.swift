@@ -62,7 +62,7 @@ class SingleARBrains {
     func setupView() {
         
         // debug options - feature points and world origin
-        //self.sceneView.debugOptions = [.showFeaturePoints, .showPhysicsShapes, .showBoundingBoxes]
+        self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
         //self.sceneView.showsStatistics = true
