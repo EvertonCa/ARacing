@@ -28,6 +28,9 @@ class SingleARBrains {
     // Feedback Label
     var feedbackLabel: UILabel?
     
+    // Map selected
+    var mapSelected:Int = MapSelected.Map1.rawValue
+    
     //MARK: - Models
     
     // Gestures
@@ -196,6 +199,7 @@ class SingleARBrains {
                     
                         // starts the timer
                         self.lapTimer.startTimer()
+                        self.arViewController.timerLabel.alpha = 1
                         self.arViewController.timerLabel.isHidden = false
                     
                         // setup the checkpoints and particles

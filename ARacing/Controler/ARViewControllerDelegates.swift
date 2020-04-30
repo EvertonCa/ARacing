@@ -16,14 +16,45 @@ extension ARViewController: OptionViewDelegate{
     func passSelectedOption(selectedOption: Int) {
         switch selectedOption{
         case TypeSelected.SinglePlayer.rawValue:
-            self.singlePlayerSelected()
-            self.menuBrains.stopIntroMusic()
+            self.typeSelected = TypeSelected.SinglePlayer.rawValue
+            self.goToMapsViewController()
+            
         case TypeSelected.MultiPlayer.rawValue:
-            self.multiPlayerSelected()
-            self.menuBrains.stopIntroMusic()
+            self.typeSelected = TypeSelected.MultiPlayer.rawValue
+            self.goToMapsViewController()
+            
         case TypeSelected.RCMode.rawValue:
             self.rcModeSelected()
+        default: break
+        }
+    }
+}
+
+//MARK: - Maps Segue Delegate
+
+extension ARViewController: MapViewDelegate {
+    func passMapSelected(mapSelected: Int) {
+        switch mapSelected {
+        case MapSelected.Map1.rawValue:
+            self.mapSelected = MapSelected.Map1.rawValue
             self.menuBrains.stopIntroMusic()
+            
+        case MapSelected.Map2.rawValue:
+            self.mapSelected = MapSelected.Map2.rawValue
+            self.menuBrains.stopIntroMusic()
+            
+        case MapSelected.Map3.rawValue:
+            self.mapSelected = MapSelected.Map3.rawValue
+            self.menuBrains.stopIntroMusic()
+            
+        default: break
+        }
+        
+        switch self.typeSelected {
+        case TypeSelected.SinglePlayer.rawValue:
+            self.singlePlayerSelected()
+        case TypeSelected.MultiPlayer.rawValue:
+            self.multiPlayerSelected()
         default: break
         }
     }
@@ -34,22 +65,22 @@ extension ARViewController: ARSCNViewDelegate {
     
     // when a anchor is detected
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        self.typeBrain.didAddNodeRenderer(node: node, anchor: anchor)
+        self.arBrain.didAddNodeRenderer(node: node, anchor: anchor)
     }
     
     //when the anchor is updated
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        self.typeBrain.didUpdateNodeRenderer(node: node, anchor: anchor)
+        self.arBrain.didUpdateNodeRenderer(node: node, anchor: anchor)
     }
     
     //when the anchor is removed
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        self.typeBrain.didRemoveNodeRenderer(node: node, anchor: anchor)
+        self.arBrain.didRemoveNodeRenderer(node: node, anchor: anchor)
     }
     
     // used for vehicle and physics updates
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        self.typeBrain.updateAtTimeRenderer()
+        self.arBrain.updateAtTimeRenderer()
     }
 }
 
@@ -58,6 +89,6 @@ extension ARViewController: SCNPhysicsContactDelegate {
     
     // checks collision in the scene
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        self.typeBrain.didBeginContact(contact: contact)
+        self.arBrain.didBeginContact(contact: contact)
     }
 }

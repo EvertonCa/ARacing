@@ -34,25 +34,26 @@ class OptionsViewController: UIViewController {
     
     // Send to the delegate the selected option and dismisses the view
     @IBAction func singlePlayerPressed(_ sender: UIButton) {
-        
-        delegate?.passSelectedOption(selectedOption: TypeSelected.SinglePlayer.rawValue)
-        
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.delegate?.passSelectedOption(selectedOption: TypeSelected.SinglePlayer.rawValue)
+        })
     }
     
     
     @IBAction func multiPlayerPressed(_ sender: UIButton) {
         
-        delegate?.passSelectedOption(selectedOption: TypeSelected.MultiPlayer.rawValue)
-        
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.delegate?.passSelectedOption(selectedOption: TypeSelected.MultiPlayer.rawValue)
+            
+        })
     }
     
     @IBAction func rcModePressed(_ sender: UIButton) {
         
-        delegate?.passSelectedOption(selectedOption: TypeSelected.RCMode.rawValue)
-        
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.delegate?.passSelectedOption(selectedOption: TypeSelected.RCMode.rawValue)
+            
+        })
     }
     
 }

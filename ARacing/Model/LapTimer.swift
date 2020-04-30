@@ -61,6 +61,7 @@ class LapTimer {
     // stops the timer
     func stopTimer() {
         self.timer.invalidate()
+        self.isPlaying = false
     }
     
 }

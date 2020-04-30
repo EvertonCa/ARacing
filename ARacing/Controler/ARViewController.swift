@@ -40,12 +40,15 @@ class ARViewController: UIViewController {
     var menuBrains: MenuBrains!
     
     // Type Brain
-    var typeBrain: TypeBrain!
+    var arBrain: ARBrain!
     
     //MARK: - Constants and Variables
     
     // Type Selected
     var typeSelected: Int?
+    
+    // Map selected
+    var mapSelected: Int = 0
     
     //MARK: - Functions
     
@@ -70,16 +73,23 @@ class ARViewController: UIViewController {
         performSegue(withIdentifier: "GoToType", sender: self)
     }
     
+    // perform segue to MapsViewController
+    func goToMapsViewController() {
+        // perform segue to options controller
+        performSegue(withIdentifier: "GoToMaps", sender: self)
+    }
+    
     // Starts AR Session as Single Player Mode
     func singlePlayerSelected() {
         // sets the selected type
         self.typeSelected = TypeSelected.SinglePlayer.rawValue
         
         // Type Brains started
-        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
         
         // start Single AR Brain
-        singleARBrain = SingleARBrains(sceneView, self)
+        self.singleARBrain = SingleARBrains(sceneView, self)
+        self.singleARBrain!.mapSelected = self.mapSelected
         
         // defines the AR Delegates
         self.defineARDelegates()
@@ -98,7 +108,7 @@ class ARViewController: UIViewController {
         self.typeSelected = TypeSelected.MultiPlayer.rawValue
         
         // Type Brains started
-        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
         
         // start Multi AR Brain
         
@@ -112,7 +122,7 @@ class ARViewController: UIViewController {
         self.typeSelected = TypeSelected.RCMode.rawValue
         
         // Type Brains started
-        self.typeBrain = TypeBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
         
         // start RC Brain
         self.rcBrains = RCBrains(sceneView, self)
@@ -164,6 +174,7 @@ class ARViewController: UIViewController {
         self.turnLeftButtonBackground.alpha = 0
         self.turnRightButtonBackground.alpha = 0
         self.feedbackLabel.alpha = 0
+        self.timerLabel.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false
@@ -228,26 +239,6 @@ class ARViewController: UIViewController {
         })
     }
     
-    // kill ARKit session
-    func resetARSession() {
-        self.sceneView.session.pause()
-        self.resetDelegates()
-        
-        self.sceneView.scene.removeAllParticleSystems()
-        self.sceneView.scene.rootNode.enumerateChildNodes{ (node, _) in
-            node.removeFromParentNode()
-        }
-        
-        // hide all the UI
-        self.hideUI()
-        
-        // Starts the AR view with temporary configuration
-        let tempConfig = ARWorldTrackingConfiguration()
-        self.sceneView.session.run(tempConfig)
-        
-        self.goToOptionsViewController()
-    }
-    
     //MARK: - Segues
     
     // Prepare segues
@@ -256,13 +247,17 @@ class ARViewController: UIViewController {
             let destinationVC = segue.destination as! OptionsViewController
             destinationVC.delegate = self
         }
+        else if segue.identifier == "GoToMaps" {
+            let destinationVC = segue.destination as! MapsViewController
+            destinationVC.delegate = self
+        }
     }
     
     //MARK: - IBActions
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
         // calls the handler for the start button
-        self.typeBrain.startButtonPressed()
+        self.arBrain.startButtonPressed()
         
         // removes feedback label
         self.hideFeedback()
@@ -273,39 +268,39 @@ class ARViewController: UIViewController {
     }
     
     @IBAction func accPressed(_ sender: UIButton) {
-        self.typeBrain.accPressed()
+        self.arBrain.accPressed()
         self.accButtonBackground.alpha = 0.8
     }
     @IBAction func accReleased(_ sender: UIButton) {
-        self.typeBrain.accReleased()
+        self.arBrain.accReleased()
         self.accButtonBackground.alpha = 1.0
     }
     @IBAction func brakePressed(_ sender: UIButton) {
-        self.typeBrain.brakePressed()
+        self.arBrain.brakePressed()
         self.brakeButtonBackground.alpha = 0.8
     }
     @IBAction func breakReleased(_ sender: UIButton) {
-        self.typeBrain.brakeReleased()
+        self.arBrain.brakeReleased()
         self.brakeButtonBackground.alpha = 1.0
     }
     @IBAction func turnRightPressed(_ sender: UIButton) {
-        self.typeBrain.turnRightPressed()
+        self.arBrain.turnRightPressed()
         self.turnRightButtonBackground.alpha = 0.8
     }
     @IBAction func turnRightReleased(_ sender: UIButton) {
-        self.typeBrain.turnRightReleased()
+        self.arBrain.turnRightReleased()
         self.turnRightButtonBackground.alpha = 1.0
     }
     @IBAction func turnLeftPressed(_ sender: UIButton) {
-        self.typeBrain.turnLeftPressed()
+        self.arBrain.turnLeftPressed()
         self.turnLeftButtonBackground.alpha = 0.8
     }
     @IBAction func turnLeftReleased(_ sender: UIButton) {
-        self.typeBrain.turnLeftReleased()
+        self.arBrain.turnLeftReleased()
         self.turnLeftButtonBackground.alpha = 1.0
     }
     
     @IBAction func backPressed(_ sender: UIButton) {
-        self.resetARSession()
+        self.arBrain.resetExperience()
     }
 }
