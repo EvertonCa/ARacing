@@ -24,41 +24,39 @@ extension ARViewController: OptionViewDelegate{
             self.goToMapsViewController()
             
         case TypeSelected.RCMode.rawValue:
-            self.rcModeSelected()
+            self.typeSelected = TypeSelected.RCMode.rawValue
+            self.goToVehicleSelectionViewController()
         default: break
         }
     }
 }
 
 //MARK: - Maps Segue Delegate
-
 extension ARViewController: MapViewDelegate {
     func passMapSelected(mapSelected: Int) {
-        switch mapSelected {
-        case MapSelected.Map1.rawValue:
-            self.mapSelected = MapSelected.Map1.rawValue
-            self.menuBrains.stopIntroMusic()
-            
-        case MapSelected.Map2.rawValue:
-            self.mapSelected = MapSelected.Map2.rawValue
-            self.menuBrains.stopIntroMusic()
-            
-        case MapSelected.Map3.rawValue:
-            self.mapSelected = MapSelected.Map3.rawValue
-            self.menuBrains.stopIntroMusic()
-            
-        default: break
-        }
+        self.mapSelected = mapSelected
+        
+        self.goToVehicleSelectionViewController()
+    }
+}
+
+//MARK: - Vehicle Selection Segue Delegate
+extension ARViewController: VehicleSelectionDelegate {
+    func passSelectedVehicle(selectedOption: Int) {
+        self.vehicleSelected = selectedOption
         
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
             self.singlePlayerSelected()
         case TypeSelected.MultiPlayer.rawValue:
             self.multiPlayerSelected()
+        case TypeSelected.RCMode.rawValue:
+            self.rcModeSelected()
         default: break
         }
     }
 }
+
 
 //MARK: - ARSCNViewDelegate
 extension ARViewController: ARSCNViewDelegate {

@@ -55,6 +55,14 @@ class Sceneries {
         
         let scene = SCNScene(named: self.mapAddress())
         self.scenery = (scene?.rootNode.childNode(withName: "Track", recursively: false))!
+        
+        // Collision Geometry
+        let collisionGeometry = (scene?.rootNode.childNode(withName: "Physics", recursively: false))!
+        
+        // sets the physics body and its parameters
+        self.scenery.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: collisionGeometry, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
+        self.scenery.physicsBody?.isAffectedByGravity = false
+        
         let transform = hitTestResult.worldTransform
         let thirdColumn = transform.columns.3
         self.scenery.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)

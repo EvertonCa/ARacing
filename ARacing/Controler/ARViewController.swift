@@ -50,10 +50,15 @@ class ARViewController: UIViewController {
     // Map selected
     var mapSelected: Int = 0
     
+    // Vehicle Selected
+    var vehicleSelected: Int = 0
+    
     //MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Prevents screen from sleeping
+        UIApplication.shared.isIdleTimerDisabled = true
         
         // hide all the UI
         self.hideUI()
@@ -79,13 +84,19 @@ class ARViewController: UIViewController {
         performSegue(withIdentifier: "GoToMaps", sender: self)
     }
     
+    // perform segue to VehicleSelectionViewController
+    func goToVehicleSelectionViewController() {
+        // perform segue to options controller
+        performSegue(withIdentifier: "GoToVehicleSelection", sender: self)
+    }
+    
     // Starts AR Session as Single Player Mode
     func singlePlayerSelected() {
         // sets the selected type
         self.typeSelected = TypeSelected.SinglePlayer.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, vehicle: self.vehicleSelected, view: self)
         
         // start Single AR Brain
         self.singleARBrain = SingleARBrains(sceneView, self)
@@ -108,7 +119,7 @@ class ARViewController: UIViewController {
         self.typeSelected = TypeSelected.MultiPlayer.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, map: self.mapSelected, vehicle: self.vehicleSelected, view: self)
         
         // start Multi AR Brain
         
@@ -122,7 +133,7 @@ class ARViewController: UIViewController {
         self.typeSelected = TypeSelected.RCMode.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.typeSelected!, view: self)
+        self.arBrain = ARBrain(type: self.typeSelected!, map: self.mapSelected, vehicle: self.vehicleSelected, view: self)
         
         // start RC Brain
         self.rcBrains = RCBrains(sceneView, self)
@@ -249,6 +260,10 @@ class ARViewController: UIViewController {
         }
         else if segue.identifier == "GoToMaps" {
             let destinationVC = segue.destination as! MapsViewController
+            destinationVC.delegate = self
+        }
+        else if segue.identifier == "GoToVehicleSelection" {
+            let destinationVC = segue.destination as! VehicleSelectionViewController
             destinationVC.delegate = self
         }
     }

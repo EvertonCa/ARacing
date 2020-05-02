@@ -39,17 +39,17 @@ class RCBrains {
     init(_ sceneView: ARSCNView, _ view: ARViewController) {
         self.sceneView = sceneView
         self.arViewController = view
-        self.vehicle = Vehicle(arView: arViewController, rcBrains: self, gameMode: GameMode.RCMode.rawValue, vehicleSelected: VehicleResources.PlaceholderRC.rawValue, sceneView: self.sceneView)
+        self.vehicle = Vehicle(arView: arViewController, rcBrains: self, gameMode: GameMode.RCMode.rawValue, vehicleSelected: VehicleResources.BugattiRC.rawValue, sceneView: self.sceneView)
     }
     
     // setup the view when it loads
     func setupView() {
         
         // debug options - feature points and world origin
-        self.sceneView.debugOptions = [.showFeaturePoints, .showPhysicsShapes, .showBoundingBoxes]
+        //self.sceneView.debugOptions = [.showFeaturePoints, .showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
-        self.sceneView.showsStatistics = true
+        //self.sceneView.showsStatistics = true
         
         // config to detect horizontal surfaces
         self.arConfiguration.planeDetection = .horizontal

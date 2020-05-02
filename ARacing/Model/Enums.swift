@@ -55,6 +55,16 @@ enum VehicleResources: String {
     case PlaceholderSingle = "3D Models.scnassets/Vehicles Assets/SinglePlaceholder.scn"
     case Z3 = "3D Models.scnassets/Vehicles Assets/Z3.scn"
     case BugattiSmall = "3D Models.scnassets/Vehicles Assets/BugattiSmall.scn"
+    case BugattiRC = "3D Models.scnassets/Vehicles Assets/BugattiRC.scn"
+}
+
+// Vehicle Names
+enum VehicleNames: Int {
+    case Chiron = 0
+    case Corvette = 1
+    case LancerEvo = 2
+    case Placeholder1 = 3
+    case Placeholder2 = 4
 }
 
 // Particles Resources
@@ -62,3 +72,5 @@ enum ParticlesResources: String {
     case VehicleExplosion1 = "3D Models.scnassets/Vehicles Assets/Explosion.scnp"
     case VehicleExplosion2 = "3D Models.scnassets/Vehicles Assets/Explosion2.scnp"
 }
+
+

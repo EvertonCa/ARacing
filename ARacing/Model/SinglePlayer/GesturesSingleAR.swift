@@ -83,6 +83,7 @@ class GesturesSingleAR {
                     let rotateAction = SCNAction.rotateBy(x: 0, y: -angle, z: 0, duration: 0)
                     
                     node.runAction(rotateAction)
+                    node.physicsBody?.resetTransform()
                     
                     sender.rotation = 0
                 }

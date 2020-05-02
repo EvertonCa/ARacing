@@ -15,13 +15,27 @@ class ARBrain {
     // type selected
     var typeSelected:Int
     
+    // map selected
+    var mapSelected:Int?
+    
+    // Vehicle selected
+    var vehicleSelected:Int
+    
     // ARViewController
     var arViewController:ARViewController
     
-    // initializer
-    init(type: Int, view: ARViewController) {
+    // initializers
+    init(type: Int, vehicle:Int, view: ARViewController) {
         self.typeSelected = type
         self.arViewController = view
+        self.vehicleSelected = vehicle
+    }
+    
+    init(type: Int, map:Int, vehicle:Int, view: ARViewController) {
+        self.typeSelected = type
+        self.arViewController = view
+        self.vehicleSelected = vehicle
+        self.mapSelected = map
     }
     
     //MARK: - Buttons Handlers
