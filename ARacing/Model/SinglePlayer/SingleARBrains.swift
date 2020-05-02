@@ -32,7 +32,7 @@ class SingleARBrains {
     var mapSelected:Int = MapSelected.Map1.rawValue
     
     // Vehicle Selected
-    var vehicleSelected:String = VehicleResources.PlaceholderSingle.rawValue
+    var vehicleSelected:String = VehicleResources.BugattiSmall.rawValue
     
     //MARK: - Models
     
@@ -68,7 +68,7 @@ class SingleARBrains {
     func setupView() {
         
         // debug options - feature points and world origin
-        self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
+        //self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
         //self.sceneView.showsStatistics = true

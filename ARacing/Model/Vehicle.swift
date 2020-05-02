@@ -178,6 +178,9 @@ class Vehicle {
         wheels.forEach {
             $0.maximumSuspensionForce = self.maximumSuspensionForce
             $0.frictionSlip = self.frictionSlip
+            var connectionPosition = $0.connectionPosition
+            connectionPosition.x = -connectionPosition.x
+            $0.connectionPosition = connectionPosition
         }
         
         // Creates the Physics Vehicle
