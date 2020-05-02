@@ -31,6 +31,9 @@ class SingleARBrains {
     // Map selected
     var mapSelected:Int = MapSelected.Map1.rawValue
     
+    // Vehicle Selected
+    var vehicleSelected:String = VehicleResources.PlaceholderSingle.rawValue
+    
     //MARK: - Models
     
     // Gestures
@@ -52,7 +55,7 @@ class SingleARBrains {
     var arText: SingleTexts!
     
     // Vehicles
-    var vehicles: SingleVehicle!
+    var vehicle: Vehicle! = nil
     
     //MARK: - Functions
     
@@ -65,7 +68,7 @@ class SingleARBrains {
     func setupView() {
         
         // debug options - feature points and world origin
-        //self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
+        self.sceneView.debugOptions = [.showPhysicsShapes, .showBoundingBoxes]
         
         // show statistics
         //self.sceneView.showsStatistics = true
@@ -94,7 +97,7 @@ class SingleARBrains {
         self.arText = SingleTexts()
         
         // setup Vehicles
-        self.vehicles = SingleVehicle(arBrain: self)
+        self.vehicle = Vehicle(arView: arViewController, singleBrain: self, gameMode: GameMode.SinglePlayer.rawValue, mapSelected: self.mapSelected, vehicleSelected: self.vehicleSelected, sceneView: self.sceneView)
         
     }
     

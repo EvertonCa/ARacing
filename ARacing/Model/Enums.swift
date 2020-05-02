@@ -28,7 +28,14 @@ enum BitMaskCategory: Int {
     case Checkpoint = 8
 }
 
-// Maps enum
+// Game Mode
+enum GameMode: Int {
+    case SinglePlayer = 1
+    case MultiPlayer = 2
+    case RCMode = 3
+}
+
+// Maps Resources
 enum MapsResources: String {
     case Map1 = "3D Models.scnassets/Tracks/Track1.scn"
     case Map2 = "3D Models.scnassets/Tracks/Test_Ice.scn"
@@ -42,3 +49,15 @@ enum CheckpointsResources: String {
     case CheckpointFire2 = "3D Models.scnassets/Checkpoint Assets/Fire2.scnp"
 }
 
+// Vehicle Resources
+enum VehicleResources: String {
+    case PlaceholderRC = "3D Models.scnassets/Vehicles Assets/RCPlaceholder.scn"
+    case PlaceholderSingle = "3D Models.scnassets/Vehicles Assets/SinglePlaceholder.scn"
+    case Z3 = "3D Models.scnassets/Vehicles Assets/Z3.scn"
+}
+
+// Particles Resources
+enum ParticlesResources: String {
+    case VehicleExplosion1 = "3D Models.scnassets/Vehicles Assets/Explosion.scnp"
+    case VehicleExplosion2 = "3D Models.scnassets/Vehicles Assets/Explosion2.scnp"
+}

@@ -41,12 +41,12 @@ class ARBrain {
     func accPressed() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.accelerating = true
+            self.arViewController.singleARBrain?.vehicle.accelerating = true
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer accelerator pressed
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.accelerating = true
+            self.arViewController.rcBrains?.vehicle.accelerating = true
         default: break
         }
     }
@@ -55,12 +55,12 @@ class ARBrain {
     func accReleased() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.accelerating = false
+            self.arViewController.singleARBrain?.vehicle.accelerating = false
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer accelerator released
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.accelerating = false
+            self.arViewController.rcBrains?.vehicle.accelerating = false
         default: break
         }
     }
@@ -69,12 +69,12 @@ class ARBrain {
     func brakePressed() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.breaking = true
+            self.arViewController.singleARBrain?.vehicle.breaking = true
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer brake pressed
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.breaking = true
+            self.arViewController.rcBrains?.vehicle.breaking = true
         default: break
         }
     }
@@ -83,12 +83,12 @@ class ARBrain {
     func brakeReleased() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.breaking = false
+            self.arViewController.singleARBrain?.vehicle.breaking = false
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer brake released
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.breaking = false
+            self.arViewController.rcBrains?.vehicle.breaking = false
         default: break
         }
     }
@@ -97,12 +97,12 @@ class ARBrain {
    func turnRightPressed() {
        switch self.typeSelected {
        case TypeSelected.SinglePlayer.rawValue:
-           self.arViewController.singleARBrain?.vehicles.turningRight = true
+           self.arViewController.singleARBrain?.vehicle.turningRight = true
        case TypeSelected.MultiPlayer.rawValue:
            //FIXME: multiplayer turn right pressed
            break
        case TypeSelected.RCMode.rawValue:
-           self.arViewController.rcBrains?.turningRight = true
+           self.arViewController.rcBrains?.vehicle.turningRight = true
        default: break
        }
    }
@@ -111,12 +111,12 @@ class ARBrain {
    func turnRightReleased() {
        switch self.typeSelected {
        case TypeSelected.SinglePlayer.rawValue:
-           self.arViewController.singleARBrain?.vehicles.turningRight = false
+           self.arViewController.singleARBrain?.vehicle.turningRight = false
        case TypeSelected.MultiPlayer.rawValue:
            //FIXME: multiplayer turn right released
            break
        case TypeSelected.RCMode.rawValue:
-           self.arViewController.rcBrains?.turningRight = false
+           self.arViewController.rcBrains?.vehicle.turningRight = false
        default: break
        }
    }
@@ -125,12 +125,12 @@ class ARBrain {
     func turnLeftPressed() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.turningLeft = true
+            self.arViewController.singleARBrain?.vehicle.turningLeft = true
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer turn left pressed
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.turningLeft = true
+            self.arViewController.rcBrains?.vehicle.turningLeft = true
         default: break
         }
     }
@@ -139,12 +139,12 @@ class ARBrain {
     func turnLeftReleased() {
         switch self.typeSelected {
         case TypeSelected.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.vehicles.turningLeft = false
+            self.arViewController.singleARBrain?.vehicle.turningLeft = false
         case TypeSelected.MultiPlayer.rawValue:
             //FIXME: multiplayer turn left released
             break
         case TypeSelected.RCMode.rawValue:
-            self.arViewController.rcBrains?.turningLeft = false
+            self.arViewController.rcBrains?.vehicle.turningLeft = false
         default: break
         }
     }
@@ -238,8 +238,19 @@ class ARBrain {
     
     // start button pressed in single player mode
     private func singleStartPressed() {
+        
+        // Stops the timer
+        switch self.typeSelected {
+        case TypeSelected.SinglePlayer.rawValue:
+            self.arViewController.singleARBrain?.lapTimer.stopTimer()
+        case TypeSelected.MultiPlayer.rawValue:
+            //FIXME: Lap reset for multiplayer
+            break
+        default: break
+        }
+        
         // show vehicle in the view
-        self.arViewController.singleARBrain?.vehicles.createVehicle()
+        self.arViewController.singleARBrain?.vehicle.createVehicleSinglePlayer()
         
         // disable gestures
         self.arViewController.singleARBrain?.gesturesBrain.removeRotationGesture()
@@ -295,7 +306,7 @@ class ARBrain {
     private func singleUpdateAtTime() {
         DispatchQueue.main.async {
             // updates vehicle
-            self.arViewController.singleARBrain!.vehicles.updatesVehicle()
+            self.arViewController.singleARBrain!.vehicle.updatesVehicle()
             
             //updates text look at
             self.arViewController.singleARBrain!.arText.lookAtCamera(sceneView: self.arViewController.sceneView, sceneryNode: self.arViewController.singleARBrain!.sceneryNode)
@@ -313,7 +324,7 @@ class ARBrain {
             nodeA.physicsBody?.categoryBitMask = 0
 
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
-            self.arViewController.singleARBrain!.vehicles.spawnPosition = nodeA.position
+            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeA.position
             
             // removes the node
             nodeA.removeFromParentNode()
@@ -328,7 +339,7 @@ class ARBrain {
             nodeB.physicsBody?.categoryBitMask = 0
             
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
-            self.arViewController.singleARBrain!.vehicles.spawnPosition = nodeB.position
+            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeB.position
 
             // removes the node
             nodeB.removeFromParentNode()
@@ -382,7 +393,7 @@ class ARBrain {
     // updateAtTime in RC mode
     private func rcUpdateAtTime() {
         DispatchQueue.main.async {
-            self.arViewController.rcBrains!.updatesVehicle()
+            self.arViewController.rcBrains!.vehicle.updatesVehicle()
         }
     }
     

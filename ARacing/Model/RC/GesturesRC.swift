@@ -50,8 +50,13 @@ class GesturesRC {
         let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
         if !hitTest.isEmpty {
-            print("Touched horizontal surface")
-            self.arBrains.createVehicle(hitTest: hitTest.first!)
+            self.sceneView.scene.rootNode.enumerateChildNodes{ (childNode, _) in
+                if childNode.name == "Vehicle" {
+                    childNode.removeFromParentNode()
+                }
+            }
+            
+            self.arBrains.vehicle.createVehicleRC(hitTest: hitTest.first!)
             
             // removes the tap gesture
             //self.removeTapGesture()
@@ -61,8 +66,6 @@ class GesturesRC {
             
             // show the driving controls
             self.arBrains.arViewController.showDrivingUI()
-        } else {
-            print("No match")
         }
     }
     
