@@ -14,7 +14,7 @@ class SingleTexts {
     //MARK: - Functions
     
     func showReadyText() -> SCNNode {
-        let scene = SCNScene(named: "3D Models.scnassets/Text Assets/ReadyText.scn")
+        let scene = SCNScene(named: TextResources.Ready.rawValue)
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
         textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
         textNode.name = "Text"
@@ -23,7 +23,7 @@ class SingleTexts {
     }
     
     func showSetText() -> SCNNode {
-        let scene = SCNScene(named: "3D Models.scnassets/Text Assets/SetText.scn")
+        let scene = SCNScene(named: TextResources.Set.rawValue)
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
         textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
         textNode.name = "Text"
@@ -32,19 +32,19 @@ class SingleTexts {
     }
     
     func showGoText() -> SCNNode {
-        let scene = SCNScene(named: "3D Models.scnassets/Text Assets/GoText.scn")
+        let scene = SCNScene(named: TextResources.Go.rawValue)
         let textNode = (scene?.rootNode.childNode(withName: "text", recursively: false))!
         textNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
         textNode.name = "Text"
         
         // Particles in the checkpoint
-        let particle = SCNParticleSystem(named: "3D Models.scnassets/Text Assets/Confetti.scnp", inDirectory: nil)
+        let particle = SCNParticleSystem(named: ParticlesResources.ConfettiText.rawValue, inDirectory: nil)
         particle?.loops = false
         particle?.emissionDuration = 2
         particle?.emitterShape = textNode.geometry
         let particleNode = SCNNode()
         particleNode.addParticleSystem(particle!)
-        particleNode.position = SCNVector3(0, 1, 0)
+        particleNode.position = SCNVector3(0, 0.2, 0)
         particleNode.eulerAngles = SCNVector3(x: 0, y: 0, z: 0)
         
         textNode.addChildNode(particleNode)

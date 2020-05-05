@@ -20,7 +20,7 @@ class SingleARBrains {
     let arConfiguration = ARWorldTrackingConfiguration()
     
     // Scenery
-    var sceneryNode = SCNNode()
+    var mapNode = SCNNode()
     
     // Grid node
     var gridNode:SCNNode?
@@ -28,13 +28,10 @@ class SingleARBrains {
     // Feedback Label
     var feedbackLabel: UILabel?
     
-    // Map selected
-    var mapSelected:Int = MapSelected.Map1.rawValue
-    
-    // Vehicle Selected
-    var vehicleSelected:String = VehicleResources.BugattiSmall.rawValue
-    
     //MARK: - Models
+    
+    // Game
+    var game:Game
     
     // Gestures
     var gesturesBrain:GesturesSingleAR!
@@ -46,7 +43,7 @@ class SingleARBrains {
     var checkpoints: SingleCheckpoint!
     
     // Scenery
-    var scenery: Sceneries!
+    var map: Map!
     
     // Lap Timer
     var lapTimer: LapTimer!
@@ -59,9 +56,10 @@ class SingleARBrains {
     
     //MARK: - Functions
     
-    init(_ sceneView: ARSCNView, _ view: ARViewController) {
+    init(_ sceneView: ARSCNView, _ view: ARViewController, _ game:Game) {
         self.sceneView = sceneView
         self.arViewController = view
+        self.game = game
     }
     
     // setup the view when it loads
@@ -87,8 +85,7 @@ class SingleARBrains {
         self.gesturesBrain.registerGesturesrecognizers()
         
         // setup scenery
-        self.scenery = Sceneries(sceneryNode: self.sceneryNode, sceneView: self.sceneView)
-        self.scenery.mapSelected = self.mapSelected
+        self.map = Map(mapNode: self.mapNode, sceneView: self.sceneView, game: self.game)
         
         // setup LapTimer
         self.lapTimer = LapTimer(timerLabel: arViewController.timerLabel)
@@ -97,7 +94,7 @@ class SingleARBrains {
         self.arText = SingleTexts()
         
         // setup Vehicles
-        self.vehicle = Vehicle(arView: arViewController, singleBrain: self, gameMode: GameMode.SinglePlayer.rawValue, mapSelected: self.mapSelected, vehicleSelected: self.vehicleSelected, sceneView: self.sceneView)
+        self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
         
     }
     
@@ -121,8 +118,8 @@ class SingleARBrains {
     }
 
     // adds the scenery and disable gestures and the grid nodes
-    func setupScenery(hitTestResult: ARHitTestResult) {
-        self.sceneryNode = self.scenery.addScenery(hitTestResult: hitTestResult)
+    func setupMap(hitTestResult: ARHitTestResult) {
+        self.mapNode = self.map.addMap(hitTestResult: hitTestResult)
         
         self.gesturesBrain.removeTapGesture()
         
@@ -137,8 +134,7 @@ class SingleARBrains {
         }
         
         // setup checkpoints
-        self.checkpoints = SingleCheckpoint(sceneryNode: self.sceneryNode)
-        self.checkpoints.mapSelected = self.mapSelected
+        self.checkpoints = SingleCheckpoint(mapNode: self.mapNode, game: self.game)
     }
     
     // adds the checkpoints with particles in the right place
@@ -155,7 +151,7 @@ class SingleARBrains {
         var textNode = self.arText.showReadyText()
         textNode.position = SCNVector3(0, 0.6, 0)
         textNode.opacity = 0
-        self.sceneryNode.addChildNode(textNode)
+        self.mapNode.addChildNode(textNode)
         
         //animate fade in Ready Text
         SCNTransaction.begin()
@@ -176,7 +172,7 @@ class SingleARBrains {
                 textNode = self.arText.showSetText()
                 textNode.position = SCNVector3(0, 0.6, 0)
                 textNode.opacity = 0
-                self.sceneryNode.addChildNode(textNode)
+                self.mapNode.addChildNode(textNode)
             }
             SCNTransaction.commit()
             
@@ -200,7 +196,7 @@ class SingleARBrains {
                         textNode = self.arText.showGoText()
                         textNode.position = SCNVector3(0, 0.6, 0)
                         textNode.opacity = 0
-                        self.sceneryNode.addChildNode(textNode)
+                        self.mapNode.addChildNode(textNode)
                     
                         // starts the timer
                         self.lapTimer.startTimer()

@@ -9,12 +9,6 @@
 import Foundation
 import ARKit
 
-struct VehiclesPositions {
-    let spawnMap1 = SCNVector3(-0.8, 0.4, 0.8)
-    let spawnMap2 = SCNVector3(-0.4, 0.4, 0.4)
-    let spawnMap3 = SCNVector3(-0.8, 0.4, 0.8)
-}
-
 class Vehicle {
     
     //MARK: - Vehicle
@@ -67,19 +61,10 @@ class Vehicle {
     var vehicleSpawned = false
     
     // Vehicle Initial Spawn position
-    let InitialspawnPosition = VehiclesPositions()
+    let initialSpawnPosition:SCNVector3
     
     // Vehicle spawn position
     var spawnPosition = SCNVector3Zero
-    
-    // Game Mode
-    var gameMode:Int
-    
-    // Map Selected
-    var mapSelected:Int?
-    
-    // Vehicle Selected
-    var vehicleSelected: String
     
     //MARK: - Brains
     
@@ -95,23 +80,25 @@ class Vehicle {
     // ARView
     var arView:ARViewController
     
+    // Game
+    var game:Game
+    
     //MARK: - Inits
     
-    init(arView:ARViewController, singleBrain:SingleARBrains, gameMode:Int, mapSelected:Int, vehicleSelected:String, sceneView:ARSCNView) {
+    init(arView:ARViewController, singleBrain:SingleARBrains, game:Game, sceneView:ARSCNView) {
         self.arView = arView
         self.singleARBrain = singleBrain
-        self.gameMode = gameMode
-        self.mapSelected = mapSelected
-        self.vehicleSelected = vehicleSelected
+        self.game = game
         self.sceneView = sceneView
+        self.initialSpawnPosition = self.game.vehiclePosition()
     }
     
-    init(arView:ARViewController, rcBrains:RCBrains, gameMode:Int, vehicleSelected:String, sceneView:ARSCNView) {
+    init(arView:ARViewController, rcBrains:RCBrains, game:Game, sceneView:ARSCNView) {
         self.arView = arView
         self.rcBrain = rcBrains
-        self.gameMode = gameMode
-        self.vehicleSelected = vehicleSelected
+        self.game = game
         self.sceneView = sceneView
+        self.initialSpawnPosition = SCNVector3Zero
     }
     
     //MARK: - Functions
@@ -120,12 +107,11 @@ class Vehicle {
     func createVehicleSinglePlayer() {
         self.createVehicle()
         self.setupVehicleCollision()
-        let initialPosition = self.vehiclePosition()
-        self.vehicleNode.position = initialPosition
-        self.spawnPosition = initialPosition
+        self.vehicleNode.position = self.initialSpawnPosition
+        self.spawnPosition = self.initialSpawnPosition
         
         // adds the vehicle to the scenery
-        self.arView.singleARBrain?.sceneryNode.addChildNode(self.vehicleNode)
+        self.arView.singleARBrain?.mapNode.addChildNode(self.vehicleNode)
         
         self.vehicleSpawned = true
     }
@@ -149,7 +135,7 @@ class Vehicle {
     func createVehicle() {
 
         // vehicle scene
-        self.vehicleScene = SCNScene(named: self.vehicleSelected)!
+        self.vehicleScene = SCNScene(named: self.game.vehicleResource())!
         
         // Main vehicle node
         self.vehicleNode = (self.vehicleScene.rootNode.childNode(withName: "Chassis", recursively: false))!
@@ -205,22 +191,6 @@ class Vehicle {
         // sets collision
         self.vehicleNode.physicsBody?.categoryBitMask = BitMaskCategory.Vehicle.rawValue
         self.vehicleNode.physicsBody?.contactTestBitMask = BitMaskCategory.Checkpoint.rawValue
-    }
-    
-    // define Vehicle Position
-    func vehiclePosition() -> SCNVector3 {
-        switch self.mapSelected {
-        case MapSelected.Map1.rawValue:
-            return self.InitialspawnPosition.spawnMap1
-            
-        case MapSelected.Map2.rawValue:
-            return self.InitialspawnPosition.spawnMap2
-            
-        case MapSelected.Map1.rawValue:
-            return self.InitialspawnPosition.spawnMap3
-            
-        default: return SCNVector3Zero
-        }
     }
     
     // explodes vehicle
@@ -304,7 +274,7 @@ class Vehicle {
                 self.vehiclePhysics.applyEngineForce(0, forWheelAt: 1)
             }
             
-            if self.gameMode != GameMode.RCMode.rawValue {
+            if self.game.gameTypeSelected != GameMode.RCMode.rawValue {
                 if self.vehicleNode.presentation.position.x < -1.05 || self.vehicleNode.presentation.position.y < -1.05 ||
                     self.vehicleNode.presentation.position.x > 1.05 || self.vehicleNode.presentation.position.y > 1.05 {
                 

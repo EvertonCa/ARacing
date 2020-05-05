@@ -25,8 +25,9 @@
 		54937299245D8262008FF034 /* VehicleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54937298245D8262008FF034 /* VehicleSelectionViewController.swift */; };
 		5493729B245D8650008FF034 /* VehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5493729A245D8650008FF034 /* VehicleCell.swift */; };
 		5493729D245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5493729C245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift */; };
+		5493729F2461EBEB008FF034 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5493729E2461EBEA008FF034 /* Game.swift */; };
 		54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */; };
-		54BDD8B324500BD600691408 /* Sceneries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B224500BD600691408 /* Sceneries.swift */; };
+		54BDD8B324500BD600691408 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDD8B224500BD600691408 /* Map.swift */; };
 		54C198BF245AC6870058DE0A /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198BE245AC6870058DE0A /* Enums.swift */; };
 		54C198C1245ACC220058DE0A /* ARBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198C0245ACC220058DE0A /* ARBrain.swift */; };
 		54C198C3245AF35B0058DE0A /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198C2245AF35B0058DE0A /* MapsViewController.swift */; };
@@ -57,8 +58,9 @@
 		54937298245D8262008FF034 /* VehicleSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSelectionViewController.swift; sourceTree = "<group>"; };
 		5493729A245D8650008FF034 /* VehicleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCell.swift; sourceTree = "<group>"; };
 		5493729C245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSelectionViewControllerDelegates.swift; sourceTree = "<group>"; };
+		5493729E2461EBEA008FF034 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCheckpoint.swift; sourceTree = "<group>"; };
-		54BDD8B224500BD600691408 /* Sceneries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sceneries.swift; sourceTree = "<group>"; };
+		54BDD8B224500BD600691408 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		54C198BE245AC6870058DE0A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		54C198C0245ACC220058DE0A /* ARBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBrain.swift; sourceTree = "<group>"; };
 		54C198C2245AF35B0058DE0A /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
@@ -142,8 +144,9 @@
 				54C198BE245AC6870058DE0A /* Enums.swift */,
 				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
 				54CE5FC724502AF9009E5E67 /* LapTimer.swift */,
-				54BDD8B224500BD600691408 /* Sceneries.swift */,
+				54BDD8B224500BD600691408 /* Map.swift */,
 				5459DD6D245CD96A00E57584 /* Vehicle.swift */,
+				5493729E2461EBEA008FF034 /* Game.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
 			);
@@ -269,10 +272,11 @@
 				5461C2132437055600F02694 /* ARViewController.swift in Sources */,
 				5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */,
 				54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */,
-				54BDD8B324500BD600691408 /* Sceneries.swift in Sources */,
+				54BDD8B324500BD600691408 /* Map.swift in Sources */,
 				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
+				5493729F2461EBEB008FF034 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

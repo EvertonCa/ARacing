@@ -34,12 +34,16 @@ class RCBrains {
     // Vehicle
     var vehicle:Vehicle! = nil
     
+    // Game
+    var game:Game
+    
     //MARK: - Functions
     
-    init(_ sceneView: ARSCNView, _ view: ARViewController) {
+    init(_ sceneView: ARSCNView, _ view: ARViewController, _ game:Game) {
         self.sceneView = sceneView
         self.arViewController = view
-        self.vehicle = Vehicle(arView: arViewController, rcBrains: self, gameMode: GameMode.RCMode.rawValue, vehicleSelected: VehicleResources.BugattiRC.rawValue, sceneView: self.sceneView)
+        self.game = game
+        self.vehicle = Vehicle(arView: self.arViewController, rcBrains: self, game: self.game, sceneView: self.sceneView)
     }
     
     // setup the view when it loads

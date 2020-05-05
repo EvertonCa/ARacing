@@ -23,13 +23,13 @@ class GesturesSingleAR {
     var sceneView:ARSCNView!
     
     // ARBrains
-    var arBrains:SingleARBrains!
+    var singleARBrain:SingleARBrains!
     
     //MARK: - Functions
     
     init(sceneView: ARSCNView, arBrains:SingleARBrains) {
         self.sceneView = sceneView
-        self.arBrains = arBrains
+        self.singleARBrain = arBrains
     }
     
     // Manager for Gestures
@@ -62,8 +62,8 @@ class GesturesSingleAR {
         let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
         if !hitTest.isEmpty {
-            self.arBrains.setupScenery(hitTestResult: hitTest.first!)
-            self.arBrains.arViewController.showStartButton()
+            self.singleARBrain.setupMap(hitTestResult: hitTest.first!)
+            self.singleARBrain.arViewController.showStartButton()
         }
     }
     
