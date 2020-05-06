@@ -49,7 +49,7 @@ enum VehicleResources: String {
     case Vehicle1_small = "3D Models.scnassets/Vehicles Assets/BugattiSmall.scn"
     case Vehicle1_normal = "3D Models.scnassets/Vehicles Assets/BugattiNormal.scn"
     case Vehicle2_small = "3D Models.scnassets/Vehicles Assets/SinglePlaceholder.scn"
-    case Vehicle2_normal = "3D Models.scnassets/Vehicles Assets/RCPlaceholder.scn"
+    case Vehicle2_normal = "3D Models.scnassets/Vehicles Assets/BrabusNormal.scn"
     case Vehicle3_small = "3D Models.scnassets/Vehicles Assets/PlaceholderSmall2.scn"
     case Vehicle3_normal = "3D Models.scnassets/Vehicles Assets/PlaceholderNormal2.scn"
     case Vehicle4_small = "3D Models.scnassets/Vehicles Assets/PlaceholderSmall3.scn"

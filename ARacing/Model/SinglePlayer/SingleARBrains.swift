@@ -34,7 +34,7 @@ class SingleARBrains {
     var game:Game
     
     // Gestures
-    var gesturesBrain:GesturesSingleAR!
+    var gesturesBrain:Gestures!
     
     // ViewController
     var arViewController: ARViewController!
@@ -81,8 +81,8 @@ class SingleARBrains {
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
-        self.gesturesBrain = GesturesSingleAR(sceneView: self.sceneView, arBrains: self)
-        self.gesturesBrain.registerGesturesrecognizers()
+        self.gesturesBrain = Gestures(sceneView: self.sceneView, arBrains: self)
+        self.gesturesBrain.registerGesturesRecognizers()
         
         // setup scenery
         self.map = Map(mapNode: self.mapNode, sceneView: self.sceneView, game: self.game)

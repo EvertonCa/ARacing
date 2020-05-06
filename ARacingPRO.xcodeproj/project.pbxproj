@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB72246269F700CD3ADA /* MapsCell.swift */; };
 		5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */; };
-		5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */; };
+		5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7724629AD900CD3ADA /* MultiARBrains.swift */; };
+		5457FB90244B4A1700BD701E /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* Gestures.swift */; };
 		5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459DD6D245CD96A00E57584 /* Vehicle.swift */; };
 		5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F22436CCEE00F02694 /* AppDelegate.swift */; };
 		5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F42436CCEE00F02694 /* SceneDelegate.swift */; };
@@ -42,7 +43,8 @@
 /* Begin PBXFileReference section */
 		5437CB72246269F700CD3ADA /* MapsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsCell.swift; sourceTree = "<group>"; };
 		5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewControllerDelegates.swift; sourceTree = "<group>"; };
-		5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesSingleAR.swift; sourceTree = "<group>"; };
+		5437CB7724629AD900CD3ADA /* MultiARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARBrains.swift; sourceTree = "<group>"; };
+		5457FB8F244B4A1700BD701E /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 		5459DD6D245CD96A00E57584 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		5461C1EF2436CCEE00F02694 /* ARacingPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacingPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461C1F22436CCEE00F02694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5437CB7624629AAA00CD3ADA /* MultiPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				5437CB7724629AD900CD3ADA /* MultiARBrains.swift */,
+			);
+			path = MultiPlayer;
+			sourceTree = "<group>";
+		};
 		5461C1E62436CCEE00F02694 = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +163,9 @@
 				54BDD8B224500BD600691408 /* Map.swift */,
 				5459DD6D245CD96A00E57584 /* Vehicle.swift */,
 				5493729E2461EBEA008FF034 /* Game.swift */,
+				5457FB8F244B4A1700BD701E /* Gestures.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
+				5437CB7624629AAA00CD3ADA /* MultiPlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
 			);
 			path = Model;
@@ -171,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				5461C2192437E5C800F02694 /* SingleARBrains.swift */,
-				5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */,
 				54BDD8AE24500B4E00691408 /* SingleCheckpoint.swift */,
 				54CE5FC52450295A009E5E67 /* SingleTexts.swift */,
 			);
@@ -277,12 +288,13 @@
 				5493729D245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift in Sources */,
 				54C198BF245AC6870058DE0A /* Enums.swift in Sources */,
 				5461C2132437055600F02694 /* ARViewController.swift in Sources */,
-				5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */,
+				5457FB90244B4A1700BD701E /* Gestures.swift in Sources */,
 				54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */,
 				54BDD8B324500BD600691408 /* Map.swift in Sources */,
 				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
+				5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */,
 				5493729F2461EBEB008FF034 /* Game.swift in Sources */,
 				5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */,
 			);

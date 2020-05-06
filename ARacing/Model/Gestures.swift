@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 
-class GesturesSingleAR {
+class Gestures {
     
     //MARK: - Variables
     
@@ -22,18 +22,33 @@ class GesturesSingleAR {
     // AR SceneView
     var sceneView:ARSCNView!
     
-    // ARBrains
+    // Single ARBrains
     var singleARBrain:SingleARBrains!
+    
+    // Multi ARBrains
+    var multiARBrains:MultiARBrains!
+    
+    // Game
+    var game:Game
     
     //MARK: - Functions
     
-    init(sceneView: ARSCNView, arBrains:SingleARBrains) {
+    // Single player init
+    init(sceneView: ARSCNView, singleARBrains:SingleARBrains, game:Game) {
         self.sceneView = sceneView
-        self.singleARBrain = arBrains
+        self.singleARBrain = singleARBrains
+        self.game = game
+    }
+    
+    // Multi player init
+    init(sceneView: ARSCNView, multiARBrains:MultiARBrains, game:Game) {
+        self.sceneView = sceneView
+        self.multiARBrains = multiARBrains
+        self.game = game
     }
     
     // Manager for Gestures
-    func registerGesturesrecognizers() {
+    func registerGesturesRecognizers() {
         // recognizer for Tap Gesture
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer!)
@@ -62,12 +77,17 @@ class GesturesSingleAR {
         let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
         if !hitTest.isEmpty {
-            self.singleARBrain.setupMap(hitTestResult: hitTest.first!)
-            self.singleARBrain.arViewController.showStartButton()
+            if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue {
+                    self.singleARBrain.setupMap(hitTestResult: hitTest.first!)
+            }
+            else {
+                    self.multiARBrains.setupMap(hitTestResult: hitTest.first!)
+            }
+            self.multiARBrains.arViewController.showStartButton()
         }
     }
     
-    // handler for Rotation Gesture for fixing location of the Scenary
+    // handler for Rotation Gesture for fixing location of the Map
     @objc func rotation(sender:UIRotationGestureRecognizer) {
         let sceneView = sender.view as! ARSCNView
         let rotationLocation = sender.location(in: sceneView)

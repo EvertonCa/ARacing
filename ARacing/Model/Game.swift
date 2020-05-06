@@ -9,14 +9,14 @@
 import UIKit
 import ARKit
 
-// Controlls all game parameters and variables
+// Controls all game parameters and variables
 class Game {
-    //MARK: - Game Controlls Variables
+    //MARK: - Game Controls Variables
     
     // Game Type Selected
     var gameTypeSelected:Int
     
-    //MARK: - Map Controlls and Resources
+    //MARK: - Map Controls and Resources
     
     // Map selected
     var mapSelected:Int
