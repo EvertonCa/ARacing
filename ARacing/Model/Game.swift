@@ -60,6 +60,24 @@ class Game {
                                              SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.4, 0.4, 0.4)]
     
+    // Vehicles Images Resources
+    let vehiclesImagesResources = [VehicleImages.Vehicle1.rawValue,
+                                   VehicleImages.Vehicle2.rawValue,
+                                   VehicleImages.Vehicle3.rawValue,
+                                   VehicleImages.Vehicle4.rawValue,
+                                   VehicleImages.Vehicle5.rawValue,
+                                   VehicleImages.Vehicle6.rawValue,
+                                   VehicleImages.Vehicle7.rawValue,
+                                   VehicleImages.Vehicle8.rawValue,
+                                   VehicleImages.Vehicle9.rawValue,
+                                   VehicleImages.Vehicle10.rawValue,
+                                   VehicleImages.Vehicle11.rawValue,
+                                   VehicleImages.Vehicle12.rawValue,
+                                   VehicleImages.Vehicle13.rawValue,
+                                   VehicleImages.Vehicle14.rawValue,
+                                   VehicleImages.Vehicle15.rawValue,
+                                   VehicleImages.Vehicle16.rawValue]
+    
     //MARK: - Checkpoints Controlls and Resources
     
     // Map 1 Coordinates
@@ -105,22 +123,15 @@ class Game {
     //MARK: - Brains
     
     // ARBrains
-    var arBrain:ARBrain
+    var arBrain:ARBrain!
     
     //MARK: - Inits
     
-    init(arBrain:ARBrain, gameTypeSelected:Int, mapSelected:Int, vehicleSelected:Int) {
-        self.arBrain = arBrain
-        self.gameTypeSelected = gameTypeSelected
-        self.mapSelected = mapSelected
-        self.vehicleSelected = vehicleSelected
-    }
-    
-    init(arBrain:ARBrain, gameTypeSelected:Int, vehicleSelected:Int) {
-        self.arBrain = arBrain
-        self.gameTypeSelected = gameTypeSelected
+    // Dummy init just to access the parameters
+    init() {
+        self.gameTypeSelected = 0
         self.mapSelected = 0
-        self.vehicleSelected = vehicleSelected
+        self.vehicleSelected = 0
     }
     
     //MARK: - Map functions

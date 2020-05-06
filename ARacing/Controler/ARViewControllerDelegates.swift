@@ -16,15 +16,15 @@ extension ARViewController: OptionViewDelegate{
     func passSelectedOption(selectedOption: Int) {
         switch selectedOption{
         case GameMode.SinglePlayer.rawValue:
-            self.gameModeSelected = GameMode.SinglePlayer.rawValue
+            self.game.gameTypeSelected = GameMode.SinglePlayer.rawValue
             self.goToMapsViewController()
             
         case GameMode.MultiPlayer.rawValue:
-            self.gameModeSelected = GameMode.MultiPlayer.rawValue
+            self.game.gameTypeSelected = GameMode.MultiPlayer.rawValue
             self.goToMapsViewController()
             
         case GameMode.RCMode.rawValue:
-            self.gameModeSelected = GameMode.RCMode.rawValue
+            self.game.gameTypeSelected = GameMode.RCMode.rawValue
             self.goToVehicleSelectionViewController()
         default: break
         }
@@ -34,7 +34,7 @@ extension ARViewController: OptionViewDelegate{
 //MARK: - Maps Segue Delegate
 extension ARViewController: MapViewDelegate {
     func passMapSelected(mapSelected: Int) {
-        self.mapSelected = mapSelected
+        self.game.mapSelected = mapSelected
         
         self.goToVehicleSelectionViewController()
     }
@@ -43,15 +43,18 @@ extension ARViewController: MapViewDelegate {
 //MARK: - Vehicle Selection Segue Delegate
 extension ARViewController: VehicleSelectionDelegate {
     func passSelectedVehicle(selectedOption: Int) {
-        self.vehicleSelected = selectedOption
+        self.game.vehicleSelected = selectedOption
         
-        switch self.gameModeSelected {
+        switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.singlePlayerSelected()
+            
         case GameMode.MultiPlayer.rawValue:
             self.multiPlayerSelected()
+            
         case GameMode.RCMode.rawValue:
             self.rcModeSelected()
+            
         default: break
         }
     }

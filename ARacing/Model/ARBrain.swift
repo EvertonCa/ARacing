@@ -19,14 +19,10 @@ class ARBrain {
     var arViewController:ARViewController
     
     // initializers
-    init(type: Int, vehicle:Int, view: ARViewController) {
+    init(game:Game, view: ARViewController) {
         self.arViewController = view
-        self.game = Game(arBrain: self, gameTypeSelected: type, vehicleSelected: vehicle)
-    }
-    
-    init(type: Int, map:Int, vehicle:Int, view: ARViewController) {
-        self.arViewController = view
-        self.game = Game(arBrain: self, gameTypeSelected: type, mapSelected: map, vehicleSelected: vehicle)
+        self.game = game
+        self.game.arBrain = self
     }
     
     //MARK: - Buttons Handlers

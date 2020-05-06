@@ -44,14 +44,8 @@ class ARViewController: UIViewController {
     
     //MARK: - Constants and Variables
     
-    // Type Selected
-    var gameModeSelected: Int?
-    
-    // Map selected
-    var mapSelected: Int = 0
-    
-    // Vehicle Selected
-    var vehicleSelected: Int = 0
+    // Initially dummy Game
+    var game:Game!
     
     //MARK: - Functions
     
@@ -62,6 +56,9 @@ class ARViewController: UIViewController {
         
         // hide all the UI
         self.hideUI()
+        
+        // Starts the Game Class in dummy way
+        self.game = Game()
         
         // Starts the AR view with temporary configuration
         let tempConfig = ARWorldTrackingConfiguration()
@@ -93,10 +90,10 @@ class ARViewController: UIViewController {
     // Starts AR Session as Single Player Mode
     func singlePlayerSelected() {
         // sets the selected type
-        self.gameModeSelected = GameMode.SinglePlayer.rawValue
+        self.game.gameTypeSelected = GameMode.SinglePlayer.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.gameModeSelected!, vehicle: self.vehicleSelected, view: self)
+        self.arBrain = ARBrain(game:self.game, view: self)
         
         // start Single AR Brain
         self.singleARBrain = SingleARBrains(self.sceneView, self, self.arBrain.game)
@@ -115,10 +112,10 @@ class ARViewController: UIViewController {
     // Starts AR Session as Multi Player Mode
     func multiPlayerSelected() {
         // sets the selected type
-        self.gameModeSelected = GameMode.MultiPlayer.rawValue
+        self.game.gameTypeSelected = GameMode.MultiPlayer.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.gameModeSelected!, vehicle: self.vehicleSelected, view: self)
+        self.arBrain = ARBrain(game:self.game, view: self)
         
         // start Multi AR Brain
         
@@ -129,10 +126,10 @@ class ARViewController: UIViewController {
     // Starts AR Session as RC Mode
     func rcModeSelected() {
         // sets the selected type
-        self.gameModeSelected = GameMode.RCMode.rawValue
+        self.game.gameTypeSelected = GameMode.RCMode.rawValue
         
         // Type Brains started
-        self.arBrain = ARBrain(type: self.gameModeSelected!, vehicle: self.vehicleSelected, view: self)
+        self.arBrain = ARBrain(game:self.game, view: self)
         
         // start RC Brain
         self.rcBrains = RCBrains(self.sceneView, self, self.arBrain.game)
@@ -152,8 +149,8 @@ class ARViewController: UIViewController {
         // setup delegate
         self.sceneView.delegate = self
         
-        if self.gameModeSelected == GameMode.SinglePlayer.rawValue ||
-            self.gameModeSelected == GameMode.MultiPlayer.rawValue{
+        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue ||
+            self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
             // setup contact delegate
             self.sceneView.scene.physicsWorld.contactDelegate = self
         }
@@ -163,8 +160,8 @@ class ARViewController: UIViewController {
     func resetDelegates() {
         self.sceneView.delegate = nil
         
-        if self.gameModeSelected == GameMode.SinglePlayer.rawValue ||
-            self.gameModeSelected == GameMode.MultiPlayer.rawValue{
+        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue ||
+            self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
             
             self.sceneView.scene.physicsWorld.contactDelegate = nil
         }
@@ -264,6 +261,7 @@ class ARViewController: UIViewController {
         else if segue.identifier == "GoToVehicleSelection" {
             let destinationVC = segue.destination as! VehicleSelectionViewController
             destinationVC.delegate = self
+            destinationVC.game = self.game
         }
     }
     
