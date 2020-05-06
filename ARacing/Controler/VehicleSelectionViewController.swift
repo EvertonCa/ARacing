@@ -20,9 +20,6 @@ class VehicleSelectionViewController: UIViewController {
     // delegate
     weak var delegate: VehicleSelectionDelegate?
     
-    // selected item
-    var selectedItem:Int?
-    
     // Game
     var game:Game!
     

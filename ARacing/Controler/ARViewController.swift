@@ -257,6 +257,7 @@ class ARViewController: UIViewController {
         else if segue.identifier == "GoToMaps" {
             let destinationVC = segue.destination as! MapsViewController
             destinationVC.delegate = self
+            destinationVC.game = self.game
         }
         else if segue.identifier == "GoToVehicleSelection" {
             let destinationVC = segue.destination as! VehicleSelectionViewController

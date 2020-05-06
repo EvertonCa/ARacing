@@ -8,12 +8,14 @@
 
 import Foundation
 
+//MARK: - Maps Enums
+
 // map selected enum
 enum MapSelected: Int {
-    case Map1 = 1
-    case Map2 = 2
-    case Map3 = 3
-    case Map4 = 4
+    case Map1 = 0
+    case Map2 = 1
+    case Map3 = 2
+    case Map4 = 3
 }
 
 // Maps Resources
@@ -24,30 +26,23 @@ enum MapsResources: String {
     case Map4 = "3D Models.scnassets/Maps/Map4.scn"
 }
 
-// Text Resources
-enum TextResources: String {
-    case Ready = "3D Models.scnassets/Text Assets/ReadyText.scn"
-    case Set = "3D Models.scnassets/Text Assets/SetText.scn"
-    case Go = "3D Models.scnassets/Text Assets/GoText.scn"
+// Maps Images
+enum MapsImages: String {
+    case Map1 = "Map1Icon"
+    case Map2 = "Map2Icon"
+    case Map3 = "Map3Icon"
+    case Map4 = "Map4Icon"
 }
 
-// collision enum
-enum BitMaskCategory: Int {
-    case Vehicle = 4
-    case Checkpoint = 8
+// Maps Names
+enum MapsNames: String {
+    case Map1 = "Map1"
+    case Map2 = "Map2"
+    case Map3 = "Map3"
+    case Map4 = "Map4"
 }
 
-// Game Mode
-enum GameMode: Int {
-    case SinglePlayer = 1
-    case MultiPlayer = 2
-    case RCMode = 3
-}
-
-// Checkpoints Resources
-enum CheckpointsResources: String {
-    case Checkpoint = "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn"
-}
+//MARK: - Vehicles Enums
 
 // Vehicle Resources
 enum VehicleResources: String {
@@ -124,6 +119,41 @@ enum VehicleImages: String {
     case Vehicle15 = "Vehicle15Icon"
     case Vehicle16 = "Vehicle16Icon"
 }
+
+//MARK: - Text Enum
+
+// Text Resources
+enum TextResources: String {
+    case Ready = "3D Models.scnassets/Text Assets/ReadyText.scn"
+    case Set = "3D Models.scnassets/Text Assets/SetText.scn"
+    case Go = "3D Models.scnassets/Text Assets/GoText.scn"
+}
+
+//MARK: - Collision Enums
+
+// collision enum
+enum BitMaskCategory: Int {
+    case Vehicle = 4
+    case Checkpoint = 8
+}
+
+//MARK: - Game Mode Enums
+
+// Game Mode
+enum GameMode: Int {
+    case SinglePlayer = 1
+    case MultiPlayer = 2
+    case RCMode = 3
+}
+
+//MARK: - Checkpoints Enums
+
+// Checkpoints Resources
+enum CheckpointsResources: String {
+    case Checkpoint = "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn"
+}
+
+//MARK: - Particles Enums
 
 // Particles Resources
 enum ParticlesResources: String {

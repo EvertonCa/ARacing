@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB72246269F700CD3ADA /* MapsCell.swift */; };
+		5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */; };
 		5457FB90244B4A1700BD701E /* GesturesSingleAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */; };
 		5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459DD6D245CD96A00E57584 /* Vehicle.swift */; };
 		5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F22436CCEE00F02694 /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5437CB72246269F700CD3ADA /* MapsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsCell.swift; sourceTree = "<group>"; };
+		5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5457FB8F244B4A1700BD701E /* GesturesSingleAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesSingleAR.swift; sourceTree = "<group>"; };
 		5459DD6D245CD96A00E57584 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		5461C1EF2436CCEE00F02694 /* ARacingPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacingPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,9 +126,11 @@
 				5489C0842447F37100B44030 /* ARViewControllerDelegates.swift */,
 				5461C2102436FC8900F02694 /* OptionsViewController.swift */,
 				54C198C2245AF35B0058DE0A /* MapsViewController.swift */,
+				5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */,
 				54937298245D8262008FF034 /* VehicleSelectionViewController.swift */,
 				5493729C245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift */,
 				5493729A245D8650008FF034 /* VehicleCell.swift */,
+				5437CB72246269F700CD3ADA /* MapsCell.swift */,
 			);
 			path = Controler;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 				5489C0852447F37100B44030 /* ARViewControllerDelegates.swift in Sources */,
 				5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */,
 				5493729B245D8650008FF034 /* VehicleCell.swift in Sources */,
+				5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */,
 				54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */,
 				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
@@ -277,6 +284,7 @@
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 				5493729F2461EBEB008FF034 /* Game.swift in Sources */,
+				5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

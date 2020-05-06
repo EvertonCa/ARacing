@@ -88,7 +88,7 @@
         <!--Options View Controller-->
         <scene sceneID="hqE-Lo-JLL">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9uq-ns-SM9">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -159,6 +159,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HnR-gH-jry" firstAttribute="leading" secondItem="Bjg-MI-ojb" secondAttribute="leading" id="5aT-q0-br4"/>
                             <constraint firstItem="SPf-76-BOP" firstAttribute="leading" secondItem="Bjg-MI-ojb" secondAttribute="leading" id="EjA-nn-DeF"/>
@@ -187,100 +188,72 @@
         <!--Maps View Controller-->
         <scene sceneID="J8z-ZH-OOn">
             <objects>
-                <viewController id="YLV-uD-HSL" customClass="MapsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="YLV-uD-HSL" customClass="MapsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="34d-WM-rB9">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="C9Q-JO-E4B">
-                                <rect key="frame" x="64" y="28.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Vnl-CX-MZs"/>
-                                    <constraint firstAttribute="width" constant="250" id="sNd-Lg-Ebw"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUP-Fi-MUx">
-                                <rect key="frame" x="64" y="28.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="60C-Va-eYt"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="Snt-4b-UyM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
-                                <size key="titleShadowOffset" width="3" height="3"/>
-                                <state key="normal" title="Map 1">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="map1Pressed:" destination="YLV-uD-HSL" eventType="touchUpInside" id="PMj-7W-BIa"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="pL5-Sq-LlQ">
-                                <rect key="frame" x="323" y="235.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Avt-E0-kKb"/>
-                                    <constraint firstAttribute="width" constant="250" id="KgJ-Am-N8e"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="xpQ-SU-OHA">
-                                <rect key="frame" x="582" y="28.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="6ov-ol-V1T"/>
-                                    <constraint firstAttribute="height" constant="150" id="nF3-jh-hWH"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fux-rv-lyu">
-                                <rect key="frame" x="582" y="28.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Pe0-go-XdJ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="zAh-D6-mL1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
-                                <size key="titleShadowOffset" width="3" height="3"/>
-                                <state key="normal" title="Map 3">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="map3Pressed:" destination="YLV-uD-HSL" eventType="touchUpInside" id="tq0-gM-T1s"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkq-S9-LUz">
-                                <rect key="frame" x="323" y="235.5" width="250" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="5O6-ad-sfT"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="NyS-Yx-rRc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
-                                <size key="titleShadowOffset" width="3" height="3"/>
-                                <state key="normal" title="Map 2">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="map2Pressed:" destination="YLV-uD-HSL" eventType="touchUpInside" id="rFt-Fd-KKG"/>
-                                </connections>
-                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OPR-RH-sVY">
+                                <rect key="frame" x="44" y="30" width="808" height="333"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Mi-Od-j8m">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="item" id="TYO-HS-Kjd" customClass="MapsCell" customModule="ARacingPRO" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="33.5" width="475" height="266"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RBk-2j-ESr">
+                                            <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="jDq-Vr-M8Z">
+                                                    <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-b1-QoU">
+                                                    <rect key="frame" x="177" y="108" width="121.5" height="50.5"/>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="3" height="3"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="jDq-Vr-M8Z" secondAttribute="bottom" id="ARV-Zv-rV6"/>
+                                                <constraint firstItem="5ip-b1-QoU" firstAttribute="centerY" secondItem="RBk-2j-ESr" secondAttribute="centerY" id="Eta-yR-Zpc"/>
+                                                <constraint firstAttribute="trailing" secondItem="jDq-Vr-M8Z" secondAttribute="trailing" id="VWb-DR-4dE"/>
+                                                <constraint firstItem="5ip-b1-QoU" firstAttribute="centerX" secondItem="RBk-2j-ESr" secondAttribute="centerX" id="YWp-P7-1rf"/>
+                                                <constraint firstItem="jDq-Vr-M8Z" firstAttribute="top" secondItem="RBk-2j-ESr" secondAttribute="top" id="dzO-cI-tVA"/>
+                                                <constraint firstItem="jDq-Vr-M8Z" firstAttribute="leading" secondItem="RBk-2j-ESr" secondAttribute="leading" id="ruO-KL-qUy"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="jDq-Vr-M8Z" id="fyf-tg-7UI"/>
+                                            <outlet property="label" destination="5ip-b1-QoU" id="iCv-iG-aJ4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Fux-rv-lyu" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xpQ-SU-OHA" secondAttribute="leading" id="0IR-Ld-Jb7"/>
-                            <constraint firstItem="lkq-S9-LUz" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="1.5" id="4Ax-2C-OwD"/>
-                            <constraint firstItem="266-p0-JQ2" firstAttribute="trailing" secondItem="xpQ-SU-OHA" secondAttribute="trailing" constant="20" id="8Jk-NP-sb0"/>
-                            <constraint firstItem="pL5-Sq-LlQ" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="1.5" id="FNa-Ot-hqA"/>
-                            <constraint firstItem="C9Q-JO-E4B" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="0.5" id="PEC-Ya-6yZ"/>
-                            <constraint firstItem="C9Q-JO-E4B" firstAttribute="leading" secondItem="266-p0-JQ2" secondAttribute="leading" constant="20" id="XAu-Ns-XYw"/>
-                            <constraint firstItem="WUP-Fi-MUx" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="0.5" id="cQ9-Xx-zVe"/>
-                            <constraint firstItem="266-p0-JQ2" firstAttribute="trailing" secondItem="Fux-rv-lyu" secondAttribute="trailing" constant="20" id="ehk-5S-WU6"/>
-                            <constraint firstItem="Fux-rv-lyu" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="0.5" id="gRM-Gy-t4l"/>
-                            <constraint firstItem="C9Q-JO-E4B" firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="WUP-Fi-MUx" secondAttribute="trailing" id="iI3-b3-Fqg"/>
-                            <constraint firstItem="lkq-S9-LUz" firstAttribute="centerX" secondItem="34d-WM-rB9" secondAttribute="centerX" id="tTG-Xh-lRV"/>
-                            <constraint firstItem="WUP-Fi-MUx" firstAttribute="leading" secondItem="266-p0-JQ2" secondAttribute="leading" constant="20" id="vgc-5f-C7n"/>
-                            <constraint firstItem="xpQ-SU-OHA" firstAttribute="centerY" secondItem="34d-WM-rB9" secondAttribute="centerY" multiplier="0.5" id="yOK-dD-pmw"/>
-                            <constraint firstItem="pL5-Sq-LlQ" firstAttribute="centerX" secondItem="34d-WM-rB9" secondAttribute="centerX" id="ylK-sa-dab"/>
+                            <constraint firstItem="OPR-RH-sVY" firstAttribute="top" secondItem="266-p0-JQ2" secondAttribute="top" constant="30" id="7on-uS-IV7"/>
+                            <constraint firstItem="266-p0-JQ2" firstAttribute="trailing" secondItem="OPR-RH-sVY" secondAttribute="trailing" id="T1S-kc-845"/>
+                            <constraint firstItem="266-p0-JQ2" firstAttribute="bottom" secondItem="OPR-RH-sVY" secondAttribute="bottom" constant="30" id="bkp-Hv-jWh"/>
+                            <constraint firstItem="OPR-RH-sVY" firstAttribute="leading" secondItem="266-p0-JQ2" secondAttribute="leading" id="tEH-Hh-419"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="266-p0-JQ2"/>
                     </view>
+                    <connections>
+                        <outlet property="mapsCollectionView" destination="OPR-RH-sVY" id="3u3-DT-BjK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WFy-pN-ViO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -289,7 +262,7 @@
         <!--Vehicle Selection View Controller-->
         <scene sceneID="odn-Ch-F2H">
             <objects>
-                <viewController id="PXA-2V-sHJ" customClass="VehicleSelectionViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="PXA-2V-sHJ" customClass="VehicleSelectionViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KlF-QB-tkG">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,12 +292,10 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="centerY" secondItem="PkZ-qR-XsV" secondAttribute="centerY" id="PPO-wz-bKR"/>
                                                 <constraint firstAttribute="trailing" secondItem="YJD-PH-Ib7" secondAttribute="trailing" id="RIC-4Y-AaT"/>
                                                 <constraint firstAttribute="bottom" secondItem="YJD-PH-Ib7" secondAttribute="bottom" id="VLQ-ly-4HM"/>
                                                 <constraint firstItem="YJD-PH-Ib7" firstAttribute="leading" secondItem="PkZ-qR-XsV" secondAttribute="leading" id="qWA-04-q6t"/>
                                                 <constraint firstItem="YJD-PH-Ib7" firstAttribute="top" secondItem="PkZ-qR-XsV" secondAttribute="top" id="sSM-B7-mXf"/>
-                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="centerX" secondItem="PkZ-qR-XsV" secondAttribute="centerX" id="t2h-B6-rG0"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

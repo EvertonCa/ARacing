@@ -22,11 +22,22 @@ class Game {
     var mapSelected:Int
     
     // Map Resources Addresses
-    let mapResourcesAddresses:[String] = ["NO MAP",
-                                        MapsResources.Map1.rawValue,
-                                        MapsResources.Map2.rawValue,
-                                        MapsResources.Map3.rawValue,
-                                        MapsResources.Map4.rawValue]
+    let mapResourcesAddresses:[String] = [MapsResources.Map1.rawValue,
+                                          MapsResources.Map2.rawValue,
+                                          MapsResources.Map3.rawValue,
+                                          MapsResources.Map4.rawValue]
+    
+    // Map Images Resources
+    let mapImagesResources:[String] = [MapsImages.Map1.rawValue,
+                                       MapsImages.Map2.rawValue,
+                                       MapsImages.Map3.rawValue,
+                                       MapsImages.Map4.rawValue]
+    
+    // Map Names
+    let mapNames:[String] = [MapsNames.Map1.rawValue,
+                             MapsNames.Map2.rawValue,
+                             MapsNames.Map3.rawValue,
+                             MapsNames.Map4.rawValue]
     
     //MARK: - Vehicle Controlls and Resources
     
@@ -34,24 +45,40 @@ class Game {
     var vehicleSelected:Int
     
     // Single and Multi Player Vehicles Resources Addresses
-    let vehicleSmallResourcesAddresses:[String] = [VehicleResources.Vehicle1_small.rawValue, VehicleResources.Vehicle2_small.rawValue,
-                                              VehicleResources.Vehicle3_small.rawValue, VehicleResources.Vehicle4_small.rawValue,
-                                              VehicleResources.Vehicle5_small.rawValue, VehicleResources.Vehicle6_small.rawValue,
-                                              VehicleResources.Vehicle7_small.rawValue, VehicleResources.Vehicle8_small.rawValue,
-                                              VehicleResources.Vehicle9_small.rawValue, VehicleResources.Vehicle10_small.rawValue,
-                                              VehicleResources.Vehicle11_small.rawValue, VehicleResources.Vehicle12_small.rawValue,
-                                              VehicleResources.Vehicle13_small.rawValue, VehicleResources.Vehicle14_small.rawValue,
-                                              VehicleResources.Vehicle15_small.rawValue, VehicleResources.Vehicle16_small.rawValue]
+    let vehicleSmallResourcesAddresses:[String] = [VehicleResources.Vehicle1_small.rawValue,
+                                                   VehicleResources.Vehicle2_small.rawValue,
+                                                   VehicleResources.Vehicle3_small.rawValue,
+                                                   VehicleResources.Vehicle4_small.rawValue,
+                                                   VehicleResources.Vehicle5_small.rawValue,
+                                                   VehicleResources.Vehicle6_small.rawValue,
+                                                   VehicleResources.Vehicle7_small.rawValue,
+                                                   VehicleResources.Vehicle8_small.rawValue,
+                                                   VehicleResources.Vehicle9_small.rawValue,
+                                                   VehicleResources.Vehicle10_small.rawValue,
+                                                   VehicleResources.Vehicle11_small.rawValue,
+                                                   VehicleResources.Vehicle12_small.rawValue,
+                                                   VehicleResources.Vehicle13_small.rawValue,
+                                                   VehicleResources.Vehicle14_small.rawValue,
+                                                   VehicleResources.Vehicle15_small.rawValue,
+                                                   VehicleResources.Vehicle16_small.rawValue]
     
     // RC Vehicles Resources Address
-    let vehicleNormalResourcesAddresses:[String] = [VehicleResources.Vehicle1_normal.rawValue, VehicleResources.Vehicle2_normal.rawValue,
-                                                    VehicleResources.Vehicle3_normal.rawValue, VehicleResources.Vehicle4_normal.rawValue,
-                                                    VehicleResources.Vehicle5_normal.rawValue, VehicleResources.Vehicle6_normal.rawValue,
-                                                    VehicleResources.Vehicle7_normal.rawValue, VehicleResources.Vehicle8_normal.rawValue,
-                                                    VehicleResources.Vehicle9_normal.rawValue, VehicleResources.Vehicle10_normal.rawValue,
-                                                    VehicleResources.Vehicle11_normal.rawValue, VehicleResources.Vehicle12_normal.rawValue,
-                                                    VehicleResources.Vehicle13_normal.rawValue, VehicleResources.Vehicle14_normal.rawValue,
-                                                    VehicleResources.Vehicle15_normal.rawValue, VehicleResources.Vehicle16_normal.rawValue]
+    let vehicleNormalResourcesAddresses:[String] = [VehicleResources.Vehicle1_normal.rawValue,
+                                                    VehicleResources.Vehicle2_normal.rawValue,
+                                                    VehicleResources.Vehicle3_normal.rawValue,
+                                                    VehicleResources.Vehicle4_normal.rawValue,
+                                                    VehicleResources.Vehicle5_normal.rawValue,
+                                                    VehicleResources.Vehicle6_normal.rawValue,
+                                                    VehicleResources.Vehicle7_normal.rawValue,
+                                                    VehicleResources.Vehicle8_normal.rawValue,
+                                                    VehicleResources.Vehicle9_normal.rawValue,
+                                                    VehicleResources.Vehicle10_normal.rawValue,
+                                                    VehicleResources.Vehicle11_normal.rawValue,
+                                                    VehicleResources.Vehicle12_normal.rawValue,
+                                                    VehicleResources.Vehicle13_normal.rawValue,
+                                                    VehicleResources.Vehicle14_normal.rawValue,
+                                                    VehicleResources.Vehicle15_normal.rawValue,
+                                                    VehicleResources.Vehicle16_normal.rawValue]
     
     // Vehicle Spawn Positions per map
     let vehicleSpawnPosition:[SCNVector3] = [SCNVector3Zero,
