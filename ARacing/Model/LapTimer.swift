@@ -13,7 +13,7 @@ class LapTimer {
     //MARK: - Variables and Constants
     
     // time elapsed in seconds
-    var counter = 0.0
+    var counter:Double = 0.0
     
     // timer elapsed in minutes
     var minutes:Int = 0
@@ -45,6 +45,7 @@ class LapTimer {
         self.updateLabel()
     }
     
+    // Updates the label with the current elapsed time in minutes, seconds and 1/10 sec
     func updateLabel() {
         DispatchQueue.main.async {
             let counterInt = Int(self.counter)
@@ -54,7 +55,6 @@ class LapTimer {
             }
             let text = "\(self.minutes)m" + String(format: "%.1f", self.counter) + "s"
             self.timerLabel.text = text
-            
         }
     }
     
@@ -62,6 +62,13 @@ class LapTimer {
     func stopTimer() {
         self.timer.invalidate()
         self.isPlaying = false
+    }
+    
+    // resets the timer
+    func resetTimer() {
+        self.counter = 0.0
+        self.minutes = 0
+        self.timer = Timer()
     }
     
 }

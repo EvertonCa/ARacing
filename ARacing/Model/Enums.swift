@@ -164,4 +164,14 @@ enum ParticlesResources: String {
     case ConfettiText = "3D Models.scnassets/Particles/Confetti.scnp"
 }
 
+//MARK: - User Defaults Enums
+
+// Map Records Keys
+enum MapRecord: String {
+    case Map1 = "map1Record"
+    case Map2 = "map2Record"
+    case Map3 = "map3Record"
+    case Map4 = "map4Record"
+}
+
 

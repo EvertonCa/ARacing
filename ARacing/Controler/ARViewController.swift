@@ -27,6 +27,7 @@ class ARViewController: UIViewController {
     @IBOutlet weak var turnRightButtonBackground: UIImageView!
     
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var recordLabel: UILabel!
     
     //MARK: - Brains
     
@@ -182,6 +183,7 @@ class ARViewController: UIViewController {
         self.turnRightButtonBackground.alpha = 0
         self.feedbackLabel.alpha = 0
         self.timerLabel.alpha = 0
+        self.recordLabel.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false

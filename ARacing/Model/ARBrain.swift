@@ -265,6 +265,10 @@ class ARBrain {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             //shows driving UI
             self.arViewController.showDrivingUI()
+            
+            // show and update record label
+            self.arViewController.recordLabel.alpha = 1
+            self.arViewController.recordLabel.text = self.arViewController.singleARBrain?.getRecordText()
         }
     }
     

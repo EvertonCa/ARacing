@@ -81,8 +81,7 @@ class Game {
                                                     VehicleResources.Vehicle16_normal.rawValue]
     
     // Vehicle Spawn Positions per map
-    let vehicleSpawnPosition:[SCNVector3] = [SCNVector3Zero,
-                                             SCNVector3(-0.8, 0.4, 0.8),
+    let vehicleSpawnPosition:[SCNVector3] = [SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.4, 0.4, 0.4),
                                              SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.4, 0.4, 0.4)]
@@ -147,6 +146,23 @@ class Game {
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
     
+    //MARK: - User Defaults
+    
+    // User Defaults
+    let defaults = UserDefaults.standard
+    
+    // Map 1 Record
+    var map1Record:Double = 99999999.9
+    
+    // Map 2 Record
+    var map2Record:Double = 99999999.9
+    
+    // Map 3 Record
+    var map3Record:Double = 99999999.9
+    
+    // Map 4 Record
+    var map4Record:Double = 99999999.9
+    
     //MARK: - Brains
     
     // ARBrains
@@ -159,6 +175,7 @@ class Game {
         self.gameTypeSelected = 0
         self.mapSelected = 0
         self.vehicleSelected = 0
+        self.loadUserDefaults()
     }
     
     //MARK: - Map functions
@@ -244,6 +261,71 @@ class Game {
             
         default:
             return [SCNVector3Zero]
+        }
+    }
+    
+    // returns the selected map record time
+    func checkRecord() -> Double {
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            return self.map1Record
+            
+        case MapSelected.Map2.rawValue:
+            return self.map2Record
+            
+        case MapSelected.Map3.rawValue:
+            return self.map3Record
+            
+        case MapSelected.Map4.rawValue:
+            return self.map4Record
+            
+        default:
+            return 0.0
+        }
+    }
+    
+    // Loads User Defaults
+    func loadUserDefaults() {
+        let temp1 = defaults.double(forKey: MapRecord.Map1.rawValue)
+        let temp2 = defaults.double(forKey: MapRecord.Map2.rawValue)
+        let temp3 = defaults.double(forKey: MapRecord.Map3.rawValue)
+        let temp4 = defaults.double(forKey: MapRecord.Map4.rawValue)
+        
+        if temp1 != 0 {
+            self.map1Record = temp1
+        }
+        if temp2 != 0 {
+            self.map2Record = temp2
+        }
+        if temp3 != 0 {
+            self.map3Record = temp3
+        }
+        if temp4 != 0 {
+            self.map4Record = temp4
+        }
+    }
+    
+    // Saves to User Defaults the new record on the selected map
+    func saveRecord(record:Double) {
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            self.map1Record = record
+            defaults.set(record, forKey: MapRecord.Map1.rawValue)
+            
+        case MapSelected.Map2.rawValue:
+            self.map2Record = record
+            defaults.set(record, forKey: MapRecord.Map2.rawValue)
+            
+        case MapSelected.Map3.rawValue:
+            self.map3Record = record
+            defaults.set(record, forKey: MapRecord.Map3.rawValue)
+            
+        case MapSelected.Map4.rawValue:
+            self.map4Record = record
+            defaults.set(record, forKey: MapRecord.Map4.rawValue)
+            
+        default:
+            break
         }
     }
 }

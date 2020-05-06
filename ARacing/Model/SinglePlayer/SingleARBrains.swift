@@ -235,6 +235,46 @@ class SingleARBrains {
     // ends the race
     func endRace() {
         self.lapTimer.stopTimer()
+        self.checkRecord()
+        self.lapTimer.resetTimer()
+    }
+    
+    // checks if the time is a record
+    func checkRecord() {
+        if self.lapTimer.counter < self.game.checkRecord() {
+            self.game.saveRecord(record:self.lapTimer.counter)
+            
+            
+        }
+    }
+    
+    // returns the current record for the selected map as a string to show to user
+    func getRecordText() -> String {
+        let currentRecordInSeconds = self.game.checkRecord()
+        
+        if currentRecordInSeconds == 99999999.9 {
+            return "Best Time: ?"
+        }
+        
+        let counterInt = Int(currentRecordInSeconds)
+        let minutes = counterInt / 60
+        let seconds = currentRecordInSeconds - Double(60 * minutes)
+        
+        let text = "Best Time: \(minutes)m" + String(format: "%.1f", seconds) + "s"
+        
+        return text
+    }
+    
+    // animates the new record in the label
+    func updateRecordLabel() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
+            self.arViewController.recordLabel.alpha = 0.5
+        }){ ( success ) in
+            UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
+                self.arViewController.recordLabel.text = self.getRecordText()
+                self.arViewController.recordLabel.alpha = 1.0
+            })
+        }
     }
 }
 

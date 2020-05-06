@@ -210,7 +210,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="jDq-Vr-M8Z">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Map1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="jDq-Vr-M8Z">
                                                     <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
@@ -466,6 +466,14 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="3" height="3"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Time: --m--.-s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KB-gA-xOl">
+                                <rect key="frame" x="54" y="60" width="298" height="26.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="3" height="2"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -476,12 +484,14 @@
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="FY1-g4-X4r" secondAttribute="bottom" constant="10" id="A6e-oG-Mgq"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="QJS-b1-0Bv" secondAttribute="bottom" constant="30" id="BAb-yZ-a5g"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="fUr-vk-cei" secondAttribute="trailing" constant="20" id="CXa-ze-fvK"/>
+                            <constraint firstItem="9KB-gA-xOl" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="10" id="DM0-4f-yYJ"/>
                             <constraint firstItem="nTa-P8-v1l" firstAttribute="leading" secondItem="gA9-Z9-iId" secondAttribute="trailing" constant="10" id="E2y-xz-lS5"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="nTa-P8-v1l" secondAttribute="bottom" constant="20" id="EkG-Cj-kGm"/>
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="EwJ-oW-l0M"/>
                             <constraint firstItem="yEr-RT-blZ" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="20" id="I0E-R8-0aI"/>
                             <constraint firstItem="gjr-ti-6td" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="10" id="J6o-KG-urW"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="QJS-b1-0Bv" secondAttribute="trailing" constant="20" id="J9W-Lm-e4A"/>
+                            <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="9KB-gA-xOl" secondAttribute="trailing" constant="500" id="JGy-U3-7yr"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="f6t-Nl-uFP" secondAttribute="trailing" constant="20" id="JHY-zI-uww"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="349-gm-93V" secondAttribute="trailing" constant="30" id="JLN-wQ-HiR"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="349-gm-93V" secondAttribute="bottom" constant="20" id="KMZ-aJ-uHE"/>
@@ -491,6 +501,7 @@
                             <constraint firstItem="UAq-GO-DI1" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="P65-po-ifz"/>
                             <constraint firstItem="5dp-Xf-3iN" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="30" id="Q7G-5U-Wl6"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="f6t-Nl-uFP" secondAttribute="bottom" constant="30" id="QPR-kY-8q2"/>
+                            <constraint firstItem="9KB-gA-xOl" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="60" id="S4S-Ue-O9N"/>
                             <constraint firstItem="fUr-vk-cei" firstAttribute="leading" secondItem="yEr-RT-blZ" secondAttribute="leading" id="VMG-4W-sQr"/>
                             <constraint firstItem="FY1-g4-X4r" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="VXE-DX-pGz"/>
                             <constraint firstItem="IGb-ci-7Vu" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="VvU-45-fMh"/>
@@ -515,6 +526,7 @@
                         <outlet property="brakeButton" destination="f6t-Nl-uFP" id="Otz-u2-78b"/>
                         <outlet property="brakeButtonBackground" destination="QJS-b1-0Bv" id="bZU-tA-CG3"/>
                         <outlet property="feedbackLabel" destination="gjr-ti-6td" id="Grm-Rw-94x"/>
+                        <outlet property="recordLabel" destination="9KB-gA-xOl" id="t0H-DX-bLh"/>
                         <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
                         <outlet property="startButton" destination="4GU-jx-Oyf" id="WP6-ae-rni"/>
                         <outlet property="startButtonBackground" destination="IGb-ci-7Vu" id="eir-Md-YlG"/>
@@ -539,7 +551,7 @@
         <image name="Background_Splash" width="666" height="375"/>
         <image name="Brake Pedal" width="167" height="95.5"/>
         <image name="Logo_ARacing" width="601" height="195"/>
-        <image name="Track1Icon" width="475" height="266"/>
+        <image name="Map1Icon" width="475" height="266"/>
         <image name="Turn Left Button" width="100" height="98"/>
         <image name="Turn Right Button" width="100.5" height="98"/>
         <image name="Vehicle1Icon" width="475" height="266"/>
