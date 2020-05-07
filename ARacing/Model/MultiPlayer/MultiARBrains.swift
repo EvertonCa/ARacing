@@ -61,6 +61,14 @@ class MultiARBrains {
         self.sceneView = sceneView
         self.arViewController = view
         self.game = game
+        self.setupMultipeer()
+    }
+    
+    // setup Multipeer Connectivity
+    func setupMultipeer() {
+        // Multipeer setup
+        self.multipeerSession = MultipeerSession(view: self.arViewController, multiBrain: self)
+        self.multipeerSession.delegate = self
     }
     
     // setup the view when it loads
@@ -92,26 +100,32 @@ class MultiARBrains {
         self.arText = SingleTexts()
         
         // setup Vehicles
-        self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
+        //self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
         
-        // Multipeer setup
-        self.multipeerSession = MultipeerSession(view: self.arViewController)
-        self.multipeerSession.delegate = self
+    }
+    
+    // adds the scenery and disable gestures and the grid nodes
+    func setupMap(hitTestResult: ARHitTestResult) {
         
     }
     
     //MARK: - Multi-peer functions
     
-    // Send the anchor info to peers, so they can place the same content.
-    func sendAnchor() {
-        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: anchor, requiringSecureCoding: true)
-            else { fatalError("can't encode anchor") }
-        self.multipeerSession.sendToAllPeers(data)
-    }
+    
 }
 
 //MARK: - Multipeer Session Delegates
 extension MultiARBrains: MultipeerSessionDelegate {
+    
+    // Handles changes in the list of connected peers
+    func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
+        print(connectedDevices)
+    }
+    
+    // Message received from peer
+    func messageReceived(manager: MultipeerSession, message: Message) {
+        print(message.name)
+    }
     
 }
 

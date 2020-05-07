@@ -39,7 +39,7 @@ class Game {
                              MapsNames.Map3.rawValue,
                              MapsNames.Map4.rawValue]
     
-    //MARK: - Vehicle Controlls and Resources
+    //MARK: - Vehicle Controls and Resources
     
     // Vehicle Selected
     var vehicleSelected:Int
@@ -104,7 +104,7 @@ class Game {
                                    VehicleImages.Vehicle15.rawValue,
                                    VehicleImages.Vehicle16.rawValue]
     
-    //MARK: - Checkpoints Controlls and Resources
+    //MARK: - Checkpoints Controls and Resources
     
     // Map 1 Coordinates
     let map1CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.25, -0.8),
@@ -146,6 +146,11 @@ class Game {
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
     
+    //MARK: - Multipeer Resources
+    
+    // Multipeer type of connection selected
+    var multipeerConnectionSelected:Int
+    
     //MARK: - User Defaults
     
     // User Defaults
@@ -175,6 +180,7 @@ class Game {
         self.gameTypeSelected = 0
         self.mapSelected = 0
         self.vehicleSelected = 0
+        self.multipeerConnectionSelected = 0
         self.loadUserDefaults()
     }
     

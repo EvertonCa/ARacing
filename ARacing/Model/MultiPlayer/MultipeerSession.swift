@@ -23,6 +23,9 @@ class MultipeerSession: NSObject {
     // AR View Controller
     var arViewController:ARViewController
     
+    // Multi AR Brain
+    var multiBrain:MultiARBrains
+    
     // Service type must be a unique string, at most 15 characters long
     // and can contain only ASCII lowercase letters, numbers and hyphens.
     static let serviceType = "eca-aracing"
@@ -41,9 +44,10 @@ class MultipeerSession: NSObject {
     //MARK: - Functions
     
     // Init and initial setup
-    init(view:ARViewController) {
+    init(view:ARViewController, multiBrain:MultiARBrains) {
         
         self.arViewController = view
+        self.multiBrain = multiBrain
         
         self.session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
         
@@ -53,15 +57,17 @@ class MultipeerSession: NSObject {
     }
     
     // Sets the device as Host in the Multipeer Connectivity
-    func startHosting(action: UIAlertAction) {
+    func startHosting() {
         self.advertiserAssistant = MCAdvertiserAssistant(serviceType: MultipeerSession.serviceType, discoveryInfo: nil, session: self.session)
         self.advertiserAssistant.start()
     }
     
     // Sets the device as Client in the Multipeer Connectivity and shows the view to choose connection
-    func joinSession(action: UIAlertAction) {
+    func joinSession() {
         self.browserAssistant = MCBrowserViewController(serviceType: MultipeerSession.serviceType, session: self.session)
         self.browserAssistant?.delegate = self
+        
+        self.browserAssistant.modalPresentationStyle = .overCurrentContext
         self.arViewController.present(self.browserAssistant, animated:true)
     }
     
@@ -158,14 +164,16 @@ extension MultipeerSession: MCSessionDelegate {
 // Handles connection browser
 extension MultipeerSession: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        self.arViewController.dismiss(animated: true)
+        self.arViewController.dismiss(animated: true, completion: {
+            self.arViewController.goToVehicleSelectionViewController()
+        })
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        self.arViewController.dismiss(animated: true)
+        self.arViewController.dismiss(animated: true, completion: {
+            self.arViewController.goToMultiPeerViewController()
+        })
     }
-    
-    
 }
 
 

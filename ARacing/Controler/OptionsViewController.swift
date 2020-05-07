@@ -41,19 +41,14 @@ class OptionsViewController: UIViewController {
     
     
     @IBAction func multiPlayerPressed(_ sender: UIButton) {
-        
         self.dismiss(animated: true, completion: {
             self.delegate?.passSelectedOption(selectedOption: GameMode.MultiPlayer.rawValue)
-            
         })
     }
     
     @IBAction func rcModePressed(_ sender: UIButton) {
-        
         self.dismiss(animated: true, completion: {
             self.delegate?.passSelectedOption(selectedOption: GameMode.RCMode.rawValue)
-            
         })
     }
-    
 }

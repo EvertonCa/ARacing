@@ -11,6 +11,7 @@
 		5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */; };
 		5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7724629AD900CD3ADA /* MultiARBrains.swift */; };
 		54405C552463B94100600AFA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54405C542463B94100600AFA /* Message.swift */; };
+		54405C572463C26700600AFA /* MultiPeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54405C562463C26700600AFA /* MultiPeerViewController.swift */; };
 		544BA7962463568B0018FDA1 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BA7952463568B0018FDA1 /* MultipeerSession.swift */; };
 		5457FB90244B4A1700BD701E /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* Gestures.swift */; };
 		5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459DD6D245CD96A00E57584 /* Vehicle.swift */; };
@@ -46,6 +47,7 @@
 		5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5437CB7724629AD900CD3ADA /* MultiARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARBrains.swift; sourceTree = "<group>"; };
 		54405C542463B94100600AFA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		54405C562463C26700600AFA /* MultiPeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerViewController.swift; sourceTree = "<group>"; };
 		544BA7952463568B0018FDA1 /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
 		5457FB8F244B4A1700BD701E /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 		5459DD6D245CD96A00E57584 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */,
 				54937298245D8262008FF034 /* VehicleSelectionViewController.swift */,
 				5493729C245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift */,
+				54405C562463C26700600AFA /* MultiPeerViewController.swift */,
 				5493729A245D8650008FF034 /* VehicleCell.swift */,
 				5437CB72246269F700CD3ADA /* MapsCell.swift */,
 			);
@@ -292,6 +295,7 @@
 				54C198BF245AC6870058DE0A /* Enums.swift in Sources */,
 				5461C2132437055600F02694 /* ARViewController.swift in Sources */,
 				5457FB90244B4A1700BD701E /* Gestures.swift in Sources */,
+				54405C572463C26700600AFA /* MultiPeerViewController.swift in Sources */,
 				54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */,
 				54BDD8B324500BD600691408 /* Map.swift in Sources */,
 				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,

@@ -81,7 +81,7 @@ class SingleARBrains {
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, arBrains: self)
+        self.gesturesBrain = Gestures(sceneView: self.sceneView, singleARBrains: self, game: self.game)
         self.gesturesBrain.registerGesturesRecognizers()
         
         // setup scenery

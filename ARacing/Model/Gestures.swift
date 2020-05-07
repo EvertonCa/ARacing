@@ -78,12 +78,14 @@ class Gestures {
         
         if !hitTest.isEmpty {
             if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue {
-                    self.singleARBrain.setupMap(hitTestResult: hitTest.first!)
+                self.singleARBrain.setupMap(hitTestResult: hitTest.first!)
+                self.singleARBrain.arViewController.showStartButton()
             }
             else {
-                    self.multiARBrains.setupMap(hitTestResult: hitTest.first!)
+                self.multiARBrains.setupMap(hitTestResult: hitTest.first!)
+                self.multiARBrains.arViewController.showStartButton()
             }
-            self.multiARBrains.arViewController.showStartButton()
+            
         }
     }
     

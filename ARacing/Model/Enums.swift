@@ -174,4 +174,10 @@ enum MapRecord: String {
     case Map4 = "map4Record"
 }
 
+//MARK: - Multipeer Enums
 
+// Type of connection selected
+enum Connection: Int {
+    case Host = 1
+    case Join = 2
+}

@@ -291,7 +291,7 @@ class ARBrain {
     
     // node updated in single player
     private func singleUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        // if the scenary is not placed, updates the grid to the new size
+        // if the scenery is not placed, updates the grid to the new size
         if !self.arViewController.singleARBrain!.map.mapPlaced {
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
             

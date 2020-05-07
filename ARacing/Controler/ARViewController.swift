@@ -34,6 +34,9 @@ class ARViewController: UIViewController {
     // Single AR Brain
     var singleARBrain: SingleARBrains?
     
+    // Multi AR Brain
+    var multiARBrain: MultiARBrains?
+    
     // RC Brain
     var rcBrains: RCBrains?
     
@@ -78,17 +81,23 @@ class ARViewController: UIViewController {
     
     // perform segue to MapsViewController
     func goToMapsViewController() {
-        // perform segue to options controller
+        // perform segue to maps controller
         performSegue(withIdentifier: "GoToMaps", sender: self)
     }
     
     // perform segue to VehicleSelectionViewController
     func goToVehicleSelectionViewController() {
-        // perform segue to options controller
+        // perform segue to vehicle controller
         performSegue(withIdentifier: "GoToVehicleSelection", sender: self)
     }
     
-    // Starts AR Session as Single Player Mode
+    // perform segue to MultiPeerViewController
+    func goToMultiPeerViewController() {
+        // perform segue to multipeer controller
+        performSegue(withIdentifier: "GoToMultipeer", sender: self)
+    }
+    
+    // Setups Single Player Mode
     func singlePlayerSelected() {
         // sets the selected type
         self.game.gameTypeSelected = GameMode.SinglePlayer.rawValue
@@ -99,6 +108,10 @@ class ARViewController: UIViewController {
         // start Single AR Brain
         self.singleARBrain = SingleARBrains(self.sceneView, self, self.arBrain.game)
         
+    }
+    
+    // Starts the Single Player Mode
+    func startSinglePlayer() {
         // defines the AR Delegates
         self.defineARDelegates()
         
@@ -107,10 +120,9 @@ class ARViewController: UIViewController {
         
         // show feedback to move the camera
         self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
-        
     }
     
-    // Starts AR Session as Multi Player Mode
+    // Setups Multi Player Mode
     func multiPlayerSelected() {
         // sets the selected type
         self.game.gameTypeSelected = GameMode.MultiPlayer.rawValue
@@ -119,12 +131,22 @@ class ARViewController: UIViewController {
         self.arBrain = ARBrain(game:self.game, view: self)
         
         // start Multi AR Brain
-        
-        // defines the AR Delegates
-        self.defineARDelegates()
+        self.multiARBrain = MultiARBrains(self.sceneView, self, self.arBrain.game)
     }
     
-    // Starts AR Session as RC Mode
+    // Starts the Single Player Mode
+    func startMultiPlayer() {
+        // defines the AR Delegates
+        self.defineARDelegates()
+        
+        // setup the AR Experience
+        self.multiARBrain?.setupView()
+        
+        // show feedback to move the camera
+        self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
+    }
+    
+    // Starts the RC Mode
     func rcModeSelected() {
         // sets the selected type
         self.game.gameTypeSelected = GameMode.RCMode.rawValue
@@ -134,7 +156,10 @@ class ARViewController: UIViewController {
         
         // start RC Brain
         self.rcBrains = RCBrains(self.sceneView, self, self.arBrain.game)
-        
+    }
+    
+    // Starts the SRC Mode
+    func startRC() {
         // defines the AR Delegates
         self.defineARDelegates()
         
@@ -265,6 +290,10 @@ class ARViewController: UIViewController {
             let destinationVC = segue.destination as! VehicleSelectionViewController
             destinationVC.delegate = self
             destinationVC.game = self.game
+        }
+        else if segue.identifier == "GoToMultipeer" {
+            let destinationVC = segue.destination as! MultiPeerViewController
+            destinationVC.delegate = self
         }
     }
     

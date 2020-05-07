@@ -17,14 +17,17 @@ extension ARViewController: OptionViewDelegate{
         switch selectedOption{
         case GameMode.SinglePlayer.rawValue:
             self.game.gameTypeSelected = GameMode.SinglePlayer.rawValue
+            self.singlePlayerSelected()
             self.goToMapsViewController()
             
         case GameMode.MultiPlayer.rawValue:
             self.game.gameTypeSelected = GameMode.MultiPlayer.rawValue
-            self.goToMapsViewController()
+            self.multiPlayerSelected()
+            self.goToMultiPeerViewController()
             
         case GameMode.RCMode.rawValue:
             self.game.gameTypeSelected = GameMode.RCMode.rawValue
+            self.rcModeSelected()
             self.goToVehicleSelectionViewController()
         default: break
         }
@@ -47,15 +50,33 @@ extension ARViewController: VehicleSelectionDelegate {
         
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
-            self.singlePlayerSelected()
+            self.startSinglePlayer()
             
         case GameMode.MultiPlayer.rawValue:
-            self.multiPlayerSelected()
+            self.startMultiPlayer()
             
         case GameMode.RCMode.rawValue:
-            self.rcModeSelected()
+            self.startRC()
             
         default: break
+        }
+    }
+}
+
+//MARK: - Multipeer Selection Segue Delegate
+extension ARViewController: MultiPeerViewDelegate {
+    func passSelectedConnection(selectedConnection: Int) {
+        self.game.multipeerConnectionSelected = selectedConnection
+        
+        switch selectedConnection {
+        case Connection.Host.rawValue:
+            self.goToMapsViewController()
+            
+        case Connection.Join.rawValue:
+            self.multiARBrain?.multipeerSession.joinSession()
+            
+        default:
+            break
         }
     }
 }
