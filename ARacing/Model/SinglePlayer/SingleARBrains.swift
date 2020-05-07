@@ -109,7 +109,7 @@ class SingleARBrains {
         
         gridNode.name = "Grid"
         
-        // static is not affected by forces, but it is interactible
+        // static is not affected by forces, but it is interact-able
         let staticBody = SCNPhysicsBody.static()
         
         gridNode.physicsBody = staticBody
@@ -243,8 +243,6 @@ class SingleARBrains {
     func checkRecord() {
         if self.lapTimer.counter < self.game.checkRecord() {
             self.game.saveRecord(record:self.lapTimer.counter)
-            
-            
         }
     }
     

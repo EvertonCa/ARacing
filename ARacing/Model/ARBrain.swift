@@ -158,7 +158,7 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.singleDidAddNodeRendered(node: node, anchor: anchor)
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer New Node Added
+            self.multiDidAddNodeRendered(node: node, anchor: anchor)
             break
         case GameMode.RCMode.rawValue:
             self.rcDidAddNodeRendered(node: node, anchor: anchor)
@@ -172,7 +172,7 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.singleUpdatedNodeRendered(node: node, anchor: anchor)
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer Node updated
+            self.multiUpdatedNodeRendered(node: node, anchor: anchor)
             break
         case GameMode.RCMode.rawValue:
             self.rcUpdatedNodeRendered(node: node, anchor: anchor)
@@ -241,14 +241,7 @@ class ARBrain {
     private func singleStartPressed() {
         
         // Stops the timer
-        switch self.game.gameTypeSelected {
-        case GameMode.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.lapTimer.stopTimer()
-        case GameMode.MultiPlayer.rawValue:
-            //FIXME: Lap reset for multiplayer
-            break
-        default: break
-        }
+        self.arViewController.singleARBrain?.lapTimer.stopTimer()
         
         // show vehicle in the view
         self.arViewController.singleARBrain?.vehicle.createVehicleSinglePlayer()
@@ -274,7 +267,7 @@ class ARBrain {
     
     // node added in single player
     private func singleDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        // if the scenary is not placed, adds the new grid
+        // if the scenery is not placed, adds the new grid
         if !self.arViewController.singleARBrain!.map.mapPlaced {
             DispatchQueue.main.async {
                 // show feedback
@@ -361,6 +354,55 @@ class ARBrain {
     // start button pressed in single player mode
     private func multiStartPressed() {
         
+        // disable gestures
+        self.arViewController.multiARBrain?.gesturesBrain.removeRotationGesture()
+        
+        // sets the scenery to locked
+        self.arViewController.multiARBrain?.map.mapLocked = true
+        
+        // If the device is Host
+        if self.arViewController.multiARBrain?.game.multipeerConnectionSelected == Connection.Host.rawValue {
+            self.arViewController.multiARBrain?.multipeerSession.startHosting()
+        }
+        // If the device is Client
+        else {
+            
+        }
+    }
+    
+    // node added in multi player
+    private func multiDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
+        // if the scenery is not placed, adds the new grid
+        if !self.arViewController.multiARBrain!.map.mapPlaced {
+            DispatchQueue.main.async {
+                // show feedback
+                self.arViewController.showFeedback(text: "Click on the grid where you would like to place your map!")
+            }
+            
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            
+            let gridNode = self.arViewController.multiARBrain!.createGrid(planeAnchor: planeAnchor)
+            
+            node.addChildNode(gridNode)
+        }
+    }
+    
+    // node updated in multi player
+    private func multiUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
+        // if the scenery is not placed, updates the grid to the new size
+        if !self.arViewController.multiARBrain!.map.mapPlaced {
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            
+            node.enumerateChildNodes { ( childNode, _ ) in
+                childNode.removeFromParentNode()
+            }
+            
+            self.arViewController.multiARBrain!.gridNode = node
+            
+            let gridNode = self.arViewController.multiARBrain!.createGrid(planeAnchor: planeAnchor)
+            
+            self.arViewController.multiARBrain!.gridNode!.addChildNode(gridNode)
+        }
     }
     
     //MARK: - RC Mode Functions

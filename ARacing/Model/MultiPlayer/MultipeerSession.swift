@@ -8,11 +8,13 @@
 //  This Class manages the Multi-peer connectivity for multiplayer game mode
 
 import MultipeerConnectivity
+import ARKit
 
 protocol MultipeerSessionDelegate {
     
     func connectedDevicesChanged(manager : MultipeerSession, connectedDevices: [String])
     func messageReceived(manager : MultipeerSession, message: Message)
+    func arWorldMapReceived(manager : MultipeerSession, worldMap: ARWorldMap)
     
 }
 
@@ -79,7 +81,7 @@ class MultipeerSession: NSObject {
     // Encodes and sends the desired message to the connected peers
     func encodeAndSend(message:Message) {
         if let encodedMessage = self.encodeMessage(message: message) {
-            self.sendMessage(data: encodedMessage)
+            self.sendData(data: encodedMessage)
         }
     }
     
@@ -96,7 +98,7 @@ class MultipeerSession: NSObject {
     }
     
     // Sends the data to connected peers
-    func sendMessage(data:Data) {
+    func sendData(data:Data) {
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
@@ -107,16 +109,38 @@ class MultipeerSession: NSObject {
         }
     }
     
-    // Decodes the message
-    func decodeMessage(data:Data) -> Message {
+    // Encodes and sends ARWorldMap to connected peers
+    func encodeAndSendARWorldMap(worldMap:ARWorldMap) {
+        let mapEncoded = self.encodeARWorldMap(worldMap: worldMap)
+        self.sendData(data: mapEncoded)
+    }
+    
+    // Encode ARWorldMap
+    func encodeARWorldMap(worldMap:ARWorldMap) -> Data {
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+            else { fatalError("can't encode map") }
+        return data
+    }
+    
+    // Handles Received Data
+    func receiveData(data:Data){
         let decoder = JSONDecoder()
-        var decoded:Message!
         do {
-            decoded = try decoder.decode(Message.self, from: data)
+            // If received data is ARWorldMap
+            if let arWorldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+                self.delegate?.arWorldMapReceived(manager: self, worldMap: arWorldMap)
+            }
+            // If received data is Message
+            else if let decodedMessage = try? decoder.decode(Message.self, from: data) {
+                self.delegate?.messageReceived(manager: self, message: decodedMessage)
+            }
+            // Unknown data type received
+            else {
+                print("unknown data received")
+            }
         } catch {
-            print(error.localizedDescription)
+            print("can't decode data received data")
         }
-        return decoded
     }
 }
 
@@ -130,6 +154,9 @@ extension MultipeerSession: MCSessionDelegate {
         case .connected:
             print("Connected: \(peerID.displayName)")
             self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
+            if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue {
+                self.encodeAndSendARWorldMap(worldMap: self.multiBrain.getARWorldMap())
+            }
         case .connecting:
             print("Connecting: \(peerID.displayName)")
         case .notConnected:
@@ -142,7 +169,7 @@ extension MultipeerSession: MCSessionDelegate {
     
     // Handles data received
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        self.delegate?.messageReceived(manager: self, message: self.decodeMessage(data: data))
+        self.receiveData(data: data)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -164,9 +191,7 @@ extension MultipeerSession: MCSessionDelegate {
 // Handles connection browser
 extension MultipeerSession: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        self.arViewController.dismiss(animated: true, completion: {
-            self.arViewController.goToVehicleSelectionViewController()
-        })
+        self.arViewController.dismiss(animated: true)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {

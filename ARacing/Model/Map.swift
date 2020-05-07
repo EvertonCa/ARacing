@@ -35,7 +35,7 @@ class Map {
         self.game = game
     }
     
-    // creates and places the scenary in the AR view
+    // creates and places the scenery in the AR view
     func addMap(hitTestResult: ARHitTestResult) -> SCNNode {
         
         let scene = SCNScene(named: self.game.mapAddress())

@@ -73,7 +73,7 @@ extension ARViewController: MultiPeerViewDelegate {
             self.goToMapsViewController()
             
         case Connection.Join.rawValue:
-            self.multiARBrain?.multipeerSession.joinSession()
+            self.goToVehicleSelectionViewController()
             
         default:
             break

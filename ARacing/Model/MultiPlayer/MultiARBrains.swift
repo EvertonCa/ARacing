@@ -86,36 +86,96 @@ class MultiARBrains {
         // enables default lighting
         self.sceneView.autoenablesDefaultLighting = true
         
-        // run session
-        self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
+        // if the user is Host
+        if self.game.multipeerConnectionSelected == Connection.Host.rawValue {
+            // run session
+            self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
+            
+            // setup the gestures recognizer
+            self.gesturesBrain = Gestures(sceneView: self.sceneView, multiARBrains: self, game: self.game)
+            self.gesturesBrain.registerGesturesRecognizers()
+            
+            // setup scenery
+            self.map = Map(mapNode: self.mapNode, sceneView: self.sceneView, game: self.game)
+            
+            // setup AR Text
+            self.arText = SingleTexts()
+            
+            // setup Vehicles
+            //self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
+        }
+        // if the device is client
+        else
+        {
+            self.multipeerSession.joinSession()
+        }
+    }
+    
+    // creates the grid that shows the horizontal surface
+    func createGrid(planeAnchor: ARPlaneAnchor) -> SCNNode {
         
-        // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, multiARBrains: self, game: self.game)
-        self.gesturesBrain.registerGesturesRecognizers()
+        let gridNode = SCNNode(geometry: SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z)))
+        gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
+        gridNode.geometry?.firstMaterial?.isDoubleSided = true
+        gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
+        gridNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
         
-        // setup scenery
-        self.map = Map(mapNode: self.mapNode, sceneView: self.sceneView, game: self.game)
+        gridNode.name = "Grid"
         
-        // setup AR Text
-        self.arText = SingleTexts()
+        // static is not affected by forces, but it is interact-able
+        let staticBody = SCNPhysicsBody.static()
         
-        // setup Vehicles
-        //self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
+        gridNode.physicsBody = staticBody
         
+        return gridNode
     }
     
     // adds the scenery and disable gestures and the grid nodes
     func setupMap(hitTestResult: ARHitTestResult) {
+        self.mapNode = self.map.addMap(hitTestResult: hitTestResult)
         
+        self.gesturesBrain.removeTapGesture()
+        
+        // changes feedback label
+        self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
+        
+        // removes all the grids in the scene
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "Grid" {
+                node.removeFromParentNode()
+            }
+        }
     }
     
     //MARK: - Multi-peer functions
     
+    // Get AR World Map
+    func getARWorldMap() -> ARWorldMap {
+        var arWorldMap:ARWorldMap!
+        self.sceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let safeMap = worldMap
+                else { print("Error: \(error!.localizedDescription)"); return }
+            arWorldMap = safeMap
+        }
+        return arWorldMap
+    }
     
+    // Join session
+    func joinARSession(worldMap:ARWorldMap) {
+        // sets the received world map as initial world
+        self.arConfiguration.initialWorldMap = worldMap
+        
+        // run session
+        self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
+    }
 }
 
 //MARK: - Multipeer Session Delegates
 extension MultiARBrains: MultipeerSessionDelegate {
+    // ARWorldMap received from peer
+    func arWorldMapReceived(manager: MultipeerSession, worldMap: ARWorldMap) {
+        self.joinARSession(worldMap: worldMap)
+    }
     
     // Handles changes in the list of connected peers
     func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
