@@ -10,10 +10,11 @@
 		5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB72246269F700CD3ADA /* MapsCell.swift */; };
 		5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */; };
 		5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7724629AD900CD3ADA /* MultiARBrains.swift */; };
+		54405C552463B94100600AFA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54405C542463B94100600AFA /* Message.swift */; };
+		544BA7962463568B0018FDA1 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BA7952463568B0018FDA1 /* MultipeerSession.swift */; };
 		5457FB90244B4A1700BD701E /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* Gestures.swift */; };
 		5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459DD6D245CD96A00E57584 /* Vehicle.swift */; };
 		5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F22436CCEE00F02694 /* AppDelegate.swift */; };
-		5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F42436CCEE00F02694 /* SceneDelegate.swift */; };
 		5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F62436CCEE00F02694 /* IntroViewController.swift */; };
 		5461C1FA2436CCEE00F02694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5461C1F82436CCEE00F02694 /* Main.storyboard */; };
 		5461C1FC2436CCFD00F02694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5461C1FB2436CCFD00F02694 /* Assets.xcassets */; };
@@ -44,11 +45,12 @@
 		5437CB72246269F700CD3ADA /* MapsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsCell.swift; sourceTree = "<group>"; };
 		5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5437CB7724629AD900CD3ADA /* MultiARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARBrains.swift; sourceTree = "<group>"; };
+		54405C542463B94100600AFA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		544BA7952463568B0018FDA1 /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
 		5457FB8F244B4A1700BD701E /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 		5459DD6D245CD96A00E57584 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		5461C1EF2436CCEE00F02694 /* ARacingPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacingPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461C1F22436CCEE00F02694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5461C1F42436CCEE00F02694 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5461C1F62436CCEE00F02694 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		5461C1F92436CCEE00F02694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5461C1FB2436CCFD00F02694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				5437CB7724629AD900CD3ADA /* MultiARBrains.swift */,
+				544BA7952463568B0018FDA1 /* MultipeerSession.swift */,
+				54405C542463B94100600AFA /* Message.swift */,
 			);
 			path = MultiPlayer;
 			sourceTree = "<group>";
@@ -117,7 +121,6 @@
 				5461C2092436F55B00F02694 /* Sounds */,
 				5489C0862447F5A200B44030 /* 3D Models.scnassets */,
 				5461C1FB2436CCFD00F02694 /* Assets.xcassets */,
-				5461C1F42436CCEE00F02694 /* SceneDelegate.swift */,
 				5461C1F22436CCEE00F02694 /* AppDelegate.swift */,
 				5461C2082436CD5800F02694 /* Model */,
 				5461C2072436CD4400F02694 /* View */,
@@ -274,6 +277,7 @@
 				54937299245D8262008FF034 /* VehicleSelectionViewController.swift in Sources */,
 				54C198C1245ACC220058DE0A /* ARBrain.swift in Sources */,
 				54FAB6C7244C30980057AF49 /* GesturesRC.swift in Sources */,
+				544BA7962463568B0018FDA1 /* MultipeerSession.swift in Sources */,
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				54C198C3245AF35B0058DE0A /* MapsViewController.swift in Sources */,
 				54CE5FC824502AF9009E5E67 /* LapTimer.swift in Sources */,
@@ -283,7 +287,6 @@
 				5493729B245D8650008FF034 /* VehicleCell.swift in Sources */,
 				5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */,
 				54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */,
-				5461C1F52436CCEE00F02694 /* SceneDelegate.swift in Sources */,
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5493729D245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift in Sources */,
 				54C198BF245AC6870058DE0A /* Enums.swift in Sources */,
@@ -292,6 +295,7 @@
 				54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */,
 				54BDD8B324500BD600691408 /* Map.swift in Sources */,
 				54BDD8AF24500B4E00691408 /* SingleCheckpoint.swift in Sources */,
+				54405C552463B94100600AFA /* Message.swift in Sources */,
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 				5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */,

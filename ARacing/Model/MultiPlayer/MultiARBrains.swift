@@ -8,6 +8,7 @@
 
 import Foundation
 import ARKit
+import MultipeerConnectivity
 
 class MultiARBrains {
     
@@ -15,6 +16,9 @@ class MultiARBrains {
     
     // ARKit scene View
     var sceneView:ARSCNView!
+    
+    // Multipeer
+    var multipeerSession:MultipeerSession!
     
     // World Tracking configuration
     let arConfiguration = ARWorldTrackingConfiguration()
@@ -78,7 +82,7 @@ class MultiARBrains {
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, arBrains: self)
+        self.gesturesBrain = Gestures(sceneView: self.sceneView, multiARBrains: self, game: self.game)
         self.gesturesBrain.registerGesturesRecognizers()
         
         // setup scenery
@@ -90,5 +94,24 @@ class MultiARBrains {
         // setup Vehicles
         self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
         
+        // Multipeer setup
+        self.multipeerSession = MultipeerSession(view: self.arViewController)
+        self.multipeerSession.delegate = self
+        
+    }
+    
+    //MARK: - Multi-peer functions
+    
+    // Send the anchor info to peers, so they can place the same content.
+    func sendAnchor() {
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: anchor, requiringSecureCoding: true)
+            else { fatalError("can't encode anchor") }
+        self.multipeerSession.sendToAllPeers(data)
     }
 }
+
+//MARK: - Multipeer Session Delegates
+extension MultiARBrains: MultipeerSessionDelegate {
+    
+}
+
