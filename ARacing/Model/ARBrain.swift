@@ -235,7 +235,8 @@ class ARBrain {
                 self.arViewController.multiARBrain?.multipeerSession.canSendMap = false
             }
         }
-        self.arViewController.trackingStatusLabel.text = frame.worldMappingStatus.description
+        self.arViewController.trackingFeedbackImage.alpha = 1.0
+        self.arViewController.trackingFeedbackImage.image = UIImage(named: frame.worldMappingStatus.description)
         self.updateFeedbackLabel(for: frame, trackingState: frame.camera.trackingState)
         
     }
@@ -312,21 +313,21 @@ class ARBrain {
         let message: String
         
         switch trackingState {
-        case .normal where frame.anchors.isEmpty:
+        case .normal where frame.anchors.isEmpty && self.arViewController.multiARBrain!.multipeerSession.connectedPeers.isEmpty:
             // No planes detected; provide instructions for this app's AR interactions.
-            message = "Move around to map the environment, or wait to join a shared session."
+            message = "Move around to map the environment."
             
         case .notAvailable:
             message = "Tracking unavailable."
             
         case .limited(.excessiveMotion):
-            message = "Tracking limited - Move the device more slowly."
+            message = "Move the device more slowly."
             
         case .limited(.insufficientFeatures):
-            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
+            message = "Point the device at an area with visible surface detail, or improve lighting conditions."
             
         case .limited(.relocalizing):
-            message = "Resuming session — move to where you were when the session was interrupted."
+            message = "Resuming Session - Move to where the map is."
             
         case .limited(.initializing):
             message = "Initializing AR session."
@@ -338,10 +339,10 @@ class ARBrain {
             
         }
         if message.isEmpty {
-            self.arViewController.hideFeedback()
+            self.arViewController.hideTrackingFeedback()
         }
         else {
-            self.arViewController.showFeedback(text: message)
+            self.arViewController.showTrackingFeedback(message: message)
         }
     }
     

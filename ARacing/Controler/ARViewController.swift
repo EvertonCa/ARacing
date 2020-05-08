@@ -29,6 +29,9 @@ class ARViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var trackingStatusLabel: UILabel!
+    @IBOutlet weak var connectedWithLabel: UILabel!
+    @IBOutlet weak var trackingFeedbackImage: UIImageView!
+    
     
     //MARK: - Brains
     
@@ -52,7 +55,7 @@ class ARViewController: UIViewController {
     // Initially dummy Game
     var game:Game!
     
-    //MARK: - Functions
+    //MARK: - View overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,8 @@ class ARViewController: UIViewController {
         self.sceneView.session.pause()
     }
     
+    //MARK: - Segue functions
+    
     // perform segue to OptionsViewController
     func goToOptionsViewController() {
         // perform segue to options controller
@@ -106,6 +111,30 @@ class ARViewController: UIViewController {
         // perform segue to multipeer controller
         performSegue(withIdentifier: "GoToMultipeer", sender: self)
     }
+    
+    // Prepare segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToType" {
+            let destinationVC = segue.destination as! OptionsViewController
+            destinationVC.delegate = self
+        }
+        else if segue.identifier == "GoToMaps" {
+            let destinationVC = segue.destination as! MapsViewController
+            destinationVC.delegate = self
+            destinationVC.game = self.game
+        }
+        else if segue.identifier == "GoToVehicleSelection" {
+            let destinationVC = segue.destination as! VehicleSelectionViewController
+            destinationVC.delegate = self
+            destinationVC.game = self.game
+        }
+        else if segue.identifier == "GoToMultipeer" {
+            let destinationVC = segue.destination as! MultiPeerViewController
+            destinationVC.delegate = self
+        }
+    }
+    
+    //MARK: - Setup Modes Functions
     
     // Setups Single Player Mode
     func singlePlayerSelected() {
@@ -180,6 +209,8 @@ class ARViewController: UIViewController {
         self.showFeedback(text: "Move your device to detect the plane to place your RC car!")
     }
     
+    //MARK: - Delegate handlers functions
+    
     // starts the delegates
     func defineARDelegates() {
         // setup delegate
@@ -205,6 +236,8 @@ class ARViewController: UIViewController {
         }
     }
     
+    //MARK: - UI Functions
+    
     // hide all buttons with alpha = 0
     func hideUI() {
         // alphas to 0
@@ -221,6 +254,9 @@ class ARViewController: UIViewController {
         self.feedbackLabel.alpha = 0
         self.timerLabel.alpha = 0
         self.recordLabel.alpha = 0
+        self.trackingStatusLabel.alpha = 0
+        self.connectedWithLabel.alpha = 0
+        self.trackingFeedbackImage.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false
@@ -232,10 +268,10 @@ class ARViewController: UIViewController {
     
     // enables and changes alpha to 1 for the startButton
     func showStartButton() {
+        self.startButton.isEnabled = true
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
             self.startButton.alpha = 1
             self.startButtonBackground.alpha = 1
-            self.startButton.isEnabled = true
         })
     }
     
@@ -248,8 +284,41 @@ class ARViewController: UIViewController {
         })
     }
     
+    // Connected with feedback
+    func connectedWith(message:String) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.connectedWithLabel.alpha = 1.0
+            self.connectedWithLabel.text = message
+        }) { ( success ) in
+            UIView.animate(withDuration: 1.0, delay: 5.0, animations: {
+                self.connectedWithLabel.alpha = 0
+            })
+        }
+    }
+    
+    // Tracking feedback
+    func showTrackingFeedback(message:String) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.trackingStatusLabel.alpha = 1.0
+            self.trackingStatusLabel.text = message
+        })
+    }
+    
+    // Hide tracking status label
+    func hideTrackingFeedback() {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.trackingStatusLabel.alpha = 0.0
+            self.trackingStatusLabel.text = ""
+        })
+    }
+    
     // enables driving buttons
     func showDrivingUI() {
+        // enables all buttons
+        self.accButton.isEnabled = true
+        self.turnRightButton.isEnabled = true
+        self.turnLeftButton.isEnabled = true
+        self.brakeButton.isEnabled = true
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
             // alphas to 1
             self.accButton.alpha = 1
@@ -261,11 +330,13 @@ class ARViewController: UIViewController {
             self.turnLeftButtonBackground.alpha = 1
             self.turnRightButtonBackground.alpha = 1
             
-            // enables all buttons
-            self.accButton.isEnabled = true
-            self.turnRightButton.isEnabled = true
-            self.turnLeftButton.isEnabled = true
-            self.brakeButton.isEnabled = true
+        })
+    }
+    
+    // Show tracking quality label
+    func showTrackingQualityFeedback() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+            self.trackingStatusLabel.alpha = 1.0
         })
     }
     
@@ -284,30 +355,7 @@ class ARViewController: UIViewController {
             self.feedbackLabel.text = ""
         })
     }
-    
-    //MARK: - Segues
-    
-    // Prepare segues
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToType" {
-            let destinationVC = segue.destination as! OptionsViewController
-            destinationVC.delegate = self
-        }
-        else if segue.identifier == "GoToMaps" {
-            let destinationVC = segue.destination as! MapsViewController
-            destinationVC.delegate = self
-            destinationVC.game = self.game
-        }
-        else if segue.identifier == "GoToVehicleSelection" {
-            let destinationVC = segue.destination as! VehicleSelectionViewController
-            destinationVC.delegate = self
-            destinationVC.game = self.game
-        }
-        else if segue.identifier == "GoToMultipeer" {
-            let destinationVC = segue.destination as! MultiPeerViewController
-            destinationVC.delegate = self
-        }
-    }
+
     
     //MARK: - IBActions
     

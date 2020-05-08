@@ -46,6 +46,14 @@ class MultipeerSession: NSObject {
     // Delegate
     var delegate:MultipeerSessionDelegate?
     
+    // Connected Peers
+    var connectedPeers: [MCPeerID] {
+        return session.connectedPeers
+    }
+    
+    // Map Provider
+    var mapProvider: MCPeerID?
+    
     //MARK: - Functions
     
     // Init and initial setup
@@ -126,12 +134,13 @@ class MultipeerSession: NSObject {
     }
     
     // Handles Received Data
-    func receiveData(data:Data){
+    func receiveData(_ data: Data, from peer: MCPeerID){
         let decoder = JSONDecoder()
         do {
             // If received data is ARWorldMap
             if let arWorldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
                 self.delegate?.arWorldMapReceived(manager: self, worldMap: arWorldMap)
+                self.mapProvider = peer
             }
             // If received data is Message
             else if let decodedMessage = try? decoder.decode(Message.self, from: data) {
@@ -155,16 +164,22 @@ extension MultipeerSession: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
-            print("Connected: \(peerID.displayName)")
+            DispatchQueue.main.async {
+                self.arViewController.connectedWith(message: "Connected: \(peerID.displayName)")
+            }
             self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
             if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue {
                 
                 self.encodeAndSendARWorldMap(worldMap: self.multiBrain.arWorldMap!)
             }
         case .connecting:
-            print("Connecting: \(peerID.displayName)")
+            DispatchQueue.main.async {
+                self.arViewController.connectedWith(message: "Connecting: \(peerID.displayName)")
+            }
         case .notConnected:
-            print("Not Connected: \(peerID.displayName)")
+            DispatchQueue.main.async {
+                self.arViewController.connectedWith(message: "Not Connected: \(peerID.displayName)")
+            }
             
         @unknown default:
             print("Unknown state received: \(peerID.displayName)")
@@ -173,7 +188,7 @@ extension MultipeerSession: MCSessionDelegate {
     
     // Handles data received
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        self.receiveData(data: data)
+        self.receiveData(data, from: peerID)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

@@ -119,8 +119,6 @@ class MultiARBrains {
         let mapAnchor = ARAnchor(name: "map", transform: hitTestResult.worldTransform)
         self.sceneView.session.add(anchor: mapAnchor)
         
-        self.gesturesBrain.removeTapGesture()
-        
         // changes feedback label
         self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
     }
@@ -146,7 +144,9 @@ class MultiARBrains {
         // run session
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
-        print("AR loaded")
+        // Set the map flags to placed and locker
+        self.map.mapPlaced = true
+        self.map.mapLocked = true
     }
 }
 

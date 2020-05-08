@@ -181,3 +181,11 @@ enum Connection: Int {
     case Host = 1
     case Join = 2
 }
+
+//MARK: - Tracking UI
+enum TrackingUI: String {
+    case mapped = "Mapped"
+    case extending = "Extending"
+    case limited = "Limited"
+    case notAvailable = "NotAvailable"
+}

@@ -38,7 +38,6 @@ class IntroViewController: UIViewController {
     
     // changes the alphas of all the initial UI to 0
     func hideInitialUI() {
-        backgroundGame.alpha = 0.0
         backgroundButtonStart.alpha = 0.0
         buttonStart.alpha = 0.0
     }

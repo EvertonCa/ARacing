@@ -210,13 +210,13 @@ extension ARFrame.WorldMappingStatus: CustomStringConvertible {
     public var description: String {
         switch self {
         case .notAvailable:
-            return "Not Available"
+            return TrackingUI.notAvailable.rawValue
         case .limited:
-            return "Limited"
+            return TrackingUI.limited.rawValue
         case .extending:
-            return "Extending"
+            return TrackingUI.extending.rawValue
         case .mapped:
-            return "Mapped"
+            return TrackingUI.mapped.rawValue
         @unknown default:
             return "Unknown"
         }

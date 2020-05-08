@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct Message: Codable {
     var peerHashID:Int
     var name: String
