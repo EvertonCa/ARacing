@@ -21,6 +21,7 @@ class ARViewController: UIViewController {
     @IBOutlet weak var brakeButton: UIButton!
     @IBOutlet weak var turnRightButton: UIButton!
     @IBOutlet weak var turnLeftButton: UIButton!
+    @IBOutlet weak var beginHostingButton: UIButton!
     //UIImageViews
     @IBOutlet weak var startButtonBackground: UIImageView!
     @IBOutlet weak var accButtonBackground: UIImageView!
@@ -29,12 +30,15 @@ class ARViewController: UIViewController {
     @IBOutlet weak var turnLeftButtonBackground: UIImageView!
     @IBOutlet weak var turnRightButtonBackground: UIImageView!
     @IBOutlet weak var trackingFeedbackImage: UIImageView!
+    @IBOutlet weak var beginHostingBackground: UIImageView!
     // UILabels
     @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var trackingStatusLabel: UILabel!
     @IBOutlet weak var connectedWithLabel: UILabel!
+    
+    
     
     
     
@@ -161,9 +165,6 @@ class ARViewController: UIViewController {
         
         // setup the AR Experience
         self.singleARBrain?.setupView()
-        
-        // show feedback to move the camera
-        self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
     }
     
     // Setups Multi Player Mode
@@ -186,8 +187,6 @@ class ARViewController: UIViewController {
         // setup the AR Experience
         self.multiARBrain?.setupView()
         
-        // show feedback to move the camera
-        self.showFeedback(text: "Move your device to detect the plane to place your AR map!")
     }
     
     // Starts the RC Mode
@@ -209,9 +208,6 @@ class ARViewController: UIViewController {
         
         // setup the AR Experience
         self.rcBrains!.setupView()
-        
-        // show feedback to move the camera
-        self.showFeedback(text: "Move your device to detect the plane to place your RC car!")
     }
     
     //MARK: - Delegate handlers functions
@@ -263,6 +259,8 @@ class ARViewController: UIViewController {
         self.connectedWithLabel.alpha = 0
         self.trackingFeedbackImage.alpha = 0
         self.pauseButtonBackground.alpha = 0
+        self.beginHostingButton.alpha = 0
+        self.beginHostingBackground.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false
@@ -270,14 +268,35 @@ class ARViewController: UIViewController {
         self.turnRightButton.isEnabled = false
         self.turnLeftButton.isEnabled = false
         self.brakeButton.isEnabled = false
+        self.beginHostingButton.isEnabled = false
     }
     
     // enables and changes alpha to 1 for the startButton
     func showStartButton() {
-        self.startButton.isEnabled = true
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.startButton.alpha = 1
-            self.startButtonBackground.alpha = 1
+        DispatchQueue.main.async {
+            self.startButton.isEnabled = true
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.startButton.alpha = 1
+                self.startButtonBackground.alpha = 1
+            })
+        }
+    }
+    
+    // Show the Begin Hosting button
+    func showBeginHostingButton() {
+        self.beginHostingButton.isEnabled = true
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+            self.beginHostingBackground.alpha = 1.0
+            self.beginHostingButton.alpha = 1.0
+        })
+    }
+    
+    // Hides the Begin Hosting button
+    func hideBeginHostingButton() {
+        self.beginHostingButton.isEnabled = false
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+            self.beginHostingBackground.alpha = 0.0
+            self.beginHostingButton.alpha = 0.0
         })
     }
     
@@ -412,5 +431,9 @@ class ARViewController: UIViewController {
     
     @IBAction func backPressed(_ sender: UIButton) {
         self.arBrain.resetExperience()
+    }
+    @IBAction func beginHostingPressed(_ sender: UIButton) {
+        self.arBrain.beginHostingPressed()
+        self.hideBeginHostingButton()
     }
 }

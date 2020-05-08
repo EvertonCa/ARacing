@@ -38,6 +38,11 @@ class ARBrain {
         }
     }
     
+    // Begin Hosting Button Pressed
+    func beginHostingPressed() {
+        self.beginHost()
+    }
+    
     // accelerator pressed
     func accPressed() {
         switch self.game.gameTypeSelected {
@@ -453,19 +458,22 @@ class ARBrain {
     
     // start button pressed in single player mode
     private func multiStartPressed() {
-        
-        // sets the scenery to locked
-        self.arViewController.multiARBrain?.map.mapLocked = true
-        
         // If the device is Host
         if self.arViewController.multiARBrain?.game.multipeerConnectionSelected == Connection.Host.rawValue {
-            self.arViewController.multiARBrain?.multipeerSession.startHosting()
-            self.arViewController.multiARBrain?.getARWorldMap()
+            self.arViewController.multiARBrain?.finallyStart()
         }
         // If the device is Client
         else {
             
         }
+    }
+    
+    // Begin Hosting Pressed
+    private func beginHost() {
+        // sets the scenery to locked
+        self.arViewController.multiARBrain?.map.mapLocked = true
+        self.arViewController.multiARBrain?.multipeerSession.startHosting()
+        self.arViewController.multiARBrain?.getARWorldMap()
     }
     
     // node added in multi player

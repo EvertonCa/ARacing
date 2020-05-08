@@ -25,6 +25,9 @@ class Vehicle {
     // Vehicle Collision Geometry
     var collisionGeometry = SCNNode()
     
+    // Vehicle Index for Multiplayer
+    var vehicleIndex:Int?
+    
     //MARK: - Driving and Vehicle Parameters
     
     // Steer angle
@@ -70,7 +73,7 @@ class Vehicle {
     
     // AR Brains
     var singleARBrain:SingleARBrains?
-    //var multiARBrain:MultiARBrains?
+    var multiARBrain:MultiARBrains?
     var rcBrain:RCBrains?
     
     //MARK: - Other Variables
@@ -101,10 +104,32 @@ class Vehicle {
         self.initialSpawnPosition = SCNVector3Zero
     }
     
+    init(arView:ARViewController, multiARBrain:MultiARBrains, game:Game, sceneView:ARSCNView, index:Int) {
+        self.arView = arView
+        self.multiARBrain = multiARBrain
+        self.game = game
+        self.sceneView = sceneView
+        self.initialSpawnPosition = self.game.vehiclePosition()
+        self.vehicleIndex = index
+    }
+    
     //MARK: - Functions
     
     // create vehicle for single player mode
     func createVehicleSinglePlayer() {
+        self.createVehicle()
+        self.setupVehicleCollision()
+        self.vehicleNode.position = self.initialSpawnPosition
+        self.spawnPosition = self.initialSpawnPosition
+        
+        // adds the vehicle to the scenery
+        self.arView.singleARBrain?.mapNode.addChildNode(self.vehicleNode)
+        
+        self.vehicleSpawned = true
+    }
+    
+    // create vehicle for multi player mode
+    func createVehicleMultiPlayer() {
         self.createVehicle()
         self.setupVehicleCollision()
         self.vehicleNode.position = self.initialSpawnPosition
@@ -134,8 +159,14 @@ class Vehicle {
     // creates the vehicle
     func createVehicle() {
 
-        // vehicle scene
-        self.vehicleScene = SCNScene(named: self.game.vehicleResource())!
+        // vehicle scene for multiplayer
+        if self.vehicleIndex != nil {
+            self.vehicleScene = SCNScene(named: self.game.vehicleResourceWithIndex(index: self.vehicleIndex!))!
+        }
+        // vehicle scene for single player and RC
+        else {
+            self.vehicleScene = SCNScene(named: self.game.vehicleResource())!
+        }
         
         // Main vehicle node
         self.vehicleNode = (self.vehicleScene.rootNode.childNode(withName: "Chassis", recursively: false))!

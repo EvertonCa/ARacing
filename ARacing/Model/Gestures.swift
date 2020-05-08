@@ -142,7 +142,7 @@ class Gestures {
                 }
                 else {
                     self.multiARBrains.createMapAnchor(hitTestResult: hitTest.first!)
-                    self.multiARBrains.arViewController.showStartButton()
+                    self.multiARBrains.arViewController.showBeginHostingButton()
                 }
             }
         }

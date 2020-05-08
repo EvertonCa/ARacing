@@ -151,6 +151,17 @@ class Game {
     // Multipeer type of connection selected
     var multipeerConnectionSelected:Int
     
+    //MARK: - Multiplayer Control Variables
+    
+    // Quantity of peers in the session
+    var peersQuantity:Int
+    
+    // Peers Hash IDs - the first is always the host
+    var peersHashIDs:[Int]
+    
+    // Selected Vehicles list
+    var listSelectedVehicles:[Int]
+    
     //MARK: - User Defaults
     
     // User Defaults
@@ -181,6 +192,9 @@ class Game {
         self.mapSelected = 0
         self.vehicleSelected = 0
         self.multipeerConnectionSelected = 0
+        self.peersQuantity = 0
+        self.peersHashIDs = [0]
+        self.listSelectedVehicles = [0]
         self.loadUserDefaults()
     }
     
@@ -200,12 +214,19 @@ class Game {
     
     // return the resources for the vehicle in the game mode and map selected
     func vehicleResource() -> String {
-        if self.gameTypeSelected == GameMode.SinglePlayer.rawValue || self.gameTypeSelected == GameMode.MultiPlayer.rawValue {
+        if self.gameTypeSelected == GameMode.SinglePlayer.rawValue {
             return self.vehicleSmallResourcesAddresses[self.vehicleSelected]
         }
         else {
             return self.vehicleNormalResourcesAddresses[self.vehicleSelected]
         }
+    }
+    
+    // return the resources for the vehicle in the game mode and map selected
+    func vehicleResourceWithIndex(index:Int) -> String {
+        
+        return self.vehicleSmallResourcesAddresses[self.listSelectedVehicles[index]]
+        
     }
     
     //MARK: - Checkpoint Functions

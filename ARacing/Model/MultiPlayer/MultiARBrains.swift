@@ -55,8 +55,8 @@ class MultiARBrains {
     // AR Text
     var arText:SingleTexts!
     
-    // Vehicles
-    var vehicle:Vehicle! = nil
+    // Vehicles list
+    var vehiclesList:[Vehicle]!
     
     // ARWorldMap
     var arWorldMap:ARWorldMap?
@@ -106,8 +106,11 @@ class MultiARBrains {
             // run session
             self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
             
-            // setup Vehicles
-            //self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
+            // sets the host hash ID in the game list
+            self.game.peersHashIDs[0] = self.multipeerSession.myPeerID.hash
+            // sets the first vehicle in the list to be the host's
+            self.game.listSelectedVehicles[0] = self.game.vehicleSelected
+            
         }
         // if the device is client
         else
@@ -126,7 +129,26 @@ class MultiARBrains {
         self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
     }
     
+    // Start Multiplayer after all peers joined
+    func finallyStart() {
+        for vehicleIndex in 0...self.game.listSelectedVehicles.count {
+            self.vehiclesList.append(Vehicle(arView: self.arViewController, multiARBrain: self, game: self.game, sceneView: self.sceneView, index: vehicleIndex))
+        }
+    }
+    
     //MARK: - Multi-peer functions
+    
+    // Interpret the received message
+    func interpretReceivedMessage(message:Message) {
+        switch message.messageType {
+        case MessageType.ARWorldMapAndTransformMatrix.rawValue:
+            self.receivedARWorldMapWithTransformMatrix(message: message)
+        case MessageType.SelectedVehicle.rawValue:
+            self.receivedVehicleSelectedMessage(message: message)
+        default:
+            break
+        }
+    }
     
     // Get AR World Map
     func getARWorldMap() {
@@ -163,16 +185,9 @@ class MultiARBrains {
         // Set the map flags to placed and locker
         self.map.mapPlaced = true
         self.map.mapLocked = true
-    }
-    
-    // Interpret the received message
-    func interpretReceivedMessage(message:Message) {
-        switch message.messageType {
-        case MessageType.ARWorldMapAndTransformMatrix.rawValue:
-            self.receivedARWorldMapWithTransformMatrix(message: message)
-        default:
-            break
-        }
+        
+        // Shows the Start Button
+        self.arViewController.showStartButton()
     }
     
     // handles messages with ARWorldMap and transform matrix
@@ -193,7 +208,21 @@ class MultiARBrains {
         } catch {
             print("can't decode world map received from")
         }
+    }
+    
+    // handles messages with vehicle selected info
+    func receivedVehicleSelectedMessage(message:Message) {
+        // adds the peer and vehicle selected to the game controls
+        self.game.peersHashIDs.append(message.peerHashID)
+        self.game.peersQuantity += 1
+        self.game.listSelectedVehicles.append(message.selectedVehicle!)
+    }
+    
+    // creates a message with the selected vehicle info
+    func messageVehicleSelected() -> Message {
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.SelectedVehicle.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: self.game.vehicleSelected)
         
+        return message
     }
 
 }

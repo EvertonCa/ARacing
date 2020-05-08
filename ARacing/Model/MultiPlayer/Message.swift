@@ -14,4 +14,5 @@ struct Message: Codable {
     var messageType:Int
     var transform:[[Float]]?
     var arWorldMapData:Data?
+    var selectedVehicle:Int?
 }

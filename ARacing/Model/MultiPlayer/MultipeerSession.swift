@@ -94,7 +94,7 @@ class MultipeerSession: NSObject {
     }
     
     // Encode the message to Data format
-    func encodeMessage(message:Message) -> Data? {
+    private func encodeMessage(message:Message) -> Data? {
         let encoder = JSONEncoder()
         var encoded:Data?
         do {
@@ -106,7 +106,7 @@ class MultipeerSession: NSObject {
     }
     
     // Sends the data to connected peers
-    func sendData(data:Data) {
+    private func sendData(data:Data) {
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
@@ -145,19 +145,38 @@ extension MultipeerSession: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
+            
+            // Displays the Peer Name in the screen
             DispatchQueue.main.async {
                 self.arViewController.connectedWith(message: "Connected: \(peerID.displayName)")
             }
+            
+            // If device is host, will send ARWorldMap and Transform Matrix to new peer
             if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue {
                 
                 // Encode and send the message with the ARWorld Map and the transform information for the Map
                 self.encodeAndSend(message: self.multiBrain.messageARWorldMap())
+                
+                // Enables the start button
+                self.arViewController.showStartButton()
+            }
+            // If device is client, will send vehicle selected
+            else{
+                self.encodeAndSend(message: self.multiBrain.messageVehicleSelected())
             }
         case .connecting:
             DispatchQueue.main.async {
                 self.arViewController.connectedWith(message: "Connecting: \(peerID.displayName)")
             }
         case .notConnected:
+            if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue{
+                // removes the peer from the game list
+                if let indexToRemove = self.arViewController.game.peersHashIDs.firstIndex(of: peerID.hash) {
+                    self.arViewController.game.peersHashIDs.remove(at: indexToRemove)
+                    self.arViewController.game.listSelectedVehicles.remove(at: indexToRemove)
+                    self.arViewController.game.peersQuantity -= 1
+                }
+            }
             DispatchQueue.main.async {
                 self.arViewController.connectedWith(message: "Not Connected: \(peerID.displayName)")
             }
