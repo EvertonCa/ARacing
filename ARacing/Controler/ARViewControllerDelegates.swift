@@ -90,6 +90,17 @@ extension ARViewController: ARSCNViewDelegate {
         self.arBrain.didAddNodeRenderer(node: node, anchor: anchor)
     }
     
+    // creates a node for each new anchor detected
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        let node = SCNNode()
+        if anchor.name == "map" {
+            node.name = "mapAnchorNode"
+        } else {
+            node.name = "surfaceAnchorNode"
+        }
+        return node
+    }
+    
     //when the anchor is updated
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         self.arBrain.didUpdateNodeRenderer(node: node, anchor: anchor)
@@ -106,6 +117,21 @@ extension ARViewController: ARSCNViewDelegate {
     }
 }
 
+//MARK: - ARSessionDelegate
+
+extension ARViewController: ARSessionDelegate {
+    
+    // when camera's tracking state changed
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        self.arBrain.cameraDidChangeTrackingState(for: session.currentFrame!, trackingState: camera.trackingState)
+    }
+    
+    // Check Mapping Status
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        self.arBrain.sessionDidUpdate(frame: frame)
+    }
+}
+
 //MARK: - SCNPhysicsContactDelegate
 extension ARViewController: SCNPhysicsContactDelegate {
     
@@ -114,3 +140,86 @@ extension ARViewController: SCNPhysicsContactDelegate {
         self.arBrain.didBeginContact(contact: contact)
     }
 }
+
+//MARK: - Gesture Recognizer Delegate
+extension ARViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        switch self.game.gameTypeSelected {
+        case GameMode.SinglePlayer.rawValue:
+            // Single player with map NOT PLACED = enable tap gesture and disable spin gesture
+            if !self.singleARBrain!.map.mapPlaced {
+                if gestureRecognizer.name == "TapGesture" {
+                    return true
+                }
+                else if gestureRecognizer.name == "SpinGesture" {
+                    return false
+                }
+            }
+            // Single player with map placed but NOT locked = disable tap gesture and enable spin gesture
+            else if self.singleARBrain!.map.mapPlaced && !self.singleARBrain!.map.mapLocked {
+                if gestureRecognizer.name == "TapGesture" {
+                    return false
+                }
+                else if gestureRecognizer.name == "SpinGesture" {
+                    return true
+                }
+            }
+            // Single player with map placed and locked = disable all gestures
+            else {
+                return false
+            }
+            
+        case GameMode.MultiPlayer.rawValue:
+            // Multi player with map NOT PLACED = enable tap gesture and disable spin gesture
+            if !self.multiARBrain!.map.mapPlaced {
+                if gestureRecognizer.name == "TapGesture" {
+                    return true
+                }
+                else if gestureRecognizer.name == "SpinGesture" {
+                    return false
+                }
+            }
+            // Multi player with map placed but NOT locked = disable tap gesture and enable spin gesture
+            else if self.multiARBrain!.map.mapPlaced && !self.multiARBrain!.map.mapLocked {
+                if gestureRecognizer.name == "TapGesture" {
+                    return false
+                }
+                else if gestureRecognizer.name == "SpinGesture" {
+                    return true
+                }
+            }
+            // Multi player with map placed and locked = disable all gestures
+            else {
+                return false
+            }
+            
+        case GameMode.RCMode.rawValue:
+            return true
+        default:
+            break
+        }
+        
+        return false
+    }
+}
+
+//MARK: - Extension to description
+
+extension ARFrame.WorldMappingStatus: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .notAvailable:
+            return "Not Available"
+        case .limited:
+            return "Limited"
+        case .extending:
+            return "Extending"
+        case .mapped:
+            return "Mapped"
+        @unknown default:
+            return "Unknown"
+        }
+    }
+}
+

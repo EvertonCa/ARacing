@@ -22,6 +22,9 @@ class MultipeerSession: NSObject {
     
     //MARK: - Variables and Constants
     
+    // Bool to check if the map can be sent
+    var canSendMap = false
+    
     // AR View Controller
     var arViewController:ARViewController
     
@@ -155,7 +158,8 @@ extension MultipeerSession: MCSessionDelegate {
             print("Connected: \(peerID.displayName)")
             self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
             if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue {
-                self.encodeAndSendARWorldMap(worldMap: self.multiBrain.getARWorldMap())
+                
+                self.encodeAndSendARWorldMap(worldMap: self.multiBrain.arWorldMap!)
             }
         case .connecting:
             print("Connecting: \(peerID.displayName)")
@@ -191,7 +195,9 @@ extension MultipeerSession: MCSessionDelegate {
 // Handles connection browser
 extension MultipeerSession: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        self.arViewController.dismiss(animated: true)
+        self.arViewController.dismiss(animated: true, completion: {
+            self.arViewController.multiARBrain?.loadReceivedARWorldMap()
+        })
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {

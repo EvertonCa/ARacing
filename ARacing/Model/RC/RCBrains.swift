@@ -26,7 +26,7 @@ class RCBrains {
     var feedbackLabel: UILabel?
     
     // Gestures
-    var gesturesBrain:GesturesRC!
+    var gesturesBrain:Gestures!
     
     // ViewController
     var arViewController: ARViewController!
@@ -65,8 +65,7 @@ class RCBrains {
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
-        self.gesturesBrain = GesturesRC(sceneView: self.sceneView, arBrains: self)
-        self.gesturesBrain.registerGesturesrecognizers()
+        self.gesturesBrain = Gestures(arViewController:self.arViewController, sceneView: self.sceneView, rcBrain: self, game: self.game)
         
     }
     
@@ -77,7 +76,7 @@ class RCBrains {
         gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
         gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
 
-        // static is not affected by forces, but it is interactible
+        // static is not affected by forces, but it is interact-able
         let staticBody = SCNPhysicsBody.static()
 
         gridNode.physicsBody = staticBody

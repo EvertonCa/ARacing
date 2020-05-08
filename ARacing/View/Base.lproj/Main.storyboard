@@ -497,8 +497,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-ti-6td">
-                                <rect key="frame" x="397.5" y="10" width="101.5" height="26.5"/>
+                                <rect key="frame" x="397.5" y="40" width="101.5" height="26.5"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxb-yS-ttb">
+                                <rect key="frame" x="390.5" y="10" width="115.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -534,7 +542,7 @@
                                 <size key="shadowOffset" width="3" height="3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Time: --m--.-s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KB-gA-xOl">
-                                <rect key="frame" x="54" y="60" width="298" height="26.5"/>
+                                <rect key="frame" x="54" y="10" width="298" height="26.5"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -549,6 +557,7 @@
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerY" secondItem="zfY-Yo-o4f" secondAttribute="centerY" multiplier="1.5" id="6fP-YY-Zfo"/>
                             <constraint firstItem="gA9-Z9-iId" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="30" id="9Dq-wy-V1n"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="FY1-g4-X4r" secondAttribute="bottom" constant="10" id="A6e-oG-Mgq"/>
+                            <constraint firstItem="xxb-yS-ttb" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="10" id="Ahu-D7-Ria"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="QJS-b1-0Bv" secondAttribute="bottom" constant="30" id="BAb-yZ-a5g"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="fUr-vk-cei" secondAttribute="trailing" constant="20" id="CXa-ze-fvK"/>
                             <constraint firstItem="9KB-gA-xOl" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="10" id="DM0-4f-yYJ"/>
@@ -556,7 +565,7 @@
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="nTa-P8-v1l" secondAttribute="bottom" constant="20" id="EkG-Cj-kGm"/>
                             <constraint firstItem="4GU-jx-Oyf" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="EwJ-oW-l0M"/>
                             <constraint firstItem="yEr-RT-blZ" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="20" id="I0E-R8-0aI"/>
-                            <constraint firstItem="gjr-ti-6td" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="10" id="J6o-KG-urW"/>
+                            <constraint firstItem="gjr-ti-6td" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="40" id="J6o-KG-urW"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="QJS-b1-0Bv" secondAttribute="trailing" constant="20" id="J9W-Lm-e4A"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="9KB-gA-xOl" secondAttribute="trailing" constant="500" id="JGy-U3-7yr"/>
                             <constraint firstItem="atr-1Y-nSk" firstAttribute="leading" secondItem="f6t-Nl-uFP" secondAttribute="trailing" constant="20" id="JHY-zI-uww"/>
@@ -568,7 +577,7 @@
                             <constraint firstItem="UAq-GO-DI1" firstAttribute="leading" secondItem="zfY-Yo-o4f" secondAttribute="leading" id="P65-po-ifz"/>
                             <constraint firstItem="5dp-Xf-3iN" firstAttribute="leading" secondItem="UQX-Uf-R1x" secondAttribute="leading" constant="30" id="Q7G-5U-Wl6"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="f6t-Nl-uFP" secondAttribute="bottom" constant="30" id="QPR-kY-8q2"/>
-                            <constraint firstItem="9KB-gA-xOl" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="60" id="S4S-Ue-O9N"/>
+                            <constraint firstItem="9KB-gA-xOl" firstAttribute="top" secondItem="UQX-Uf-R1x" secondAttribute="top" constant="10" id="S4S-Ue-O9N"/>
                             <constraint firstItem="fUr-vk-cei" firstAttribute="leading" secondItem="yEr-RT-blZ" secondAttribute="leading" id="VMG-4W-sQr"/>
                             <constraint firstItem="FY1-g4-X4r" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="VXE-DX-pGz"/>
                             <constraint firstItem="IGb-ci-7Vu" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="VvU-45-fMh"/>
@@ -580,6 +589,7 @@
                             <constraint firstAttribute="bottom" secondItem="UAq-GO-DI1" secondAttribute="bottom" id="cYL-iG-VYc"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="trailing" secondItem="atr-1Y-nSk" secondAttribute="trailing" constant="30" id="iIQ-Dz-yti"/>
                             <constraint firstItem="xX5-0T-5kM" firstAttribute="leading" secondItem="5dp-Xf-3iN" secondAttribute="trailing" constant="10" id="sap-FC-EF0"/>
+                            <constraint firstItem="xxb-yS-ttb" firstAttribute="centerX" secondItem="zfY-Yo-o4f" secondAttribute="centerX" id="tBb-6u-mQ6"/>
                             <constraint firstItem="UQX-Uf-R1x" firstAttribute="bottom" secondItem="xX5-0T-5kM" secondAttribute="bottom" constant="20" id="tX2-2h-Ewy"/>
                             <constraint firstItem="f6t-Nl-uFP" firstAttribute="leading" secondItem="QJS-b1-0Bv" secondAttribute="leading" id="xaH-61-tJr"/>
                             <constraint firstItem="349-gm-93V" firstAttribute="leading" secondItem="atr-1Y-nSk" secondAttribute="leading" id="zFa-vv-3SF"/>
@@ -598,6 +608,7 @@
                         <outlet property="startButton" destination="4GU-jx-Oyf" id="WP6-ae-rni"/>
                         <outlet property="startButtonBackground" destination="IGb-ci-7Vu" id="eir-Md-YlG"/>
                         <outlet property="timerLabel" destination="FY1-g4-X4r" id="cOo-yU-fGe"/>
+                        <outlet property="trackingStatusLabel" destination="xxb-yS-ttb" id="SAg-bX-hBc"/>
                         <outlet property="turnLeftButton" destination="gA9-Z9-iId" id="l19-Zv-ocl"/>
                         <outlet property="turnLeftButtonBackground" destination="5dp-Xf-3iN" id="Emc-Xm-s09"/>
                         <outlet property="turnRightButton" destination="nTa-P8-v1l" id="BeY-Qs-GUi"/>

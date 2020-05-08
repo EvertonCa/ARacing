@@ -22,9 +22,6 @@ class SingleARBrains {
     // Scenery
     var mapNode = SCNNode()
     
-    // Grid node
-    var gridNode:SCNNode?
-    
     // Feedback Label
     var feedbackLabel: UILabel?
     
@@ -81,8 +78,7 @@ class SingleARBrains {
         self.sceneView.session.run(arConfiguration, options: [.removeExistingAnchors, .resetTracking])
         
         // setup the gestures recognizer
-        self.gesturesBrain = Gestures(sceneView: self.sceneView, singleARBrains: self, game: self.game)
-        self.gesturesBrain.registerGesturesRecognizers()
+        self.gesturesBrain = Gestures(arViewController:self.arViewController, sceneView: self.sceneView, singleARBrains: self, game: self.game)
         
         // setup scenery
         self.map = Map(mapNode: self.mapNode, sceneView: self.sceneView, game: self.game)
@@ -98,40 +94,16 @@ class SingleARBrains {
         
     }
     
-    // creates the grid that shows the horizontal surface
-    func createGrid(planeAnchor: ARPlaneAnchor) -> SCNNode {
-        
-        let gridNode = SCNNode(geometry: SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z)))
-        gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
-        gridNode.geometry?.firstMaterial?.isDoubleSided = true
-        gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
-        gridNode.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
-        
-        gridNode.name = "Grid"
-        
-        // static is not affected by forces, but it is interact-able
-        let staticBody = SCNPhysicsBody.static()
-        
-        gridNode.physicsBody = staticBody
-        
-        return gridNode
-    }
-
     // adds the scenery and disable gestures and the grid nodes
-    func setupMap(hitTestResult: ARHitTestResult) {
-        self.mapNode = self.map.addMap(hitTestResult: hitTestResult)
+    func createMapAnchor(hitTestResult: ARHitTestResult) {
+        // Place the anchor for the map
+        let mapAnchor = ARAnchor(name: "map", transform: hitTestResult.worldTransform)
+        self.sceneView.session.add(anchor: mapAnchor)
         
         self.gesturesBrain.removeTapGesture()
         
         // changes feedback label
         self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
-        
-        // removes all the grids in the scene
-        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.name == "Grid" {
-                node.removeFromParentNode()
-            }
-        }
         
         // setup checkpoints
         self.checkpoints = SingleCheckpoint(mapNode: self.mapNode, game: self.game)

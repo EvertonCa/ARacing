@@ -182,8 +182,10 @@ class ARBrain {
     
     // Node didRemove delegate handler
     func didRemoveNodeRenderer(node: SCNNode, anchor: ARAnchor) {
-        node.enumerateChildNodes { ( childNode, _ ) in
-            childNode.removeFromParentNode()
+        DispatchQueue.main.async {
+            node.enumerateChildNodes { ( childNode, _ ) in
+                childNode.removeFromParentNode()
+            }
         }
     }
     
@@ -213,6 +215,31 @@ class ARBrain {
         }
     }
     
+    // cameraDidChangeTrackingState delegate handler
+    func cameraDidChangeTrackingState(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
+        self.updateFeedbackLabel(for: frame, trackingState: trackingState)
+    }
+    
+    // Check Mapping Status
+    func sessionDidUpdate(frame: ARFrame) {
+        if self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue &&
+            self.game.multipeerConnectionSelected == Connection.Host.rawValue {
+            switch frame.worldMappingStatus {
+            case .notAvailable, .limited:
+                self.arViewController.multiARBrain?.multipeerSession.canSendMap = false
+            case .extending:
+                self.arViewController.multiARBrain?.multipeerSession.canSendMap = true
+            case .mapped:
+                self.arViewController.multiARBrain?.multipeerSession.canSendMap = true
+            @unknown default:
+                self.arViewController.multiARBrain?.multipeerSession.canSendMap = false
+            }
+        }
+        self.arViewController.trackingStatusLabel.text = frame.worldMappingStatus.description
+        self.updateFeedbackLabel(for: frame, trackingState: frame.camera.trackingState)
+        
+    }
+    
     //MARK: - Other Global Functions
     
     // reset AR Experience
@@ -233,6 +260,89 @@ class ARBrain {
         self.arViewController.sceneView.session.run(tempConfig)
         
         self.arViewController.goToOptionsViewController()
+    }
+    
+    // Enables Gestures
+    func enableGestures() {
+        switch self.arViewController.game.gameTypeSelected {
+        case GameMode.SinglePlayer.rawValue:
+            self.arViewController.singleARBrain?.gesturesBrain.registerGesturesRecognizers()
+            
+        case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.gesturesBrain.registerGesturesRecognizers()
+            
+        default:
+            break
+        }
+    }
+    
+    // Disable Gestures
+    func disableGestures() {
+        switch self.arViewController.game.gameTypeSelected {
+        case GameMode.SinglePlayer.rawValue:
+            self.arViewController.singleARBrain?.gesturesBrain.removeAllGestures()
+            
+        case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.gesturesBrain.removeAllGestures()
+            
+        default:
+            break
+        }
+    }
+    
+    // Creates the surface node with the grid
+    func updateSurfaceNode(node: SCNNode, anchor: ARAnchor) {
+        if node.name == "surfaceAnchorNode" {
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            
+            DispatchQueue.main.async {
+                node.enumerateChildNodes { ( childNode, _ ) in
+                    childNode.removeFromParentNode()
+                }
+                let gridNode = Grid.createGrid(planeAnchor: planeAnchor)
+                
+                node.addChildNode(gridNode)
+            }
+        }
+    }
+    
+    // updates the feedback label
+    func updateFeedbackLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
+        // Update the UI to provide feedback on the state of the AR experience.
+        let message: String
+        
+        switch trackingState {
+        case .normal where frame.anchors.isEmpty:
+            // No planes detected; provide instructions for this app's AR interactions.
+            message = "Move around to map the environment, or wait to join a shared session."
+            
+        case .notAvailable:
+            message = "Tracking unavailable."
+            
+        case .limited(.excessiveMotion):
+            message = "Tracking limited - Move the device more slowly."
+            
+        case .limited(.insufficientFeatures):
+            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
+            
+        case .limited(.relocalizing):
+            message = "Resuming session — move to where you were when the session was interrupted."
+            
+        case .limited(.initializing):
+            message = "Initializing AR session."
+            
+        default:
+            // No feedback needed when tracking is normal and planes are visible.
+            // (Nor when in unreachable limited-tracking states.)
+            message = ""
+            
+        }
+        if message.isEmpty {
+            self.arViewController.hideFeedback()
+        }
+        else {
+            self.arViewController.showFeedback(text: message)
+        }
     }
     
     //MARK: - Single Player Functions
@@ -268,36 +378,25 @@ class ARBrain {
     // node added in single player
     private func singleDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
         // if the scenery is not placed, adds the new grid
-        if !self.arViewController.singleARBrain!.map.mapPlaced {
+        if node.name == "mapAnchorNode" {
             DispatchQueue.main.async {
-                // show feedback
-                self.arViewController.showFeedback(text: "Click on the grid where you would like to place your map!")
+                self.arViewController.singleARBrain!.mapNode = self.arViewController.singleARBrain!.map.addMap()
+                node.addChildNode(self.arViewController.singleARBrain!.mapNode)
+                self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
+                    if node.name == "surfaceAnchorNode"{
+                        node.removeFromParentNode()
+                    }
+                }
             }
-            
-            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-            
-            let gridNode = self.arViewController.singleARBrain!.createGrid(planeAnchor: planeAnchor)
-            
-            node.addChildNode(gridNode)
+        }
+        else if node.name == "surfaceAnchorNode" {
+            self.updateSurfaceNode(node: node, anchor: anchor)
         }
     }
     
     // node updated in single player
     private func singleUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        // if the scenery is not placed, updates the grid to the new size
-        if !self.arViewController.singleARBrain!.map.mapPlaced {
-            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-            
-            node.enumerateChildNodes { ( childNode, _ ) in
-                childNode.removeFromParentNode()
-            }
-            
-            self.arViewController.singleARBrain!.gridNode = node
-            
-            let gridNode = self.arViewController.singleARBrain!.createGrid(planeAnchor: planeAnchor)
-            
-            self.arViewController.singleARBrain!.gridNode!.addChildNode(gridNode)
-        }
+        self.updateSurfaceNode(node: node, anchor: anchor)
     }
     
     // updateAtTime in single player
@@ -354,15 +453,13 @@ class ARBrain {
     // start button pressed in single player mode
     private func multiStartPressed() {
         
-        // disable gestures
-        self.arViewController.multiARBrain?.gesturesBrain.removeRotationGesture()
-        
         // sets the scenery to locked
         self.arViewController.multiARBrain?.map.mapLocked = true
         
         // If the device is Host
         if self.arViewController.multiARBrain?.game.multipeerConnectionSelected == Connection.Host.rawValue {
             self.arViewController.multiARBrain?.multipeerSession.startHosting()
+            self.arViewController.multiARBrain?.getARWorldMap()
         }
         // If the device is Client
         else {
@@ -372,36 +469,26 @@ class ARBrain {
     
     // node added in multi player
     private func multiDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        // if the scenery is not placed, adds the new grid
-        if !self.arViewController.multiARBrain!.map.mapPlaced {
+        if node.name == "mapAnchorNode" {
             DispatchQueue.main.async {
-                // show feedback
-                self.arViewController.showFeedback(text: "Click on the grid where you would like to place your map!")
+                self.arViewController.multiARBrain!.mapNode = self.arViewController.multiARBrain!.map.addMap()
+                node.addChildNode(self.arViewController.multiARBrain!.mapNode)
+                self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
+                    if node.name == "surfaceAnchorNode"{
+                        node.removeFromParentNode()
+                    }
+                }
             }
-            
-            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-            
-            let gridNode = self.arViewController.multiARBrain!.createGrid(planeAnchor: planeAnchor)
-            
-            node.addChildNode(gridNode)
+        }
+        else if node.name == "surfaceAnchorNode" {
+            self.updateSurfaceNode(node: node, anchor: anchor)
         }
     }
     
     // node updated in multi player
     private func multiUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        // if the scenery is not placed, updates the grid to the new size
-        if !self.arViewController.multiARBrain!.map.mapPlaced {
-            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-            
-            node.enumerateChildNodes { ( childNode, _ ) in
-                childNode.removeFromParentNode()
-            }
-            
-            self.arViewController.multiARBrain!.gridNode = node
-            
-            let gridNode = self.arViewController.multiARBrain!.createGrid(planeAnchor: planeAnchor)
-            
-            self.arViewController.multiARBrain!.gridNode!.addChildNode(gridNode)
+        if self.game.multipeerConnectionSelected == Connection.Host.rawValue {
+            self.updateSurfaceNode(node: node, anchor: anchor)
         }
     }
     

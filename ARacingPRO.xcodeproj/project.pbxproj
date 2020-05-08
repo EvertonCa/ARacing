@@ -36,10 +36,10 @@
 		54C198BF245AC6870058DE0A /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198BE245AC6870058DE0A /* Enums.swift */; };
 		54C198C1245ACC220058DE0A /* ARBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198C0245ACC220058DE0A /* ARBrain.swift */; };
 		54C198C3245AF35B0058DE0A /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C198C2245AF35B0058DE0A /* MapsViewController.swift */; };
+		54CACB672464AAF80094427F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CACB662464AAF80094427F /* Grid.swift */; };
 		54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC52450295A009E5E67 /* SingleTexts.swift */; };
 		54CE5FC824502AF9009E5E67 /* LapTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC724502AF9009E5E67 /* LapTimer.swift */; };
 		54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */; };
-		54FAB6C7244C30980057AF49 /* GesturesRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C6244C30980057AF49 /* GesturesRC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,10 +74,10 @@
 		54C198BE245AC6870058DE0A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		54C198C0245ACC220058DE0A /* ARBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBrain.swift; sourceTree = "<group>"; };
 		54C198C2245AF35B0058DE0A /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
+		54CACB662464AAF80094427F /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		54CE5FC52450295A009E5E67 /* SingleTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTexts.swift; sourceTree = "<group>"; };
 		54CE5FC724502AF9009E5E67 /* LapTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTimer.swift; sourceTree = "<group>"; };
 		54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCBrains.swift; sourceTree = "<group>"; };
-		54FAB6C6244C30980057AF49 /* GesturesRC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesRC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +170,7 @@
 				5459DD6D245CD96A00E57584 /* Vehicle.swift */,
 				5493729E2461EBEA008FF034 /* Game.swift */,
 				5457FB8F244B4A1700BD701E /* Gestures.swift */,
+				54CACB662464AAF80094427F /* Grid.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
 				5437CB7624629AAA00CD3ADA /* MultiPlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
@@ -199,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */,
-				54FAB6C6244C30980057AF49 /* GesturesRC.swift */,
 			);
 			path = RC;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 			files = (
 				54937299245D8262008FF034 /* VehicleSelectionViewController.swift in Sources */,
 				54C198C1245ACC220058DE0A /* ARBrain.swift in Sources */,
-				54FAB6C7244C30980057AF49 /* GesturesRC.swift in Sources */,
+				54CACB672464AAF80094427F /* Grid.swift in Sources */,
 				544BA7962463568B0018FDA1 /* MultipeerSession.swift in Sources */,
 				5461C1F72436CCEE00F02694 /* IntroViewController.swift in Sources */,
 				54C198C3245AF35B0058DE0A /* MapsViewController.swift in Sources */,

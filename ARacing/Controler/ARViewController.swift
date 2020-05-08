@@ -28,6 +28,7 @@ class ARViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
+    @IBOutlet weak var trackingStatusLabel: UILabel!
     
     //MARK: - Brains
     
@@ -70,7 +71,16 @@ class ARViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.goToOptionsViewController()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Pause the view's AR session.
+        self.sceneView.session.pause()
     }
     
     // perform segue to OptionsViewController
@@ -175,8 +185,10 @@ class ARViewController: UIViewController {
         // setup delegate
         self.sceneView.delegate = self
         
-        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue ||
-            self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
+        // AR session delegate
+        self.sceneView.session.delegate = self
+        
+        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue || self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
             // setup contact delegate
             self.sceneView.scene.physicsWorld.contactDelegate = self
         }
@@ -185,9 +197,9 @@ class ARViewController: UIViewController {
     // resets the delegates
     func resetDelegates() {
         self.sceneView.delegate = nil
+        self.sceneView.session.delegate = nil
         
-        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue ||
-            self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
+        if self.game.gameTypeSelected == GameMode.SinglePlayer.rawValue || self.game.gameTypeSelected == GameMode.MultiPlayer.rawValue{
             
             self.sceneView.scene.physicsWorld.contactDelegate = nil
         }
