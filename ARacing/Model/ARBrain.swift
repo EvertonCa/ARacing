@@ -313,7 +313,7 @@ class ARBrain {
         let message: String
         
         switch trackingState {
-        case .normal where frame.anchors.isEmpty && self.arViewController.multiARBrain!.multipeerSession.connectedPeers.isEmpty:
+        case .normal where frame.anchors.isEmpty:
             // No planes detected; provide instructions for this app's AR interactions.
             message = "Move around to map the environment."
             
@@ -472,7 +472,12 @@ class ARBrain {
     private func multiDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
         if node.name == "mapAnchorNode" {
             DispatchQueue.main.async {
+                // creates the map node
                 self.arViewController.multiARBrain!.mapNode = self.arViewController.multiARBrain!.map.addMap()
+                // checks if the transformMatrix exists, and if true, applies it
+                if let safeTransform = self.arViewController.multiARBrain!.transformMatrix {
+                    self.arViewController.multiARBrain!.mapNode.transform = safeTransform
+                }
                 node.addChildNode(self.arViewController.multiARBrain!.mapNode)
                 self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
                     if node.name == "surfaceAnchorNode"{

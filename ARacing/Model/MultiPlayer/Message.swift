@@ -6,11 +6,12 @@
 //  Copyright © 2020 Everton Cardoso. All rights reserved.
 //
 
-import Foundation
+import ARKit
+import UIKit
 
 struct Message: Codable {
     var peerHashID:Int
-    var name: String
-    var number:Double
-    var trueOrFalse:Bool
+    var messageType:Int
+    var transform:[[Float]]?
+    var arWorldMapData:Data?
 }

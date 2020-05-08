@@ -13,24 +13,29 @@ class ARViewController: UIViewController {
     
     //MARK: - Global IBOutlets and Variables
     
-    @IBOutlet weak var feedbackLabel: UILabel!
+    // ARSCNView
     @IBOutlet weak var sceneView: ARSCNView!
+    // UIButtons
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var startButtonBackground: UIImageView!
     @IBOutlet weak var accButton: UIButton!
     @IBOutlet weak var brakeButton: UIButton!
     @IBOutlet weak var turnRightButton: UIButton!
     @IBOutlet weak var turnLeftButton: UIButton!
+    //UIImageViews
+    @IBOutlet weak var startButtonBackground: UIImageView!
     @IBOutlet weak var accButtonBackground: UIImageView!
     @IBOutlet weak var brakeButtonBackground: UIImageView!
+    @IBOutlet weak var pauseButtonBackground: UIImageView!
     @IBOutlet weak var turnLeftButtonBackground: UIImageView!
     @IBOutlet weak var turnRightButtonBackground: UIImageView!
-    
+    @IBOutlet weak var trackingFeedbackImage: UIImageView!
+    // UILabels
+    @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var trackingStatusLabel: UILabel!
     @IBOutlet weak var connectedWithLabel: UILabel!
-    @IBOutlet weak var trackingFeedbackImage: UIImageView!
+    
     
     
     //MARK: - Brains
@@ -257,6 +262,7 @@ class ARViewController: UIViewController {
         self.trackingStatusLabel.alpha = 0
         self.connectedWithLabel.alpha = 0
         self.trackingFeedbackImage.alpha = 0
+        self.pauseButtonBackground.alpha = 0
         
         // disables all buttons
         self.startButton.isEnabled = false

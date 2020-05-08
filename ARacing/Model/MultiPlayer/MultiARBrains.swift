@@ -26,6 +26,9 @@ class MultiARBrains {
     // Scenery
     var mapNode = SCNNode()
     
+    // Transform Matrix
+    var transformMatrix:SCNMatrix4?
+    
     // Feedback Label
     var feedbackLabel:UILabel?
     
@@ -136,6 +139,19 @@ class MultiARBrains {
         }
     }
     
+    // Create message for ARWorldMap with transform
+    func messageARWorldMap() -> Message {
+        let tm = self.mapNode.transform
+        let transformMatrixCodable = [[tm.m11, tm.m12, tm.m13, tm.m14],
+                                      [tm.m21, tm.m22, tm.m23, tm.m24],
+                                      [tm.m31, tm.m32, tm.m33, tm.m34],
+                                      [tm.m41, tm.m42, tm.m43, tm.m44]]
+        let arWorldMapData = self.multipeerSession.encodeARWorldMap(worldMap: self.arWorldMap!)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ARWorldMapAndTransformMatrix.rawValue, transform: transformMatrixCodable, arWorldMapData: arWorldMapData)
+        
+        return message
+    }
+    
     // Join session
     func loadReceivedARWorldMap() {
         // sets the received world map as initial world
@@ -148,23 +164,47 @@ class MultiARBrains {
         self.map.mapPlaced = true
         self.map.mapLocked = true
     }
+    
+    // Interpret the received message
+    func interpretReceivedMessage(message:Message) {
+        switch message.messageType {
+        case MessageType.ARWorldMapAndTransformMatrix.rawValue:
+            self.receivedARWorldMapWithTransformMatrix(message: message)
+        default:
+            break
+        }
+    }
+    
+    // handles messages with ARWorldMap and transform matrix
+    func receivedARWorldMapWithTransformMatrix(message:Message) {
+        // decode of the transform matrix
+        let tm = message.transform!
+        let transformMatrix4x4 = SCNMatrix4(m11: tm[0][0], m12: tm[0][1], m13: tm[0][2], m14: tm[0][3],
+                                            m21: tm[1][0], m22: tm[1][1], m23: tm[1][2], m24: tm[1][3],
+                                            m31: tm[2][0], m32: tm[2][1], m33: tm[2][2], m34: tm[2][3],
+                                            m41: tm[3][0], m42: tm[3][1], m43: tm[3][2], m44: tm[3][3])
+        self.transformMatrix = transformMatrix4x4
+        
+        // decode of the ARWorldMap
+        do {
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: message.arWorldMapData!){
+                self.arWorldMap = worldMap
+            }
+        } catch {
+            print("can't decode world map received from")
+        }
+        
+    }
+
 }
 
 //MARK: - Multipeer Session Delegates
 extension MultiARBrains: MultipeerSessionDelegate {
-    // ARWorldMap received from peer
-    func arWorldMapReceived(manager: MultipeerSession, worldMap: ARWorldMap) {
-        self.arWorldMap = worldMap
-    }
-    
-    // Handles changes in the list of connected peers
-    func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
-        print(connectedDevices)
-    }
     
     // Message received from peer
     func messageReceived(manager: MultipeerSession, message: Message) {
-        print(message.name)
+        interpretReceivedMessage(message: message)
+        print(message)
     }
 }
 

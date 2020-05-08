@@ -12,10 +12,7 @@ import ARKit
 
 protocol MultipeerSessionDelegate {
     
-    func connectedDevicesChanged(manager : MultipeerSession, connectedDevices: [String])
     func messageReceived(manager : MultipeerSession, message: Message)
-    func arWorldMapReceived(manager : MultipeerSession, worldMap: ARWorldMap)
-    
 }
 
 class MultipeerSession: NSObject {
@@ -36,7 +33,7 @@ class MultipeerSession: NSObject {
     static let serviceType = "eca-aracing"
     
     // Peer name as device name
-    private let myPeerID = MCPeerID(displayName: UIDevice.current.name)
+    let myPeerID = MCPeerID(displayName: UIDevice.current.name)
     
     // Session control variables
     private var session: MCSession!
@@ -120,12 +117,6 @@ class MultipeerSession: NSObject {
         }
     }
     
-    // Encodes and sends ARWorldMap to connected peers
-    func encodeAndSendARWorldMap(worldMap:ARWorldMap) {
-        let mapEncoded = self.encodeARWorldMap(worldMap: worldMap)
-        self.sendData(data: mapEncoded)
-    }
-    
     // Encode ARWorldMap
     func encodeARWorldMap(worldMap:ARWorldMap) -> Data {
         guard let data = try? NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
@@ -136,23 +127,13 @@ class MultipeerSession: NSObject {
     // Handles Received Data
     func receiveData(_ data: Data, from peer: MCPeerID){
         let decoder = JSONDecoder()
-        do {
-            // If received data is ARWorldMap
-            if let arWorldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
-                self.delegate?.arWorldMapReceived(manager: self, worldMap: arWorldMap)
-                self.mapProvider = peer
-            }
-            // If received data is Message
-            else if let decodedMessage = try? decoder.decode(Message.self, from: data) {
-                self.delegate?.messageReceived(manager: self, message: decodedMessage)
-            }
-            // Unknown data type received
-            else {
-                print("unknown data received")
-            }
-        } catch {
-            print("can't decode data received data")
+        let decodedMessage = try! decoder.decode(Message.self, from: data)
+        
+        if decodedMessage.messageType == MessageType.ARWorldMapAndTransformMatrix.rawValue{
+            self.mapProvider = peer
         }
+        
+        self.delegate?.messageReceived(manager: self, message: decodedMessage)
     }
 }
 
@@ -167,10 +148,10 @@ extension MultipeerSession: MCSessionDelegate {
             DispatchQueue.main.async {
                 self.arViewController.connectedWith(message: "Connected: \(peerID.displayName)")
             }
-            self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
             if self.arViewController.game.multipeerConnectionSelected == Connection.Host.rawValue {
                 
-                self.encodeAndSendARWorldMap(worldMap: self.multiBrain.arWorldMap!)
+                // Encode and send the message with the ARWorld Map and the transform information for the Map
+                self.encodeAndSend(message: self.multiBrain.messageARWorldMap())
             }
         case .connecting:
             DispatchQueue.main.async {

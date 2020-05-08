@@ -182,10 +182,15 @@ enum Connection: Int {
     case Join = 2
 }
 
-//MARK: - Tracking UI
+//MARK: - Tracking UI Enum
 enum TrackingUI: String {
     case mapped = "Mapped"
     case extending = "Extending"
     case limited = "Limited"
     case notAvailable = "NotAvailable"
+}
+
+//MARK: - Messages Enums
+enum MessageType: Int {
+    case ARWorldMapAndTransformMatrix = 1
 }

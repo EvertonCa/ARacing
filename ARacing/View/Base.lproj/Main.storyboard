@@ -521,8 +521,8 @@
                                 <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-RT-blZ">
-                                <rect key="frame" x="64" y="21" width="35" height="32.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PauseButton" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-RT-blZ">
+                                <rect key="frame" x="64" y="20" width="35" height="35"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Rab-1G-pTj"/>
@@ -623,6 +623,7 @@
                         <outlet property="brakeButtonBackground" destination="QJS-b1-0Bv" id="bZU-tA-CG3"/>
                         <outlet property="connectedWithLabel" destination="oyr-pd-B6m" id="D24-Xv-xHS"/>
                         <outlet property="feedbackLabel" destination="gjr-ti-6td" id="Grm-Rw-94x"/>
+                        <outlet property="pauseButtonBackground" destination="yEr-RT-blZ" id="FEe-r5-F9M"/>
                         <outlet property="recordLabel" destination="9KB-gA-xOl" id="t0H-DX-bLh"/>
                         <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
                         <outlet property="startButton" destination="4GU-jx-Oyf" id="WP6-ae-rni"/>
@@ -653,9 +654,9 @@
         <image name="Logo_ARacing" width="601" height="195"/>
         <image name="Map1Icon" width="475" height="266"/>
         <image name="NotAvailable" width="298" height="273"/>
+        <image name="PauseButton" width="296.5" height="276"/>
         <image name="Turn Left Button" width="100" height="98"/>
         <image name="Turn Right Button" width="100.5" height="98"/>
         <image name="Vehicle1Icon" width="475" height="266"/>
-        <image name="return" catalog="system" width="128" height="101"/>
     </resources>
 </document>
