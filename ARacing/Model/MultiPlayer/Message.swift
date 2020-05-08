@@ -15,4 +15,7 @@ struct Message: Codable {
     var transform:[[Float]]?
     var arWorldMapData:Data?
     var selectedVehicle:Int?
+    var peersQuantity:Int?
+    var peersHashID:[Int]?
+    var listSelectedVehicles:[Int]?
 }

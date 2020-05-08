@@ -194,4 +194,5 @@ enum TrackingUI: String {
 enum MessageType: Int {
     case ARWorldMapAndTransformMatrix = 1
     case SelectedVehicle = 2
+    case StartGame = 3
 }

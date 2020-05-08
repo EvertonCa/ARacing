@@ -109,8 +109,8 @@ class Vehicle {
         self.multiARBrain = multiARBrain
         self.game = game
         self.sceneView = sceneView
-        self.initialSpawnPosition = self.game.vehiclePosition()
         self.vehicleIndex = index
+        self.initialSpawnPosition = self.game.listVehiclesSpawn[self.game.mapSelected][self.vehicleIndex!]
     }
     
     //MARK: - Functions
@@ -136,7 +136,7 @@ class Vehicle {
         self.spawnPosition = self.initialSpawnPosition
         
         // adds the vehicle to the scenery
-        self.arView.singleARBrain?.mapNode.addChildNode(self.vehicleNode)
+        self.arView.multiARBrain?.mapNode.addChildNode(self.vehicleNode)
         
         self.vehicleSpawned = true
     }
@@ -281,7 +281,7 @@ class Vehicle {
                 self.vehiclePhysics.applyEngineForce(self.engineForce, forWheelAt: 1)
             } else if self.breaking {
                 // if vehicle is stopped, reverse, else, brakes
-                if self.vehiclePhysics.speedInKilometersPerHour < 0.5{
+                if self.vehiclePhysics.speedInKilometersPerHour < 0.1{
                     self.vehiclePhysics.applyEngineForce(-self.engineForce, forWheelAt: 0)
                     self.vehiclePhysics.applyEngineForce(-self.engineForce, forWheelAt: 1)
                 } else {

@@ -80,12 +80,6 @@ class Game {
                                                     VehicleResources.Vehicle15_normal.rawValue,
                                                     VehicleResources.Vehicle16_normal.rawValue]
     
-    // Vehicle Spawn Positions per map
-    let vehicleSpawnPosition:[SCNVector3] = [SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.4, 0.4, 0.4),
-                                             SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.4, 0.4, 0.4)]
-    
     // Vehicles Images Resources
     let vehiclesImagesResources = [VehicleImages.Vehicle1.rawValue,
                                    VehicleImages.Vehicle2.rawValue,
@@ -103,6 +97,30 @@ class Game {
                                    VehicleImages.Vehicle14.rawValue,
                                    VehicleImages.Vehicle15.rawValue,
                                    VehicleImages.Vehicle16.rawValue]
+    
+    // Single Player Vehicle Spawn Positions per map
+    let vehicleSpawnPosition:[SCNVector3] = [SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.4, 0.4, 0.4),
+                                             SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.4, 0.4, 0.4)]
+    
+    // Multi Player Vehicle Spawns Positions per map - each row is a map; each column is a initial spawn
+    let listVehiclesSpawn:[[SCNVector3]] = [[SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.7, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)],
+                                            [SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)],
+                                            [SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)],
+                                            [SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
+                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)]]
     
     //MARK: - Checkpoints Controls and Resources
     

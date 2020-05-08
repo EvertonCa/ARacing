@@ -56,7 +56,7 @@ class MultiARBrains {
     var arText:SingleTexts!
     
     // Vehicles list
-    var vehiclesList:[Vehicle]!
+    var vehiclesList:[Vehicle] = []
     
     // ARWorldMap
     var arWorldMap:ARWorldMap?
@@ -131,22 +131,20 @@ class MultiARBrains {
     
     // Start Multiplayer after all peers joined
     func finallyStart() {
-        for vehicleIndex in 0...self.game.listSelectedVehicles.count {
-            self.vehiclesList.append(Vehicle(arView: self.arViewController, multiARBrain: self, game: self.game, sceneView: self.sceneView, index: vehicleIndex))
-        }
+        self.multipeerSession.encodeAndSend(message: self.messageStartGame())
+        self.setupMultiplayerGame()
     }
     
-    //MARK: - Multi-peer functions
-    
-    // Interpret the received message
-    func interpretReceivedMessage(message:Message) {
-        switch message.messageType {
-        case MessageType.ARWorldMapAndTransformMatrix.rawValue:
-            self.receivedARWorldMapWithTransformMatrix(message: message)
-        case MessageType.SelectedVehicle.rawValue:
-            self.receivedVehicleSelectedMessage(message: message)
-        default:
-            break
+    // Sets up the game
+    func setupMultiplayerGame() {
+        // instantiate the vehicles and creates the list with them
+        for vehicleIndex in 0..<self.game.listSelectedVehicles.count {
+            self.vehiclesList.append(Vehicle(arView: self.arViewController, multiARBrain: self, game: self.game, sceneView: self.sceneView, index: vehicleIndex))
+        }
+        
+        // Show vehicles in the view
+        for vehicle in self.vehiclesList {
+            vehicle.createVehicleMultiPlayer()
         }
     }
     
@@ -159,19 +157,6 @@ class MultiARBrains {
             }
             self.arWorldMap = safeWorldMap
         }
-    }
-    
-    // Create message for ARWorldMap with transform
-    func messageARWorldMap() -> Message {
-        let tm = self.mapNode.transform
-        let transformMatrixCodable = [[tm.m11, tm.m12, tm.m13, tm.m14],
-                                      [tm.m21, tm.m22, tm.m23, tm.m24],
-                                      [tm.m31, tm.m32, tm.m33, tm.m34],
-                                      [tm.m41, tm.m42, tm.m43, tm.m44]]
-        let arWorldMapData = self.multipeerSession.encodeARWorldMap(worldMap: self.arWorldMap!)
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ARWorldMapAndTransformMatrix.rawValue, transform: transformMatrixCodable, arWorldMapData: arWorldMapData)
-        
-        return message
     }
     
     // Join session
@@ -190,8 +175,53 @@ class MultiARBrains {
         self.arViewController.showStartButton()
     }
     
+    //MARK: - Multi-peer Sending and encoding functions
+    
+    // Create message for ARWorldMap with transform
+    func messageARWorldMap() -> Message {
+        let tm = self.mapNode.transform
+        let transformMatrixCodable = [[tm.m11, tm.m12, tm.m13, tm.m14],
+                                      [tm.m21, tm.m22, tm.m23, tm.m24],
+                                      [tm.m31, tm.m32, tm.m33, tm.m34],
+                                      [tm.m41, tm.m42, tm.m43, tm.m44]]
+        let arWorldMapData = self.multipeerSession.encodeARWorldMap(worldMap: self.arWorldMap!)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ARWorldMapAndTransformMatrix.rawValue, transform: transformMatrixCodable, arWorldMapData: arWorldMapData)
+        
+        return message
+    }
+    
+    // creates a message with the selected vehicle info
+    func messageVehicleSelected() -> Message {
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.SelectedVehicle.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: self.game.vehicleSelected)
+        
+        return message
+    }
+    
+    // creates a message with all the parameters to start the game
+    func messageStartGame() -> Message {
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.StartGame.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: self.game.peersQuantity, peersHashID: self.game.peersHashIDs, listSelectedVehicles: self.game.listSelectedVehicles)
+        
+        return message
+    }
+    
+    //MARK: - Multi-peer Receiving and decoding functions
+    
+    // Interpret the received message
+    func interpretReceivedMessage(message:Message) {
+        switch message.messageType {
+        case MessageType.ARWorldMapAndTransformMatrix.rawValue:
+            self.receivedARWorldMapWithTransformMatrixMessage(message: message)
+        case MessageType.SelectedVehicle.rawValue:
+            self.receivedVehicleSelectedMessage(message: message)
+        case MessageType.StartGame.rawValue:
+            self.receivedStartGameMessage(message: message)
+        default:
+            break
+        }
+    }
+    
     // handles messages with ARWorldMap and transform matrix
-    func receivedARWorldMapWithTransformMatrix(message:Message) {
+    func receivedARWorldMapWithTransformMatrixMessage(message:Message) {
         // decode of the transform matrix
         let tm = message.transform!
         let transformMatrix4x4 = SCNMatrix4(m11: tm[0][0], m12: tm[0][1], m13: tm[0][2], m14: tm[0][3],
@@ -214,15 +244,19 @@ class MultiARBrains {
     func receivedVehicleSelectedMessage(message:Message) {
         // adds the peer and vehicle selected to the game controls
         self.game.peersHashIDs.append(message.peerHashID)
-        self.game.peersQuantity += 1
         self.game.listSelectedVehicles.append(message.selectedVehicle!)
+        self.game.peersQuantity += 1
+        print(" --------------- \(self.game.peersQuantity)")
     }
     
-    // creates a message with the selected vehicle info
-    func messageVehicleSelected() -> Message {
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.SelectedVehicle.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: self.game.vehicleSelected)
-        
-        return message
+    // handles messages with the information necessary to start the game
+    func receivedStartGameMessage(message:Message) {
+        // saves the necessary infos in the game class
+        self.game.peersQuantity = message.peersQuantity!
+        self.game.peersHashIDs = message.peersHashID!
+        self.game.listSelectedVehicles = message.listSelectedVehicles!
+        // Starts the game and starts it
+        self.setupMultiplayerGame()
     }
 
 }
@@ -233,7 +267,17 @@ extension MultiARBrains: MultipeerSessionDelegate {
     // Message received from peer
     func messageReceived(manager: MultipeerSession, message: Message) {
         interpretReceivedMessage(message: message)
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
         print(message)
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
     }
 }
 
