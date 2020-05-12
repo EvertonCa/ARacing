@@ -211,7 +211,7 @@ extension MultipeerSession: MCSessionDelegate {
 extension MultipeerSession: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         self.arViewController.dismiss(animated: true, completion: {
-            self.arViewController.multiARBrain?.loadReceivedARWorldMap()
+            //self.arViewController.multiARBrain?.loadReceivedARWorldMap()
         })
     }
     

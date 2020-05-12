@@ -494,7 +494,7 @@ class ARBrain {
                 }
             }
         }
-        else if node.name == "surfaceAnchorNode" {
+        else if node.name == "surfaceAnchorNode" && self.game.multipeerConnectionSelected == Connection.Host.rawValue {
             self.updateSurfaceNode(node: node, anchor: anchor)
         }
     }

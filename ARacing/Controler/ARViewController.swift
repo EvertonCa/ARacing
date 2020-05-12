@@ -38,10 +38,6 @@ class ARViewController: UIViewController {
     @IBOutlet weak var trackingStatusLabel: UILabel!
     @IBOutlet weak var connectedWithLabel: UILabel!
     
-    
-    
-    
-    
     //MARK: - Brains
     
     // Single AR Brain

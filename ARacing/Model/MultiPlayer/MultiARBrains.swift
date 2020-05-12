@@ -234,6 +234,8 @@ class MultiARBrains {
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: message.arWorldMapData!){
                 self.arWorldMap = worldMap
+                // loads the received world map
+                self.loadReceivedARWorldMap()
             }
         } catch {
             print("can't decode world map received from")
@@ -246,7 +248,6 @@ class MultiARBrains {
         self.game.peersHashIDs.append(message.peerHashID)
         self.game.listSelectedVehicles.append(message.selectedVehicle!)
         self.game.peersQuantity += 1
-        print(" --------------- \(self.game.peersQuantity)")
     }
     
     // handles messages with the information necessary to start the game
@@ -267,17 +268,6 @@ extension MultiARBrains: MultipeerSessionDelegate {
     // Message received from peer
     func messageReceived(manager: MultipeerSession, message: Message) {
         interpretReceivedMessage(message: message)
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
-        print(message)
-        print("")
-        print("")
-        print("")
-        print("")
-        print("")
     }
 }
 
