@@ -208,21 +208,21 @@ class MultiARBrains {
     
     // creates a message with the selected vehicle info
     func messageVehicleSelected() -> Message {
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.SelectedVehicle.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: self.game.vehicleSelected)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.SelectedVehicle.rawValue, selectedVehicle: self.game.vehicleSelected)
         
         return message
     }
     
     // creates a message with all the parameters to start the game
     func messageStartGame() -> Message {
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.StartGame.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: self.game.peersQuantity, peersHashID: self.game.peersHashIDs, listSelectedVehicles: self.game.listSelectedVehicles)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.StartGame.rawValue, peersQuantity: self.game.peersQuantity, peersHashID: self.game.peersHashIDs, listSelectedVehicles: self.game.listSelectedVehicles)
         
         return message
     }
     
     // creates a message informing the host that the client is ready
     func messageReady() -> Message {
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ClientReady.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ClientReady.rawValue)
         
         return message
     }
@@ -230,8 +230,15 @@ class MultiARBrains {
     // creates a message with the changed vehicle control
     func messageVehicleControlChanged(control:Int) -> Message {
 
+        // Transform matrix for the vehicle
+        let tempMatrix = self.getRightVehicle()!.vehicleNode.presentation.transform
+        let transformMatrixCodable = [[tempMatrix.m11, tempMatrix.m12, tempMatrix.m13, tempMatrix.m14],
+                                      [tempMatrix.m21, tempMatrix.m22, tempMatrix.m23, tempMatrix.m24],
+                                      [tempMatrix.m31, tempMatrix.m32, tempMatrix.m33, tempMatrix.m34],
+                                      [tempMatrix.m41, tempMatrix.m42, tempMatrix.m43, tempMatrix.m44]]
+        
         // creates the message with the status
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: control, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: control, vehicleTransformMatrix: transformMatrixCodable)
         
         return message
     }
@@ -319,6 +326,15 @@ class MultiARBrains {
             if let tempIndex = self.game.peersHashIDs.firstIndex(of: message.peerHashID) {
                 if !self.vehiclesList.isEmpty {
                     let vehicle = self.vehiclesList[tempIndex]
+                    
+                    let tm = message.vehicleTransformMatrix!
+                    let transformMatrix4x4 = SCNMatrix4(m11: tm[0][0], m12: tm[0][1], m13: tm[0][2], m14: tm[0][3],
+                                                        m21: tm[1][0], m22: tm[1][1], m23: tm[1][2], m24: tm[1][3],
+                                                        m31: tm[2][0], m32: tm[2][1], m33: tm[2][2], m34: tm[2][3],
+                                                        m41: tm[3][0], m42: tm[3][1], m43: tm[3][2], m44: tm[3][3])
+                    
+                    vehicle.vehicleNode.transform = transformMatrix4x4
+                    
                     switch message.messageType {
                     case MessageType.Accelerating.rawValue:
                         vehicle.accelerating = true
