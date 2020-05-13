@@ -219,8 +219,9 @@ class Vehicle {
     // sets the collisions
     func setupVehicleCollision() {
         // sets collision
-        self.vehicleNode.physicsBody?.categoryBitMask = BitMaskCategory.Vehicle.rawValue
-        self.vehicleNode.physicsBody?.contactTestBitMask = BitMaskCategory.Checkpoint.rawValue
+        self.vehicleNode.physicsBody?.categoryBitMask = CategoryBitmask.Vehicle.rawValue
+        self.vehicleNode.physicsBody?.contactTestBitMask = ContactBitmask.Checkpoint.rawValue
+        self.vehicleNode.physicsBody?.collisionBitMask = CollisionBitmask.OthersAndVehicles.rawValue
     }
     
     // explodes vehicle

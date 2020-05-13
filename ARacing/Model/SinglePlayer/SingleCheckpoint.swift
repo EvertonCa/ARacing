@@ -42,8 +42,9 @@ class SingleCheckpoint {
             checkpoint.position = self.game.checkpointsCoordinates()[self.checkpointNow]
             checkpoint.eulerAngles = self.game.checkpointsRotations()[self.checkpointNow]
             checkpoint.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: checkpoint, options: nil))
-            checkpoint.physicsBody?.categoryBitMask = BitMaskCategory.Checkpoint.rawValue
-            checkpoint.physicsBody?.contactTestBitMask = BitMaskCategory.Vehicle.rawValue
+            checkpoint.physicsBody?.categoryBitMask = CategoryBitmask.Checkpoint.rawValue
+            checkpoint.physicsBody?.contactTestBitMask = ContactBitmask.Vehicle.rawValue
+            checkpoint.physicsBody?.collisionBitMask = CollisionBitmask.Nothing.rawValue
             checkpoint.physicsBody?.isAffectedByGravity = false
             checkpoint.name = String(self.checkpointNow)
             

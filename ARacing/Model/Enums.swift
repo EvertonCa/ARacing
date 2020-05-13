@@ -131,10 +131,27 @@ enum TextResources: String {
 
 //MARK: - Collision Enums
 
-// collision enum
-enum BitMaskCategory: Int {
-    case Vehicle = 4
-    case Checkpoint = 8
+// Category enum
+enum CategoryBitmask: Int {
+    case Others = 1
+    case Vehicle = 2
+    case Checkpoint = 4
+}
+
+// Contact enum
+enum ContactBitmask: Int {
+    case Everything = 7
+    case OthersAndVehicles = 3
+    case Checkpoint = 4
+    case Vehicle = 2
+}
+
+// Collision enum
+enum CollisionBitmask: Int {
+    case Everything = 7
+    case OthersAndVehicles = 3
+    case Checkpoint = 4
+    case Nothing = 0
 }
 
 //MARK: - Game Mode Enums

@@ -227,8 +227,7 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.singleDidBeginContact(contact: contact)
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer didBegin Contact
-            break
+            self.multiDidBeginContact(contact: contact)
         default: break
         }
     }
@@ -400,6 +399,7 @@ class ARBrain {
         if node.name == "mapAnchorNode" {
             DispatchQueue.main.async {
                 self.arViewController.singleARBrain!.mapNode = self.arViewController.singleARBrain!.map.addMap()
+                self.arViewController.singleARBrain!.checkpoints.map = self.arViewController.singleARBrain!.mapNode
                 node.addChildNode(self.arViewController.singleARBrain!.mapNode)
                 self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
                     if node.name == "surfaceAnchorNode"{
@@ -434,8 +434,8 @@ class ARBrain {
         let nodeA = contact.nodeA
         let nodeB = contact.nodeB
         
-        if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
-            && nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
+        if nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
+            && nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
             
             nodeA.physicsBody?.categoryBitMask = 0
 
@@ -449,8 +449,8 @@ class ARBrain {
                 self.arViewController.singleARBrain!.updateCheckpoint()
             }
         }
-        else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.Checkpoint.rawValue
-        && nodeA.physicsBody?.categoryBitMask == BitMaskCategory.Vehicle.rawValue {
+        else if nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
+        && nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
             
             nodeB.physicsBody?.categoryBitMask = 0
             
@@ -529,6 +529,44 @@ class ARBrain {
             
             //updates text look at
             self.arViewController.multiARBrain!.arText.lookAtCamera(sceneView: self.arViewController.sceneView, sceneryNode: self.arViewController.multiARBrain!.mapNode)
+        }
+    }
+    
+    // didBegin Contact in multi player
+    private func multiDidBeginContact(contact: SCNPhysicsContact) {
+        let nodeA = contact.nodeA
+        let nodeB = contact.nodeB
+        
+        if nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
+            && nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+            
+            nodeA.physicsBody?.categoryBitMask = 0
+            
+            // sets the new spawn coordinate for the vehicle to be the collided checkpoint
+            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeA.position
+            
+            // removes the node
+            nodeA.removeFromParentNode()
+            // calls another checkpoint
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.arViewController.singleARBrain!.updateCheckpoint()
+            }
+        }
+        else if nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
+            && nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+            
+            nodeB.physicsBody?.categoryBitMask = 0
+            
+            // sets the new spawn coordinate for the vehicle to be the collided checkpoint
+            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeB.position
+            
+            // removes the node
+            nodeB.removeFromParentNode()
+            // calls another checkpoint
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.arViewController.singleARBrain!.updateCheckpoint()
+            }
+            
         }
     }
     
