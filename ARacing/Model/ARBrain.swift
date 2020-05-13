@@ -48,9 +48,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.accelerating = true
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.Accelerating.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.accelerating = true
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.accelerating = true
         default: break
@@ -62,9 +64,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.accelerating = false
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.NotAccelerating.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.accelerating = false
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.accelerating = false
         default: break
@@ -76,9 +80,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.breaking = true
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.Breaking.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.breaking = true
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.breaking = true
         default: break
@@ -90,9 +96,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.breaking = false
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.NotBreaking.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.breaking = false
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.breaking = false
         default: break
@@ -104,9 +112,11 @@ class ARBrain {
        switch self.game.gameTypeSelected {
        case GameMode.SinglePlayer.rawValue:
            self.arViewController.singleARBrain?.vehicle.turningRight = true
+        
        case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.TurningRight.rawValue)))
            self.arViewController.multiARBrain?.getRightVehicle()!.turningRight = true
-           self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+           
        case GameMode.RCMode.rawValue:
            self.arViewController.rcBrains?.vehicle.turningRight = true
        default: break
@@ -118,9 +128,11 @@ class ARBrain {
        switch self.game.gameTypeSelected {
        case GameMode.SinglePlayer.rawValue:
            self.arViewController.singleARBrain?.vehicle.turningRight = false
+        
        case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.NotTurningRight.rawValue)))
            self.arViewController.multiARBrain?.getRightVehicle()!.turningRight = false
-           self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+           
        case GameMode.RCMode.rawValue:
            self.arViewController.rcBrains?.vehicle.turningRight = false
        default: break
@@ -132,9 +144,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.turningLeft = true
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.TurningLeft.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.turningLeft = true
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.turningLeft = true
         default: break
@@ -146,9 +160,11 @@ class ARBrain {
         switch self.game.gameTypeSelected {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.turningLeft = false
+            
         case GameMode.MultiPlayer.rawValue:
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged(control: MessageType.NotTurningLeft.rawValue)))
             self.arViewController.multiARBrain?.getRightVehicle()!.turningLeft = false
-            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
+            
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.turningLeft = false
         default: break

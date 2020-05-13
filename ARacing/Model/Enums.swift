@@ -196,5 +196,12 @@ enum MessageType: Int {
     case SelectedVehicle = 2
     case StartGame = 3
     case ClientReady = 4
-    case VehicleControl = 5
+    case Accelerating = 10
+    case NotAccelerating = 11
+    case Breaking = 12
+    case NotBreaking = 13
+    case TurningRight = 14
+    case NotTurningRight = 15
+    case TurningLeft = 16
+    case NotTurningLeft = 17
 }

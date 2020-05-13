@@ -34,11 +34,11 @@ class Vehicle {
     let steerAngle:CGFloat = 0.8
     
     // Engine force
-    let engineForce: CGFloat = 5
+    let engineForce: CGFloat = 2
     
     // Breaking force
-    let frontBreakingForce: CGFloat = 5
-    let rearBreakingForce: CGFloat = 2
+    let frontBreakingForce: CGFloat = 2
+    let rearBreakingForce: CGFloat = 1
     
     // Driving variables
     var turningRight = false

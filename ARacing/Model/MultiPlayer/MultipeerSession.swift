@@ -189,6 +189,11 @@ extension MultipeerSession: MCSessionDelegate {
     // Handles data received
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         self.receiveData(data, from: peerID)
+        print("~~~~~~~~~~~~~~~~")
+        print("~~~~~~~~~~~~~~~~")
+        print("Data packet received: \(data)")
+        print("~~~~~~~~~~~~~~~~")
+        print("~~~~~~~~~~~~~~~~")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -210,9 +215,7 @@ extension MultipeerSession: MCSessionDelegate {
 // Handles connection browser
 extension MultipeerSession: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        self.arViewController.dismiss(animated: true, completion: {
-            //self.arViewController.multiARBrain?.loadReceivedARWorldMap()
-        })
+        self.arViewController.dismiss(animated: true)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {

@@ -228,14 +228,10 @@ class MultiARBrains {
     }
     
     // creates a message with the changed vehicle control
-    func messageVehicleControlChanged() -> Message {
-        // creates a list with the current vehicle driving status
-        let vehicleState = [self.getRightVehicle()!.accelerating,
-                            self.getRightVehicle()!.breaking,
-                            self.getRightVehicle()!.turningLeft,
-                            self.getRightVehicle()!.turningRight]
+    func messageVehicleControlChanged(control:Int) -> Message {
+
         // creates the message with the status
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.VehicleControl.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil, vehicleControls: vehicleState)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: control, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil)
         
         return message
     }
@@ -245,6 +241,8 @@ class MultiARBrains {
     // Interpret the received message
     func interpretReceivedMessage(message:Message) {
         switch message.messageType {
+        case MessageType.Accelerating.rawValue...MessageType.NotTurningLeft.rawValue:
+            self.receiveVehicleControlMessage(message: message)
         case MessageType.ARWorldMapAndTransformMatrix.rawValue:
             self.receivedARWorldMapWithTransformMatrixMessage(message: message)
         case MessageType.SelectedVehicle.rawValue:
@@ -253,8 +251,6 @@ class MultiARBrains {
             self.receivedStartGameMessage(message: message)
         case MessageType.ClientReady.rawValue:
             self.receivedClientReadyMessage(message: message)
-        case MessageType.VehicleControl.rawValue:
-            self.receiveVehicleControlMessage(message: message)
         default:
             break
         }
@@ -323,10 +319,26 @@ class MultiARBrains {
             if let tempIndex = self.game.peersHashIDs.firstIndex(of: message.peerHashID) {
                 if !self.vehiclesList.isEmpty {
                     let vehicle = self.vehiclesList[tempIndex]
-                    vehicle.accelerating = message.vehicleControls![0]
-                    vehicle.breaking = message.vehicleControls![1]
-                    vehicle.turningLeft = message.vehicleControls![2]
-                    vehicle.turningRight = message.vehicleControls![3]
+                    switch message.messageType {
+                    case MessageType.Accelerating.rawValue:
+                        vehicle.accelerating = true
+                    case MessageType.NotAccelerating.rawValue:
+                        vehicle.accelerating = false
+                    case MessageType.Breaking.rawValue:
+                        vehicle.breaking = true
+                    case MessageType.NotBreaking.rawValue:
+                        vehicle.breaking = false
+                    case MessageType.TurningRight.rawValue:
+                        vehicle.turningRight = true
+                    case MessageType.NotTurningRight.rawValue:
+                        vehicle.turningRight = false
+                    case MessageType.TurningLeft.rawValue:
+                        vehicle.turningLeft = true
+                    case MessageType.NotTurningLeft.rawValue:
+                        vehicle.turningLeft = false
+                    default:
+                        break
+                    }
                 }
             }
         }
@@ -339,6 +351,13 @@ extension MultiARBrains: MultipeerSessionDelegate {
     // Message received from peer
     func messageReceived(manager: MultipeerSession, message: Message) {
         interpretReceivedMessage(message: message)
+        print("")
+        print("")
+        print("")
+        print(message)
+        print("")
+        print("")
+        print("")
     }
 }
 
