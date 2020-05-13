@@ -18,4 +18,5 @@ struct Message: Codable {
     var peersQuantity:Int?
     var peersHashID:[Int]?
     var listSelectedVehicles:[Int]?
+    var vehicleControls:[Bool]?
 }

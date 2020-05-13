@@ -195,4 +195,6 @@ enum MessageType: Int {
     case ARWorldMapAndTransformMatrix = 1
     case SelectedVehicle = 2
     case StartGame = 3
+    case ClientReady = 4
+    case VehicleControl = 5
 }

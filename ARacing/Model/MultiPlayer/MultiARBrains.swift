@@ -131,8 +131,14 @@ class MultiARBrains {
     
     // Start Multiplayer after all peers joined
     func finallyStart() {
+        // sends the message to all peers to start the game
         self.multipeerSession.encodeAndSend(message: self.messageStartGame())
+        
+        // setup the multiplayer
         self.setupMultiplayerGame()
+        
+        //show the Driving UI
+        self.arViewController.showDrivingUI()
     }
     
     // Sets up the game
@@ -175,6 +181,16 @@ class MultiARBrains {
         self.arViewController.showStartButton()
     }
     
+    // returns the correct vehicle that this device is moving
+    func getRightVehicle() -> Vehicle? {
+        if let tempIndex = self.game.peersHashIDs.firstIndex(of: self.multipeerSession.myPeerID.hash) {
+            if !self.vehiclesList.isEmpty {
+                return self.vehiclesList[tempIndex]
+            }
+        }
+        return nil
+    }
+    
     //MARK: - Multi-peer Sending and encoding functions
     
     // Create message for ARWorldMap with transform
@@ -204,6 +220,26 @@ class MultiARBrains {
         return message
     }
     
+    // creates a message informing the host that the client is ready
+    func messageReady() -> Message {
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.ClientReady.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil)
+        
+        return message
+    }
+    
+    // creates a message with the changed vehicle control
+    func messageVehicleControlChanged() -> Message {
+        // creates a list with the current vehicle driving status
+        let vehicleState = [self.getRightVehicle()!.accelerating,
+                            self.getRightVehicle()!.breaking,
+                            self.getRightVehicle()!.turningLeft,
+                            self.getRightVehicle()!.turningRight]
+        // creates the message with the status
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.VehicleControl.rawValue, transform: nil, arWorldMapData: nil, selectedVehicle: nil, peersQuantity: nil, peersHashID: nil, listSelectedVehicles: nil, vehicleControls: vehicleState)
+        
+        return message
+    }
+    
     //MARK: - Multi-peer Receiving and decoding functions
     
     // Interpret the received message
@@ -215,6 +251,10 @@ class MultiARBrains {
             self.receivedVehicleSelectedMessage(message: message)
         case MessageType.StartGame.rawValue:
             self.receivedStartGameMessage(message: message)
+        case MessageType.ClientReady.rawValue:
+            self.receivedClientReadyMessage(message: message)
+        case MessageType.VehicleControl.rawValue:
+            self.receiveVehicleControlMessage(message: message)
         default:
             break
         }
@@ -247,6 +287,7 @@ class MultiARBrains {
         // adds the peer and vehicle selected to the game controls
         self.game.peersHashIDs.append(message.peerHashID)
         self.game.listSelectedVehicles.append(message.selectedVehicle!)
+        self.game.peersReady.append(false)
         self.game.peersQuantity += 1
     }
     
@@ -256,10 +297,40 @@ class MultiARBrains {
         self.game.peersQuantity = message.peersQuantity!
         self.game.peersHashIDs = message.peersHashID!
         self.game.listSelectedVehicles = message.listSelectedVehicles!
+        
         // Starts the game and starts it
         self.setupMultiplayerGame()
+        
+        //show the Driving UI
+        self.arViewController.showDrivingUI()
     }
-
+    
+    // handles messages with client ready information
+    func receivedClientReadyMessage(message: Message) {
+        let tempIndex = self.game.peersHashIDs.firstIndex(of: message.peerHashID)
+        self.game.peersReady[tempIndex!] = true
+    }
+    
+    // handles messages with vehicle driving status
+    func receiveVehicleControlMessage(message: Message) {
+        // if the device is host, feed to other peers
+        if self.game.multipeerConnectionSelected == Connection.Host.rawValue {
+            self.multipeerSession.encodeAndSend(message: message)
+        }
+        
+        // updates the received vehicle, if it isn't yourself
+        if message.peerHashID != self.multipeerSession.myPeerID.hash {
+            if let tempIndex = self.game.peersHashIDs.firstIndex(of: message.peerHashID) {
+                if !self.vehiclesList.isEmpty {
+                    let vehicle = self.vehiclesList[tempIndex]
+                    vehicle.accelerating = message.vehicleControls![0]
+                    vehicle.breaking = message.vehicleControls![1]
+                    vehicle.turningLeft = message.vehicleControls![2]
+                    vehicle.turningRight = message.vehicleControls![3]
+                }
+            }
+        }
+    }
 }
 
 //MARK: - Multipeer Session Delegates

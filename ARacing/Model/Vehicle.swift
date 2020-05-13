@@ -45,7 +45,6 @@ class Vehicle {
     var turningLeft = false
     var accelerating = false
     var breaking = false
-    var goingBackwards = false
     
     // Body Parameters
     let allowsResting = false

@@ -237,34 +237,36 @@ class ARViewController: UIViewController {
     
     // hide all buttons with alpha = 0
     func hideUI() {
-        // alphas to 0
-        self.startButton.alpha = 0
-        self.startButtonBackground.alpha = 0
-        self.accButton.alpha = 0
-        self.turnRightButton.alpha = 0
-        self.turnLeftButton.alpha = 0
-        self.brakeButton.alpha = 0
-        self.accButtonBackground.alpha = 0
-        self.brakeButtonBackground.alpha = 0
-        self.turnLeftButtonBackground.alpha = 0
-        self.turnRightButtonBackground.alpha = 0
-        self.feedbackLabel.alpha = 0
-        self.timerLabel.alpha = 0
-        self.recordLabel.alpha = 0
-        self.trackingStatusLabel.alpha = 0
-        self.connectedWithLabel.alpha = 0
-        self.trackingFeedbackImage.alpha = 0
-        self.pauseButtonBackground.alpha = 0
-        self.beginHostingButton.alpha = 0
-        self.beginHostingBackground.alpha = 0
-        
-        // disables all buttons
-        self.startButton.isEnabled = false
-        self.accButton.isEnabled = false
-        self.turnRightButton.isEnabled = false
-        self.turnLeftButton.isEnabled = false
-        self.brakeButton.isEnabled = false
-        self.beginHostingButton.isEnabled = false
+        DispatchQueue.main.async {
+            // alphas to 0
+            self.startButton.alpha = 0
+            self.startButtonBackground.alpha = 0
+            self.accButton.alpha = 0
+            self.turnRightButton.alpha = 0
+            self.turnLeftButton.alpha = 0
+            self.brakeButton.alpha = 0
+            self.accButtonBackground.alpha = 0
+            self.brakeButtonBackground.alpha = 0
+            self.turnLeftButtonBackground.alpha = 0
+            self.turnRightButtonBackground.alpha = 0
+            self.feedbackLabel.alpha = 0
+            self.timerLabel.alpha = 0
+            self.recordLabel.alpha = 0
+            self.trackingStatusLabel.alpha = 0
+            self.connectedWithLabel.alpha = 0
+            self.trackingFeedbackImage.alpha = 0
+            self.pauseButtonBackground.alpha = 0
+            self.beginHostingButton.alpha = 0
+            self.beginHostingBackground.alpha = 0
+            
+            // disables all buttons
+            self.startButton.isEnabled = false
+            self.accButton.isEnabled = false
+            self.turnRightButton.isEnabled = false
+            self.turnLeftButton.isEnabled = false
+            self.brakeButton.isEnabled = false
+            self.beginHostingButton.isEnabled = false
+        }
     }
     
     // enables and changes alpha to 1 for the startButton
@@ -280,101 +282,121 @@ class ARViewController: UIViewController {
     
     // Show the Begin Hosting button
     func showBeginHostingButton() {
-        self.beginHostingButton.isEnabled = true
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-            self.beginHostingBackground.alpha = 1.0
-            self.beginHostingButton.alpha = 1.0
-        })
+        DispatchQueue.main.async {
+            self.beginHostingButton.isEnabled = true
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                self.beginHostingBackground.alpha = 1.0
+                self.beginHostingButton.alpha = 1.0
+            })
+        }
     }
     
     // Hides the Begin Hosting button
     func hideBeginHostingButton() {
-        self.beginHostingButton.isEnabled = false
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-            self.beginHostingBackground.alpha = 0.0
-            self.beginHostingButton.alpha = 0.0
-        })
+        DispatchQueue.main.async {
+            self.beginHostingButton.isEnabled = false
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                self.beginHostingBackground.alpha = 0.0
+                self.beginHostingButton.alpha = 0.0
+            })
+        }
     }
     
     // hides the start button
     func hideStartButton() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.startButton.isEnabled = false
-            self.startButton.alpha = 0
-            self.startButtonBackground.alpha = 0
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.startButton.isEnabled = false
+                self.startButton.alpha = 0
+                self.startButtonBackground.alpha = 0
+            })
+        }
     }
     
     // Connected with feedback
     func connectedWith(message:String) {
-        UIView.animate(withDuration: 1.0, animations: {
-            self.connectedWithLabel.alpha = 1.0
-            self.connectedWithLabel.text = message
-        }) { ( success ) in
-            UIView.animate(withDuration: 1.0, delay: 5.0, animations: {
-                self.connectedWithLabel.alpha = 0
-            })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, animations: {
+                self.connectedWithLabel.alpha = 1.0
+                self.connectedWithLabel.text = message
+            }) { ( success ) in
+                UIView.animate(withDuration: 1.0, delay: 5.0, animations: {
+                    self.connectedWithLabel.alpha = 0
+                })
+            }
         }
     }
     
     // Tracking feedback
     func showTrackingFeedback(message:String) {
-        UIView.animate(withDuration: 1.0, animations: {
-            self.trackingStatusLabel.alpha = 1.0
-            self.trackingStatusLabel.text = message
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, animations: {
+                self.trackingStatusLabel.alpha = 1.0
+                self.trackingStatusLabel.text = message
+            })
+        }
     }
     
     // Hide tracking status label
     func hideTrackingFeedback() {
-        UIView.animate(withDuration: 1.0, animations: {
-            self.trackingStatusLabel.alpha = 0.0
-            self.trackingStatusLabel.text = ""
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, animations: {
+                self.trackingStatusLabel.alpha = 0.0
+                self.trackingStatusLabel.text = ""
+            })
+        }
     }
     
     // enables driving buttons
     func showDrivingUI() {
-        // enables all buttons
-        self.accButton.isEnabled = true
-        self.turnRightButton.isEnabled = true
-        self.turnLeftButton.isEnabled = true
-        self.brakeButton.isEnabled = true
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            // alphas to 1
-            self.accButton.alpha = 1
-            self.turnRightButton.alpha = 1
-            self.turnLeftButton.alpha = 1
-            self.brakeButton.alpha = 1
-            self.accButtonBackground.alpha = 1
-            self.brakeButtonBackground.alpha = 1
-            self.turnLeftButtonBackground.alpha = 1
-            self.turnRightButtonBackground.alpha = 1
-            
-        })
+        DispatchQueue.main.async {
+            // enables all buttons
+            self.accButton.isEnabled = true
+            self.turnRightButton.isEnabled = true
+            self.turnLeftButton.isEnabled = true
+            self.brakeButton.isEnabled = true
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                // alphas to 1
+                self.accButton.alpha = 1
+                self.turnRightButton.alpha = 1
+                self.turnLeftButton.alpha = 1
+                self.brakeButton.alpha = 1
+                self.accButtonBackground.alpha = 1
+                self.brakeButtonBackground.alpha = 1
+                self.turnLeftButtonBackground.alpha = 1
+                self.turnRightButtonBackground.alpha = 1
+                
+            })
+        }
     }
     
     // Show tracking quality label
     func showTrackingQualityFeedback() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.trackingStatusLabel.alpha = 1.0
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.trackingStatusLabel.alpha = 1.0
+            })
+        }
     }
     
     // enables feedback label
     func showFeedback(text:String) {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.feedbackLabel.alpha = 1.0
-            self.feedbackLabel.text = text
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.feedbackLabel.alpha = 1.0
+                self.feedbackLabel.text = text
+            })
+        }
     }
     
     // hide feedback label
     func hideFeedback() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
-            self.feedbackLabel.alpha = 0
-            self.feedbackLabel.text = ""
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.feedbackLabel.alpha = 0
+                self.feedbackLabel.text = ""
+            })
+        }
     }
 
     

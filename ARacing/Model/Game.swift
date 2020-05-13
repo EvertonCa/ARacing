@@ -180,6 +180,9 @@ class Game {
     // Selected Vehicles list
     var listSelectedVehicles:[Int]
     
+    // Peers ready
+    var peersReady:[Bool]
+    
     //MARK: - User Defaults
     
     // User Defaults
@@ -213,6 +216,7 @@ class Game {
         self.peersQuantity = 0
         self.peersHashIDs = [0]
         self.listSelectedVehicles = [0]
+        self.peersReady = [true]
         self.loadUserDefaults()
     }
     

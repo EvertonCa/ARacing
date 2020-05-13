@@ -49,8 +49,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.accelerating = true
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer accelerator pressed
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.accelerating = true
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.accelerating = true
         default: break
@@ -63,8 +63,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.accelerating = false
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer accelerator released
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.accelerating = false
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.accelerating = false
         default: break
@@ -77,8 +77,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.breaking = true
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer brake pressed
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.breaking = true
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.breaking = true
         default: break
@@ -91,8 +91,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.breaking = false
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer brake released
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.breaking = false
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.breaking = false
         default: break
@@ -105,8 +105,8 @@ class ARBrain {
        case GameMode.SinglePlayer.rawValue:
            self.arViewController.singleARBrain?.vehicle.turningRight = true
        case GameMode.MultiPlayer.rawValue:
-           //FIXME: multiplayer turn right pressed
-           break
+           self.arViewController.multiARBrain?.getRightVehicle()!.turningRight = true
+           self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
        case GameMode.RCMode.rawValue:
            self.arViewController.rcBrains?.vehicle.turningRight = true
        default: break
@@ -119,8 +119,8 @@ class ARBrain {
        case GameMode.SinglePlayer.rawValue:
            self.arViewController.singleARBrain?.vehicle.turningRight = false
        case GameMode.MultiPlayer.rawValue:
-           //FIXME: multiplayer turn right released
-           break
+           self.arViewController.multiARBrain?.getRightVehicle()!.turningRight = false
+           self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
        case GameMode.RCMode.rawValue:
            self.arViewController.rcBrains?.vehicle.turningRight = false
        default: break
@@ -133,8 +133,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.turningLeft = true
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer turn left pressed
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.turningLeft = true
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.turningLeft = true
         default: break
@@ -147,8 +147,8 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.arViewController.singleARBrain?.vehicle.turningLeft = false
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer turn left released
-            break
+            self.arViewController.multiARBrain?.getRightVehicle()!.turningLeft = false
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: (self.arViewController.multiARBrain!.messageVehicleControlChanged()))
         case GameMode.RCMode.rawValue:
             self.arViewController.rcBrains?.vehicle.turningLeft = false
         default: break
@@ -164,7 +164,6 @@ class ARBrain {
             self.singleDidAddNodeRendered(node: node, anchor: anchor)
         case GameMode.MultiPlayer.rawValue:
             self.multiDidAddNodeRendered(node: node, anchor: anchor)
-            break
         case GameMode.RCMode.rawValue:
             self.rcDidAddNodeRendered(node: node, anchor: anchor)
         default: break
@@ -178,7 +177,6 @@ class ARBrain {
             self.singleUpdatedNodeRendered(node: node, anchor: anchor)
         case GameMode.MultiPlayer.rawValue:
             self.multiUpdatedNodeRendered(node: node, anchor: anchor)
-            break
         case GameMode.RCMode.rawValue:
             self.rcUpdatedNodeRendered(node: node, anchor: anchor)
         default: break
@@ -200,8 +198,7 @@ class ARBrain {
         case GameMode.SinglePlayer.rawValue:
             self.singleUpdateAtTime()
         case GameMode.MultiPlayer.rawValue:
-            //FIXME: multiplayer UpdatedAtTime
-            break
+            self.multiUpdateAtTime()
         case GameMode.RCMode.rawValue:
             self.rcUpdateAtTime()
         default: break
@@ -462,9 +459,9 @@ class ARBrain {
         if self.arViewController.multiARBrain?.game.multipeerConnectionSelected == Connection.Host.rawValue {
             self.arViewController.multiARBrain?.finallyStart()
         }
-        // If the device is Client
+        // If the device is Client, sends a message saying that the client is ready
         else {
-            
+            self.arViewController.multiARBrain?.multipeerSession.encodeAndSend(message: self.arViewController.multiARBrain!.messageReady())
         }
     }
     
@@ -503,6 +500,19 @@ class ARBrain {
     private func multiUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
         if self.game.multipeerConnectionSelected == Connection.Host.rawValue {
             self.updateSurfaceNode(node: node, anchor: anchor)
+        }
+    }
+    
+    // updateAtTime in multi player
+    private func multiUpdateAtTime() {
+        DispatchQueue.main.async {
+            // updates vehicle
+            for vehicle in self.arViewController.multiARBrain!.vehiclesList {
+                vehicle.updatesVehicle()
+            }
+            
+            //updates text look at
+            self.arViewController.multiARBrain!.arText.lookAtCamera(sceneView: self.arViewController.sceneView, sceneryNode: self.arViewController.multiARBrain!.mapNode)
         }
     }
     
