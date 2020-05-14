@@ -280,34 +280,6 @@ class ARBrain {
         self.arViewController.goToOptionsViewController()
     }
     
-    // Enables Gestures
-    func enableGestures() {
-        switch self.arViewController.game.gameTypeSelected {
-        case GameMode.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.gesturesBrain.registerGesturesRecognizers()
-            
-        case GameMode.MultiPlayer.rawValue:
-            self.arViewController.multiARBrain?.gesturesBrain.registerGesturesRecognizers()
-            
-        default:
-            break
-        }
-    }
-    
-    // Disable Gestures
-    func disableGestures() {
-        switch self.arViewController.game.gameTypeSelected {
-        case GameMode.SinglePlayer.rawValue:
-            self.arViewController.singleARBrain?.gesturesBrain.removeAllGestures()
-            
-        case GameMode.MultiPlayer.rawValue:
-            self.arViewController.multiARBrain?.gesturesBrain.removeAllGestures()
-            
-        default:
-            break
-        }
-    }
-    
     // Creates the surface node with the grid
     func updateSurfaceNode(node: SCNNode, anchor: ARAnchor) {
         if node.name == "surfaceAnchorNode" {
@@ -373,9 +345,6 @@ class ARBrain {
         
         // show vehicle in the view
         self.arViewController.singleARBrain?.vehicle.createVehicleSinglePlayer()
-        
-        // disable gestures
-        self.arViewController.singleARBrain?.gesturesBrain.removeRotationGesture()
         
         // sets the scenery to locked
         self.arViewController.singleARBrain?.map.mapLocked = true
@@ -495,6 +464,7 @@ class ARBrain {
             DispatchQueue.main.async {
                 // creates the map node
                 self.arViewController.multiARBrain!.mapNode = self.arViewController.multiARBrain!.map.addMap()
+                self.arViewController.multiARBrain!.checkpoints.map = self.arViewController.multiARBrain!.mapNode
                 // checks if the transformMatrix exists, and if true, applies it
                 if let safeTransform = self.arViewController.multiARBrain!.transformMatrix {
                     self.arViewController.multiARBrain!.mapNode.transform = safeTransform
@@ -537,34 +507,43 @@ class ARBrain {
         let nodeA = contact.nodeA
         let nodeB = contact.nodeB
         
+        
         if nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
             && nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
             
             nodeA.physicsBody?.categoryBitMask = 0
             
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
-            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeA.position
+            for vehicle in self.arViewController.multiARBrain!.vehiclesList {
+                if vehicle.vehicleNode == nodeB {
+                    vehicle.spawnPosition = nodeA.position
+                }
+            }
             
             // removes the node
             nodeA.removeFromParentNode()
             // calls another checkpoint
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.arViewController.singleARBrain!.updateCheckpoint()
+                self.arViewController.multiARBrain!.updateCheckpoint()
             }
         }
         else if nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Checkpoint.rawValue
             && nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
             
             nodeB.physicsBody?.categoryBitMask = 0
-            
+
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
-            self.arViewController.singleARBrain!.vehicle.spawnPosition = nodeB.position
+            for vehicle in self.arViewController.multiARBrain!.vehiclesList {
+                if vehicle.vehicleNode == nodeA {
+                    vehicle.spawnPosition = nodeA.position
+                }
+            }
             
             // removes the node
             nodeB.removeFromParentNode()
             // calls another checkpoint
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.arViewController.singleARBrain!.updateCheckpoint()
+                self.arViewController.multiARBrain!.updateCheckpoint()
             }
             
         }

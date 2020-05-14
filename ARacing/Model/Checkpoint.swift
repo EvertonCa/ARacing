@@ -1,15 +1,15 @@
 //
-//  SingleCheckpoint.swift
+//  Checkpoint.swift
 //  ARacingPRO
 //
-//  Created by Everton Cardoso on 22/04/20.
+//  Created by Everton Cardoso on 13/05/20.
 //  Copyright © 2020 Everton Cardoso. All rights reserved.
 //
 
 import Foundation
 import ARKit
 
-class SingleCheckpoint {
+class Checkpoint {
     
     //MARK: - Variables and Constants
     
@@ -85,3 +85,4 @@ class SingleCheckpoint {
         }
     }
 }
+

@@ -37,7 +37,7 @@ class SingleARBrains {
     var arViewController: ARViewController!
     
     // Checkpoints
-    var checkpoints: SingleCheckpoint!
+    var checkpoints: Checkpoint!
     
     // Scenery
     var map: Map!
@@ -100,13 +100,11 @@ class SingleARBrains {
         let mapAnchor = ARAnchor(name: "map", transform: hitTestResult.worldTransform)
         self.sceneView.session.add(anchor: mapAnchor)
         
-        self.gesturesBrain.removeTapGesture()
-        
         // changes feedback label
         self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
         
         // setup checkpoints
-        self.checkpoints = SingleCheckpoint(mapNode: self.mapNode, game: self.game)
+        self.checkpoints = Checkpoint(mapNode: self.mapNode, game: self.game)
     }
     
     // adds the checkpoints with particles in the right place
@@ -123,7 +121,13 @@ class SingleARBrains {
         var textNode = self.arText.showReadyText()
         textNode.position = SCNVector3(0, 0.6, 0)
         textNode.opacity = 0
-        self.mapNode.addChildNode(textNode)
+        var rootNode = SCNNode()
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "mapAnchorNode"{
+                rootNode = node
+            }
+        }
+        rootNode.addChildNode(textNode)
         
         //animate fade in Ready Text
         SCNTransaction.begin()
@@ -144,7 +148,7 @@ class SingleARBrains {
                 textNode = self.arText.showSetText()
                 textNode.position = SCNVector3(0, 0.6, 0)
                 textNode.opacity = 0
-                self.mapNode.addChildNode(textNode)
+                rootNode.addChildNode(textNode)
             }
             SCNTransaction.commit()
             
@@ -168,7 +172,7 @@ class SingleARBrains {
                         textNode = self.arText.showGoText()
                         textNode.position = SCNVector3(0, 0.6, 0)
                         textNode.opacity = 0
-                        self.mapNode.addChildNode(textNode)
+                        rootNode.addChildNode(textNode)
                     
                         // starts the timer
                         self.lapTimer.startTimer()

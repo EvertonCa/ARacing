@@ -87,22 +87,6 @@ class Gestures {
         self.tapGestureRecognizer?.delegate = self.arViewController
     }
     
-    // Removes all Gestures Recognizers
-    func removeAllGestures() {
-        self.sceneView.removeGestureRecognizer(self.spinGestureRecognizer!)
-        self.sceneView.removeGestureRecognizer(self.tapGestureRecognizer!)
-    }
-    
-    // Remove rotation gesture recognizer
-    func removeRotationGesture() {
-        self.sceneView.removeGestureRecognizer(self.spinGestureRecognizer!)
-    }
-    
-    // Remove tap gesture recognizer
-    func removeTapGesture() {
-        self.sceneView.removeGestureRecognizer(self.tapGestureRecognizer!)
-    }
-    
     // handler for Tap Gesture for adding scene to plane
     @objc func tapped(sender:UITapGestureRecognizer) {
         if self.game.gameTypeSelected == GameMode.RCMode.rawValue{

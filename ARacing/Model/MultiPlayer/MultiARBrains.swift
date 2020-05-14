@@ -47,7 +47,7 @@ class MultiARBrains {
     var arViewController:ARViewController!
     
     // Checkpoints
-    var checkpoints:SingleCheckpoint!
+    var checkpoints:Checkpoint!
     
     // Scenery
     var map:Map!
@@ -101,6 +101,9 @@ class MultiARBrains {
         // setup AR Text
         self.arText = SingleTexts()
         
+        // setup checkpoints
+        self.checkpoints = Checkpoint(mapNode: self.mapNode, game: self.game)
+        
         // if the user is Host
         if self.game.multipeerConnectionSelected == Connection.Host.rawValue {
             // run session
@@ -127,6 +130,7 @@ class MultiARBrains {
         
         // changes feedback label
         self.arViewController.showFeedback(text: "Rotate the map to match your surface and press Start to begin!")
+        
     }
     
     // Start Multiplayer after all peers joined
@@ -136,9 +140,6 @@ class MultiARBrains {
         
         // setup the multiplayer
         self.setupMultiplayerGame()
-        
-        //show the Driving UI
-        self.arViewController.showDrivingUI()
     }
     
     // Sets up the game
@@ -151,6 +152,17 @@ class MultiARBrains {
         // Show vehicles in the view
         for vehicle in self.vehiclesList {
             vehicle.createVehicleMultiPlayer()
+        }
+        
+        //show the Driving UI
+        self.arViewController.showDrivingUI()
+        
+        // Start race
+        self.startRace()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            //shows driving UI
+            self.arViewController.showDrivingUI()
         }
     }
     
@@ -189,6 +201,107 @@ class MultiARBrains {
             }
         }
         return nil
+    }
+    
+    // adds the checkpoints with particles in the right place
+    func updateCheckpoint() {
+        if !self.checkpoints.setupCheckpoints() {
+            self.endRace()
+        }
+    }
+    
+    // shows the checkpoints, AR Text and starts the timer.
+    func startRace() {
+        
+        // shows the Ready AR Text
+        var textNode = self.arText.showReadyText()
+        textNode.position = SCNVector3(0, 0.6, 0)
+        textNode.opacity = 0
+        var rootNode = SCNNode()
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "mapAnchorNode"{
+                rootNode = node
+            }
+        }
+        rootNode.addChildNode(textNode)
+        
+        //animate fade in Ready Text
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        textNode.opacity = 1
+        SCNTransaction.commit()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            //animate fade out Ready Text
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.5
+            textNode.opacity = 0
+            SCNTransaction.completionBlock = {
+                // removes the Ready text
+                textNode.removeFromParentNode()
+                
+                // shows the Set AR Text
+                textNode = self.arText.showSetText()
+                textNode.position = SCNVector3(0, 0.6, 0)
+                textNode.opacity = 0
+                rootNode.addChildNode(textNode)
+            }
+            SCNTransaction.commit()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                //animate fade in Set Text
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.5
+                textNode.opacity = 1
+                SCNTransaction.commit()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                    //animate fade out Set text
+                    SCNTransaction.begin()
+                    SCNTransaction.animationDuration = 0.5
+                    textNode.opacity = 0
+                    SCNTransaction.completionBlock = {
+                        // removes the Set text
+                        textNode.removeFromParentNode()
+                        
+                        // shows the GO AR Text
+                        textNode = self.arText.showGoText()
+                        textNode.position = SCNVector3(0, 0.6, 0)
+                        textNode.opacity = 0
+                        rootNode.addChildNode(textNode)
+                        
+                        // setup the checkpoints and particles
+                        self.updateCheckpoint()
+                        
+                    }
+                    SCNTransaction.commit()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        //animate fade in Go Text
+                        SCNTransaction.begin()
+                        SCNTransaction.animationDuration = 0.5
+                        textNode.opacity = 1
+                        SCNTransaction.commit()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            //animate fade out Go Text
+                            SCNTransaction.begin()
+                            SCNTransaction.animationDuration = 0.5
+                            textNode.opacity = 0
+                            SCNTransaction.completionBlock = {
+                                // removes the Ready text
+                                textNode.removeFromParentNode()
+                            }
+                            SCNTransaction.commit()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // ends the race
+    func endRace() {
+        
     }
     
     //MARK: - Multi-peer Sending and encoding functions
@@ -303,9 +416,6 @@ class MultiARBrains {
         
         // Starts the game and starts it
         self.setupMultiplayerGame()
-        
-        //show the Driving UI
-        self.arViewController.showDrivingUI()
     }
     
     // handles messages with client ready information
