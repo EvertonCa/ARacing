@@ -515,7 +515,7 @@ class ARBrain {
             
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
             for vehicle in self.arViewController.multiARBrain!.vehiclesList {
-                if vehicle.vehicleNode == nodeB {
+                if vehicle.vehicleNode.hashValue == nodeB.hashValue {
                     vehicle.spawnPosition = nodeA.position
                 }
             }
@@ -534,8 +534,8 @@ class ARBrain {
 
             // sets the new spawn coordinate for the vehicle to be the collided checkpoint
             for vehicle in self.arViewController.multiARBrain!.vehiclesList {
-                if vehicle.vehicleNode == nodeA {
-                    vehicle.spawnPosition = nodeA.position
+                if vehicle.vehicleNode.hashValue == nodeA.hashValue {
+                    vehicle.spawnPosition = nodeB.position
                 }
             }
             
