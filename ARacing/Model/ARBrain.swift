@@ -562,7 +562,7 @@ class ARBrain {
         
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
-        let gridNode = self.arViewController.rcBrains!.createGrid(planeAnchor: planeAnchor)
+        let gridNode = Grid.createGrid(planeAnchor: planeAnchor)
         
         node.addChildNode(gridNode)
     }
@@ -577,7 +577,7 @@ class ARBrain {
         
         self.arViewController.rcBrains!.gridNode = node
         
-        let gridNode = self.arViewController.rcBrains!.createGrid(planeAnchor: planeAnchor)
+        let gridNode = Grid.createGrid(planeAnchor: planeAnchor)
         self.arViewController.rcBrains!.gridNode!.addChildNode(gridNode)
     }
     

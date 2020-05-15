@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,30 +13,30 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="IntroViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="le1-En-INd">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="dDC-53-SyT">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_ARacing" translatesAutoresizingMaskIntoConstraints="NO" id="WEu-VI-QqO">
-                                <rect key="frame" x="124" y="137" width="648" height="140"/>
+                                <rect key="frame" x="124" y="126.66666666666669" width="564" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WEu-VI-QqO" secondAttribute="height" multiplier="282:61" id="cnH-ym-MgT"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="7Fj-NI-iWd">
-                                <rect key="frame" x="248" y="228" width="400" height="165"/>
+                                <rect key="frame" x="206" y="189" width="400" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="Ap1-Sb-sMP"/>
                                     <constraint firstAttribute="width" constant="400" id="SqV-tP-479"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Dv-4W-7zF">
-                                <rect key="frame" x="248" y="228" width="400" height="165"/>
+                                <rect key="frame" x="206" y="189" width="400" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="Opw-cU-ZuY"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="wxL-3D-qZS"/>
@@ -90,18 +90,18 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="1eg-OT-pJ5" customClass="OptionsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="9uq-ns-SM9">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HnR-gH-jry" userLabel="Buttons Background StackView">
-                                <rect key="frame" x="44" y="47.5" width="808" height="153"/>
+                                <rect key="frame" x="44" y="36" width="724" height="153"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="Dvc-1l-ykO">
-                                        <rect key="frame" x="0.0" y="0.0" width="401" height="153"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="153"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-sg-wSf">
-                                        <rect key="frame" x="407" y="0.0" width="401" height="153"/>
+                                        <rect key="frame" x="365" y="0.0" width="359" height="153"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -111,10 +111,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SPf-76-BOP" userLabel="Buttons StackView">
-                                <rect key="frame" x="44" y="41.5" width="808" height="165"/>
+                                <rect key="frame" x="44" y="30" width="724" height="165"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-2y-GqB">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="165"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="362" height="165"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                         <size key="titleShadowOffset" width="3" height="3"/>
                                         <state key="normal" title="Single Player">
@@ -126,7 +126,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5p-Wz-fSW">
-                                        <rect key="frame" x="404" y="0.0" width="404" height="165"/>
+                                        <rect key="frame" x="362" y="0.0" width="362" height="165"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                         <size key="titleShadowOffset" width="3" height="3"/>
                                         <state key="normal" title="Multi Player">
@@ -144,14 +144,14 @@
                                 </constraints>
                             </stackView>
                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="sVY-yg-VC1">
-                                <rect key="frame" x="112" y="207.5" width="672" height="165"/>
+                                <rect key="frame" x="70" y="180" width="672" height="165"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="Q8V-sd-uIK"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIi-1o-taF">
-                                <rect key="frame" x="358.5" y="260" width="179" height="60"/>
+                                <rect key="frame" x="316.66666666666669" y="232.66666666666663" width="179" height="60"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                 <size key="titleShadowOffset" width="3" height="3"/>
                                 <state key="normal" title="RC Mode">
@@ -195,26 +195,26 @@
             <objects>
                 <viewController id="BX6-or-wu0" customClass="MultiPeerViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iZx-bK-AeW">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="oA8-ok-bH9">
-                                <rect key="frame" x="94" y="50" width="708" height="293"/>
+                                <rect key="frame" x="94" y="50" width="624" height="254"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="x9H-Mm-RXg">
-                                        <rect key="frame" x="0.0" y="30.5" width="304" height="232"/>
+                                        <rect key="frame" x="0.0" y="11" width="262" height="232.33333333333334"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="jD6-EO-eP8">
-                                        <rect key="frame" x="404" y="30.5" width="304" height="232"/>
+                                        <rect key="frame" x="362" y="11" width="262" height="232.33333333333334"/>
                                     </imageView>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="5O2-M4-kZv">
-                                <rect key="frame" x="94" y="50" width="708" height="293"/>
+                                <rect key="frame" x="94" y="50" width="624" height="254"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XE1-Gm-mmp">
-                                        <rect key="frame" x="0.0" y="116.5" width="304" height="60"/>
+                                        <rect key="frame" x="0.0" y="97" width="262" height="60"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                         <size key="titleShadowOffset" width="3" height="3"/>
                                         <state key="normal" title="Host Session">
@@ -226,7 +226,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ty-kQ-Se5">
-                                        <rect key="frame" x="404" y="116.5" width="304" height="60"/>
+                                        <rect key="frame" x="362" y="97" width="262" height="60"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                         <size key="titleShadowOffset" width="3" height="3"/>
                                         <state key="normal" title="Join Session">
@@ -262,11 +262,11 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="YLV-uD-HSL" customClass="MapsViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="34d-WM-rB9">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OPR-RH-sVY">
-                                <rect key="frame" x="44" y="30" width="808" height="333"/>
+                                <rect key="frame" x="44" y="30" width="724" height="294"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Mi-Od-j8m">
                                     <size key="itemSize" width="128" height="128"/>
@@ -276,7 +276,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="item" id="TYO-HS-Kjd" customClass="MapsCell" customModule="ARacingPRO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="33.5" width="475" height="266"/>
+                                        <rect key="frame" x="0.0" y="14" width="475" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RBk-2j-ESr">
                                             <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
@@ -286,7 +286,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-b1-QoU">
-                                                    <rect key="frame" x="177" y="108" width="121.5" height="50.5"/>
+                                                    <rect key="frame" x="176.66666666666666" y="107.66666666666667" width="121.66666666666666" height="50.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="41"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -332,38 +332,37 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="PXA-2V-sHJ" customClass="VehicleSelectionViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KlF-QB-tkG">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VqG-0W-3X4">
-                                <rect key="frame" x="44" y="30" width="808" height="333"/>
+                                <rect key="frame" x="44" y="30" width="724" height="294"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="30" id="q4V-Z0-RK1">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="30" id="q4V-Z0-RK1">
                                     <size key="itemSize" width="250" height="250"/>
-                                    <size key="estimatedItemSize" width="250" height="250"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="item" id="47u-zx-wwL" customClass="VehicleCell" customModule="ARacingPRO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="33.5" width="475" height="266"/>
+                                        <rect key="frame" x="0.0" y="14" width="475.33333333333331" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PkZ-qR-XsV">
-                                            <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="475.33333333333331" height="266"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vehicle1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="YJD-PH-Ib7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="475" height="266"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vehicle1Icon" translatesAutoresizingMaskIntoConstraints="NO" id="YJD-PH-Ib7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="475.33333333333331" height="266"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="YJD-PH-Ib7" secondAttribute="trailing" id="RIC-4Y-AaT"/>
-                                                <constraint firstAttribute="bottom" secondItem="YJD-PH-Ib7" secondAttribute="bottom" id="VLQ-ly-4HM"/>
-                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="leading" secondItem="PkZ-qR-XsV" secondAttribute="leading" id="qWA-04-q6t"/>
-                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="top" secondItem="PkZ-qR-XsV" secondAttribute="top" id="sSM-B7-mXf"/>
+                                                <constraint firstAttribute="trailing" secondItem="YJD-PH-Ib7" secondAttribute="trailing" id="8ud-iQ-3fu"/>
+                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="leading" secondItem="PkZ-qR-XsV" secondAttribute="leading" id="Oqf-Zj-Osh"/>
+                                                <constraint firstItem="YJD-PH-Ib7" firstAttribute="top" secondItem="PkZ-qR-XsV" secondAttribute="top" id="fFf-FX-8gY"/>
+                                                <constraint firstAttribute="bottom" secondItem="YJD-PH-Ib7" secondAttribute="bottom" id="fqF-1a-KgX"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -388,28 +387,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfK-t4-nbu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="2019"/>
+            <point key="canvasLocation" x="799.50738916256159" y="2018.4000000000001"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="fWc-rI-KLE">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="1mO-Fu-hmP" customClass="ARViewController" customModule="ARacingPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zfY-Yo-o4f">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" autoenablesDefaultLighting="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAq-GO-DI1">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                             </arscnView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="IGb-ci-7Vu">
-                                <rect key="frame" x="358" y="270.5" width="180" height="80"/>
+                                <rect key="frame" x="316" y="241.33333333333337" width="180" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="EsT-yO-IXW"/>
                                     <constraint firstAttribute="height" constant="80" id="eYN-OA-raH"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-jx-Oyf">
-                                <rect key="frame" x="358" y="270.5" width="180" height="80"/>
+                                <rect key="frame" x="316" y="241.33333333333337" width="180" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="mtY-OJ-5gS"/>
                                     <constraint firstAttribute="height" constant="80" id="tau-qw-t2s"/>
@@ -425,7 +424,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="349-gm-93V">
-                                <rect key="frame" x="782" y="245" width="70" height="128"/>
+                                <rect key="frame" x="698" y="206" width="70" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="2SF-OA-y8K"/>
                                     <constraint firstAttribute="height" constant="128" id="pp3-vj-0BL"/>
@@ -436,7 +435,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6t-Nl-uFP">
-                                <rect key="frame" x="662" y="293" width="100" height="70"/>
+                                <rect key="frame" x="578" y="254" width="100" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="I0T-cn-yQZ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="j9z-u6-IEr"/>
@@ -447,7 +446,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTa-P8-v1l">
-                                <rect key="frame" x="154" y="273" width="100" height="100"/>
+                                <rect key="frame" x="154" y="234" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="rc2-72-A46"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="sVh-do-gjW"/>
@@ -458,7 +457,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA9-Z9-iId">
-                                <rect key="frame" x="44" y="273" width="100" height="100"/>
+                                <rect key="frame" x="44" y="234" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="cDX-xm-oJz"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ydN-Qi-gCx"/>
@@ -469,35 +468,35 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Accelerator Pedal" translatesAutoresizingMaskIntoConstraints="NO" id="atr-1Y-nSk">
-                                <rect key="frame" x="782" y="245" width="70" height="128"/>
+                                <rect key="frame" x="698" y="206" width="70" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Trc-ZX-MP4"/>
                                     <constraint firstAttribute="width" constant="70" id="hJx-uT-nXk"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Brake Pedal" translatesAutoresizingMaskIntoConstraints="NO" id="QJS-b1-0Bv">
-                                <rect key="frame" x="662" y="293" width="100" height="70"/>
+                                <rect key="frame" x="578" y="254" width="100" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="aCN-DT-HnF"/>
                                     <constraint firstAttribute="width" constant="100" id="eDm-73-l04"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Turn Left Button" translatesAutoresizingMaskIntoConstraints="NO" id="5dp-Xf-3iN">
-                                <rect key="frame" x="44" y="273" width="100" height="100"/>
+                                <rect key="frame" x="44" y="234" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="fvd-ZX-lsg"/>
                                     <constraint firstAttribute="height" constant="100" id="xac-ev-Iog"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Turn Right Button" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-0T-5kM">
-                                <rect key="frame" x="154" y="273" width="100" height="100"/>
+                                <rect key="frame" x="154" y="234" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="iyR-Tt-8WI"/>
                                     <constraint firstAttribute="width" constant="100" id="rvF-yO-gcG"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-ti-6td">
-                                <rect key="frame" x="404.5" y="40" width="87.5" height="23"/>
+                                <rect key="frame" x="362.33333333333331" y="40" width="87.666666666666686" height="23"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -505,7 +504,7 @@
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected with:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyr-pd-B6m">
-                                <rect key="frame" x="363.5" y="193.5" width="169.5" height="27.5"/>
+                                <rect key="frame" x="321.33333333333331" y="174" width="169.66666666666669" height="27.333333333333343"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -514,7 +513,7 @@
                                 <size key="shadowOffset" width="3" height="3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxb-yS-ttb">
-                                <rect key="frame" x="390.5" y="10" width="115.5" height="19.5"/>
+                                <rect key="frame" x="348.33333333333331" y="10.000000000000002" width="115.66666666666669" height="19.666666666666671"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -543,7 +542,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00m00.0s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FY1-g4-X4r">
-                                <rect key="frame" x="387.5" y="351" width="121" height="32"/>
+                                <rect key="frame" x="345.66666666666669" y="312" width="121" height="32"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -551,7 +550,7 @@
                                 <size key="shadowOffset" width="3" height="3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Time: --m--.-s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KB-gA-xOl">
-                                <rect key="frame" x="54" y="100" width="298" height="26.5"/>
+                                <rect key="frame" x="54" y="100" width="214" height="26.666666666666671"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -559,21 +558,21 @@
                                 <size key="shadowOffset" width="3" height="2"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NotAvailable" translatesAutoresizingMaskIntoConstraints="NO" id="ZBp-lq-XDW">
-                                <rect key="frame" x="806" y="20" width="80" height="50"/>
+                                <rect key="frame" x="722" y="20" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KTs-It-BFq"/>
                                     <constraint firstAttribute="width" constant="80" id="XdY-ZN-6Qq"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Button" translatesAutoresizingMaskIntoConstraints="NO" id="5yx-AX-B24">
-                                <rect key="frame" x="662" y="182" width="190" height="50"/>
+                                <rect key="frame" x="578" y="162.66666666666666" width="190" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="190" id="8Mv-YV-P2p"/>
                                     <constraint firstAttribute="height" constant="50" id="VDn-2U-31T"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVa-Gg-e0g">
-                                <rect key="frame" x="662" y="182" width="190" height="50"/>
+                                <rect key="frame" x="578" y="162.66666666666666" width="190" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="190" id="nGV-om-ucq"/>
                                     <constraint firstAttribute="height" constant="50" id="pWn-k7-sl0"/>
@@ -653,6 +652,7 @@
                         <outlet property="brakeButtonBackground" destination="QJS-b1-0Bv" id="bZU-tA-CG3"/>
                         <outlet property="connectedWithLabel" destination="oyr-pd-B6m" id="D24-Xv-xHS"/>
                         <outlet property="feedbackLabel" destination="gjr-ti-6td" id="Grm-Rw-94x"/>
+                        <outlet property="pauseButton" destination="fUr-vk-cei" id="uMG-we-pyG"/>
                         <outlet property="pauseButtonBackground" destination="yEr-RT-blZ" id="FEe-r5-F9M"/>
                         <outlet property="recordLabel" destination="9KB-gA-xOl" id="t0H-DX-bLh"/>
                         <outlet property="sceneView" destination="UAq-GO-DI1" id="FmF-DU-m5K"/>
@@ -677,16 +677,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Accelerator Pedal" width="101" height="198"/>
-        <image name="Background_Button" width="672" height="232"/>
-        <image name="Background_Splash" width="666" height="375"/>
-        <image name="Brake Pedal" width="167" height="95.5"/>
-        <image name="Logo_ARacing" width="601" height="195"/>
-        <image name="Map1Icon" width="475" height="266"/>
-        <image name="NotAvailable" width="298" height="273"/>
-        <image name="PauseButton" width="296.5" height="276"/>
-        <image name="Turn Left Button" width="100" height="98"/>
-        <image name="Turn Right Button" width="100.5" height="98"/>
-        <image name="Vehicle1Icon" width="475" height="266"/>
+        <image name="Accelerator Pedal" width="101.33333587646484" height="198.33332824707031"/>
+        <image name="Background_Button" width="672" height="232.33332824707031"/>
+        <image name="Background_Splash" width="1000" height="666.66668701171875"/>
+        <image name="Brake Pedal" width="167.33332824707031" height="95.666664123535156"/>
+        <image name="Logo_ARacing" width="601.33331298828125" height="195"/>
+        <image name="Map1Icon" width="475.33334350585938" height="266"/>
+        <image name="NotAvailable" width="298" height="273.33334350585938"/>
+        <image name="PauseButton" width="296.66665649414062" height="276"/>
+        <image name="Turn Left Button" width="100" height="98.333335876464844"/>
+        <image name="Turn Right Button" width="100.66666412353516" height="98.333335876464844"/>
+        <image name="Vehicle1Icon" width="475.33334350585938" height="266"/>
     </resources>
 </document>

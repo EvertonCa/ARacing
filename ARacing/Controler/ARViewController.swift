@@ -22,6 +22,7 @@ class ARViewController: UIViewController {
     @IBOutlet weak var turnRightButton: UIButton!
     @IBOutlet weak var turnLeftButton: UIButton!
     @IBOutlet weak var beginHostingButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     //UIImageViews
     @IBOutlet weak var startButtonBackground: UIImageView!
     @IBOutlet weak var accButtonBackground: UIImageView!
@@ -95,6 +96,12 @@ class ARViewController: UIViewController {
     
     // perform segue to OptionsViewController
     func goToOptionsViewController() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn, animations: {
+                self.pauseButton.alpha = 1.0
+                self.pauseButtonBackground.alpha = 1.0
+            })
+        }
         // perform segue to options controller
         performSegue(withIdentifier: "GoToType", sender: self)
     }
@@ -258,6 +265,7 @@ class ARViewController: UIViewController {
             self.pauseButtonBackground.alpha = 0
             self.beginHostingButton.alpha = 0
             self.beginHostingBackground.alpha = 0
+            self.pauseButton.alpha = 0
             
             // disables all buttons
             self.startButton.isEnabled = false

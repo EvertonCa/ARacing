@@ -69,21 +69,5 @@ class RCBrains {
         
     }
     
-    // creates the grid that shows the horizontal surface
-    func createGrid(planeAnchor: ARPlaneAnchor) -> SCNNode {
-        
-        let gridNode = SCNNode(geometry: SCNBox(width: CGFloat(planeAnchor.extent.x), height: CGFloat(0.08), length: CGFloat(planeAnchor.extent.z), chamferRadius: 1))
-        gridNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Grid")
-        gridNode.position = SCNVector3(CGFloat(planeAnchor.center.x), CGFloat(planeAnchor.center.y), CGFloat(planeAnchor.center.z))
-
-        // static is not affected by forces, but it is interact-able
-        let staticBody = SCNPhysicsBody.static()
-
-        gridNode.physicsBody = staticBody
-
-        return gridNode
-        
-    }
-    
 }
 

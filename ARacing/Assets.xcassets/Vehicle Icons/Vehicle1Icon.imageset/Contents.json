@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Track1.png",
+      "filename" : "Bugatti.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Track1@2x.png",
+      "filename" : "Bugatti@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Track1@3x.png",
+      "filename" : "Bugatti@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
