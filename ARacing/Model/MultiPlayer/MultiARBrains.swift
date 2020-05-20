@@ -35,6 +35,13 @@ class MultiARBrains {
     // Can send world map
     var canSendWorldMap = false
     
+    // who's winning
+    var winning:[Int] = [] {
+        didSet {
+            self.updateWinning()
+        }
+    }
+    
     //MARK: - Models
     
     // Game
@@ -305,6 +312,25 @@ class MultiARBrains {
     // ends the race
     func endRace() {
         
+    }
+    
+    // updates the label for who's winning
+    func updateWinning() {
+        let vehicleID = self.getRightVehicle()!.vehicleNode.hashValue
+        var checkpointsWon:Int = 0
+        for i in winning {
+            if vehicleID == i{
+                checkpointsWon += 1
+            }
+        }
+        let totalCheckpoints = self.game.randomCheckpointSpawn.count
+        let checkpointsLeft = totalCheckpoints - winning.count
+        
+        let checkPointsText = "Checkpoints: \(checkpointsWon) of \(totalCheckpoints)"
+        let checkpointsLeftText = "\(checkpointsLeft) checkpoints left"
+        
+        self.arViewController.showFeedback(text: checkPointsText)
+        self.arViewController.updateRecordLabel(text: checkpointsLeftText)
     }
     
     //MARK: - Multi-peer Sending and encoding functions

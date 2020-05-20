@@ -50,13 +50,13 @@ class Vehicle {
     let allowsResting = false
     let mass:CGFloat = 1
     let restitution:CGFloat = 0.1
-    let friction:CGFloat = 0.1
-    let rollingFriction:CGFloat = 0.1
+    let friction:CGFloat = 0.5
+    let rollingFriction:CGFloat = 0
     
     // Suspension Parameter
     let maximumSuspensionForce:CGFloat = 0
     let frictionSlip:CGFloat = 1
-    let suspensionRestLength:CGFloat = 0.01
+    let suspensionRestLength:CGFloat = 0.03
     let maximumSuspensionTravel:CGFloat = 1
     
     //MARK: - Control Variables

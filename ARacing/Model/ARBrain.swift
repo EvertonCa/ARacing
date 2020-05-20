@@ -517,6 +517,7 @@ class ARBrain {
             for vehicle in self.arViewController.multiARBrain!.vehiclesList {
                 if vehicle.vehicleNode.hashValue == nodeB.hashValue {
                     vehicle.spawnPosition = nodeA.position
+                    self.arViewController.multiARBrain!.winning.append(vehicle.vehicleNode.hashValue)
                 }
             }
             
@@ -536,6 +537,7 @@ class ARBrain {
             for vehicle in self.arViewController.multiARBrain!.vehiclesList {
                 if vehicle.vehicleNode.hashValue == nodeA.hashValue {
                     vehicle.spawnPosition = nodeB.position
+                    self.arViewController.multiARBrain!.winning.append(vehicle.vehicleNode.hashValue)
                 }
             }
             

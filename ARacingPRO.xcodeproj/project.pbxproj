@@ -38,6 +38,7 @@
 		54CACB672464AAF80094427F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CACB662464AAF80094427F /* Grid.swift */; };
 		54CE5FC62450295A009E5E67 /* SingleTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC52450295A009E5E67 /* SingleTexts.swift */; };
 		54CE5FC824502AF9009E5E67 /* LapTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE5FC724502AF9009E5E67 /* LapTimer.swift */; };
+		54D8410A2475EEA400A80419 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D841092475EEA400A80419 /* Utilities.swift */; };
 		54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */; };
 		54FD0F98246C8DC400907BA5 /* Checkpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0F97246C8DC400907BA5 /* Checkpoint.swift */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		54CACB662464AAF80094427F /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		54CE5FC52450295A009E5E67 /* SingleTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTexts.swift; sourceTree = "<group>"; };
 		54CE5FC724502AF9009E5E67 /* LapTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTimer.swift; sourceTree = "<group>"; };
+		54D841092475EEA400A80419 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		54FAB6C4244C2E0D0057AF49 /* RCBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCBrains.swift; sourceTree = "<group>"; };
 		54FD0F97246C8DC400907BA5 /* Checkpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 				5457FB8F244B4A1700BD701E /* Gestures.swift */,
 				54CACB662464AAF80094427F /* Grid.swift */,
 				54FD0F97246C8DC400907BA5 /* Checkpoint.swift */,
+				54D841092475EEA400A80419 /* Utilities.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
 				5437CB7624629AAA00CD3ADA /* MultiPlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
@@ -290,6 +293,7 @@
 				5493729B245D8650008FF034 /* VehicleCell.swift in Sources */,
 				5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */,
 				54FAB6C5244C2E0D0057AF49 /* RCBrains.swift in Sources */,
+				54D8410A2475EEA400A80419 /* Utilities.swift in Sources */,
 				5461C21A2437E5C800F02694 /* SingleARBrains.swift in Sources */,
 				5493729D245D8C8D008FF034 /* VehicleSelectionViewControllerDelegates.swift in Sources */,
 				54C198BF245AC6870058DE0A /* Enums.swift in Sources */,

@@ -219,6 +219,7 @@ class SingleARBrains {
     func checkRecord() {
         if self.lapTimer.counter < self.game.checkRecord() {
             self.game.saveRecord(record:self.lapTimer.counter)
+            self.arViewController.updateRecordLabel(text: self.getRecordText())
         }
     }
     
@@ -238,28 +239,4 @@ class SingleARBrains {
         
         return text
     }
-    
-    // animates the new record in the label
-    func updateRecordLabel() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
-            self.arViewController.recordLabel.alpha = 0.5
-        }){ ( success ) in
-            UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
-                self.arViewController.recordLabel.text = self.getRecordText()
-                self.arViewController.recordLabel.alpha = 1.0
-            })
-        }
-    }
-}
-
-//MARK: - Extension to Int
-extension Int {
-    
-    var degreesToRadians: Double { return Double(self) * .pi/180 }
-}
-
-
-//MARK: - Overload +
-func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
 }
