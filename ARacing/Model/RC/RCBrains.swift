@@ -50,7 +50,7 @@ class RCBrains {
     func setupView() {
         
         // debug options - feature points and world origin
-        //self.sceneView.debugOptions = [.showFeaturePoints, .showPhysicsShapes, .showBoundingBoxes]
+        //self.sceneView.debugOptions = [.showPhysicsShapes]
         
         // show statistics
         //self.sceneView.showsStatistics = true

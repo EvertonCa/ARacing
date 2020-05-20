@@ -135,6 +135,9 @@ class MultiARBrains {
     
     // Start Multiplayer after all peers joined
     func finallyStart() {
+        // randomizes the checkpoints
+        self.game.randomizeCheckpointsSpawns()
+        
         // sends the message to all peers to start the game
         self.multipeerSession.encodeAndSend(message: self.messageStartGame())
         
@@ -328,7 +331,7 @@ class MultiARBrains {
     
     // creates a message with all the parameters to start the game
     func messageStartGame() -> Message {
-        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.StartGame.rawValue, peersQuantity: self.game.peersQuantity, peersHashID: self.game.peersHashIDs, listSelectedVehicles: self.game.listSelectedVehicles)
+        let message = Message(peerHashID: self.multipeerSession.myPeerID.hash, messageType: MessageType.StartGame.rawValue, peersQuantity: self.game.peersQuantity, peersHashID: self.game.peersHashIDs, randomCheckpoints:self.game.randomCheckpointSpawn, listSelectedVehicles: self.game.listSelectedVehicles)
         
         return message
     }
@@ -413,6 +416,7 @@ class MultiARBrains {
         self.game.peersQuantity = message.peersQuantity!
         self.game.peersHashIDs = message.peersHashID!
         self.game.listSelectedVehicles = message.listSelectedVehicles!
+        self.game.randomCheckpointSpawn = message.randomCheckpoints!
         
         // Starts the game and starts it
         self.setupMultiplayerGame()

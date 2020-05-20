@@ -164,6 +164,9 @@ class Game {
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
     
+    // Control variable for random checkpoint spawns
+    var randomCheckpointSpawn:[Int] = []
+    
     //MARK: - Multipeer Resources
     
     // Multipeer type of connection selected
@@ -275,42 +278,147 @@ class Game {
     
     // return the coordinate list of checkpoints in the selected map
     func checkpointsCoordinates() -> [SCNVector3] {
-        switch self.mapSelected {
-        case MapSelected.Map1.rawValue:
-            return self.map1CheckpointsCoordinates
-            
-        case MapSelected.Map2.rawValue:
-            return self.map2CheckpointsCoordinates
-            
-        case MapSelected.Map3.rawValue:
-            return self.map3CheckpointsCoordinates
-            
-        case MapSelected.Map4.rawValue:
-            return self.map4CheckpointsCoordinates
-            
-        default:
-            return [SCNVector3Zero]
+        
+        if self.gameTypeSelected == GameMode.MultiPlayer.rawValue {
+            switch self.mapSelected {
+            case MapSelected.Map1.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map1CheckpointsCoordinates[index])
+                }
+                return tempList
+                
+            case MapSelected.Map2.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map2CheckpointsCoordinates[index])
+                }
+                return tempList
+                
+            case MapSelected.Map3.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map3CheckpointsCoordinates[index])
+                }
+                return tempList
+                
+            case MapSelected.Map4.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map4CheckpointsCoordinates[index])
+                }
+                return tempList
+                
+            default:
+                return [SCNVector3Zero]
+            }
+        }
+        else {
+            switch self.mapSelected {
+            case MapSelected.Map1.rawValue:
+                return self.map1CheckpointsCoordinates
+                
+            case MapSelected.Map2.rawValue:
+                return self.map2CheckpointsCoordinates
+                
+            case MapSelected.Map3.rawValue:
+                return self.map3CheckpointsCoordinates
+                
+            case MapSelected.Map4.rawValue:
+                return self.map4CheckpointsCoordinates
+                
+            default:
+                return [SCNVector3Zero]
+            }
         }
     }
     
     // return the rotation list of checkpoints in the selected map
     func checkpointsRotations() -> [SCNVector3] {
+        
+        if self.gameTypeSelected == GameMode.MultiPlayer.rawValue {
+            switch self.mapSelected {
+            case MapSelected.Map1.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map1CheckpointsRotations[index])
+                }
+                return tempList
+                
+            case MapSelected.Map2.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map2CheckpointsRotations[index])
+                }
+                return tempList
+                
+            case MapSelected.Map3.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map3CheckpointsRotations[index])
+                }
+                return tempList
+                
+            case MapSelected.Map4.rawValue:
+                var tempList:[SCNVector3] = []
+                for index in self.randomCheckpointSpawn {
+                    tempList.append(self.map4CheckpointsRotations[index])
+                }
+                return tempList
+                
+            default:
+                return [SCNVector3Zero]
+            }
+        }
+        else {
+            switch self.mapSelected {
+            case MapSelected.Map1.rawValue:
+                return self.map1CheckpointsRotations
+                
+            case MapSelected.Map2.rawValue:
+                return self.map2CheckpointsRotations
+                
+            case MapSelected.Map3.rawValue:
+                return self.map3CheckpointsRotations
+                
+            case MapSelected.Map4.rawValue:
+                return self.map4CheckpointsRotations
+                
+            default:
+                return [SCNVector3Zero]
+            }
+        }
+    }
+    
+    // creates the list with random checkpoint spawns
+    func randomizeCheckpointsSpawns() {
+        self.randomCheckpointSpawn = []
         switch self.mapSelected {
         case MapSelected.Map1.rawValue:
-            return self.map1CheckpointsRotations
+            for i in 0..<self.map1CheckpointsCoordinates.count {
+                self.randomCheckpointSpawn.append(i)
+            }
             
         case MapSelected.Map2.rawValue:
-            return self.map2CheckpointsRotations
+            for i in 0..<self.map2CheckpointsCoordinates.count {
+                self.randomCheckpointSpawn.append(i)
+            }
             
         case MapSelected.Map3.rawValue:
-            return self.map3CheckpointsRotations
+            for i in 0..<self.map3CheckpointsCoordinates.count {
+                self.randomCheckpointSpawn.append(i)
+            }
             
         case MapSelected.Map4.rawValue:
-            return self.map4CheckpointsRotations
+            for i in 0..<self.map4CheckpointsCoordinates.count {
+                self.randomCheckpointSpawn.append(i)
+            }
             
         default:
-            return [SCNVector3Zero]
+            break
         }
+        
+        self.randomCheckpointSpawn.shuffle()
     }
     
     // returns the selected map record time

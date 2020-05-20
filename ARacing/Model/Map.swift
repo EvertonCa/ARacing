@@ -47,6 +47,8 @@ class Map {
         // sets the physics body and its parameters
         self.mapNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: collisionGeometry, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
         self.mapNode.physicsBody?.isAffectedByGravity = false
+        self.mapNode.physicsBody?.allowsResting = false
+        self.mapNode.physicsBody?.friction = 0.4
         self.mapNode.physicsBody?.categoryBitMask = CategoryBitmask.Others.rawValue
         self.mapNode.physicsBody?.collisionBitMask = CollisionBitmask.Everything.rawValue
 

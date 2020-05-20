@@ -22,6 +22,8 @@ struct Grid {
         let staticBody = SCNPhysicsBody.static()
         
         gridNode.physicsBody = staticBody
+        gridNode.physicsBody?.allowsResting = false
+        gridNode.physicsBody?.friction = CGFloat(0.4)
         
         return gridNode
     }

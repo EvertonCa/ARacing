@@ -34,10 +34,10 @@ class Vehicle {
     let steerAngle:CGFloat = 0.8
     
     // Engine force
-    let engineForce: CGFloat = 2
+    let engineForce: CGFloat = 3
     
     // Breaking force
-    let frontBreakingForce: CGFloat = 2
+    let frontBreakingForce: CGFloat = 1
     let rearBreakingForce: CGFloat = 1
     
     // Driving variables
@@ -50,12 +50,14 @@ class Vehicle {
     let allowsResting = false
     let mass:CGFloat = 1
     let restitution:CGFloat = 0.1
-    let friction:CGFloat = 0.5
+    let friction:CGFloat = 0.1
     let rollingFriction:CGFloat = 0.1
     
     // Suspension Parameter
     let maximumSuspensionForce:CGFloat = 0
-    let frictionSlip:CGFloat = 0.1
+    let frictionSlip:CGFloat = 1
+    let suspensionRestLength:CGFloat = 0.01
+    let maximumSuspensionTravel:CGFloat = 1
     
     //MARK: - Control Variables
     
@@ -197,6 +199,8 @@ class Vehicle {
             var connectionPosition = $0.connectionPosition
             connectionPosition.x = -connectionPosition.x
             $0.connectionPosition = connectionPosition
+            $0.maximumSuspensionTravel = self.maximumSuspensionTravel
+            $0.suspensionRestLength = self.suspensionRestLength
         }
         
         // Creates the Physics Vehicle

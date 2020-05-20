@@ -17,6 +17,7 @@ struct Message: Codable {
     var selectedVehicle:Int?
     var peersQuantity:Int?
     var peersHashID:[Int]?
+    var randomCheckpoints:[Int]?
     var listSelectedVehicles:[Int]?
     var vehicleTransformMatrix:[[Float]]?
 }
