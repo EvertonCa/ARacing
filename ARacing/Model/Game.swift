@@ -100,7 +100,7 @@ class Game {
     
     // Single Player Vehicle Spawn Positions per map
     let vehicleSpawnPosition:[SCNVector3] = [SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.4, 0.4, 0.4),
+                                             SCNVector3(0.0, 0.4, 0.0),
                                              SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.4, 0.4, 0.4)]
     

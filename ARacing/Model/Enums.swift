@@ -20,8 +20,8 @@ enum MapSelected: Int {
 
 // Maps Resources
 enum MapsResources: String {
-    case Map1 = "3D Models.scnassets/Maps/Track1.scn"
-    case Map2 = "3D Models.scnassets/Maps/Test_Ice.scn"
+    case Map1 = "3D Models.scnassets/Maps/Mountain.scn"
+    case Map2 = "3D Models.scnassets/Maps/Snow.scn"
     case Map3 = "3D Models.scnassets/Maps/Track3.scn"
     case Map4 = "3D Models.scnassets/Maps/Map4.scn"
 }
@@ -36,8 +36,8 @@ enum MapsImages: String {
 
 // Maps Names
 enum MapsNames: String {
-    case Map1 = "Map1"
-    case Map2 = "Map2"
+    case Map1 = "Mountain"
+    case Map2 = "Snow"
     case Map3 = "Map3"
     case Map4 = "Map4"
 }
