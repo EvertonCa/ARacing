@@ -189,11 +189,6 @@ extension MultipeerSession: MCSessionDelegate {
     // Handles data received
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         self.receiveData(data, from: peerID)
-        print("~~~~~~~~~~~~~~~~")
-        print("~~~~~~~~~~~~~~~~")
-        print("Data packet received: \(data)")
-        print("~~~~~~~~~~~~~~~~")
-        print("~~~~~~~~~~~~~~~~")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

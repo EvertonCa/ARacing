@@ -507,13 +507,6 @@ extension MultiARBrains: MultipeerSessionDelegate {
     // Message received from peer
     func messageReceived(manager: MultipeerSession, message: Message) {
         interpretReceivedMessage(message: message)
-        print("")
-        print("")
-        print("")
-        print(message)
-        print("")
-        print("")
-        print("")
     }
 }
 

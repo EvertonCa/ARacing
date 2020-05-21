@@ -409,13 +409,15 @@ class ARViewController: UIViewController {
     
     // animates the new record in the label
     func updateRecordLabel(text:String) {
-        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
-            self.recordLabel.alpha = 0.5
-        }){ ( success ) in
+        DispatchQueue.main.async {
             UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
-                self.recordLabel.text = text
-                self.recordLabel.alpha = 1.0
-            })
+                self.recordLabel.alpha = 0.5
+            }){ ( success ) in
+                UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn, .curveEaseOut], animations: {
+                    self.recordLabel.text = text
+                    self.recordLabel.alpha = 1.0
+                })
+            }
         }
     }
 
