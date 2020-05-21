@@ -124,7 +124,10 @@ class SingleARBrains {
     func startRace() {
         
         // stops the menu music
-        self.soundController.stopIntroMusic()
+        self.soundController.stopMusic()
+        
+        // play the map music
+        self.game.playMapMusic()
         
         // shows the Ready AR Text
         var textNode = self.arText.showReadyText()

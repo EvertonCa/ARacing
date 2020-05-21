@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5432073C24770AE000FB5D4E /* Acceleration.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5432073B24770ADF00FB5D4E /* Acceleration.m4a */; };
+		5435339424771BD200908DD7 /* Rural Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5435338E24771BD100908DD7 /* Rural Music.m4a */; };
+		5435339524771BD200908DD7 /* Snow Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5435338F24771BD100908DD7 /* Snow Music.m4a */; };
+		5435339724771BD200908DD7 /* Space Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5435339124771BD200908DD7 /* Space Music.m4a */; };
+		5435339824771BD200908DD7 /* Ambient Snow.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5435339224771BD200908DD7 /* Ambient Snow.m4a */; };
+		5435339924771BD200908DD7 /* Ambient Rural.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5435339324771BD200908DD7 /* Ambient Rural.m4a */; };
 		5437CB73246269F700CD3ADA /* MapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB72246269F700CD3ADA /* MapsCell.swift */; };
 		5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */; };
 		5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5437CB7724629AD900CD3ADA /* MultiARBrains.swift */; };
@@ -54,6 +59,11 @@
 
 /* Begin PBXFileReference section */
 		5432073B24770ADF00FB5D4E /* Acceleration.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Acceleration.m4a; sourceTree = "<group>"; };
+		5435338E24771BD100908DD7 /* Rural Music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rural Music.m4a"; sourceTree = "<group>"; };
+		5435338F24771BD100908DD7 /* Snow Music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Snow Music.m4a"; sourceTree = "<group>"; };
+		5435339124771BD200908DD7 /* Space Music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Space Music.m4a"; sourceTree = "<group>"; };
+		5435339224771BD200908DD7 /* Ambient Snow.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ambient Snow.m4a"; sourceTree = "<group>"; };
+		5435339324771BD200908DD7 /* Ambient Rural.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ambient Rural.m4a"; sourceTree = "<group>"; };
 		5437CB72246269F700CD3ADA /* MapsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsCell.swift; sourceTree = "<group>"; };
 		5437CB7424626D5600CD3ADA /* MapsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewControllerDelegates.swift; sourceTree = "<group>"; };
 		5437CB7724629AD900CD3ADA /* MultiARBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiARBrains.swift; sourceTree = "<group>"; };
@@ -213,6 +223,11 @@
 				5432073B24770ADF00FB5D4E /* Acceleration.m4a */,
 				54A85DCF2477044E00747D06 /* Reduction.m4a */,
 				54A85DCC2477043000747D06 /* Splash.m4a */,
+				5435339324771BD200908DD7 /* Ambient Rural.m4a */,
+				5435339224771BD200908DD7 /* Ambient Snow.m4a */,
+				5435338E24771BD100908DD7 /* Rural Music.m4a */,
+				5435338F24771BD100908DD7 /* Snow Music.m4a */,
+				5435339124771BD200908DD7 /* Space Music.m4a */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -292,16 +307,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5435339524771BD200908DD7 /* Snow Music.m4a in Resources */,
 				5461C1FF2436CCFD00F02694 /* LaunchScreen.storyboard in Resources */,
 				5432073C24770AE000FB5D4E /* Acceleration.m4a in Resources */,
 				54A85DD72477046A00747D06 /* Engine.m4a in Resources */,
 				5489C0872447F5A200B44030 /* 3D Models.scnassets in Resources */,
 				5461C20D2436F5B500F02694 /* Intro.m4a in Resources */,
+				5435339824771BD200908DD7 /* Ambient Snow.m4a in Resources */,
 				54A85DD22477046A00747D06 /* Splash.m4a in Resources */,
+				5435339424771BD200908DD7 /* Rural Music.m4a in Resources */,
 				54A85DD42477046A00747D06 /* Go.m4a in Resources */,
 				54A85DD32477046A00747D06 /* Crash.m4a in Resources */,
 				54A85DD62477046A00747D06 /* Ready.m4a in Resources */,
 				5461C1FC2436CCFD00F02694 /* Assets.xcassets in Resources */,
+				5435339924771BD200908DD7 /* Ambient Rural.m4a in Resources */,
+				5435339724771BD200908DD7 /* Space Music.m4a in Resources */,
 				5461C1FA2436CCEE00F02694 /* Main.storyboard in Resources */,
 				54A85DD52477046A00747D06 /* Reduction.m4a in Resources */,
 			);

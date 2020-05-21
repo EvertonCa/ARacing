@@ -369,7 +369,10 @@ class ARBrain {
             DispatchQueue.main.async {
                 self.arViewController.singleARBrain!.mapNode = self.arViewController.singleARBrain!.map.addMap()
                 self.arViewController.singleARBrain!.checkpoints.map = self.arViewController.singleARBrain!.mapNode
+                
                 node.addChildNode(self.arViewController.singleARBrain!.mapNode)
+                
+                self.arViewController.singleARBrain!.checkpoints.map.addAudioPlayer(self.game.playAmbientSound())
                 self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
                     if node.name == "surfaceAnchorNode"{
                         node.removeFromParentNode()
@@ -434,6 +437,16 @@ class ARBrain {
             }
             
         }
+        else {
+            if nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+                nodeA.removeAllAudioPlayers()
+                nodeA.addAudioPlayer(SCNAudioPlayer(source: self.arViewController.sounds.crashAudioResource))
+            }
+            else if nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+                nodeB.removeAllAudioPlayers()
+                nodeB.addAudioPlayer(SCNAudioPlayer(source: self.arViewController.sounds.crashAudioResource))
+            }
+        }
     }
     
     //MARK: - Multi Player Functions
@@ -470,6 +483,9 @@ class ARBrain {
                     self.arViewController.multiARBrain!.mapNode.transform = safeTransform
                 }
                 node.addChildNode(self.arViewController.multiARBrain!.mapNode)
+                
+                self.arViewController.multiARBrain!.checkpoints.map.addAudioPlayer(self.game.playAmbientSound())
+                
                 self.arViewController.sceneView.scene.rootNode.enumerateChildNodes { (SCNNode, _) in
                     if node.name == "surfaceAnchorNode"{
                         node.removeFromParentNode()
@@ -548,6 +564,16 @@ class ARBrain {
                 self.arViewController.multiARBrain!.updateCheckpoint()
             }
             
+        }
+        else {
+            if nodeA.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+                nodeA.removeAllAudioPlayers()
+                nodeA.addAudioPlayer(SCNAudioPlayer(source: self.arViewController.sounds.crashAudioResource))
+            }
+            else if nodeB.physicsBody?.categoryBitMask == CategoryBitmask.Vehicle.rawValue {
+                nodeB.removeAllAudioPlayers()
+                nodeB.addAudioPlayer(SCNAudioPlayer(source: self.arViewController.sounds.crashAudioResource))
+            }
         }
     }
     

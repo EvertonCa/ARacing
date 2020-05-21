@@ -34,6 +34,12 @@ struct Sounds {
     // reduction sound
     var reductionAudioResource = SCNAudioSource()
     
+    // ambient sound mountain
+    var mountainAmbientResource = SCNAudioSource()
+    
+    // snow sound mountain
+    var snowAmbientResource = SCNAudioSource()
+    
     //MARK: - Init
     
     init() {
@@ -43,6 +49,8 @@ struct Sounds {
         self.loadReadyTextAudio()
         self.loadAccelerationAudio()
         self.loadReductionAudio()
+        self.loadSnowAmbientAudio()
+        self.loadMountainAmbientAudio()
     }
     
     //MARK: - Functions
@@ -52,11 +60,39 @@ struct Sounds {
         let path = Bundle.main.path(forResource: SoundsResources.Intro.rawValue, ofType:nil)!
         let url = URL(fileURLWithPath: path)
         self.player = try! AVAudioPlayer(contentsOf: url)
+        self.player.volume = 0.2
+        self.player.play()
+    }
+    
+    // Starts playing the mountain music
+    mutating func playMountainMusic() {
+        let path = Bundle.main.path(forResource: SoundsResources.MusicMountain.rawValue, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.player = try! AVAudioPlayer(contentsOf: url)
+        self.player.volume = 0.2
+        self.player.play()
+    }
+    
+    // Starts playing the snow music
+    mutating func playSnowMusic() {
+        let path = Bundle.main.path(forResource: SoundsResources.MusicSnow.rawValue, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.player = try! AVAudioPlayer(contentsOf: url)
+        self.player.volume = 0.2
+        self.player.play()
+    }
+    
+    // Starts playing the space music
+    mutating func playSpaceMusic() {
+        let path = Bundle.main.path(forResource: SoundsResources.MusicSpace.rawValue, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.player = try! AVAudioPlayer(contentsOf: url)
+        self.player.volume = 0.2
         self.player.play()
     }
     
     // Stops the background music
-    mutating func stopIntroMusic() {
+    mutating func stopMusic() {
         self.player.stop()
     }
     
@@ -106,6 +142,24 @@ struct Sounds {
         let url = URL(fileURLWithPath: path)
         self.reductionAudioResource = SCNAudioSource(url: url)!
         self.reductionAudioResource.load()
+    }
+    
+    // loads the mountain ambient audio
+    mutating func loadMountainAmbientAudio() {
+        let path = Bundle.main.path(forResource: SoundsResources.AmbientMountain.rawValue, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.mountainAmbientResource = SCNAudioSource(url: url)!
+        self.mountainAmbientResource.loops = true
+        self.mountainAmbientResource.load()
+    }
+    
+    // loads the mountain ambient audio
+    mutating func loadSnowAmbientAudio() {
+        let path = Bundle.main.path(forResource: SoundsResources.AmbientSnow.rawValue, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.snowAmbientResource = SCNAudioSource(url: url)!
+        self.snowAmbientResource.loops = true
+        self.snowAmbientResource.load()
     }
     
 }

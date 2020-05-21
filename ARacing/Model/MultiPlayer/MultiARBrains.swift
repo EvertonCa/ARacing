@@ -71,6 +71,9 @@ class MultiARBrains {
     // ARWorldMap
     var arWorldMap:ARWorldMap?
     
+    // Sounds
+    var soundController:Sounds!
+    
     //MARK: - Functions
     
     init(_ sceneView: ARSCNView, _ view: ARViewController, _ game:Game) {
@@ -130,6 +133,9 @@ class MultiARBrains {
         {
             self.multipeerSession.joinSession()
         }
+        
+        // setup sounds
+        self.soundController = self.arViewController.sounds
     }
     
     // adds the scenery and disable gestures and the grid nodes
@@ -226,6 +232,12 @@ class MultiARBrains {
     // shows the checkpoints, AR Text and starts the timer.
     func startRace() {
         
+        // stops the menu music
+        self.soundController.stopMusic()
+        
+        // play the map music
+        self.game.playMapMusic()
+        
         // shows the Ready AR Text
         var textNode = self.arText.showReadyText()
         textNode.position = SCNVector3(0, 0.6, 0)
@@ -237,6 +249,8 @@ class MultiARBrains {
             }
         }
         rootNode.addChildNode(textNode)
+        
+        textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.readyTextAudioResource))
         
         //animate fade in Ready Text
         SCNTransaction.begin()
@@ -258,6 +272,8 @@ class MultiARBrains {
                 textNode.position = SCNVector3(0, 0.6, 0)
                 textNode.opacity = 0
                 rootNode.addChildNode(textNode)
+                
+                textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.readyTextAudioResource))
             }
             SCNTransaction.commit()
             
@@ -283,7 +299,7 @@ class MultiARBrains {
                         textNode.opacity = 0
                         rootNode.addChildNode(textNode)
                         
-                        
+                        textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.goTextAudioResource))
                         
                         // setup the checkpoints and particles
                         self.updateCheckpoint()

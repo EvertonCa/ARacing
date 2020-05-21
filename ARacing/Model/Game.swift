@@ -254,6 +254,49 @@ class Game {
         
     }
     
+    //MARK: - Audio Functions
+    
+    // plays the correct music
+    func playMapMusic() {
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            self.arBrain.arViewController.sounds.playMountainMusic()
+            
+        case MapSelected.Map2.rawValue:
+            self.arBrain.arViewController.sounds.playSnowMusic()
+            
+        case MapSelected.Map3.rawValue:
+            self.arBrain.arViewController.sounds.playSpaceMusic()
+            
+        case MapSelected.Map4.rawValue:
+            self.arBrain.arViewController.sounds.playMountainMusic()
+            
+        default:
+            break
+        }
+    }
+    
+    // play the correct ambient sound
+    func playAmbientSound() -> SCNAudioPlayer {
+
+        switch self.mapSelected {
+        case MapSelected.Map1.rawValue:
+            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
+            
+        case MapSelected.Map2.rawValue:
+            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.snowAmbientResource)
+            
+        case MapSelected.Map3.rawValue:
+            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
+            
+        case MapSelected.Map4.rawValue:
+            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
+            
+        default:
+            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
+        }
+    }
+    
     //MARK: - Checkpoint Functions
     
     // return the quantity of checkpoints in the selected map

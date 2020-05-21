@@ -139,6 +139,11 @@ enum SoundsResources: String {
     case Reduction = "Reduction.m4a"
     case Acceleration = "Acceleration.m4a"
     case Splash = "Splash.m4a"
+    case AmbientMountain = "Ambient Rural.m4a"
+    case AmbientSnow = "Ambient Snow.m4a"
+    case MusicMountain = "Rural Music.m4a"
+    case MusicSnow = "Snow Music.m4a"
+    case MusicSpace = "Space Music.m4a"
 }
 
 //MARK: - Collision Enums
