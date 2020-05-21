@@ -37,6 +37,9 @@ class RCBrains {
     // Game
     var game:Game
     
+    // floor created
+    var floorCreated = false
+    
     //MARK: - Functions
     
     init(_ sceneView: ARSCNView, _ view: ARViewController, _ game:Game) {

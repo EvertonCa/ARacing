@@ -42,6 +42,9 @@ class MultiARBrains {
         }
     }
     
+    // checkpoints won
+    var checkpointsWon:Int = 0
+    
     //MARK: - Models
     
     // Game
@@ -311,13 +314,15 @@ class MultiARBrains {
     
     // ends the race
     func endRace() {
-        
+        if self.didWon() {
+            self.showGoldTrophy()
+        }
     }
     
     // updates the label for who's winning
     func updateWinning() {
         let vehicleID = self.getRightVehicle()!.vehicleNode.hashValue
-        var checkpointsWon:Int = 0
+        self.checkpointsWon = 0
         for i in winning {
             if vehicleID == i{
                 checkpointsWon += 1
@@ -331,6 +336,46 @@ class MultiARBrains {
         
         self.arViewController.showFeedback(text: checkPointsText)
         self.arViewController.updateRecordLabel(text: checkpointsLeftText)
+    }
+    
+    // Check if won
+    func didWon() -> Bool {
+        if self.checkpointsWon > (self.game.randomCheckpointSpawn.count / 2) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    // Show the Golden Trophy
+    func showGoldTrophy() {
+        let trophyNode = Trophy.getTrophy()
+        trophyNode.enumerateChildNodes { (node, _) in
+            if node.name == "TextWinner" {
+                if let textGeometry = node.geometry as? SCNText {
+                    textGeometry.string = "WINNER!"
+                }
+            }
+        }
+        self.mapNode.addChildNode(trophyNode)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 1.0
+            self.mapNode.enumerateChildNodes { (node, _) in
+                if node.name == "Trophy" {
+                    node.opacity = 0.0
+                }
+            }
+            SCNTransaction.completionBlock = {
+                self.mapNode.enumerateChildNodes { (node, _) in
+                    if node.name == "Trophy" {
+                        node.removeFromParentNode()
+                    }
+                }
+            }
+            SCNTransaction.commit()
+        }
     }
     
     //MARK: - Multi-peer Sending and encoding functions

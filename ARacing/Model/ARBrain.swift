@@ -555,32 +555,27 @@ class ARBrain {
     
     // node added in RC Mode
     private func rcDidAddNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        guard anchor is ARPlaneAnchor else { return }
-        DispatchQueue.main.async {
-            // show feedback
-            self.arViewController.showFeedback(text: "Click on the grid where you would like to place your RC Car!")
-            //FIXME: make the label only appear if the vehicle hasn't spawned yet
+        if !self.arViewController.rcBrains!.floorCreated {
+            guard anchor is ARPlaneAnchor else { return }
+            DispatchQueue.main.async {
+                // show feedback
+                self.arViewController.showFeedback(text: "Click where you would like to place your RC Car!")
+                //FIXME: make the label only appear if the vehicle hasn't spawned yet
+            }
+            
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            
+            let gridNode = Grid.rcGrid(planeAnchor: planeAnchor)
+            
+            node.addChildNode(gridNode)
+            
+            self.arViewController.rcBrains!.floorCreated = true
         }
-        
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        
-        let gridNode = Grid.createGrid(planeAnchor: planeAnchor)
-        
-        node.addChildNode(gridNode)
     }
     
     // node updated in RC Mode
     private func rcUpdatedNodeRendered(node: SCNNode, anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
-        node.enumerateChildNodes { ( childNode, _ ) in
-            childNode.removeFromParentNode()
-        }
-        
-        self.arViewController.rcBrains!.gridNode = node
-        
-        let gridNode = Grid.createGrid(planeAnchor: planeAnchor)
-        self.arViewController.rcBrains!.gridNode!.addChildNode(gridNode)
     }
     
     // updateAtTime in RC mode

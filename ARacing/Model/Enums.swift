@@ -167,7 +167,14 @@ enum GameMode: Int {
 
 // Checkpoints Resources
 enum CheckpointsResources: String {
-    case Checkpoint = "3D Models.scnassets/Checkpoint Assets/CheckPoint.scn"
+    case Checkpoint = "3D Models.scnassets/Checkpoint/CheckPoint.scn"
+}
+
+//MARK: - Trophies Enums
+
+// Checkpoints Resources
+enum TrophyResources: String {
+    case Trophy = "3D Models.scnassets/Trophy/Trophy.scn"
 }
 
 //MARK: - Particles Enums

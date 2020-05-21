@@ -27,4 +27,19 @@ struct Grid {
         
         return gridNode
     }
+    
+    // creates a infinite plane for RC
+    static func rcGrid(planeAnchor: ARPlaneAnchor) -> SCNNode {
+//        let scene = SCNScene(named: "3D Models.scnassets/Plane.scn")
+//        let plane = scene!.rootNode.childNode(withName: "Floor", recursively: false)!
+//        plane.simdWorldTransform = planeAnchor.transform
+//        plane.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNFloor(), options: [SCNPhysicsShape.Option.keepAsCompound: true]))
+        
+        let plane = SCNNode(geometry: SCNFloor())
+        plane.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+        plane.simdWorldTransform = planeAnchor.transform
+        plane.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: SCNFloor(), options: nil))
+        
+        return plane
+    }
 }

@@ -220,6 +220,29 @@ class SingleARBrains {
         if self.lapTimer.counter < self.game.checkRecord() {
             self.game.saveRecord(record:self.lapTimer.counter)
             self.arViewController.updateRecordLabel(text: self.getRecordText())
+            self.showTrophy()
+        }
+    }
+    
+    // show the Trophy
+    func showTrophy() {
+        self.mapNode.addChildNode(Trophy.getTrophy())
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 1.0
+            self.mapNode.enumerateChildNodes { (node, _) in
+                if node.name == "Trophy" {
+                    node.opacity = 0.0
+                }
+            }
+            SCNTransaction.completionBlock = {
+                self.mapNode.enumerateChildNodes { (node, _) in
+                    if node.name == "Trophy" {
+                        node.removeFromParentNode()
+                    }
+                }
+            }
+            SCNTransaction.commit()
         }
     }
     

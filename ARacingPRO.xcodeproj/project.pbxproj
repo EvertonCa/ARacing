@@ -13,6 +13,7 @@
 		54405C552463B94100600AFA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54405C542463B94100600AFA /* Message.swift */; };
 		54405C572463C26700600AFA /* MultiPeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54405C562463C26700600AFA /* MultiPeerViewController.swift */; };
 		544BA7962463568B0018FDA1 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BA7952463568B0018FDA1 /* MultipeerSession.swift */; };
+		545355F024761C1F0007F05F /* Trophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545355EF24761C1F0007F05F /* Trophy.swift */; };
 		5457FB90244B4A1700BD701E /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457FB8F244B4A1700BD701E /* Gestures.swift */; };
 		5459DD6E245CD96A00E57584 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459DD6D245CD96A00E57584 /* Vehicle.swift */; };
 		5461C1F32436CCEE00F02694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461C1F22436CCEE00F02694 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		54405C542463B94100600AFA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		54405C562463C26700600AFA /* MultiPeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerViewController.swift; sourceTree = "<group>"; };
 		544BA7952463568B0018FDA1 /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
+		545355EF24761C1F0007F05F /* Trophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trophy.swift; sourceTree = "<group>"; };
 		5457FB8F244B4A1700BD701E /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 		5459DD6D245CD96A00E57584 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		5461C1EF2436CCEE00F02694 /* ARacingPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARacingPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,16 +167,17 @@
 			isa = PBXGroup;
 			children = (
 				54C198C0245ACC220058DE0A /* ARBrain.swift */,
+				54FD0F97246C8DC400907BA5 /* Checkpoint.swift */,
 				54C198BE245AC6870058DE0A /* Enums.swift */,
-				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
-				54CE5FC724502AF9009E5E67 /* LapTimer.swift */,
-				54BDD8B224500BD600691408 /* Map.swift */,
-				5459DD6D245CD96A00E57584 /* Vehicle.swift */,
 				5493729E2461EBEA008FF034 /* Game.swift */,
 				5457FB8F244B4A1700BD701E /* Gestures.swift */,
 				54CACB662464AAF80094427F /* Grid.swift */,
-				54FD0F97246C8DC400907BA5 /* Checkpoint.swift */,
+				54CE5FC724502AF9009E5E67 /* LapTimer.swift */,
+				54BDD8B224500BD600691408 /* Map.swift */,
+				5461C20E2436FB5600F02694 /* MenuBrains.swift */,
+				545355EF24761C1F0007F05F /* Trophy.swift */,
 				54D841092475EEA400A80419 /* Utilities.swift */,
+				5459DD6D245CD96A00E57584 /* Vehicle.swift */,
 				54BDD8B424500E1000691408 /* SinglePlayer */,
 				5437CB7624629AAA00CD3ADA /* MultiPlayer */,
 				54BDD8B524500E5F00691408 /* RC */,
@@ -307,6 +310,7 @@
 				5461C20F2436FB5600F02694 /* MenuBrains.swift in Sources */,
 				5461C2112436FC8900F02694 /* OptionsViewController.swift in Sources */,
 				5437CB7824629AD900CD3ADA /* MultiARBrains.swift in Sources */,
+				545355F024761C1F0007F05F /* Trophy.swift in Sources */,
 				5493729F2461EBEB008FF034 /* Game.swift in Sources */,
 				5437CB7524626D5600CD3ADA /* MapsViewControllerDelegates.swift in Sources */,
 			);

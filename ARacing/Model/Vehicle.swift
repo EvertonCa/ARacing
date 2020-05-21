@@ -50,12 +50,12 @@ class Vehicle {
     let allowsResting = false
     let mass:CGFloat = 1
     let restitution:CGFloat = 0.1
-    let friction:CGFloat = 0.1
+    let friction:CGFloat = 0.5
     let rollingFriction:CGFloat = 0.1
     
     // Suspension Parameter
     let maximumSuspensionForce:CGFloat = 0
-    let frictionSlip:CGFloat = 1
+    let frictionSlip:CGFloat = 0.1
     let suspensionRestLength:CGFloat = 0.01
     let maximumSuspensionTravel:CGFloat = 1
     
@@ -149,7 +149,7 @@ class Vehicle {
         // hit test to position the vehicle
         let transform = hitTest.worldTransform
         let thirdColumn = transform.columns.3
-        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y + 0.1, thirdColumn.z)
+        self.vehicleNode.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
         
         // adds the vehicle to the scene
         self.sceneView.scene.rootNode.addChildNode(self.vehicleNode)
@@ -199,8 +199,8 @@ class Vehicle {
             var connectionPosition = $0.connectionPosition
             connectionPosition.x = -connectionPosition.x
             $0.connectionPosition = connectionPosition
-            $0.maximumSuspensionTravel = self.maximumSuspensionTravel
-            $0.suspensionRestLength = self.suspensionRestLength
+            //$0.maximumSuspensionTravel = self.maximumSuspensionTravel
+            //$0.suspensionRestLength = self.suspensionRestLength
         }
         
         // Creates the Physics Vehicle
