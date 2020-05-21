@@ -22,7 +22,7 @@ enum MapSelected: Int {
 enum MapsResources: String {
     case Map1 = "3D Models.scnassets/Maps/Mountain.scn"
     case Map2 = "3D Models.scnassets/Maps/Snow.scn"
-    case Map3 = "3D Models.scnassets/Maps/Track3.scn"
+    case Map3 = "3D Models.scnassets/Maps/Space.scn"
     case Map4 = "3D Models.scnassets/Maps/Map4.scn"
 }
 
@@ -38,7 +38,7 @@ enum MapsImages: String {
 enum MapsNames: String {
     case Map1 = "Mountain"
     case Map2 = "Snow"
-    case Map3 = "Map3"
+    case Map3 = "Space"
     case Map4 = "Map4"
 }
 
@@ -48,7 +48,7 @@ enum MapsNames: String {
 enum VehicleResources: String {
     case Vehicle1_small = "3D Models.scnassets/Vehicles Assets/BugattiSmall.scn"
     case Vehicle1_normal = "3D Models.scnassets/Vehicles Assets/BugattiNormal.scn"
-    case Vehicle2_small = "3D Models.scnassets/Vehicles Assets/SinglePlaceholder.scn"
+    case Vehicle2_small = "3D Models.scnassets/Vehicles Assets/BrabusSmall.scn"
     case Vehicle2_normal = "3D Models.scnassets/Vehicles Assets/BrabusNormal.scn"
     case Vehicle3_small = "3D Models.scnassets/Vehicles Assets/PlaceholderSmall2.scn"
     case Vehicle3_normal = "3D Models.scnassets/Vehicles Assets/PlaceholderNormal2.scn"
@@ -127,6 +127,18 @@ enum TextResources: String {
     case Ready = "3D Models.scnassets/Text Assets/ReadyText.scn"
     case Set = "3D Models.scnassets/Text Assets/SetText.scn"
     case Go = "3D Models.scnassets/Text Assets/GoText.scn"
+}
+
+//MARK: - Sounds Enums
+enum SoundsResources: String {
+    case Intro = "Intro.m4a"
+    case Crash = "Crash.m4a"
+    case Engine = "Engine.m4a"
+    case Go = "Go.m4a"
+    case Ready = "Ready.m4a"
+    case Reduction = "Reduction.m4a"
+    case Acceleration = "Acceleration.m4a"
+    case Splash = "Splash.m4a"
 }
 
 //MARK: - Collision Enums

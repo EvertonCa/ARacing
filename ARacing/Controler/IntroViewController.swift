@@ -19,7 +19,7 @@ class IntroViewController: UIViewController {
     @IBOutlet weak var buttonStart: UIButton!
     
     // Menu Brains
-    var menuBrains = MenuBrains()
+    var sounds:Sounds!
     
     //MARK: - Functions
     
@@ -30,7 +30,8 @@ class IntroViewController: UIViewController {
         self.hideInitialUI()
         
         // Start playing background music
-        menuBrains.playIntroMusic()
+        self.sounds = Sounds()
+        self.sounds.playIntroMusic()
         
         // Animate the intro
         animateIntro()
@@ -68,7 +69,7 @@ class IntroViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToAR" {
             let destinationVC = segue.destination as! ARViewController
-            destinationVC.menuBrains = menuBrains
+            destinationVC.sounds = self.sounds
         }
     }
     

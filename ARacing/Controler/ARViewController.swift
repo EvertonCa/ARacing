@@ -51,7 +51,7 @@ class ARViewController: UIViewController {
     var rcBrains: RCBrains?
     
     // Menu Brains
-    var menuBrains: MenuBrains!
+    var sounds: Sounds!
     
     // Type Brain
     var arBrain: ARBrain!

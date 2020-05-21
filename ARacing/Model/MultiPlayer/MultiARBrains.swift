@@ -283,6 +283,8 @@ class MultiARBrains {
                         textNode.opacity = 0
                         rootNode.addChildNode(textNode)
                         
+                        
+                        
                         // setup the checkpoints and particles
                         self.updateCheckpoint()
                         

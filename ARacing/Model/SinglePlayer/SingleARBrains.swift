@@ -51,6 +51,9 @@ class SingleARBrains {
     // Vehicles
     var vehicle: Vehicle! = nil
     
+    // Sounds
+    var soundController:Sounds!
+    
     //MARK: - Functions
     
     init(_ sceneView: ARSCNView, _ view: ARViewController, _ game:Game) {
@@ -92,6 +95,9 @@ class SingleARBrains {
         // setup Vehicles
         self.vehicle = Vehicle(arView: self.arViewController, singleBrain: self, game: self.game, sceneView: self.sceneView)
         
+        // setup sounds
+        self.soundController = self.arViewController.sounds
+        
     }
     
     // adds the scenery and disable gestures and the grid nodes
@@ -117,6 +123,9 @@ class SingleARBrains {
     // shows the checkpoints, AR Text and starts the timer.
     func startRace() {
         
+        // stops the menu music
+        self.soundController.stopIntroMusic()
+        
         // shows the Ready AR Text
         var textNode = self.arText.showReadyText()
         textNode.position = SCNVector3(0, 0.6, 0)
@@ -128,6 +137,8 @@ class SingleARBrains {
             }
         }
         rootNode.addChildNode(textNode)
+        
+        textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.readyTextAudioResource))
         
         //animate fade in Ready Text
         SCNTransaction.begin()
@@ -148,7 +159,10 @@ class SingleARBrains {
                 textNode = self.arText.showSetText()
                 textNode.position = SCNVector3(0, 0.6, 0)
                 textNode.opacity = 0
+                
                 rootNode.addChildNode(textNode)
+                
+                textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.readyTextAudioResource))
             }
             SCNTransaction.commit()
             
@@ -172,7 +186,10 @@ class SingleARBrains {
                         textNode = self.arText.showGoText()
                         textNode.position = SCNVector3(0, 0.6, 0)
                         textNode.opacity = 0
+                        
                         rootNode.addChildNode(textNode)
+                        
+                        textNode.addAudioPlayer(SCNAudioPlayer(source: self.soundController.goTextAudioResource))
                     
                         // starts the timer
                         self.lapTimer.startTimer()
