@@ -24,20 +24,17 @@ class Game {
     // Map Resources Addresses
     let mapResourcesAddresses:[String] = [MapsResources.Map1.rawValue,
                                           MapsResources.Map2.rawValue,
-                                          MapsResources.Map3.rawValue,
-                                          MapsResources.Map4.rawValue]
+                                          MapsResources.Map3.rawValue]
     
     // Map Images Resources
     let mapImagesResources:[String] = [MapsImages.Map1.rawValue,
                                        MapsImages.Map2.rawValue,
-                                       MapsImages.Map3.rawValue,
-                                       MapsImages.Map4.rawValue]
+                                       MapsImages.Map3.rawValue]
     
     // Map Names
     let mapNames:[String] = [MapsNames.Map1.rawValue,
                              MapsNames.Map2.rawValue,
-                             MapsNames.Map3.rawValue,
-                             MapsNames.Map4.rawValue]
+                             MapsNames.Map3.rawValue]
     
     //MARK: - Vehicle Controls and Resources
     
@@ -55,12 +52,7 @@ class Game {
                                                    VehicleResources.Vehicle8_small.rawValue,
                                                    VehicleResources.Vehicle9_small.rawValue,
                                                    VehicleResources.Vehicle10_small.rawValue,
-                                                   VehicleResources.Vehicle11_small.rawValue,
-                                                   VehicleResources.Vehicle12_small.rawValue,
-                                                   VehicleResources.Vehicle13_small.rawValue,
-                                                   VehicleResources.Vehicle14_small.rawValue,
-                                                   VehicleResources.Vehicle15_small.rawValue,
-                                                   VehicleResources.Vehicle16_small.rawValue]
+                                                   VehicleResources.Vehicle11_small.rawValue]
     
     // RC Vehicles Resources Address
     let vehicleNormalResourcesAddresses:[String] = [VehicleResources.Vehicle1_normal.rawValue,
@@ -73,12 +65,7 @@ class Game {
                                                     VehicleResources.Vehicle8_normal.rawValue,
                                                     VehicleResources.Vehicle9_normal.rawValue,
                                                     VehicleResources.Vehicle10_normal.rawValue,
-                                                    VehicleResources.Vehicle11_normal.rawValue,
-                                                    VehicleResources.Vehicle12_normal.rawValue,
-                                                    VehicleResources.Vehicle13_normal.rawValue,
-                                                    VehicleResources.Vehicle14_normal.rawValue,
-                                                    VehicleResources.Vehicle15_normal.rawValue,
-                                                    VehicleResources.Vehicle16_normal.rawValue]
+                                                    VehicleResources.Vehicle11_normal.rawValue]
     
     // Vehicles Images Resources
     let vehiclesImagesResources = [VehicleImages.Vehicle1.rawValue,
@@ -91,25 +78,15 @@ class Game {
                                    VehicleImages.Vehicle8.rawValue,
                                    VehicleImages.Vehicle9.rawValue,
                                    VehicleImages.Vehicle10.rawValue,
-                                   VehicleImages.Vehicle11.rawValue,
-                                   VehicleImages.Vehicle12.rawValue,
-                                   VehicleImages.Vehicle13.rawValue,
-                                   VehicleImages.Vehicle14.rawValue,
-                                   VehicleImages.Vehicle15.rawValue,
-                                   VehicleImages.Vehicle16.rawValue]
+                                   VehicleImages.Vehicle11.rawValue]
     
     // Single Player Vehicle Spawn Positions per map
     let vehicleSpawnPosition:[SCNVector3] = [SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(0.0, 0.4, 0.0),
-                                             SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.4, 0.4, 0.4)]
+                                             SCNVector3(-0.8, 0.4, 0.8)]
     
     // Multi Player Vehicle Spawns Positions per map - each row is a map; each column is a initial spawn
     let listVehiclesSpawn:[[SCNVector3]] = [[SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.7, 0.4, 0.8),
-                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
-                                             SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)],
-                                            [SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8),
                                              SCNVector3(-0.8, 0.4, 0.8), SCNVector3(-0.8, 0.4, 0.8)],
@@ -125,44 +102,52 @@ class Game {
     //MARK: - Checkpoints Controls and Resources
     
     // Map 1 Coordinates
-    let map1CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.25, -0.8),
-                                                   SCNVector3(-0.8, 0.25, 0.0),
-                                                   SCNVector3(0.8, 0.25, 0.8)]
+    let map1CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.2, -0.8),
+                                                   SCNVector3(-0.8, 0.2, 0.0),
+                                                   SCNVector3(0.8, 0.2, 0.8),
+                                                   SCNVector3(-0.9, 0.2, -0.9),
+                                                   SCNVector3(0, 0.2, 0.2),
+                                                   SCNVector3(0.0, 0.2, 0.6)]
     
     // Map 1 rotations
     let map1CheckpointsRotations:[SCNVector3] = [SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
     
     // Map 2 Coordinates
-    let map2CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.25, -0.8),
-                                                   SCNVector3(-0.8, 0.25, 0.0),
-                                                   SCNVector3(0.8, 0.25, 0.8)]
-    
+    let map2CheckpointsCoordinates:[SCNVector3] = [SCNVector3(-0.352305, 0.2, -0.728673),
+                                                   SCNVector3(-0.742929, 0.2, -0.129525),
+                                                   SCNVector3(0.648314, 0.2, -0.188619),
+                                                   SCNVector3(-0.035578, 0.2, -0.046394),
+                                                   SCNVector3(0.294927, 0.2, 0.643647),
+                                                   SCNVector3(-0.299335, 0.2, 0.746471)]
     // Map 2 rotations
     let map2CheckpointsRotations:[SCNVector3] = [SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(0, 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
     
     // Map 3 Coordinates
-    let map3CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.25, -0.8),
-                                                   SCNVector3(-0.8, 0.25, 0.0),
-                                                   SCNVector3(0.8, 0.25, 0.8)]
+    let map3CheckpointsCoordinates:[SCNVector3] = [SCNVector3(-0.7, 0.2, 0.7),
+                                                   SCNVector3(0.7, 0.2, 0.5),
+                                                   SCNVector3(0.6, 0.2, 0.1),
+                                                   SCNVector3(-0.2, 0.2, 0.2),
+                                                   SCNVector3(-0.4, 0.2, -0.7),
+                                                   SCNVector3(0.5, 0.2, -0.5)]
     
     // Map 3 rotations
     let map3CheckpointsRotations:[SCNVector3] = [SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
-                                                 SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
-    
-    // Map 4 Coordinates
-    let map4CheckpointsCoordinates:[SCNVector3] = [SCNVector3(0.8, 0.25, -0.8),
-                                                   SCNVector3(-0.8, 0.25, 0.0),
-                                                   SCNVector3(0.8, 0.25, 0.8)]
-    
-    // Map 4 rotations
-    let map4CheckpointsRotations:[SCNVector3] = [SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
+                                                 SCNVector3(Float(45.degreesToRadians), 0, Float(90.degreesToRadians)),
                                                  SCNVector3(0, 0, Float(90.degreesToRadians)),
                                                  SCNVector3(-Float(45.degreesToRadians), 0, Float(90.degreesToRadians))]
+    
     
     // Control variable for random checkpoint spawns
     var randomCheckpointSpawn:[Int] = []
@@ -199,9 +184,6 @@ class Game {
     
     // Map 3 Record
     var map3Record:Double = 99999999.9
-    
-    // Map 4 Record
-    var map4Record:Double = 99999999.9
     
     //MARK: - Brains
     
@@ -268,9 +250,6 @@ class Game {
         case MapSelected.Map3.rawValue:
             self.arBrain.arViewController.sounds.playSpaceMusic()
             
-        case MapSelected.Map4.rawValue:
-            self.arBrain.arViewController.sounds.playMountainMusic()
-            
         default:
             break
         }
@@ -287,9 +266,6 @@ class Game {
             return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.snowAmbientResource)
             
         case MapSelected.Map3.rawValue:
-            return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
-            
-        case MapSelected.Map4.rawValue:
             return SCNAudioPlayer(source: self.arBrain.arViewController.sounds.mountainAmbientResource)
             
         default:
@@ -310,9 +286,6 @@ class Game {
             
         case MapSelected.Map3.rawValue:
             return self.map3CheckpointsCoordinates.count
-            
-        case MapSelected.Map4.rawValue:
-            return self.map4CheckpointsCoordinates.count
             
         default:
             return 0
@@ -345,13 +318,6 @@ class Game {
                 }
                 return tempList
                 
-            case MapSelected.Map4.rawValue:
-                var tempList:[SCNVector3] = []
-                for index in self.randomCheckpointSpawn {
-                    tempList.append(self.map4CheckpointsCoordinates[index])
-                }
-                return tempList
-                
             default:
                 return [SCNVector3Zero]
             }
@@ -366,9 +332,6 @@ class Game {
                 
             case MapSelected.Map3.rawValue:
                 return self.map3CheckpointsCoordinates
-                
-            case MapSelected.Map4.rawValue:
-                return self.map4CheckpointsCoordinates
                 
             default:
                 return [SCNVector3Zero]
@@ -402,13 +365,6 @@ class Game {
                 }
                 return tempList
                 
-            case MapSelected.Map4.rawValue:
-                var tempList:[SCNVector3] = []
-                for index in self.randomCheckpointSpawn {
-                    tempList.append(self.map4CheckpointsRotations[index])
-                }
-                return tempList
-                
             default:
                 return [SCNVector3Zero]
             }
@@ -423,9 +379,6 @@ class Game {
                 
             case MapSelected.Map3.rawValue:
                 return self.map3CheckpointsRotations
-                
-            case MapSelected.Map4.rawValue:
-                return self.map4CheckpointsRotations
                 
             default:
                 return [SCNVector3Zero]
@@ -452,11 +405,6 @@ class Game {
                 self.randomCheckpointSpawn.append(i)
             }
             
-        case MapSelected.Map4.rawValue:
-            for i in 0..<self.map4CheckpointsCoordinates.count {
-                self.randomCheckpointSpawn.append(i)
-            }
-            
         default:
             break
         }
@@ -476,9 +424,6 @@ class Game {
         case MapSelected.Map3.rawValue:
             return self.map3Record
             
-        case MapSelected.Map4.rawValue:
-            return self.map4Record
-            
         default:
             return 0.0
         }
@@ -489,7 +434,6 @@ class Game {
         let temp1 = defaults.double(forKey: MapRecord.Map1.rawValue)
         let temp2 = defaults.double(forKey: MapRecord.Map2.rawValue)
         let temp3 = defaults.double(forKey: MapRecord.Map3.rawValue)
-        let temp4 = defaults.double(forKey: MapRecord.Map4.rawValue)
         
         if temp1 != 0 {
             self.map1Record = temp1
@@ -499,9 +443,6 @@ class Game {
         }
         if temp3 != 0 {
             self.map3Record = temp3
-        }
-        if temp4 != 0 {
-            self.map4Record = temp4
         }
     }
     
@@ -519,10 +460,6 @@ class Game {
         case MapSelected.Map3.rawValue:
             self.map3Record = record
             defaults.set(record, forKey: MapRecord.Map3.rawValue)
-            
-        case MapSelected.Map4.rawValue:
-            self.map4Record = record
-            defaults.set(record, forKey: MapRecord.Map4.rawValue)
             
         default:
             break
